@@ -55,6 +55,7 @@ from boto.cloudformation.stack import Output
 # List of supported CloudFormation models
 MODEL_LIST = CloudFormationModel.__subclasses__()
 MODEL_MAP = {model.cloudformation_type(): model for model in MODEL_LIST}
+
 NAME_TYPE_MAP = {
     model.cloudformation_type(): model.cloudformation_name_type()
     for model in MODEL_LIST
