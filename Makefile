@@ -25,7 +25,6 @@ test-only:
 	rm -rf cover
 	@pytest -sv --cov=moto --cov-report html ./tests/ $(TEST_EXCLUDE)
 
-
 test: lint test-only
 
 test_server:
