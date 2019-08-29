@@ -6,6 +6,7 @@ from freezegun import freeze_time
 import requests
 import sure  # noqa
 from botocore.exceptions import ClientError
+from nose.tools import assert_raises
 
 import responses
 from moto import mock_apigateway, settings
@@ -164,6 +165,13 @@ def test_create_method():
     resources = client.get_resources(restApiId=api_id)
     root_id = [resource for resource in resources[
         'items'] if resource['path'] == '/'][0]['id']
+
+    with assert_raises(client.exceptions.NotFoundException):
+        _ = client.get_method(
+            restApiId=api_id,
+            resourceId=root_id,
+            httpMethod='GET'
+        )
 
     client.put_method(
         restApiId=api_id,

@@ -4,8 +4,8 @@ import json
 
 from moto.core.responses import BaseResponse
 from .models import apigateway_backends
-from .exceptions import StageNotFoundException, ApiKeyNotFoundException
-
+from .exceptions import (StageNotFoundException, ApiKeyNotFoundException,
+                         MethodNotFoundException)
 
 class APIGatewayResponse(BaseResponse):
 
@@ -82,9 +82,13 @@ class APIGatewayResponse(BaseResponse):
         method_type = url_path_parts[6]
 
         if self.method == 'GET':
-            method = self.backend.get_method(
-                function_id, resource_id, method_type)
-            return 200, {}, json.dumps(method)
+            try:
+                method = self.backend.get_method(
+                    function_id, resource_id, method_type)
+                return 200, {}, json.dumps(method)
+            except MethodNotFoundException as error:
+                return error.code, {}, '{{"message":"{0}","code":"{1}"}}'.format(error.message, error.error_type)
+
         elif self.method == 'PUT':
             authorization_type = self._get_param("authorizationType")
             method = self.backend.create_method(
