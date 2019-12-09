@@ -99,7 +99,7 @@ class Message(BaseModel):
             encoded += struct.pack(struct_format, len(data_type)) + utf8(data_type)
             encoded += TRANSPORT_TYPE_ENCODINGS[data_type]
 
-            if data_type == "String" or data_type == "Number":
+            if data_type == "String" or data_type.startswith("Number"):
                 value = attr["string_value"]
             elif data_type == "Binary":
                 value = base64.b64decode(attr["binary_value"])
