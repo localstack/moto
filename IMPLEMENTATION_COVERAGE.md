@@ -51,16 +51,6 @@
 >>>>>>> fix handling of encoding errors
 - [X] remove_tags_from_certificate
 - [ ] renew_certificate
-<<<<<<< HEAD
-- [X] request_certificate
-=======
-- [ ] remove_tags_from_certificate
-- [ ] request_certificate
->>>>>>> Updating implementation coverage
-=======
-- [X] remove_tags_from_certificate
-=======
->>>>>>> fix handling of encoding errors
 - [X] request_certificate
 - [ ] resend_validation_email
 - [ ] update_certificate_options
@@ -967,6 +957,7 @@
 - [X] set_instance_protection
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [ ] start_instance_refresh
 =======
 <<<<<<< HEAD
@@ -974,30 +965,12 @@
 =======
 <<<<<<< HEAD
 >>>>>>> fix handling of encoding errors
+=======
+>>>>>>> bump version
 - [X] suspend_processes
 - [ ] terminate_instance_in_auto_scaling_group
 - [X] update_auto_scaling_group
 </details>
-=======
-=======
-=======
-- [ ] set_instance_health
->>>>>>> Updating implementation coverage
-=======
-- [X] set_instance_health
->>>>>>> Updating implementation coverage
-- [ ] set_instance_protection
->>>>>>> Updating implementation coverage
-=======
->>>>>>> fix handling of encoding errors
-- [X] suspend_processes
-- [ ] terminate_instance_in_auto_scaling_group
-<<<<<<< HEAD
-- [ ] update_auto_scaling_group
->>>>>>> Updating implementation coverage
-=======
-- [X] update_auto_scaling_group
->>>>>>> Updating implementation coverage
 
 ## autoscaling-plans
 <details>
@@ -1072,10 +1045,6 @@
 <summary>78% implemented</summary>
 
 - [ ] cancel_job
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Updating implementation coverage
 - [X] create_compute_environment
 - [X] create_job_queue
 - [X] delete_compute_environment
@@ -1094,27 +1063,7 @@
 - [ ] untag_resource
 - [X] update_compute_environment
 - [X] update_job_queue
-<<<<<<< HEAD
 </details>
-=======
-- [ ] create_compute_environment
-- [ ] create_job_queue
-- [ ] delete_compute_environment
-- [ ] delete_job_queue
-- [ ] deregister_job_definition
-- [ ] describe_compute_environments
-- [ ] describe_job_definitions
-- [ ] describe_job_queues
-- [ ] describe_jobs
-- [ ] list_jobs
-- [ ] register_job_definition
-- [ ] submit_job
-- [ ] terminate_job
-- [ ] update_compute_environment
-- [ ] update_job_queue
->>>>>>> Updating implementation coverage
-=======
->>>>>>> Updating implementation coverage
 
 ## braket
 <details>
@@ -1732,22 +1681,7 @@
 <summary>36% implemented</summary>
 
 - [X] delete_alarms
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
 - [ ] delete_anomaly_detector
->>>>>>> Updating implementation coverage
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> Updating implementation coverage
-- [ ] delete_anomaly_detector
-=======
-- [ ] delete_anomaly_detector
->>>>>>> fix handling of encoding errors
 - [X] delete_dashboards
 - [ ] delete_insight_rules
 - [ ] describe_alarm_history
@@ -1766,35 +1700,9 @@
 - [ ] get_metric_widget_image
 - [X] list_dashboards
 - [X] list_metrics
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-- [ ] list_metrics
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> Updating implementation coverage
-=======
-<<<<<<< HEAD
->>>>>>> Updating implementation coverage
-=======
-<<<<<<< HEAD
->>>>>>> Updating implementation coverage
-<<<<<<< HEAD
->>>>>>> Updating implementation coverage
 - [ ] list_tags_for_resource
 - [ ] put_anomaly_detector
 - [ ] put_composite_alarm
-=======
-=======
->>>>>>> fix handling of encoding errors
-=======
->>>>>>> bump version
-- [ ] list_tags_for_resource
-- [ ] put_anomaly_detector
->>>>>>> fix handling of encoding errors
 - [X] put_dashboard
 - [ ] put_insight_rule
 - [X] put_metric_alarm
@@ -1802,29 +1710,7 @@
 - [X] set_alarm_state
 - [ ] tag_resource
 - [ ] untag_resource
-<<<<<<< HEAD
-<<<<<<< HEAD
 </details>
-=======
-=======
->>>>>>> Updating implementation coverage
-=======
-- [ ] put_dashboard
-- [X] put_metric_alarm
-- [X] put_metric_data
-- [ ] set_alarm_state
->>>>>>> Updating implementation coverage
-<<<<<<< HEAD
-=======
-=======
-- [X] put_dashboard
-- [X] put_metric_alarm
-- [X] put_metric_data
-- [X] set_alarm_state
->>>>>>> Updating implementation coverage
->>>>>>> Updating implementation coverage
-=======
->>>>>>> fix handling of encoding errors
 
 ## codeartifact
 <details>
@@ -3911,6 +3797,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## ecr-public
 <details>
 <summary>0% implemented</summary>
@@ -3960,6 +3847,8 @@
 =======
 >>>>>>> fix handling of encoding errors
 >>>>>>> fix handling of encoding errors
+=======
+>>>>>>> bump version
 ## ecs
 <details>
 <summary>70% implemented</summary>
@@ -4004,22 +3893,7 @@
 - [X] describe_task_sets
 - [X] describe_tasks
 - [ ] discover_poll_endpoint
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
 - [ ] list_account_settings
->>>>>>> Updating implementation coverage
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> Updating implementation coverage
-- [ ] list_account_settings
-=======
-- [ ] list_account_settings
->>>>>>> fix handling of encoding errors
 - [X] list_attributes
 - [X] list_clusters
 - [X] list_container_instances
@@ -4030,18 +3904,6 @@
 - [X] list_tasks
 - [ ] put_account_setting
 - [ ] put_account_setting_default
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-- [X] list_task_definition_families
-- [X] list_task_definitions
-- [X] list_tasks
->>>>>>> Updating implementation coverage
->>>>>>> fix handling of encoding errors
-=======
->>>>>>> bump version
 - [X] put_attributes
 - [ ] put_cluster_capacity_providers
 - [X] register_container_instance
@@ -4340,34 +4202,10 @@
 - [X] set_load_balancer_policies_of_listener
 </details>
 
-<<<<<<< HEAD
 ## elbv2
-
-<<<<<<< HEAD
 <details>
 <summary>70% implemented</summary>
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-## elbv2
-70% implemented
-=======
-## elbv2 - 70% implemented
->>>>>>> Updating implementation coverage
-=======
-## elbv2 - 50% implemented
->>>>>>> Updating implementation coverage
-<<<<<<< HEAD
-=======
-=======
-## elbv2 - 70% implemented
->>>>>>> Updating implementation coverage
->>>>>>> Updating implementation coverage
-=======
-## elbv2
-70% implemented
->>>>>>> fix handling of encoding errors
+
 - [ ] add_listener_certificates
 - [ ] add_tags
 - [X] create_listener
@@ -4400,19 +4238,9 @@
 - [ ] remove_tags
 - [X] set_ip_address_type
 - [X] set_rule_priorities
-<<<<<<< HEAD
-<<<<<<< HEAD
 - [X] set_security_groups
 - [X] set_subnets
 </details>
-=======
-- [ ] set_security_groups
-- [ ] set_subnets
->>>>>>> Updating implementation coverage
-=======
-- [X] set_security_groups
-- [X] set_subnets
->>>>>>> Updating implementation coverage
 
 ## emr
 <details>
@@ -4561,10 +4389,13 @@
 - [ ] describe_partner_event_source
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [X] describe_replay
 =======
 =======
 >>>>>>> fix handling of encoding errors
+=======
+>>>>>>> bump version
 <<<<<<< HEAD
 - [ ] describe_replay
 =======
@@ -4598,7 +4429,12 @@
 =======
 >>>>>>> fix handling of encoding errors
 >>>>>>> fix handling of encoding errors
+<<<<<<< HEAD
 >>>>>>> fix handling of encoding errors
+=======
+=======
+>>>>>>> bump version
+>>>>>>> bump version
 - [X] describe_rule
 - [X] disable_rule
 - [X] enable_rule
@@ -4616,16 +4452,6 @@
 - [X] list_targets_by_rule
 - [X] put_events
 - [ ] put_partner_events
-<<<<<<< HEAD
-- [X] put_permission
-=======
-- [ ] put_events
-- [ ] put_permission
->>>>>>> Updating implementation coverage
-=======
-- [X] put_events
-=======
->>>>>>> fix handling of encoding errors
 - [X] put_permission
 - [X] put_rule
 - [X] put_targets
@@ -5489,17 +5315,6 @@
 - [ ] delete_user_permissions_boundary
 - [X] delete_user_policy
 - [X] delete_virtual_mfa_device
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-- [ ] delete_virtual_mfa_device
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> Updating implementation coverage
->>>>>>> Updating implementation coverage
-=======
->>>>>>> fix handling of encoding errors
 - [X] detach_group_policy
 - [X] detach_role_policy
 - [X] detach_user_policy
@@ -5886,20 +5701,9 @@
 - [ ] list_mitigation_actions
 - [ ] list_ota_updates
 - [ ] list_outgoing_certificates
-<<<<<<< HEAD
-<<<<<<< HEAD
 - [X] list_policies
 - [X] list_policy_principals
 - [X] list_policy_versions
-=======
-- [ ] list_policies
-- [ ] list_policy_principals
-=======
-- [X] list_policies
-- [X] list_policy_principals
->>>>>>> Updating implementation coverage
-- [ ] list_policy_versions
->>>>>>> Updating implementation coverage
 - [X] list_principal_policies
 - [X] list_principal_things
 - [ ] list_provisioning_template_versions
@@ -6868,27 +6672,19 @@
 - [ ] attach_load_balancer_tls_certificate
 - [ ] attach_static_ip
 - [ ] close_instance_public_ports
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> Updating implementation coverage
-=======
-<<<<<<< HEAD
->>>>>>> Updating implementation coverage
 - [ ] copy_snapshot
 - [ ] create_certificate
 - [ ] create_cloud_formation_stack
-<<<<<<< HEAD
 - [ ] create_contact_method
+<<<<<<< HEAD
 <<<<<<< HEAD
 - [ ] create_container_service
 - [ ] create_container_service_deployment
 - [ ] create_container_service_registry_login
 =======
 >>>>>>> Updating implementation coverage
+=======
+>>>>>>> bump version
 >>>>>>> Updating implementation coverage
 <<<<<<< HEAD
 - [ ] create_disk
@@ -6907,6 +6703,8 @@
 - [ ] copy_snapshot
 - [ ] create_cloud_formation_stack
 >>>>>>> fix handling of encoding errors
+=======
+>>>>>>> bump version
 - [ ] create_disk
 - [ ] create_disk_from_snapshot
 - [ ] create_disk_snapshot
@@ -6960,6 +6758,7 @@
 - [ ] get_bundles
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [ ] get_certificates
 =======
 <<<<<<< HEAD
@@ -6976,6 +6775,7 @@
 <<<<<<< HEAD
 >>>>>>> Updating implementation coverage
 >>>>>>> Updating implementation coverage
+<<<<<<< HEAD
 - [ ] get_cloud_formation_stack_records
 <<<<<<< HEAD
 - [ ] get_contact_methods
@@ -6993,8 +6793,11 @@
 =======
 >>>>>>> Updating implementation coverage
 =======
+>>>>>>> bump version
+=======
+>>>>>>> bump version
 - [ ] get_cloud_formation_stack_records
->>>>>>> fix handling of encoding errors
+- [ ] get_contact_methods
 - [ ] get_disk
 - [ ] get_disk_snapshot
 - [ ] get_disk_snapshots
@@ -7155,23 +6958,6 @@
 - [ ] get_log_record
 - [ ] get_query_results
 - [X] list_tags_log_group
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-=======
-- [ ] filter_log_events
-- [ ] get_log_events
->>>>>>> Updating implementation coverage
-=======
-- [X] filter_log_events
-- [X] get_log_events
->>>>>>> Updating implementation coverage
-- [ ] list_tags_log_group
->>>>>>> Updating implementation coverage
->>>>>>> Updating implementation coverage
-=======
->>>>>>> fix handling of encoding errors
 - [ ] put_destination
 - [ ] put_destination_policy
 - [X] put_log_events
@@ -8369,15 +8155,9 @@
 </details>
 
 ## pricing
-<<<<<<< HEAD
-<<<<<<< HEAD
 <details>
 <summary>0% implemented</summary>
 
->>>>>>> Updating implementation coverage
-=======
-0% implemented
->>>>>>> fix handling of encoding errors
 - [ ] describe_services
 - [ ] get_attribute_values
 - [ ] get_products
@@ -8551,44 +8331,9 @@
 </details>
 
 ## rds
-<<<<<<< HEAD
 <details>
 <summary>0% implemented</summary>
 
-=======
-0% implemented
-<<<<<<< HEAD
-=======
-=======
-## polly - 0% implemented
-- [ ] delete_lexicon
-- [ ] describe_voices
-- [ ] get_lexicon
-- [ ] list_lexicons
-- [ ] put_lexicon
-- [ ] synthesize_speech
-
->>>>>>> Updating implementation coverage
-=======
-## polly - 83% implemented
-- [X] delete_lexicon
-- [X] describe_voices
-- [X] get_lexicon
-- [X] list_lexicons
-- [X] put_lexicon
-- [ ] synthesize_speech
-
-## pricing - 0% implemented
-- [ ] describe_services
-- [ ] get_attribute_values
-- [ ] get_products
-
->>>>>>> Updating implementation coverage
-## rds - 0% implemented
->>>>>>> Updating implementation coverage
->>>>>>> Updating implementation coverage
-=======
->>>>>>> fix handling of encoding errors
 - [ ] add_role_to_db_cluster
 - [ ] add_role_to_db_instance
 - [ ] add_source_identifier_to_subscription
@@ -8942,17 +8687,9 @@
 </details>
 
 ## resourcegroupstaggingapi
-<<<<<<< HEAD
-<<<<<<< HEAD
 <details>
 <summary>37% implemented</summary>
 
-=======
-<<<<<<< HEAD
-=======
->>>>>>> bump version
-37% implemented
->>>>>>> Updating implementation coverage
 - [ ] describe_report_creation
 - [ ] get_compliance_summary
 - [X] get_resources
@@ -9027,10 +8764,10 @@
 </details>
 
 ## route53
-<<<<<<< HEAD
 <details>
 <summary>10% implemented</summary>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 - [ ] activate_key_signing_key
 =======
@@ -9071,6 +8808,8 @@
 =======
 >>>>>>> fix handling of encoding errors
 >>>>>>> fix handling of encoding errors
+=======
+>>>>>>> bump version
 - [ ] associate_vpc_with_hosted_zone
 - [ ] change_resource_record_sets
 - [X] change_tags_for_resource
@@ -9275,6 +9014,7 @@
 - [ ] get_bucket_accelerate_configuration
 - [X] get_bucket_acl
 - [ ] get_bucket_analytics_configuration
+<<<<<<< HEAD
 - [X] get_bucket_cors
 <<<<<<< HEAD
 - [X] get_bucket_encryption
@@ -9287,22 +9027,11 @@
 <<<<<<< HEAD
 =======
 =======
+=======
+>>>>>>> bump version
 - [ ] get_bucket_cors
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> Updating implementation coverage
-=======
 - [ ] get_bucket_encryption
->>>>>>> Updating implementation coverage
 <<<<<<< HEAD
-=======
-=======
->>>>>>> Updating implementation coverage
-<<<<<<< HEAD
-=======
-=======
-- [ ] get_bucket_encryption
 >>>>>>> Updating implementation coverage
 >>>>>>> Updating implementation coverage
 <<<<<<< HEAD
@@ -9315,6 +9044,8 @@
 >>>>>>> fix handling of encoding errors
 >>>>>>> fix handling of encoding errors
 >>>>>>> fix handling of encoding errors
+=======
+>>>>>>> bump version
 - [ ] get_bucket_inventory_configuration
 - [ ] get_bucket_lifecycle
 - [ ] get_bucket_lifecycle_configuration
@@ -10674,28 +10405,16 @@
 =======
 - [ ] tag_resource
 - [ ] untag_resource
-<<<<<<< HEAD
-=======
-- [ ] start_execution
-- [ ] stop_execution
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> Updating implementation coverage
 - [ ] update_state_machine
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Updating implementation coverage
 =======
 <<<<<<< HEAD
 >>>>>>> Updating implementation coverage
+=======
+>>>>>>> bump version
 </details>
-=======
-=======
->>>>>>> Updating implementation coverage
->>>>>>> Updating implementation coverage
-=======
-=======
->>>>>>> fix handling of encoding errors
-- [ ] update_state_machine
 
 ## storagegateway
 <details>
