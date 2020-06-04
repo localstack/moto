@@ -42,6 +42,7 @@ from .exceptions import (
     RestAPINotFound,
     ModelNotFound,
 )
+from moto.apigateway.exceptions import MethodNotFoundException
 
 STAGE_URL = "https://{api_id}.execute-api.{region_name}.amazonaws.com/{stage_name}"
 
@@ -53,16 +54,6 @@ class Deployment(BaseModel, dict):
         self["stageName"] = name
         self["description"] = description
         self["createdDate"] = int(time.time())
-
-    @classmethod
-    def create_from_cloudformation_json(cls, resource_name, cloudformation_json, region_name):
-        properties = cloudformation_json['Properties']
-        spec = {
-            'deployment_id': create_id(),
-            'name': properties['StageName'],
-            'description': properties.get('Description')
-        }
-        return Deployment(**spec)
 
     @classmethod
     def create_from_cloudformation_json(cls, resource_name, cloudformation_json, region_name):
@@ -242,18 +233,6 @@ class Resource(BaseModel):
 
     def delete_integration(self, method_type):
         return self.resource_methods[method_type].pop("methodIntegration")
-
-    @classmethod
-    def create_from_cloudformation_json(cls, resource_name, cloudformation_json, region_name):
-        properties = cloudformation_json['Properties']
-        spec = {
-            'id': create_id(),
-            'region_name': 'us-east-1',
-            'api_id': properties['RestApiId'],
-            'path_part': properties['PathPart'],
-            'parent_id': properties['ParentId']
-        }
-        return Resource(**spec)
 
     @classmethod
     def create_from_cloudformation_json(cls, resource_name, cloudformation_json, region_name):
