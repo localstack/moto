@@ -1666,7 +1666,7 @@ class ResponseObject(_TemplateEnvironmentMixin, ActionAuthenticatorMixin):
 
             del bucket.multiparts[multipart_id]
 
-            key = self.backend.set_key(
+            key = self.backend.set_object(
                 bucket_name, multipart.key_name, value, storage=multipart.storage, etag=etag, multipart=multipart
             )
             key.set_metadata(multipart.metadata)
