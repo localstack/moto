@@ -17,7 +17,7 @@ init:
 	@pip install -r requirements-dev.txt
 
 lint:
-	flake8 moto
+	flake8 --ignore=Q000,E501,W503 moto
 	black --check moto/ tests/
 
 test-only:
