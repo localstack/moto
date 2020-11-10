@@ -534,8 +534,8 @@ class SecretsManagerBackend(BaseBackend):
             if _matches(secret, filters):
                 secret_list.append(secret.to_dict())
 
-        starting_point = int(next_token) if next_token else 0
-        ending_point = starting_point + int(max_results) if max_results else 100
+        starting_point = int(next_token or 0)
+        ending_point = starting_point + int(max_results or 100)
         secret_page = secret_list[starting_point:ending_point]
         new_next_token = str(ending_point) if ending_point < len(secret_list) else None
 
