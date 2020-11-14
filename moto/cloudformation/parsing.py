@@ -442,6 +442,9 @@ class ResourceMap(collections_abc.Mapping):
     def __getitem__(self, key):
         resource_logical_id = key
 
+        if key != 'AWS::NoValue' and key in self._parsed_resources and self._parsed_resources[key] is None:
+            self._parsed_resources.pop(key)
+
         if resource_logical_id in self._parsed_resources:
             return self._parsed_resources[resource_logical_id]
         else:
@@ -646,7 +649,8 @@ class ResourceMap(collections_abc.Mapping):
             new_resource = parse_and_create_resource(
                 resource_name, resource_json, self, self._region_name
             )
-            self._parsed_resources[resource_name] = new_resource
+            if new_resource is not None:
+                self._parsed_resources[resource_name] = new_resource
 
         for logical_name, _ in resources_by_action["Remove"].items():
             resource_json = old_template[logical_name]
@@ -676,7 +680,8 @@ class ResourceMap(collections_abc.Mapping):
                     # second pass
                     last_exception = e
                 else:
-                    self._parsed_resources[logical_name] = changed_resource
+                    if changed_resource is not None:
+                        self._parsed_resources[logical_name] = changed_resource
                     del resources_by_action["Modify"][logical_name]
             tries += 1
         if tries == 5:
