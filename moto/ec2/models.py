@@ -9,6 +9,7 @@ import re
 import six
 import warnings
 
+from typing import List, Tuple
 from boto3 import Session
 from pkg_resources import resource_filename
 
@@ -100,6 +101,7 @@ from .exceptions import (
     RulesPerSecurityGroupLimitExceededError,
     TagLimitExceeded,
     InvalidParameterDependency,
+    AssociateIamInstanceProfileExistError,
 )
 from .utils import (
     EC2_RESOURCE_TO_PREFIX,
@@ -5925,16 +5927,37 @@ class IamInstanceProfileAssociationBackend(object):
             else:
                 instance_profile = None
 
+        if instance_id in self.iam_instance_profile_associations.keys():
+            raise AssociateIamInstanceProfileExistError(instance_id)
+
         iam_instance_profile_associations = IamInstanceProfileAssociation(
             self,
             iam_association_id,
             self.get_instance(instance_id) if instance_id else None,
             instance_profile
         )
-        self.iam_instance_profile_associations[
-            "{0}:{1}".format(instance_id, instance_profile.arn)
-        ] = iam_instance_profile_associations
+        # Regarding to AWS there can be only one association with ec2.
+        self.iam_instance_profile_associations[instance_id] = iam_instance_profile_associations
         return iam_instance_profile_associations
+
+    def describe_iam_instance_profile_associations(
+        self, association_ids: List, filters: List, max_results: int = 100, next_token: str = None
+    ) -> Tuple[List, str]:
+        associations_list = []
+        if association_ids:
+            for association in self.iam_instance_profile_associations.values():
+                if association.id in association_ids:
+                    associations_list.append(association)
+        else:
+            # That's mean that no association id were given. Showing all.
+            associations_list.extend(self.iam_instance_profile_associations.values())
+
+        starting_point = int(next_token or 0)
+        ending_point = starting_point + int(max_results or 100)
+        associations_page = associations_list[starting_point:ending_point]
+        new_next_token = str(ending_point) if ending_point < len(associations_list) else None
+
+        return associations_page, new_next_token
 
 
 class EC2Backend(

@@ -583,3 +583,11 @@ class InvalidParameterDependency(EC2ClientError):
                 param, param_needed
             ),
         )
+
+
+class AssociateIamInstanceProfileExistError(EC2ClientError):
+    def __init__(self, instance_id):
+        super(AssociateIamInstanceProfileExistError, self).__init__(
+            "IncorrectState",
+            "There is an existing association for instance {0}".format(instance_id),
+        )

@@ -14,16 +14,30 @@ class IamInstanceProfiles(BaseResponse):
         template = self.response_template(ASSOCIATE_IAM_INSTANCE_PROFILE_RESPONSE)
         return template.render(iam_association=iam_association)
 
+    def describe_iam_instance_profile_associations(self):
+        association_ids = self._get_multi_param("AssociationId")
+        filters = self._get_param("Filters")
+        max_items = self._get_param("MaxItems")
+        next_token = self._get_param("NextToken")
+        iam_associations, next_token = self.ec2_backend.describe_iam_instance_profile_associations(
+            association_ids, filters, max_items, next_token
+        )
+        template = self.response_template(DESCRIBE_IAM_INSTANCE_PROFILE_RESPONSE)
+        return template.render(iam_associations=iam_associations, next_token=next_token)
 
+
+# https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html
 ASSOCIATE_IAM_INSTANCE_PROFILE_RESPONSE = """
 <AssociateIamInstanceProfileResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
     <requestId>e10deeaf-7cda-48e7-950b-example</requestId>
     <iamInstanceProfileAssociation>
         <associationId>{{ iam_association.id }}</associationId>
+        {% if iam_association.iam_instance_profile %}
         <iamInstanceProfile>
             <arn>{{ iam_association.iam_instance_profile.arn }}</arn>
             <id>{{ iam_association.iam_instance_profile.id }}</id>
         </iamInstanceProfile>
+        {% endif %}
         <instanceId>{{ iam_association.instance.id }}</instanceId>
         <state>{{ iam_association.state }}</state>
     </iamInstanceProfileAssociation>
@@ -31,10 +45,14 @@ ASSOCIATE_IAM_INSTANCE_PROFILE_RESPONSE = """
 """
 
 
+# https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeIamInstanceProfileAssociations.html
+# Note: this API description page contains an error! Provided `iamInstanceProfileAssociations` doesn't work, you
+# should use `iamInstanceProfileAssociationSet` instead.
 DESCRIBE_IAM_INSTANCE_PROFILE_RESPONSE = """
 <DescribeIamInstanceProfileAssociationsResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
     <requestId>84c2d2a6-12dc-491f-a9ee-example</requestId>
-    <iamInstanceProfileAssociations>
+    {% if next_token %}<nextToken>{{ next_token }}</nextToken>{% endif %}
+    <iamInstanceProfileAssociationSet>
          {% for iam_association in iam_associations %}
             <item>
                 <associationId>{{ iam_association.id }}</associationId>
@@ -46,6 +64,6 @@ DESCRIBE_IAM_INSTANCE_PROFILE_RESPONSE = """
                 <state>{{ iam_association.state }}</state>
             </item>
         {% endfor %}
-    </iamInstanceProfileAssociations>
+    </iamInstanceProfileAssociationSet>
 </DescribeIamInstanceProfileAssociationsResponse>
 """
