@@ -29,6 +29,7 @@ from moto.core.utils import (
 )
 from moto.core import ACCOUNT_ID
 from moto.kms import kms_backends
+from moto.iam import iam_backends
 
 from .exceptions import (
     CidrLimitExceeded,
@@ -121,6 +122,7 @@ from .utils import (
     random_public_ip,
     random_reservation_id,
     random_route_table_id,
+    random_iam_instance_profile_association_id,
     generate_route_id,
     generate_vpc_end_point_id,
     create_dns_entries,
@@ -5867,6 +5869,74 @@ class LaunchTemplateBackend(object):
         return generic_filter(filters, templates)
 
 
+class IamInstanceProfileAssociation(CloudFormationModel):
+    def __init__(self, ec2_backend, association_id, instance, iam_instance_profile):
+        self.ec2_backend = ec2_backend
+        self.id = association_id
+        self.instance = instance
+        self.iam_instance_profile = iam_instance_profile
+        self.state = "associated"
+
+    @staticmethod
+    def cloudformation_name_type():
+        return None
+
+    @staticmethod
+    def cloudformation_type():
+        # TODO: Change this, search for cloudformation option
+        return "AWS::EC2::SubnetRouteTableAssociation1111"
+
+    @classmethod
+    def create_from_cloudformation_json(
+            cls, resource_name, cloudformation_json, region_name
+    ):
+        properties = cloudformation_json["Properties"]
+
+        instance_id = properties["InstanceId"]
+        iam_instance_profile = properties["IamInstanceProfile"]
+
+        ec2_backend = ec2_backends[region_name]
+        subnet_association = ec2_backend.associate_iam_instance_profile(
+            instance_id=instance_id, iam_instance_profile=iam_instance_profile
+        )
+        return subnet_association
+
+
+class IamInstanceProfileAssociationBackend(object):
+    def __init__(self):
+        self.iam_instance_profile_associations = {}
+        super(IamInstanceProfileAssociationBackend, self).__init__()
+
+    def associate_iam_instance_profile(self, instance_id, iam_instance_profile_name, iam_instance_profile_arn):
+        iam_association_id = random_iam_instance_profile_association_id()
+
+        instance_profile = None
+        instance_profile_by_name = None
+        instance_profile_by_arn = None
+        if iam_instance_profile_name:
+            instance_profile_by_name = iam_backends['global'].get_instance_profile(iam_instance_profile_name)
+            instance_profile = instance_profile_by_name
+        if iam_instance_profile_arn:
+            instance_profile_by_arn = iam_backends['global'].get_instance_profile_by_arn(iam_instance_profile_arn)
+            instance_profile = instance_profile_by_arn
+        if iam_instance_profile_arn and iam_instance_profile_name:
+            if instance_profile_by_name == instance_profile_by_arn:
+                instance_profile = instance_profile_by_arn
+            else:
+                instance_profile = None
+
+        iam_instance_profile_associations = IamInstanceProfileAssociation(
+            self,
+            iam_association_id,
+            self.get_instance(instance_id) if instance_id else None,
+            instance_profile
+        )
+        self.iam_instance_profile_associations[
+            "{0}:{1}".format(instance_id, instance_profile.arn)
+        ] = iam_instance_profile_associations
+        return iam_instance_profile_associations
+
+
 class EC2Backend(
     BaseBackend,
     InstanceBackend,
@@ -5896,6 +5966,7 @@ class EC2Backend(
     CustomerGatewayBackend,
     NatGatewayBackend,
     LaunchTemplateBackend,
+    IamInstanceProfileAssociationBackend,
 ):
     def __init__(self, region_name):
         self.region_name = region_name

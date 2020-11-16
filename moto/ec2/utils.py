@@ -43,6 +43,7 @@ EC2_RESOURCE_TO_PREFIX = {
     "vpc-peering-connection": "pcx",
     "vpn-connection": "vpn",
     "vpn-gateway": "vgw",
+    "iam-instance-profile-association": "iip-assoc"
 }
 
 
@@ -145,6 +146,10 @@ def random_internet_gateway_id():
 
 def random_route_table_id():
     return random_id(prefix=EC2_RESOURCE_TO_PREFIX["route-table"])
+
+
+def random_iam_instance_profile_association_id():
+    return random_id(prefix=EC2_RESOURCE_TO_PREFIX["iam-instance-profile-association"])
 
 
 def random_eip_allocation_id():

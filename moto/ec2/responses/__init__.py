@@ -20,6 +20,7 @@ from .network_acls import NetworkACLs
 from .placement_groups import PlacementGroups
 from .reserved_instances import ReservedInstances
 from .route_tables import RouteTables
+from .iam_instance_profiles import IamInstanceProfiles
 from .security_groups import SecurityGroups
 from .spot_fleets import SpotFleets
 from .spot_instances import SpotInstances
@@ -71,6 +72,7 @@ class EC2Response(
     VPNConnections,
     Windows,
     NatGateways,
+    IamInstanceProfiles,
 ):
     @property
     def ec2_backend(self):
