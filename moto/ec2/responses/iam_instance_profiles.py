@@ -33,6 +33,16 @@ class IamInstanceProfiles(BaseResponse):
         template = self.response_template(IAM_INSTANCE_PROFILE_RESPONSE)
         return template.render(iam_association=iam_association, state="disassociating")
 
+    def replace_iam_instance_profile_association(self):
+        association_id = self._get_param("AssociationId")
+        iam_instance_profile_name = self._get_param("IamInstanceProfile.Name")
+        iam_instance_profile_arn = self._get_param("IamInstanceProfile.Arn")
+        iam_association = self.ec2_backend.replace_iam_instance_profile_association(
+            association_id, iam_instance_profile_name, iam_instance_profile_arn
+        )
+        template = self.response_template(IAM_INSTANCE_PROFILE_RESPONSE)
+        return template.render(iam_association=iam_association, state="associating")
+
 
 # https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html
 IAM_INSTANCE_PROFILE_RESPONSE = """

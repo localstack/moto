@@ -591,3 +591,11 @@ class AssociateIamInstanceProfileExistError(EC2ClientError):
             "IncorrectState",
             "There is an existing association for instance {0}".format(instance_id),
         )
+
+
+class NotFoundIamInstanceProfileExistError(EC2ClientError):
+    def __init__(self, association_id):
+        super(NotFoundIamInstanceProfileExistError, self).__init__(
+            "InvalidAssociationID.NotFound",
+            "An invalid association-id of '{0}' was given".format(association_id),
+        )

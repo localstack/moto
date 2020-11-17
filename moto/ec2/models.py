@@ -102,6 +102,7 @@ from .exceptions import (
     TagLimitExceeded,
     InvalidParameterDependency,
     AssociateIamInstanceProfileExistError,
+    NotFoundIamInstanceProfileExistError,
 )
 from .utils import (
     EC2_RESOURCE_TO_PREFIX,
@@ -677,6 +678,13 @@ class Instance(TaggedEC2Resource, BotoInstance, CloudFormationModel):
             block_device_mappings=properties.get("BlockDeviceMappings", {}),
         )
         instance = reservation.instances[0]
+
+        # Associating iam instance profile.
+        if properties.get("IamInstanceProfile"):
+            ec2_backend.associate_iam_instance_profile(
+                instance_id=instance.id, iam_instance_profile_name=properties.get('IamInstanceProfile')
+            )
+
         for tag in properties.get("Tags", []):
             instance.add_tag(tag["Key"], tag["Value"])
         return instance
@@ -763,6 +771,13 @@ class Instance(TaggedEC2Resource, BotoInstance, CloudFormationModel):
             "Client.UserInitiatedShutdown: User initiated shutdown",
             "Client.UserInitiatedShutdown",
         )
+
+        # Disassociate iam instance profile if associated, otherwise iam_instance_profile_associations will
+        # be pointing to None.
+        if self.ec2_backend.iam_instance_profile_associations[self.id]:
+            self.ec2_backend.disassociate_iam_instance_profile(
+                association_id=self.ec2_backend.iam_instance_profile_associations[self.id].id
+            )
 
     def reboot(self, *args, **kwargs):
         self._state.name = "running"
@@ -5880,37 +5895,15 @@ class IamInstanceProfileAssociation(CloudFormationModel):
         self.iam_instance_profile = iam_instance_profile
         self.state = "associated"
 
-    @staticmethod
-    def cloudformation_name_type():
-        return None
-
-    @staticmethod
-    def cloudformation_type():
-        # TODO: Change this, search for cloudformation option
-        return "AWS::EC2::SubnetRouteTableAssociation1111"
-
-    @classmethod
-    def create_from_cloudformation_json(
-            cls, resource_name, cloudformation_json, region_name
-    ):
-        properties = cloudformation_json["Properties"]
-
-        instance_id = properties["InstanceId"]
-        iam_instance_profile = properties["IamInstanceProfile"]
-
-        ec2_backend = ec2_backends[region_name]
-        subnet_association = ec2_backend.associate_iam_instance_profile(
-            instance_id=instance_id, iam_instance_profile=iam_instance_profile
-        )
-        return subnet_association
-
 
 class IamInstanceProfileAssociationBackend(object):
     def __init__(self):
         self.iam_instance_profile_associations = {}
         super(IamInstanceProfileAssociationBackend, self).__init__()
 
-    def associate_iam_instance_profile(self, instance_id, iam_instance_profile_name, iam_instance_profile_arn):
+    def associate_iam_instance_profile(
+            self, instance_id, iam_instance_profile_name: str = None, iam_instance_profile_arn: str = None
+    ) -> IamInstanceProfileAssociation:
         iam_association_id = random_iam_instance_profile_association_id()
 
         instance_profile = None
@@ -5943,7 +5936,7 @@ class IamInstanceProfileAssociationBackend(object):
 
     def describe_iam_instance_profile_associations(
         self, association_ids: List, filters: Optional[Dict] = None, max_results: int = 100, next_token: str = None
-    ) -> Tuple[List, str]:
+    ) -> Tuple[List[IamInstanceProfileAssociation], str]:
         associations_list = []
         if association_ids:
             for association in self.iam_instance_profile_associations.values():
@@ -5961,6 +5954,50 @@ class IamInstanceProfileAssociationBackend(object):
         new_next_token = str(ending_point) if ending_point < len(associations_list) else None
 
         return associations_page, new_next_token
+
+    def disassociate_iam_instance_profile(self, association_id):
+        iam_instance_profile_associations = None
+        for association_key in self.iam_instance_profile_associations.keys():
+            if self.iam_instance_profile_associations[association_key].id == association_id:
+                iam_instance_profile_associations = self.iam_instance_profile_associations[association_key]
+                del self.iam_instance_profile_associations[association_key]
+                # Deleting once and avoiding `RuntimeError: dictionary changed size during iteration`
+                break
+
+        if not iam_instance_profile_associations:
+            raise NotFoundIamInstanceProfileExistError(association_id)
+
+        return iam_instance_profile_associations
+
+    def replace_iam_instance_profile_association(
+            self, association_id, iam_instance_profile_name, iam_instance_profile_arn
+    ):
+        instance_profile = None
+        instance_profile_by_name = None
+        instance_profile_by_arn = None
+        if iam_instance_profile_name:
+            instance_profile_by_name = iam_backends['global'].get_instance_profile(iam_instance_profile_name)
+            instance_profile = instance_profile_by_name
+        if iam_instance_profile_arn:
+            instance_profile_by_arn = iam_backends['global'].get_instance_profile_by_arn(iam_instance_profile_arn)
+            instance_profile = instance_profile_by_arn
+        if iam_instance_profile_arn and iam_instance_profile_name:
+            if instance_profile_by_name == instance_profile_by_arn:
+                instance_profile = instance_profile_by_arn
+            else:
+                instance_profile = None
+
+        iam_instance_profile_association = None
+        for association_key in self.iam_instance_profile_associations.keys():
+            if self.iam_instance_profile_associations[association_key].id == association_id:
+                self.iam_instance_profile_associations[association_key].iam_instance_profile = instance_profile
+                iam_instance_profile_association = self.iam_instance_profile_associations[association_key]
+                break
+
+        if not iam_instance_profile_association:
+            raise NotFoundIamInstanceProfileExistError(association_id)
+
+        return iam_instance_profile_association
 
 
 class EC2Backend(
