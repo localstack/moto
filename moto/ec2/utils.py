@@ -454,6 +454,17 @@ def filter_internet_gateways(igws, filter_dict):
     return result
 
 
+def filter_iam_instance_associations(iam_instance_associations, filter_dict):
+    if not filter_dict:
+        return iam_instance_associations
+    result = []
+    for iam_instance_association in iam_instance_associations:
+        if iam_instance_association.instance.id in filter_dict.get("instance-id").values() \
+                and iam_instance_association.state in filter_dict.get("state").values():
+            result.append(iam_instance_association)
+    return result
+
+
 def is_filter_matching(obj, filter, filter_value):
     value = obj.get_filter_value(filter)
 

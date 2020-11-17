@@ -9,7 +9,7 @@ import re
 import six
 import warnings
 
-from typing import List, Tuple
+from typing import List, Tuple, Dict, Optional
 from boto3 import Session
 from pkg_resources import resource_filename
 
@@ -147,6 +147,7 @@ from .utils import (
     is_valid_cidr,
     filter_internet_gateways,
     filter_reservations,
+    filter_iam_instance_associations,
     random_network_acl_id,
     random_network_acl_subnet_association_id,
     random_vpn_gateway_id,
@@ -5941,7 +5942,7 @@ class IamInstanceProfileAssociationBackend(object):
         return iam_instance_profile_associations
 
     def describe_iam_instance_profile_associations(
-        self, association_ids: List, filters: List, max_results: int = 100, next_token: str = None
+        self, association_ids: List, filters: Optional[Dict] = None, max_results: int = 100, next_token: str = None
     ) -> Tuple[List, str]:
         associations_list = []
         if association_ids:
@@ -5951,6 +5952,8 @@ class IamInstanceProfileAssociationBackend(object):
         else:
             # That's mean that no association id were given. Showing all.
             associations_list.extend(self.iam_instance_profile_associations.values())
+
+        associations_list = filter_iam_instance_associations(associations_list, filters)
 
         starting_point = int(next_token or 0)
         ending_point = starting_point + int(max_results or 100)
@@ -6076,6 +6079,8 @@ class EC2Backend(
                 self.describe_vpn_connections(vpn_connection_ids=[resource_id])
             elif resource_prefix == EC2_RESOURCE_TO_PREFIX["vpn-gateway"]:
                 self.get_vpn_gateway(vpn_gateway_id=resource_id)
+            elif resource_prefix == EC2_RESOURCE_TO_PREFIX["iam-instance-profile-association"]:
+                self.describe_iam_instance_profile_associations(association_ids=[resource_id])
         return True
 
 

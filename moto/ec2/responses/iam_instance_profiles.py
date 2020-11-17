@@ -11,12 +11,12 @@ class IamInstanceProfiles(BaseResponse):
         iam_association = self.ec2_backend.associate_iam_instance_profile(
             instance_id, iam_instance_profile_name, iam_instance_profile_arn
         )
-        template = self.response_template(ASSOCIATE_IAM_INSTANCE_PROFILE_RESPONSE)
-        return template.render(iam_association=iam_association)
+        template = self.response_template(IAM_INSTANCE_PROFILE_RESPONSE)
+        return template.render(iam_association=iam_association, state="associating")
 
     def describe_iam_instance_profile_associations(self):
         association_ids = self._get_multi_param("AssociationId")
-        filters = self._get_param("Filters")
+        filters = self._get_object_map("Filter")
         max_items = self._get_param("MaxItems")
         next_token = self._get_param("NextToken")
         iam_associations, next_token = self.ec2_backend.describe_iam_instance_profile_associations(
@@ -25,9 +25,17 @@ class IamInstanceProfiles(BaseResponse):
         template = self.response_template(DESCRIBE_IAM_INSTANCE_PROFILE_RESPONSE)
         return template.render(iam_associations=iam_associations, next_token=next_token)
 
+    def disassociate_iam_instance_profile(self):
+        association_id = self._get_param("AssociationId")
+        iam_association = self.ec2_backend.disassociate_iam_instance_profile(
+            association_id
+        )
+        template = self.response_template(IAM_INSTANCE_PROFILE_RESPONSE)
+        return template.render(iam_association=iam_association, state="disassociating")
+
 
 # https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html
-ASSOCIATE_IAM_INSTANCE_PROFILE_RESPONSE = """
+IAM_INSTANCE_PROFILE_RESPONSE = """
 <AssociateIamInstanceProfileResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
     <requestId>e10deeaf-7cda-48e7-950b-example</requestId>
     <iamInstanceProfileAssociation>
@@ -39,7 +47,7 @@ ASSOCIATE_IAM_INSTANCE_PROFILE_RESPONSE = """
         </iamInstanceProfile>
         {% endif %}
         <instanceId>{{ iam_association.instance.id }}</instanceId>
-        <state>{{ iam_association.state }}</state>
+        <state>{{ state }}</state>
     </iamInstanceProfileAssociation>
 </AssociateIamInstanceProfileResponse>
 """
