@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 from moto.core.responses import BaseResponse
-from moto.ec2.utils import filters_from_querystring
 
 
 class IamInstanceProfiles(BaseResponse):
@@ -19,7 +18,10 @@ class IamInstanceProfiles(BaseResponse):
         filters = self._get_object_map("Filter")
         max_items = self._get_param("MaxItems")
         next_token = self._get_param("NextToken")
-        iam_associations, next_token = self.ec2_backend.describe_iam_instance_profile_associations(
+        (
+            iam_associations,
+            next_token,
+        ) = self.ec2_backend.describe_iam_instance_profile_associations(
             association_ids, filters, max_items, next_token
         )
         template = self.response_template(DESCRIBE_IAM_INSTANCE_PROFILE_RESPONSE)

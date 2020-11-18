@@ -680,9 +680,12 @@ class Instance(TaggedEC2Resource, BotoInstance, CloudFormationModel):
         instance = reservation.instances[0]
 
         # Associating iam instance profile.
+        # TODO: Don't forget to implement replace_iam_instance_profile_association once update_from_cloudformation_json
+        #  for ec2 instance will be implemented.
         if properties.get("IamInstanceProfile"):
             ec2_backend.associate_iam_instance_profile(
-                instance_id=instance.id, iam_instance_profile_name=properties.get('IamInstanceProfile')
+                instance_id=instance.id,
+                iam_instance_profile_name=properties.get("IamInstanceProfile"),
             )
 
         for tag in properties.get("Tags", []):
@@ -776,7 +779,9 @@ class Instance(TaggedEC2Resource, BotoInstance, CloudFormationModel):
         # be pointing to None.
         if self.ec2_backend.iam_instance_profile_associations[self.id]:
             self.ec2_backend.disassociate_iam_instance_profile(
-                association_id=self.ec2_backend.iam_instance_profile_associations[self.id].id
+                association_id=self.ec2_backend.iam_instance_profile_associations[
+                    self.id
+                ].id
             )
 
     def reboot(self, *args, **kwargs):
@@ -5902,7 +5907,10 @@ class IamInstanceProfileAssociationBackend(object):
         super(IamInstanceProfileAssociationBackend, self).__init__()
 
     def associate_iam_instance_profile(
-            self, instance_id, iam_instance_profile_name: str = None, iam_instance_profile_arn: str = None
+        self,
+        instance_id,
+        iam_instance_profile_name: str = None,
+        iam_instance_profile_arn: str = None,
     ) -> IamInstanceProfileAssociation:
         iam_association_id = random_iam_instance_profile_association_id()
 
@@ -5910,10 +5918,14 @@ class IamInstanceProfileAssociationBackend(object):
         instance_profile_by_name = None
         instance_profile_by_arn = None
         if iam_instance_profile_name:
-            instance_profile_by_name = iam_backends['global'].get_instance_profile(iam_instance_profile_name)
+            instance_profile_by_name = iam_backends["global"].get_instance_profile(
+                iam_instance_profile_name
+            )
             instance_profile = instance_profile_by_name
         if iam_instance_profile_arn:
-            instance_profile_by_arn = iam_backends['global'].get_instance_profile_by_arn(iam_instance_profile_arn)
+            instance_profile_by_arn = iam_backends[
+                "global"
+            ].get_instance_profile_by_arn(iam_instance_profile_arn)
             instance_profile = instance_profile_by_arn
         if iam_instance_profile_arn and iam_instance_profile_name:
             if instance_profile_by_name == instance_profile_by_arn:
@@ -5928,14 +5940,20 @@ class IamInstanceProfileAssociationBackend(object):
             self,
             iam_association_id,
             self.get_instance(instance_id) if instance_id else None,
-            instance_profile
+            instance_profile,
         )
         # Regarding to AWS there can be only one association with ec2.
-        self.iam_instance_profile_associations[instance_id] = iam_instance_profile_associations
+        self.iam_instance_profile_associations[
+            instance_id
+        ] = iam_instance_profile_associations
         return iam_instance_profile_associations
 
     def describe_iam_instance_profile_associations(
-        self, association_ids: List, filters: Optional[Dict] = None, max_results: int = 100, next_token: str = None
+        self,
+        association_ids: List,
+        filters: Optional[Dict] = None,
+        max_results: int = 100,
+        next_token: str = None,
     ) -> Tuple[List[IamInstanceProfileAssociation], str]:
         associations_list = []
         if association_ids:
@@ -5951,15 +5969,22 @@ class IamInstanceProfileAssociationBackend(object):
         starting_point = int(next_token or 0)
         ending_point = starting_point + int(max_results or 100)
         associations_page = associations_list[starting_point:ending_point]
-        new_next_token = str(ending_point) if ending_point < len(associations_list) else None
+        new_next_token = (
+            str(ending_point) if ending_point < len(associations_list) else None
+        )
 
         return associations_page, new_next_token
 
     def disassociate_iam_instance_profile(self, association_id):
         iam_instance_profile_associations = None
         for association_key in self.iam_instance_profile_associations.keys():
-            if self.iam_instance_profile_associations[association_key].id == association_id:
-                iam_instance_profile_associations = self.iam_instance_profile_associations[association_key]
+            if (
+                self.iam_instance_profile_associations[association_key].id
+                == association_id
+            ):
+                iam_instance_profile_associations = self.iam_instance_profile_associations[
+                    association_key
+                ]
                 del self.iam_instance_profile_associations[association_key]
                 # Deleting once and avoiding `RuntimeError: dictionary changed size during iteration`
                 break
@@ -5970,16 +5995,20 @@ class IamInstanceProfileAssociationBackend(object):
         return iam_instance_profile_associations
 
     def replace_iam_instance_profile_association(
-            self, association_id, iam_instance_profile_name, iam_instance_profile_arn
+        self, association_id, iam_instance_profile_name, iam_instance_profile_arn
     ):
         instance_profile = None
         instance_profile_by_name = None
         instance_profile_by_arn = None
         if iam_instance_profile_name:
-            instance_profile_by_name = iam_backends['global'].get_instance_profile(iam_instance_profile_name)
+            instance_profile_by_name = iam_backends["global"].get_instance_profile(
+                iam_instance_profile_name
+            )
             instance_profile = instance_profile_by_name
         if iam_instance_profile_arn:
-            instance_profile_by_arn = iam_backends['global'].get_instance_profile_by_arn(iam_instance_profile_arn)
+            instance_profile_by_arn = iam_backends[
+                "global"
+            ].get_instance_profile_by_arn(iam_instance_profile_arn)
             instance_profile = instance_profile_by_arn
         if iam_instance_profile_arn and iam_instance_profile_name:
             if instance_profile_by_name == instance_profile_by_arn:
@@ -5989,9 +6018,16 @@ class IamInstanceProfileAssociationBackend(object):
 
         iam_instance_profile_association = None
         for association_key in self.iam_instance_profile_associations.keys():
-            if self.iam_instance_profile_associations[association_key].id == association_id:
-                self.iam_instance_profile_associations[association_key].iam_instance_profile = instance_profile
-                iam_instance_profile_association = self.iam_instance_profile_associations[association_key]
+            if (
+                self.iam_instance_profile_associations[association_key].id
+                == association_id
+            ):
+                self.iam_instance_profile_associations[
+                    association_key
+                ].iam_instance_profile = instance_profile
+                iam_instance_profile_association = self.iam_instance_profile_associations[
+                    association_key
+                ]
                 break
 
         if not iam_instance_profile_association:
@@ -6116,8 +6152,13 @@ class EC2Backend(
                 self.describe_vpn_connections(vpn_connection_ids=[resource_id])
             elif resource_prefix == EC2_RESOURCE_TO_PREFIX["vpn-gateway"]:
                 self.get_vpn_gateway(vpn_gateway_id=resource_id)
-            elif resource_prefix == EC2_RESOURCE_TO_PREFIX["iam-instance-profile-association"]:
-                self.describe_iam_instance_profile_associations(association_ids=[resource_id])
+            elif (
+                resource_prefix
+                == EC2_RESOURCE_TO_PREFIX["iam-instance-profile-association"]
+            ):
+                self.describe_iam_instance_profile_associations(
+                    association_ids=[resource_id]
+                )
         return True
 
 
