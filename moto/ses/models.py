@@ -11,6 +11,8 @@ from .exceptions import (
     ConfigurationSetDoesNotExist,
     EventDestinationAlreadyExists,
     TemplateNameAlreadyExists,
+    ValidationError,
+    InvalidParameterValue,
     TemplateDoesNotExist,
     RuleSetNameAlreadyExists,
     RuleSetDoesNotExist,
@@ -288,8 +290,19 @@ class SESBackend(BaseBackend):
 
     def add_template(self, template_info):
         template_name = template_info["template_name"]
+        if not template_name:
+            raise ValidationError(
+                "1 validation error detected: "\
+                "Value null at 'template.templateName'"\
+                "failed to satisfy constraint: Member must not be null")
+
         if self.templates.get(template_name, None):
             raise TemplateNameAlreadyExists("Duplicate Template Name.")
+
+        template_subject = template_info["subject_part"]
+        if not template_subject:
+            raise InvalidParameterValue("The subject must be specified.")
+
         self.templates[template_name] = template_info
 
     def get_template(self, template_name):
