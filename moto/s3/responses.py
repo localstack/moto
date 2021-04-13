@@ -2202,7 +2202,7 @@ S3_ALL_MULTIPARTS = (
   <KeyMarker></KeyMarker>
   <UploadIdMarker></UploadIdMarker>
   <MaxUploads>1000</MaxUploads>
-  <IsTruncated>False</IsTruncated>
+  <IsTruncated>false</IsTruncated>
   {% for upload in uploads %}
   <Upload>
     <Key>{{ upload.key_name }}</Key>
