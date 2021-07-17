@@ -544,7 +544,7 @@ class Replay(BaseModel):
 
 class Connection(BaseModel):
     def __init__(
-        self, name, region_name, description, authorization_type, auth_parameters,
+            self, name, region_name, description, authorization_type, auth_parameters,
     ):
         self.uuid = uuid4()
         self.name = name
@@ -582,7 +582,6 @@ class Connection(BaseModel):
             "ConnectionArn": self.arn,
             "ConnectionState": self.state,
             "CreationTime": self.creation_time,
-            "CreationTime": self.creation_time,
         }
 
     def describe(self):
@@ -613,7 +612,6 @@ class Connection(BaseModel):
             "Description": self.description,
             "Name": self.name,
         }
-
 
 
 class Destination(BaseModel):
