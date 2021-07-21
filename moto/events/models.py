@@ -641,7 +641,7 @@ class Destination(BaseModel):
         return "arn:aws:events:{0}:{1}:api-destination/{2}/{3}".format(
             self.region, ACCOUNT_ID, self.name, self.uuid
         )
-    
+
     def describe(self):
         """
         Describes the Destination object as a dict
@@ -1536,6 +1536,7 @@ class EventsBackend(BaseBackend):
         if not destination:
             raise ResourceNotFoundException("An api-destination '{}' does not exist.".format(name))
         return {}
+
 
 events_backends = {}
 for region in Session().get_available_regions("events"):
