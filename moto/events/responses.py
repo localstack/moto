@@ -463,22 +463,13 @@ class EventsHandler(BaseResponse):
         description = self._get_param("Description")
         connection_arn = self._get_param("ConnectionArn")
         invocation_endpoint = self._get_param("InvocationEndpoint")
+        invocation_rate_limit_per_second = self._get_param("InvocationRateLimitPerSecond")
         http_method = self._get_param("HttpMethod")
 
-        destination = self.events_backend.create_api_destination(
-            name, description, connection_arn, invocation_endpoint, http_method
+        result = self.events_backend.create_api_destination(
+            name, description, connection_arn, invocation_endpoint, invocation_rate_limit_per_second, http_method
         )
-        return (
-            json.dumps(
-                {
-                    "ApiDestinationArn": destination.arn,
-                    "ApiDestinationState": "ACTIVE",
-                    "CreationTime": destination.creation_time,
-                    "LastModifiedTime": destination.creation_time,
-                }
-            ),
-            self.response_headers,
-        )
+        return json.dumps(result), self.response_headers
 
     def list_api_destinations(self):
         destinations = self.events_backend.list_api_destinations()
@@ -501,20 +492,10 @@ class EventsHandler(BaseResponse):
 
     def describe_api_destination(self):
         name = self._get_param("Name")
-        destination = self.events_backend.describe_api_destination(name)
+        result = self.events_backend.describe_api_destination(name)
+        return json.dumps(result), self.response_headers
 
-        return (
-            json.dumps(
-                {
-                    "ApiDestinationArn": destination.arn,
-                    "Name": destination.name,
-                    "ApiDestinationState": destination.state,
-                    "ConnectionArn": destination.connection_arn,
-                    "InvocationEndpoint": destination.invocation_endpoint,
-                    "HttpMethod": destination.http_method,
-                    "CreationTime": destination.creation_time,
-                    "LastModifiedTime": destination.creation_time,
-                }
-            ),
-            self.response_headers,
-        )
+    def delete_api_destination(self):
+        name = self._get_param("Name")
+        result = self.events_backend.delete_api_destination(name)
+        return json.dumps(result), self.response_headers
