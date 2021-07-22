@@ -202,8 +202,14 @@ class SQSResponse(BaseResponse):
 
     def set_queue_attributes(self):
         # TODO validate self.get_param('QueueUrl')
+        attr_name = self.querystring.get('Attribute.1.Name')
+        attr_value = self.querystring.get('Attribute.1.Value')
+        if 'Policy' == attr_name[0] and len(attr_value[0]) == 0:
+          attribute = {attr_name[0]: None}
+        else:
+          attribute = self.attribute
         queue_name = self._get_queue_name()
-        self.sqs_backend.set_queue_attributes(queue_name, self.attribute)
+        self.sqs_backend.set_queue_attributes(queue_name, attribute)
 
         return SET_QUEUE_ATTRIBUTE_RESPONSE
 
