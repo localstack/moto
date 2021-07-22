@@ -1516,6 +1516,24 @@ class EventsBackend(BaseBackend):
             raise ResourceNotFoundException("An api-destination '{}' does not exist.".format(name))
         return destination.describe()
 
+    def update_api_destination(self, *, name, **kwargs):
+        """
+        Creates an API destination, which is an HTTP invocation endpoint configured as a target for events.
+        Docs:
+            https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_UpdateApiDestination.html
+
+        Returns:
+            dict
+        """
+        destination = self.destinations.get(name)
+        if not destination:
+            raise ResourceNotFoundException("An api-destination '{}' does not exist.".format(name))
+
+        for attr, value in kwargs.items():
+            if value is not None and hasattr(destination, attr):
+                setattr(destination, attr, value)
+        return destination.describe_short()
+
     def delete_api_destination(self, name):
         """
         Deletes the specified API destination.
