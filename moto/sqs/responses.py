@@ -205,9 +205,9 @@ class SQSResponse(BaseResponse):
         attr_name = self.querystring.get('Attribute.1.Name')[0]
         attr_value = self.querystring.get('Attribute.1.Value')[0]
         if attr_name == 'Policy' and len(attr_value) == 0:
-          attribute = {attr_name: None}
+            attribute = {attr_name: None}
         else:
-          attribute = self.attribute
+            attribute = self.attribute
         queue_name = self._get_queue_name()
         self.sqs_backend.set_queue_attributes(queue_name, attribute)
 
