@@ -43,6 +43,17 @@ class EventsHandler(BaseResponse):
         return self.request_params.get(param, if_none)
 
     def _create_response(self, result):
+        """
+        Creates a proper response for the API.
+
+        It basically transforms a dict-like result from the backend
+        into a tuple (str, dict) properly formatted.
+        Args:
+            result (dict): result from backend
+
+        Returns:
+            (str, dict): dumped result and headers
+        """
         return json.dumps(result), self.headers
 
     def error(self, type_, message="", status=400):
