@@ -194,7 +194,6 @@ class SQSResponse(BaseResponse):
             raise InvalidAttributeName("")
 
         attribute_names = self._get_multi_param("AttributeName")
-
         attributes = self.sqs_backend.get_queue_attributes(queue_name, attribute_names)
 
         template = self.response_template(GET_QUEUE_ATTRIBUTES_RESPONSE)
@@ -203,16 +202,12 @@ class SQSResponse(BaseResponse):
     def set_queue_attributes(self):
         # TODO validate self.get_param('QueueUrl')
         attribute = self.attribute
-        query_string_result = self.querystring
-        for key, value in query_string_result.items():
-            match = re.match(r"^Attribute\.(\d+)\.Name", key)
-            if match and 'Policy' in value[0]:
-                index = match.group(1)
-                attr_value = query_string_result.get(
-                  "Attribute.{}.Value".format(index)
-                )[0]
-                if len(attr_value) == 0:
-                  attribute = {value[0]: None}
+        attribute_names = self._get_multi_param("Attribute")
+        # Fixes issue with Policy set to empty str
+        if attribute_names:
+            for attr in attribute_names:
+                if attr['Name'] == 'Policy' and attr['Value'] == '':
+                  attribute = {attr['Name']: None}
         queue_name = self._get_queue_name()
         self.sqs_backend.set_queue_attributes(queue_name, attribute)
 
