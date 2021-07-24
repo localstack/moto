@@ -194,6 +194,7 @@ class SQSResponse(BaseResponse):
             raise InvalidAttributeName("")
 
         attribute_names = self._get_multi_param("AttributeName")
+
         attributes = self.sqs_backend.get_queue_attributes(queue_name, attribute_names)
 
         template = self.response_template(GET_QUEUE_ATTRIBUTES_RESPONSE)
