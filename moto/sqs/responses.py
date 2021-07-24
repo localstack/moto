@@ -207,8 +207,8 @@ class SQSResponse(BaseResponse):
         # Fixes issue with Policy set to empty str
         if attribute_names:
             for attr in attribute_names:
-                if attr['Name'] == 'Policy' and attr['Value'] == '':
-                  attribute = {attr['Name']: None}
+                if attr['Name'] == 'Policy' and len(attr['Value']) == 0:
+                    attribute = {attr['Name']: None}
         queue_name = self._get_queue_name()
         self.sqs_backend.set_queue_attributes(queue_name, attribute)
 
