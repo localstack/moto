@@ -1440,7 +1440,9 @@ class TagBackend(object):
                             value_filters.append(
                                 re.compile(simple_aws_filter_to_re(value))
                             )
-        for resource_id, tags in self.tags.items():
+        # Note: create a copy of tags to avoid "RuntimeError: dictionary changed size during iteration"
+        # TODO: we should consider introducing proper locking here for synchronous access
+        for resource_id, tags in dict(self.tags).items():
             for key, value in tags.items():
                 add_result = False
                 if filters is None:
