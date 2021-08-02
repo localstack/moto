@@ -1569,6 +1569,7 @@ class TagBackend(object):
                             value_filters.append(
                                 re.compile(simple_aws_filter_to_re(value))
                             )
+        # TODO: we should consider introducing proper locking here for synchronous access
         for resource_id, tags in self.tags.copy().items():
             for key, value in tags.items():
                 add_result = False
