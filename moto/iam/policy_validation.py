@@ -98,11 +98,9 @@ class IAMPolicyDocumentValidator:
         try:
             self._validate_version()
         except Exception:
-            # whummer: skip raising an error here, as this is failing some of our TF examples
-            # raise MalformedPolicyDocument(
-            #     "Policy document must be version 2012-10-17 or greater."
-            # )
-            pass
+            raise MalformedPolicyDocument(
+                "Policy document must be version 2012-10-17 or greater."
+            )
         try:
             self._perform_first_legacy_parsing()
             self._validate_resources_for_formats()
