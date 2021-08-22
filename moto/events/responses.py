@@ -423,6 +423,7 @@ class EventsHandler(BaseResponse):
                     "ConnectionArn": connection.arn,
                     "ConnectionState": "AUTHORIZED",
                     "CreationTime": connection.creation_time,
+                    "Name": connection.name,
                     "LastModifiedTime": connection.creation_time,
                     "AuthorizationType": connection.authorization_type,
                 }
