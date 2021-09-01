@@ -466,7 +466,9 @@ class Job(threading.Thread, BaseModel, DockerModel):
             # avoid explicit pulling here, to allow using cached images
             # self.docker_client.images.pull(image_repository, image_tag)
             self.job_state = "STARTING"
-            container = self.run_batch_container(cmd, environment, image, log_config, mounts, name, privileged)
+            container = self.run_batch_container(
+                cmd, environment, image, log_config, mounts, name, privileged
+            )
             self.job_state = "RUNNING"
             try:
                 container.reload()
@@ -547,7 +549,9 @@ class Job(threading.Thread, BaseModel, DockerModel):
             )
             self._mark_stopped(success=False)
 
-    def run_batch_container(self, cmd, environment, image, log_config, mounts, name, privileged):
+    def run_batch_container(
+        self, cmd, environment, image, log_config, mounts, name, privileged
+    ):
         container = self.docker_client.containers.run(
             image,
             cmd,
