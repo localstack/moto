@@ -746,7 +746,8 @@ class Job(threading.Thread, BaseModel, DockerModel, ManagedState):
                     env = kwargs["environment"]
                     ip = containers[0].attrs["NetworkSettings"]["IPAddress"]
                     env["AWS_BATCH_JOB_MAIN_NODE_PRIVATE_IPV4_ADDRESS"] = ip
-                container = self.docker_client.containers.run(
+                # Method is wrapped in a function to make it patchable in LocalStack
+                container = self.run_batch_container(
                     detach=True,
                     log_config=log_config,
                     extra_hosts=extra_hosts,
@@ -852,6 +853,32 @@ class Job(threading.Thread, BaseModel, DockerModel, ManagedState):
                 if container.status == "running":
                     container.kill()
                 container.remove()
+
+    def run_batch_container(
+        self,
+        cmd,
+        environment,
+        image,
+        log_config,
+        mounts,
+        name,
+        privileged,
+        extra_hosts,
+        **run_kwargs,
+    ):
+        container = self.docker_client.containers.run(
+            image,
+            cmd,
+            detach=True,
+            name=name,
+            log_config=log_config,
+            environment=environment,
+            mounts=mounts,
+            privileged=privileged,
+            extra_hosts=extra_hosts,
+            **run_kwargs,
+        )
+        return container
 
     def _mark_stopped(self, success: bool = True) -> None:
         if self.job_stopped:
