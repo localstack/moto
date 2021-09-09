@@ -653,16 +653,15 @@ class Job(threading.Thread, BaseModel, DockerModel, ManagedState):
             while self.status == "STARTING":
                 # Wait until the state is no longer runnable, but 'RUNNING'
                 sleep(0.5)
-            container = self.docker_client.containers.run(
-                image,
+            container = self.run_batch_container(
                 cmd,
-                detach=True,
-                name=name,
-                log_config=log_config,
-                environment=environment,
-                mounts=mounts,
-                privileged=privileged,
-                extra_hosts=extra_hosts,
+                environment,
+                image,
+                log_config,
+                mounts,
+                name,
+                privileged,
+                extra_hosts,
                 **run_kwargs,
             )
             try:
@@ -752,6 +751,32 @@ class Job(threading.Thread, BaseModel, DockerModel, ManagedState):
         except Exception as err:
             logger.error(f"Failed to run AWS Batch container {self.name}. Error {err}")
             self._mark_stopped(success=False)
+
+    def run_batch_container(
+        self,
+        cmd,
+        environment,
+        image,
+        log_config,
+        mounts,
+        name,
+        privileged,
+        extra_hosts,
+        **run_kwargs,
+    ):
+        container = self.docker_client.containers.run(
+            image,
+            cmd,
+            detach=True,
+            name=name,
+            log_config=log_config,
+            environment=environment,
+            mounts=mounts,
+            privileged=privileged,
+            extra_hosts=extra_hosts,
+            **run_kwargs,
+        )
+        return container
 
     def _mark_stopped(self, success: bool = True) -> None:
         # Ensure that job_stopped/job_stopped_at-attributes are set first
