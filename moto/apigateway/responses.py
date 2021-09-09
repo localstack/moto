@@ -377,7 +377,7 @@ class APIGatewayResponse(BaseResponse):
             tags = self._get_param("tags")
             if tags:
                 stage = self.backend.get_stage(function_id, stage_name)
-                stage["tags"] = merge_multiple_dicts(stage.get("tags"), tags)
+                stage["tags"] = merge_multiple_dicts(stage.get("tags") or {}, tags)
             return 200, {}, json.dumps({"item": tags})
         if self.method == "DELETE":
             stage = self.backend.get_stage(function_id, stage_name)
