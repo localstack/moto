@@ -547,15 +547,8 @@ class Job(threading.Thread, BaseModel, DockerModel):
 
             log_config = docker.types.LogConfig(type=docker.types.LogConfig.types.JSON)
             self.job_state = "STARTING"
-            container = self.docker_client.containers.run(
-                image,
-                cmd,
-                detach=True,
-                name=name,
-                log_config=log_config,
-                environment=environment,
-                mounts=mounts,
-                privileged=privileged,
+            container = self.run_batch_container(
+                cmd, environment, image, log_config, mounts, name, privileged
             )
             self.job_state = "RUNNING"
             try:
@@ -650,6 +643,21 @@ class Job(threading.Thread, BaseModel, DockerModel):
                 )
             )
             self._mark_stopped(success=False)
+
+    def run_batch_container(
+        self, cmd, environment, image, log_config, mounts, name, privileged
+    ):
+        container = self.docker_client.containers.run(
+            image,
+            cmd,
+            detach=True,
+            name=name,
+            log_config=log_config,
+            environment=environment,
+            mounts=mounts,
+            privileged=privileged,
+        )
+        return container
 
     def _mark_stopped(self, success=True):
         # Ensure that job_stopped/job_stopped_at-attributes are set first
