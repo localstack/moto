@@ -139,7 +139,7 @@ class LogsResponse(BaseResponse):
             "logGroupName",
             "Minimum length of 1. Maximum length of 512.",
             lambda x: 1 <= len(x) <= 512,
-            pattern="[.-_/#A-Za-z0-9]+$",
+            pattern=r"[\-._/#A-Za-z0-9]+$",
         )
 
         self.logs_backend.delete_metric_filter(filter_name, log_group_name)
