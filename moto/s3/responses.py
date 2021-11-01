@@ -1454,9 +1454,7 @@ class ResponseObject(_TemplateEnvironmentMixin, ActionAuthenticatorMixin):
             if isinstance(src_key, bytes):
                 src_key = src_key.decode("utf-8")
             src_key_parsed = urlparse(src_key)
-            src_bucket, src_key = (
-                src_key_parsed.path.lstrip("/").split("/", 1)
-            )
+            src_bucket, src_key = src_key_parsed.path.lstrip("/").split("/", 1)
             src_version_id = parse_qs(src_key_parsed.query).get("versionId", [None])[0]
 
             key = self.backend.get_object(
