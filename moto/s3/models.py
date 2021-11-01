@@ -2014,7 +2014,6 @@ class S3Backend(BaseBackend):
         acl=None,
         src_version_id=None,
     ):
-        src_key_name = clean_key_name(src_key_name)
         dest_key_name = clean_key_name(dest_key_name)
         dest_bucket = self.get_bucket(dest_bucket_name)
         key = self.get_object(src_bucket_name, src_key_name, version_id=src_version_id)
