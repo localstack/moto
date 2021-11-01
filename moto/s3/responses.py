@@ -61,7 +61,6 @@ from .models import (
 )
 from .utils import (
     bucket_name_from_url,
-    clean_key_name,
     metadata_from_headers,
     parse_region_from_url,
 )
