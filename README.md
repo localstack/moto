@@ -1,68 +1,34 @@
 # Moto - Mock AWS Services
 
-[![Join the chat at https://gitter.im/awsmoto/Lobby](https://badges.gitter.im/awsmoto/Lobby.svg)](https://gitter.im/awsmoto/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Fork of [`moto`](https://github.com/spulec/moto) with changes and adaptations for [LocalStack](https://github.com/localstack/localstack).
 
-[![Build Status](https://github.com/spulec/moto/workflows/TestNDeploy/badge.svg)](https://github.com/spulec/moto/actions)
-[![Coverage Status](https://codecov.io/gh/spulec/moto/branch/master/graph/badge.svg)](https://codecov.io/gh/spulec/moto)
-[![Docs](https://readthedocs.org/projects/pip/badge/?version=stable)](http://docs.getmoto.org)
-[![PyPI](https://img.shields.io/pypi/v/moto.svg)](https://pypi.org/project/moto/)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/moto.svg)](#)
-[![PyPI - Downloads](https://img.shields.io/pypi/dw/moto.svg)](https://pypistats.org/packages/moto)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+Please refer to the upstream repo for more details.
 
+## Releasing
 
-## Install
-
-```console
-$ pip install moto[ec2,s3,all]
+This fork is maintained as a separate pypi package, [moto-ext](https://pypi.org/project/moto-ext). To release a new version, follow these steps:
 ```
+# make sure to have git remotes defined for both repos: 
+$ git remote -v
+localstack	git@github.com:localstack/moto.git (fetch)
+localstack	git@github.com:localstack/moto.git (push)
+upstream	git@github.com:spulec/moto.git (fetch)
+upstream	git@github.com:spulec/moto.git (push)
 
-## In a nutshell
+# branch "master" is kept in sync with upstream "master"
+$ git checkout master
+$ git pull upstream master
 
+# branch "localstack" is the default branch of this repo
+$ git checkout localstack
+$ git rebase master  # resolve merge conflicts, if any...
+# (force-)push latest changes to the remote repo
+$ git push -f localstack localstack
 
-Moto is a library that allows your tests to easily mock out AWS Services.
-
-Imagine you have the following python code that you want to test:
-
-```python
-import boto3
-
-class MyModel(object):
-    def __init__(self, name, value):
-        self.name = name
-        self.value = value
-
-    def save(self):
-        s3 = boto3.client('s3', region_name='us-east-1')
-        s3.put_object(Bucket='mybucket', Key=self.name, Body=self.value)
+# update __version__, then publish to pypi
+$ vi moto/__init__.py
+...
+$ rm -rf dist/ build/
+$ make publish
+...
 ```
-
-Take a minute to think how you would have tested that in the past.
-
-Now see how you could test it with Moto:
-
-```python
-import boto3
-from moto import mock_s3
-from mymodule import MyModel
-
-@mock_s3
-def test_my_model_save():
-    conn = boto3.resource('s3', region_name='us-east-1')
-    # We need to create the bucket since this is all in Moto's 'virtual' AWS account
-    conn.create_bucket(Bucket='mybucket')
-    model_instance = MyModel('steve', 'is awesome')
-    model_instance.save()
-    body = conn.Object('mybucket', 'steve').get()['Body'].read().decode("utf-8")
-    assert body == 'is awesome'
-```
-
-With the decorator wrapping the test, all the calls to s3 are automatically mocked out. The mock keeps the state of the buckets and keys.
-
-For a full list of which services and features are covered, please see our [implementation coverage](https://github.com/spulec/moto/blob/master/IMPLEMENTATION_COVERAGE.md).
-
-
-### Documentation
-The full documentation can be found here:
-
-[http://docs.getmoto.org/en/latest/](http://docs.getmoto.org/en/latest/)
