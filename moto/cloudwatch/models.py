@@ -578,7 +578,9 @@ class CloudWatchBackend(BaseBackend):
         period_delta = timedelta(seconds=period)
         filtered_data = [
             md
-            for md in self.get_all_metrics()
+            for md in (
+                self.metric_data + self.aws_metric_data
+            )  # TODO: divergence from upstream
             if md.namespace == namespace
             and md.name == metric_name
             and start_time <= md.timestamp < end_time
