@@ -221,6 +221,8 @@ class MetricDatum(BaseModel):
             return False
 
         for metric in already_present_metrics:
+            if metric.namespace != self.namespace:
+                continue
             if self.dimensions and are_dimensions_same(
                 metric.dimensions, self.dimensions
             ):
@@ -539,7 +541,9 @@ class CloudWatchBackend(BaseBackend):
         # TODO: Also filter by unit and dimensions
         filtered_data = [
             md
-            for md in self.get_all_metrics()
+            for md in (
+                self.metric_data + self.aws_metric_data
+            )  # TODO: divergence from upstream
             if md.namespace == namespace
             and md.name == metric_name
             and start_time <= md.timestamp <= end_time
