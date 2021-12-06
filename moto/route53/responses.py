@@ -32,24 +32,22 @@ class Route53(BaseResponse):
 
         if request.method == "POST":
             elements = xmltodict.parse(self.body)
-            if "HostedZoneConfig" in elements["CreateHostedZoneRequest"]:
-                comment = elements["CreateHostedZoneRequest"]["HostedZoneConfig"][
-                    "Comment"
-                ]
+            create_request = elements["CreateHostedZoneRequest"]
+            hosted_zone_config = create_request.get("HostedZoneConfig")
+            if hosted_zone_config:
+                comment = hosted_zone_config.get("Comment")
                 try:
                     # in boto3, this field is set directly in the xml
-                    private_zone = elements["CreateHostedZoneRequest"][
-                        "HostedZoneConfig"
-                    ]["PrivateZone"]
+                    private_zone = hosted_zone_config["PrivateZone"]
                 except KeyError:
                     # if a VPC subsection is only included in xmls params when private_zone=True,
                     # see boto: boto/route53/connection.py
-                    private_zone = "VPC" in elements["CreateHostedZoneRequest"]
+                    private_zone = "VPC" in create_request
             else:
                 comment = None
                 private_zone = False
 
-            name = elements["CreateHostedZoneRequest"]["Name"]
+            name = create_request["Name"]
 
             if name[-1] != ".":
                 name += "."
@@ -406,7 +404,7 @@ GET_HOSTED_ZONE_RESPONSE = """<GetHostedZoneResponse xmlns="https://route53.amaz
         {% if zone.comment %}
             <Comment>{{ zone.comment }}</Comment>
         {% endif %}
-        <PrivateZone>{{ zone.private_zone }}</PrivateZone>
+        <PrivateZone>{{ "true" if zone.private_zone else "false" }}</PrivateZone>
       </Config>
    </HostedZone>
    <DelegationSet>
@@ -425,7 +423,7 @@ CREATE_HOSTED_ZONE_RESPONSE = """<CreateHostedZoneResponse xmlns="https://route5
         {% if zone.comment %}
             <Comment>{{ zone.comment }}</Comment>
         {% endif %}
-        <PrivateZone>{{ zone.private_zone }}</PrivateZone>
+        <PrivateZone>{{ "true" if zone.private_zone else "false" }}</PrivateZone>
       </Config>
    </HostedZone>
    <DelegationSet>
@@ -445,7 +443,7 @@ LIST_HOSTED_ZONES_RESPONSE = """<ListHostedZonesResponse xmlns="https://route53.
             {% if zone.comment %}
                 <Comment>{{ zone.comment }}</Comment>
             {% endif %}
-           <PrivateZone>{{ zone.private_zone }}</PrivateZone>
+           <PrivateZone>{{ "true" if zone.private_zone else "false" }}</PrivateZone>
          </Config>
          <ResourceRecordSetCount>{{ zone.rrsets|count  }}</ResourceRecordSetCount>
       </HostedZone>
@@ -467,7 +465,7 @@ LIST_HOSTED_ZONES_BY_NAME_RESPONSE = """<ListHostedZonesByNameResponse xmlns="{{
             {% if zone.comment %}
                 <Comment>{{ zone.comment }}</Comment>
             {% endif %}
-           <PrivateZone>{{ zone.private_zone }}</PrivateZone>
+           <PrivateZone>{{ "true" if zone.private_zone else "false" }}</PrivateZone>
          </Config>
          <ResourceRecordSetCount>{{ zone.rrsets|count  }}</ResourceRecordSetCount>
       </HostedZone>
