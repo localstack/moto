@@ -423,7 +423,7 @@ GET_HOSTED_ZONE_RESPONSE = """<GetHostedZoneResponse xmlns="https://route53.amaz
         {% if zone.comment %}
             <Comment>{{ zone.comment }}</Comment>
         {% endif %}
-        <PrivateZone>{{ zone.private_zone }}</PrivateZone>
+        <PrivateZone>{{ "true" if zone.private_zone else "false" }}</PrivateZone>
       </Config>
    </HostedZone>
    <DelegationSet>
@@ -449,7 +449,7 @@ CREATE_HOSTED_ZONE_RESPONSE = """<CreateHostedZoneResponse xmlns="https://route5
         {% if zone.comment %}
             <Comment>{{ zone.comment }}</Comment>
         {% endif %}
-        <PrivateZone>{{ zone.private_zone }}</PrivateZone>
+        <PrivateZone>{{ "true" if zone.private_zone else "false" }}</PrivateZone>
       </Config>
    </HostedZone>
    <DelegationSet>
@@ -473,7 +473,7 @@ LIST_HOSTED_ZONES_RESPONSE = """<ListHostedZonesResponse xmlns="https://route53.
             {% if zone.comment %}
                 <Comment>{{ zone.comment }}</Comment>
             {% endif %}
-           <PrivateZone>{{ zone.private_zone }}</PrivateZone>
+           <PrivateZone>{{ "true" if zone.private_zone else "false" }}</PrivateZone>
          </Config>
          <ResourceRecordSetCount>{{ zone.rrsets|count  }}</ResourceRecordSetCount>
       </HostedZone>
@@ -495,7 +495,7 @@ LIST_HOSTED_ZONES_BY_NAME_RESPONSE = """<ListHostedZonesByNameResponse xmlns="{{
             {% if zone.comment %}
                 <Comment>{{ zone.comment }}</Comment>
             {% endif %}
-           <PrivateZone>{{ zone.private_zone }}</PrivateZone>
+           <PrivateZone>{{ "true" if zone.private_zone else "false" }}</PrivateZone>
          </Config>
          <ResourceRecordSetCount>{{ zone.rrsets|count  }}</ResourceRecordSetCount>
       </HostedZone>
