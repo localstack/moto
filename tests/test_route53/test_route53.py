@@ -729,15 +729,15 @@ def test_hosted_zone_private_zone_preserved():
     # in (original) boto, these bools returned as strings.
     hosted_zone["GetHostedZoneResponse"]["HostedZone"]["Config"][
         "PrivateZone"
-    ].should.equal("True")
+    ].should.equal("true")
 
     hosted_zones = conn.get_all_hosted_zones()
     hosted_zones["ListHostedZonesResponse"]["HostedZones"][0]["Config"][
         "PrivateZone"
-    ].should.equal("True")
+    ].should.equal("true")
 
     zone = conn.get_zone("testdns.aws.com.")
-    zone.config["PrivateZone"].should.equal("True")
+    zone.config["PrivateZone"].should.equal("true")
 
 
 @mock_route53
