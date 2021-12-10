@@ -16,13 +16,12 @@ localstack	git@github.com:localstack/moto.git (push)
 upstream	git@github.com:spulec/moto.git (fetch)
 upstream	git@github.com:spulec/moto.git (push)
 
-# branch "master" is kept in sync with upstream "master"
-$ git checkout master
-$ git pull upstream master
+# fetch fresh upstream "master" branch
+$ git fetch upstream master
 
 # branch "localstack" is the default branch of this repo
 $ git checkout localstack
-$ git rebase master  # resolve merge conflicts, if any...
+$ git rebase upstream/master  # resolve merge conflicts, if any...
 # (force-)push latest changes to the remote repo
 $ git push -f localstack localstack
 
