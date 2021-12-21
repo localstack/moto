@@ -644,5 +644,39 @@
     "name": "amzn-ami-minimal-hvm-2018.03.0.20181129-x86_64-ebs",
     "virtualization_type": "hvm",
     "hypervisor": "xen"
+  },
+  {
+    "ami_id": "ami-04dd4500af104442f",
+    "state": "available",
+    "public": true,
+    "owner_id": "137112412989",
+    "image_location": "amazon/amzn2-ami-kernel-5.10-hvm-2.0.20211201.0-x86_64-gp2",
+    "sriov": "simple",
+    "root_device_type": "ebs",
+    "root_device_name": "/dev/xvda",
+    "description": "Amazon Linux 2 Kernel 5.10 AMI 2.0.20211201.0 x86_64 HVM gp2",
+    "image_type": "machine",
+    "platform": "Linux/UNIX",
+    "architecture": "x86_64",
+    "name": "amzn2-ami-kernel-5.10-hvm-2.0.20211201.0-x86_64-gp2",
+    "virtualization_type": "hvm",
+    "hypervisor": "xen"
+  },
+  {
+    "ami_id": "ami-0fa7253564b0074bb",
+    "state": "available",
+    "public": true,
+    "owner_id": "099720109477",
+    "image_location": "099720109477/ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20210413",
+    "sriov": "simple",
+    "root_device_type": "ebs",
+    "root_device_name": "/dev/sda1",
+    "description": "Canonical, Ubuntu, 20.04 LTS, amd64 focal image build on 2021-04-13",
+    "image_type": "machine",
+    "platform": "Linux/UNIX",
+    "architecture": "x86_64",
+    "name": "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20210413",
+    "virtualization_type": "hvm",
+    "hypervisor": "xen"
   }
 ]
