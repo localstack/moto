@@ -349,7 +349,7 @@ class OrganizationsBackend(BaseBackend):
         return root
 
     def create_organization(self, **kwargs):
-        self.org = FakeOrganization(kwargs["FeatureSet"])
+        self.org = FakeOrganization(kwargs.get("FeatureSet"))
         root_ou = FakeRoot(self.org)
         self.ou.append(root_ou)
         master_account = FakeAccount(
