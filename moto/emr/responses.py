@@ -277,7 +277,7 @@ class ElasticMapReduceResponse(BaseResponse):
             job_flow_role=self._get_param("JobFlowRole"),
             service_role=self._get_param("ServiceRole"),
             auto_scaling_role=self._get_param("AutoScalingRole"),
-            ebs_root_volume_size=self._get_param("EbsRootVolumeSize"),
+            ebs_root_volume_size=self._get_param("EbsRootVolumeSize", 10),
             steps=steps_from_query_string(self._get_list_prefix("Steps.member")),
             visible_to_all_users=self._get_bool_param("VisibleToAllUsers", False),
             instance_attrs=instance_attrs,
