@@ -167,6 +167,7 @@ class FakeCluster(BaseModel):
         security_configuration=None,
         kerberos_attributes=None,
         auto_scaling_role=None,
+        ebs_root_volume_size=10,
     ):
         self.id = cluster_id or random_cluster_id()
         emr_backend.clusters[self.id] = self
@@ -199,34 +200,43 @@ class FakeCluster(BaseModel):
             "master_instance_type" in instance_attrs
             and instance_attrs["master_instance_type"]
         ):
-            self.emr_backend.add_instance_groups(
+            instance_groups = [
+                {
+                    "instance_count": 1,
+                    "instance_role": "MASTER",
+                    "instance_type": instance_attrs["master_instance_type"],
+                    "market": "ON_DEMAND",
+                    "name": "master",
+                }
+            ]
+            instance_group_result = self.emr_backend.add_instance_groups(
                 self.id,
-                [
-                    {
-                        "instance_count": 1,
-                        "instance_role": "MASTER",
-                        "instance_type": instance_attrs["master_instance_type"],
-                        "market": "ON_DEMAND",
-                        "name": "master",
-                    }
-                ],
+                instance_groups,
+            )
+            self.emr_backend.add_instances(
+                self.id, instance_groups[0], instance_group_result[0]
             )
         if (
             "slave_instance_type" in instance_attrs
             and instance_attrs["slave_instance_type"]
         ):
-            self.emr_backend.add_instance_groups(
+            instance_groups = [
+                {
+                    "instance_count": instance_attrs["instance_count"] - 1,
+                    "instance_role": "CORE",
+                    "instance_type": instance_attrs["slave_instance_type"],
+                    "market": "ON_DEMAND",
+                    "name": "slave",
+                }
+            ]
+            instance_group_result = self.emr_backend.add_instance_groups(
                 self.id,
-                [
-                    {
-                        "instance_count": instance_attrs["instance_count"] - 1,
-                        "instance_role": "CORE",
-                        "instance_type": instance_attrs["slave_instance_type"],
-                        "market": "ON_DEMAND",
-                        "name": "slave",
-                    }
-                ],
+                instance_groups,
             )
+            for i in range(0, len(instance_group_result)):
+                self.emr_backend.add_instances(
+                    self.id, instance_groups[i], instance_group_result[i]
+                )
         self.additional_master_security_groups = instance_attrs.get(
             "additional_master_security_groups"
         )
@@ -275,10 +285,23 @@ class FakeCluster(BaseModel):
         )
         self.kerberos_attributes = kerberos_attributes
         self.auto_scaling_role = auto_scaling_role
+        self.ebs_root_volume_size = ebs_root_volume_size
 
     @property
     def arn(self):
         return f"arn:aws:elasticmapreduce:{self.emr_backend.region_name}:{self.emr_backend.account_id}:cluster/{self.id}"
+
+    @property
+    def master_public_dns_name(self):
+        master_group_id = self.master_instance_group_id
+        master_instance = [
+            i for i in self.instances if i.instance_group.id == master_group_id
+        ]
+        # add region into the domain name after the IP (results in something like: ec2-184-0-0-1.us-west-1.compute.amazonaws.com)
+        parts = master_instance[0].details.public_dns.split(
+            "."
+        )  # there should always be at least one master instance available here
+        return ".".join([parts[0], self.emr_backend.region_name, *parts[1:]])
 
     @property
     def instance_groups(self):
@@ -434,6 +457,8 @@ class ElasticMapReduceBackend(BaseBackend):
             instance = FakeInstance(
                 ec2_instance_id=instance.id, instance_group=instance_group
             )
+            # set details so we have the same behavior as in list_instances
+            instance.details = self.ec2_backend.get_instance(instance.ec2_instance_id)
             cluster.add_instance(instance)
 
     def add_job_flow_steps(self, job_flow_id, steps):
