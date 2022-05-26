@@ -2,6 +2,7 @@ import json
 import boto3
 import botocore
 import sure  # noqa # pylint: disable=unused-import
+import pytest
 
 from moto import mock_cloudformation, mock_s3
 from tests import EXAMPLE_AMI_ID
@@ -40,6 +41,9 @@ json_bad_template = {"AWSTemplateFormatVersion": "2010-09-09", "Description": "S
 
 dummy_template_json = json.dumps(json_template)
 dummy_bad_template_json = json.dumps(json_bad_template)
+
+# skip tests in this module, as we skip importing cfn-lint
+pytestmark = pytest.mark.skip()
 
 
 @mock_cloudformation
