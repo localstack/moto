@@ -67,7 +67,8 @@ all_extra_deps = [
     _dep_jsondiff,
     _dep_aws_xray_sdk,
     _dep_idna,
-    _dep_cfn_lint,
+    # removing cfn-lint for now, to save ~138MB
+    # _dep_cfn_lint,
     _dep_sshpubkeys,
     _dep_pyparsing,
     _dep_openapi,
@@ -89,6 +90,11 @@ extras_per_service.update(
         "appsync": [_dep_graphql],
         "awslambda": [_dep_docker],
         "batch": [_dep_docker],
+        "cloudformation": [
+            _dep_docker, _dep_PyYAML,
+            # removing cfn-lint for now, to save ~138MB
+            # _dep_cfn_lint
+        ],
         "cognitoidp": [_dep_python_jose, _dep_python_jose_ecdsa_pin],
         "ec2": [_dep_sshpubkeys],
         "glue": [_dep_pyparsing],
