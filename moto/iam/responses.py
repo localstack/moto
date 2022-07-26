@@ -2124,6 +2124,9 @@ LIST_MFA_DEVICES_TEMPLATE = """<ListMFADevicesResponse>
          <member>
             <UserName>{{ user_name }}</UserName>
             <SerialNumber>{{ device.serial_number }}</SerialNumber>
+            {% if device.enable_date %}
+            <EnableDate>{{ device.enabled_iso_8601 }}</EnableDate>
+            {% endif %}
          </member>
         {% endfor %}
       </MFADevices>
