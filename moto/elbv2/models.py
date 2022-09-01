@@ -525,6 +525,7 @@ class FakeLoadBalancer(CloudFormationModel):
         "load_balancing.cross_zone.enabled",
         "routing.http.desync_mitigation_mode",
         "routing.http.drop_invalid_header_fields.enabled",
+        "routing.http.preserve_host_header.enabled",
         "routing.http.x_amzn_tls_version_and_cipher_suite.enabled",
         "routing.http.xff_client_port.enabled",
         "routing.http2.enabled",
@@ -1341,10 +1342,10 @@ Member must satisfy regular expression pattern: {}".format(
         return modified_rules
 
     def set_ip_address_type(self, arn, ip_type):
-        if ip_type not in ("internal", "dualstack"):
+        if ip_type not in ("ipv4", "dualstack"):
             raise RESTError(
-                "InvalidParameterValue",
-                "IpAddressType must be either internal | dualstack",
+                "ValidationError",
+                f"1 validation error detected: Value '{ip_type}' at 'ipAddressType' failed to satisfy constraint: Member must satisfy enum value set: [ipv4, dualstack]",
             )
 
         balancer = self.load_balancers.get(arn)
