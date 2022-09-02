@@ -1333,10 +1333,10 @@ Member must satisfy regular expression pattern: {expression}"
         return modified_rules
 
     def set_ip_address_type(self, arn, ip_type):
-        if ip_type not in ("internal", "dualstack"):
+        if ip_type not in ("ipv4", "dualstack"):
             raise RESTError(
-                "InvalidParameterValue",
-                "IpAddressType must be either internal | dualstack",
+                "ValidationError",
+                f"1 validation error detected: Value '{ip_type}' at 'ipAddressType' failed to satisfy constraint: Member must satisfy enum value set: [ipv4, dualstack]",
             )
 
         balancer = self.load_balancers.get(arn)
