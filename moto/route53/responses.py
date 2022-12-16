@@ -44,7 +44,8 @@ class Route53(BaseResponse):
             if "HostedZoneConfig" in zone_request:
                 zone_config = zone_request["HostedZoneConfig"]
                 comment = zone_config["Comment"]
-                if zone_request.get("VPC", {}).get("VPCId", None):
+                vpc = zone_request.get("VPC", {}) or {}
+                if vpc.get("VPCId", None):
                     private_zone = True
                 else:
                     private_zone = self._convert_to_bool(
