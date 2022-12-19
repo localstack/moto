@@ -1,13 +1,15 @@
 import re
 from itertools import cycle
 from time import sleep
-from typing import Any, Dict, List, Tuple, Optional, Set
+from typing import Any, Dict, List, Tuple, Optional, Set, cast
 import datetime
 import time
 import logging
 import threading
 import dateutil.parser
 from sys import platform
+
+from docker.models.containers import Container
 
 from moto.core import BaseBackend, BackendDict, BaseModel, CloudFormationModel
 from moto.iam.models import iam_backends, IAMBackend
@@ -863,16 +865,16 @@ class Job(threading.Thread, BaseModel, DockerModel, ManagedState):
 
     def run_batch_container(
         self,
-        cmd,
-        environment,
-        image,
-        log_config,
-        mounts,
-        name,
-        privileged,
-        extra_hosts,
-        **run_kwargs,
-    ):
+        cmd: str,
+        environment: Dict[str, str],
+        image: str,
+        log_config: Dict[str, Any],
+        mounts: List[Any],
+        name: str,
+        privileged: bool,
+        extra_hosts: Dict[str, Any],
+        **run_kwargs: str,
+    ) -> Container:
         container = self.docker_client.containers.run(
             image,
             cmd,
@@ -885,7 +887,9 @@ class Job(threading.Thread, BaseModel, DockerModel, ManagedState):
             extra_hosts=extra_hosts,
             **run_kwargs,
         )
-        return container
+        # `container` _is_ a `Container` but the docker client api is untyped,
+        # so mypy thinks it is an `Any`
+        return cast(Container, container)
 
     def _mark_stopped(self, success: bool = True) -> None:
         if self.job_stopped:
