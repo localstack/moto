@@ -778,6 +778,7 @@ class SNSBackend(BaseBackend):
             "RawMessageDelivery",
             "DeliveryPolicy",
             "FilterPolicy",
+            "FilterPolicyScope",
             "RedrivePolicy",
             "SubscriptionRoleArn",
         ]:
