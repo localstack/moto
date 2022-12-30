@@ -228,7 +228,8 @@ class SNSResponse(BaseResponse):
             if "FilterPolicyScope" in attributes:
                 filter_policy_scope = attributes.pop("FilterPolicyScope")
                 self.backend.set_subscription_attributes(
-                    subscription.arn, "FilterPolicyScope", filter_policy_scope)
+                    subscription.arn, "FilterPolicyScope", filter_policy_scope
+                )
 
             for attr_name, attr_value in attributes.items():
                 self.backend.set_subscription_attributes(

@@ -811,7 +811,7 @@ class SNSBackend(BaseBackend):
                 if not isinstance(_value, list):
                     if scope == "MessageBody":
                         # From AWS docs: "unlike attribute-based policies, payload-based policies support property nesting."
-                        _rules.extend(aggregate_rules(_value, depth=depth+1))
+                        _rules.extend(aggregate_rules(_value, depth=depth + 1))
                     else:
                         raise SNSInvalidParameter(
                             "Invalid parameter: Filter policy scope MessageAttributes does not support nested filter policy"
@@ -828,8 +828,8 @@ class SNSBackend(BaseBackend):
             )
 
         aggregated_rules = aggregate_rules(value)
-        # Even the official documentation states the total combination of values must not exceed 100, in reality it is 150
-        # https://docs.aws.amazon.com/sns/latest/dg/sns-subscription-filter-policies.html#subscription-filter-policy-constraints
+        # For the complexity of the filter policy, the total combination of values must not exceed 150.
+        # https://docs.aws.amazon.com/sns/latest/dg/subscription-filter-policy-constraints.html
         if combinations > 150:
             raise SNSInvalidParameter(
                 "Invalid parameter: FilterPolicy: Filter policy is too complex"
@@ -859,6 +859,7 @@ class SNSBackend(BaseBackend):
                             )
                         continue
                     elif keyword == "numeric":
+                        # TODO: validate conditions
                         continue
                     elif keyword == "prefix":
                         continue
