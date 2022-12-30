@@ -1434,8 +1434,6 @@ class S3Response(BaseResponse):
             lock_mode = bucket.default_lock_mode
 
         acl = self._acl_from_headers(request.headers)
-        if acl is None:
-            acl = self.backend.get_bucket(bucket_name).acl
         tagging = self._tagging_from_headers(request.headers)
 
         if "retention" in query:
@@ -1459,6 +1457,8 @@ class S3Response(BaseResponse):
             return 200, response_headers, ""
 
         if "acl" in query:
+            if not acl:
+                acl = self._acl_from_body()
             self.backend.put_object_acl(bucket_name, key_name, acl)
             return 200, response_headers, ""
 
@@ -1552,7 +1552,7 @@ class S3Response(BaseResponse):
         metadata = metadata_from_headers(request.headers)
         metadata.update(metadata_from_headers(query))
         new_key.set_metadata(metadata)
-        new_key.set_acl(acl)
+        new_key.set_acl(acl or get_canned_acl("private"))
         new_key.website_redirect_location = request.headers.get(
             "x-amz-website-redirect-location"
         )
@@ -1995,7 +1995,7 @@ class S3Response(BaseResponse):
             metadata = metadata_from_headers(request.headers)
             tagging = self._tagging_from_headers(request.headers)
             storage_type = request.headers.get("x-amz-storage-class", "STANDARD")
-            acl = self._acl_from_headers(request.headers)
+            acl = self._acl_from_headers(request.headers) or get_canned_acl("private")
 
             multipart_id = self.backend.create_multipart_upload(
                 bucket_name,

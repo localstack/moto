@@ -528,9 +528,7 @@ class FakeAcl(BaseModel):
                     if grantee.uri:
                         grant_list.append(
                             {
-                                "grantee": grantee.uri.split(
-                                    "http://acs.amazonaws.com/groups/s3/"
-                                )[1],
+                                "grantee": grantee.uri.rsplit("/", maxsplit=1)[1],
                                 "permission": CAMEL_CASED_PERMISSIONS[permission],
                             }
                         )
@@ -561,9 +559,8 @@ def get_canned_acl(acl):
     elif acl == "public-read":
         grants.append(FakeGrant([ALL_USERS_GRANTEE], [PERMISSION_READ]))
     elif acl == "public-read-write":
-        grants.append(
-            FakeGrant([ALL_USERS_GRANTEE], [PERMISSION_READ, PERMISSION_WRITE])
-        )
+        grants.append(FakeGrant([ALL_USERS_GRANTEE], [PERMISSION_READ]))
+        grants.append(FakeGrant([ALL_USERS_GRANTEE], [PERMISSION_WRITE]))
     elif acl == "authenticated-read":
         grants.append(FakeGrant([AUTHENTICATED_USERS_GRANTEE], [PERMISSION_READ]))
     elif acl == "bucket-owner-read":
@@ -573,9 +570,9 @@ def get_canned_acl(acl):
     elif acl == "aws-exec-read":
         pass  # TODO: bucket owner, EC2 Read
     elif acl == "log-delivery-write":
-        grants.append(
-            FakeGrant([LOG_DELIVERY_GRANTEE], [PERMISSION_READ_ACP, PERMISSION_WRITE])
-        )
+        grants.append(FakeGrant([LOG_DELIVERY_GRANTEE], [PERMISSION_READ_ACP]))
+        grants.append(FakeGrant([LOG_DELIVERY_GRANTEE], [PERMISSION_WRITE]))
+
     else:
         assert False, f"Unknown canned acl: {acl}"
     return FakeAcl(grants=grants)
