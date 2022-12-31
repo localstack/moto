@@ -250,7 +250,6 @@ def test_creating_subscription_with_attributes():
     filter_policy = json.dumps(
         {
             "store": ["example_corp"],
-            "event": ["order_cancelled"],
             "encrypted": [False],
             "customer_interests": ["basketball", "baseball"],
             "price": [100, 100.12],
@@ -371,7 +370,6 @@ def test_set_subscription_attributes():
     filter_policy = json.dumps(
         {
             "store": ["example_corp"],
-            "event": ["order_cancelled"],
             "encrypted": [False],
             "customer_interests": ["basketball", "baseball"],
             "price": [100, 100.12],
