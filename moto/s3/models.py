@@ -505,6 +505,17 @@ class FakeAcl(BaseModel):
                     return True
         return False
 
+    def __eq__(self, other):
+        """
+        User-defined classes always compare unequal except to themselves by default. Using the `config_dict` allows
+        to check for equality in ACLs.
+        :param other: another FakeAcl object to compare to
+        :return: a boolean indicating equality
+        """
+        if not isinstance(other, FakeAcl):
+            return False
+        return self.to_config_dict() == other.to_config_dict()
+
     def __repr__(self):
         return f"FakeAcl(grants: {self.grants})"
 
@@ -2171,6 +2182,10 @@ class S3Backend(BaseBackend, CloudWatchMetricProvider):
         bucket_key_enabled=False,
         mdirective=None,
     ):
+        print(src_key, dest_key_name)
+        print(storage, src_key.storage_class)
+        print(acl, src_key.acl)
+        print(encryption, src_key.encryption)
         if (
             src_key.name == dest_key_name
             and src_key.bucket_name == dest_bucket_name

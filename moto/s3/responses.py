@@ -1512,13 +1512,12 @@ class S3Response(BaseResponse):
                 )
 
                 mdirective = request.headers.get("x-amz-metadata-directive")
-
                 self.backend.copy_object(
                     key,
                     bucket_name,
                     key_name,
                     storage=storage_class,
-                    acl=acl,
+                    acl=acl or get_canned_acl("private"),
                     kms_key_id=kms_key_id,
                     encryption=encryption,
                     bucket_key_enabled=bucket_key_enabled,
