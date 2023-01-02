@@ -2182,10 +2182,6 @@ class S3Backend(BaseBackend, CloudWatchMetricProvider):
         bucket_key_enabled=False,
         mdirective=None,
     ):
-        print(src_key, dest_key_name)
-        print(storage, src_key.storage_class)
-        print(acl, src_key.acl)
-        print(encryption, src_key.encryption)
         if (
             src_key.name == dest_key_name
             and src_key.bucket_name == dest_bucket_name
