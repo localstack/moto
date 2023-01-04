@@ -805,10 +805,40 @@ class SNSBackend(BaseBackend):
         combinations = 1
 
         def aggregate_rules(filter_policy_dict, depth=1) -> list:
+            """
+            This method evaluate the filter policy recursively, and returns only a list of lists of rules.
+            It also calculates the combinations of rules, calculated depending on the nesting of the rules.
+            Example:
+            nested_filter_policy = {
+                "key_a": {
+                    "key_b": {
+                        "key_c": ["value_one", "value_two", "value_three", "value_four"]
+                    }
+                },
+                "key_d": {
+                    "key_e": ["value_one", "value_two", "value_three"]
+                }
+            }
+            This function then iterates on the values of the top level keys of the filter policy: ("key_a", "key_d")
+            If the iterated value is not a list, it means it is a nested property. If the scope is `MessageBody`, it is
+            allowed, we call this method on the value, adding a level to the depth to keep track on how deep the key is.
+            If the value is a list, it means it contains rules: we will append this list of rules in _rules, and
+            calculate the combinations it adds.
+            For the example filter policy containing nested properties, we calculate it this way
+            The first array has four values in a three-level nested key, and the second has three values in a two-level
+            nested key. 3 x 4 x 2 x 3 = 72
+            The return value would be:
+            [["value_one", "value_two", "value_three", "value_four"], ["value_one", "value_two", "value_three"]]
+            It allows us to later iterate of the list of rules in an easy way, to verify its conditions.
+
+            :param filter_policy_dict: a dict, starting at the FilterPolicy
+            :param depth: the depth/level of the rules we are evaluating
+            :return: a list of lists of rules
+            """
             nonlocal combinations
             _rules = []
-            for _value in filter_policy_dict.values():
-                if not isinstance(_value, list):
+            for key, _value in filter_policy_dict.items():
+                if isinstance(_value, dict):
                     if scope == "MessageBody":
                         # From AWS docs: "unlike attribute-based policies, payload-based policies support property nesting."
                         _rules.extend(aggregate_rules(_value, depth=depth + 1))
@@ -816,9 +846,13 @@ class SNSBackend(BaseBackend):
                         raise SNSInvalidParameter(
                             "Invalid parameter: Filter policy scope MessageAttributes does not support nested filter policy"
                         )
-                else:
+                elif isinstance(_value, list):
                     _rules.append(_value)
                     combinations = combinations * len(_value) * depth
+                else:
+                    raise SNSInvalidParameter(
+                        f'Invalid parameter: FilterPolicy: "{key}" must be an object or an array'
+                    )
             return _rules
 
         # A filter policy can have a maximum of five attribute names. For a nested policy, only parent keys are counted.
