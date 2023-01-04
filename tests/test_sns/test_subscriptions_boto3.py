@@ -483,7 +483,9 @@ def test_subscribe_invalid_filter_policy():
             TopicArn=topic_arn,
             Protocol="http",
             Endpoint="http://example.com/",
-            Attributes={"FilterPolicy": json.dumps({"store": {"key": [{"exists": None}]}})},
+            Attributes={
+                "FilterPolicy": json.dumps({"store": {"key": [{"exists": None}]}})
+            },
         )
     except ClientError as err:
         err.response["Error"]["Code"].should.equal("InvalidParameter")
@@ -515,7 +517,9 @@ def test_subscribe_invalid_filter_policy():
     try:
         nested_filter_policy = {
             "key_a": {
-                "key_b": {"key_c": ["value_one", "value_two", "value_three", "value_four"]},
+                "key_b": {
+                    "key_c": ["value_one", "value_two", "value_three", "value_four"]
+                },
             },
             "key_d": {"key_e": ["value_one", "value_two", "value_three"]},
             "key_f": ["value_one", "value_two", "value_three"],
@@ -527,13 +531,17 @@ def test_subscribe_invalid_filter_policy():
             TopicArn=topic_arn,
             Protocol="http",
             Endpoint="http://example.com/",
-            Attributes={"FilterPolicyScope": "MessageBody", "FilterPolicy": json.dumps(nested_filter_policy)},
+            Attributes={
+                "FilterPolicyScope": "MessageBody",
+                "FilterPolicy": json.dumps(nested_filter_policy),
+            },
         )
     except ClientError as err:
         err.response["Error"]["Code"].should.equal("InvalidParameter")
         err.response["Error"]["Message"].should.equal(
             "Invalid parameter: FilterPolicy: Filter policy is too complex"
         )
+
 
 @mock_sns
 def test_check_not_opted_out():
