@@ -778,6 +778,7 @@ class SNSBackend(BaseBackend):
             "RawMessageDelivery",
             "DeliveryPolicy",
             "FilterPolicy",
+            "FilterPolicyScope",
             "RedrivePolicy",
             "SubscriptionRoleArn",
         ]:
@@ -789,26 +790,86 @@ class SNSBackend(BaseBackend):
             raise SNSNotFoundError(f"Subscription with arn {arn} not found")
         subscription = _subscription[0]
 
-        subscription.attributes[name] = value
-
         if name == "FilterPolicy":
             filter_policy = json.loads(value)
-            self._validate_filter_policy(filter_policy)
+            # we validate the filter policy differently depending on the scope
+            # we need to always set the scope first
+            filter_policy_scope = subscription.attributes.get("FilterPolicyScope")
+            self._validate_filter_policy(filter_policy, scope=filter_policy_scope)
             subscription._filter_policy = filter_policy
 
-    def _validate_filter_policy(self, value):
-        # TODO: extend validation checks
+        subscription.attributes[name] = value
+
+    def _validate_filter_policy(self, value, scope):
+
         combinations = 1
-        for rules in value.values():
-            combinations *= len(rules)
-        # Even the official documentation states the total combination of values must not exceed 100, in reality it is 150
-        # https://docs.aws.amazon.com/sns/latest/dg/sns-subscription-filter-policies.html#subscription-filter-policy-constraints
+
+        def aggregate_rules(filter_policy_dict, depth=1) -> list:
+            """
+            This method evaluate the filter policy recursively, and returns only a list of lists of rules.
+            It also calculates the combinations of rules, calculated depending on the nesting of the rules.
+            Example:
+            nested_filter_policy = {
+                "key_a": {
+                    "key_b": {
+                        "key_c": ["value_one", "value_two", "value_three", "value_four"]
+                    }
+                },
+                "key_d": {
+                    "key_e": ["value_one", "value_two", "value_three"]
+                }
+            }
+            This function then iterates on the values of the top level keys of the filter policy: ("key_a", "key_d")
+            If the iterated value is not a list, it means it is a nested property. If the scope is `MessageBody`, it is
+            allowed, we call this method on the value, adding a level to the depth to keep track on how deep the key is.
+            If the value is a list, it means it contains rules: we will append this list of rules in _rules, and
+            calculate the combinations it adds.
+            For the example filter policy containing nested properties, we calculate it this way
+            The first array has four values in a three-level nested key, and the second has three values in a two-level
+            nested key. 3 x 4 x 2 x 3 = 72
+            The return value would be:
+            [["value_one", "value_two", "value_three", "value_four"], ["value_one", "value_two", "value_three"]]
+            It allows us to later iterate of the list of rules in an easy way, to verify its conditions.
+
+            :param filter_policy_dict: a dict, starting at the FilterPolicy
+            :param depth: the depth/level of the rules we are evaluating
+            :return: a list of lists of rules
+            """
+            nonlocal combinations
+            _rules = []
+            for key, _value in filter_policy_dict.items():
+                if isinstance(_value, dict):
+                    if scope == "MessageBody":
+                        # From AWS docs: "unlike attribute-based policies, payload-based policies support property nesting."
+                        _rules.extend(aggregate_rules(_value, depth=depth + 1))
+                    else:
+                        raise SNSInvalidParameter(
+                            "Invalid parameter: Filter policy scope MessageAttributes does not support nested filter policy"
+                        )
+                elif isinstance(_value, list):
+                    _rules.append(_value)
+                    combinations = combinations * len(_value) * depth
+                else:
+                    raise SNSInvalidParameter(
+                        f'Invalid parameter: FilterPolicy: "{key}" must be an object or an array'
+                    )
+            return _rules
+
+        # A filter policy can have a maximum of five attribute names. For a nested policy, only parent keys are counted.
+        if len(value.values()) > 5:
+            raise SNSInvalidParameter(
+                "Invalid parameter: FilterPolicy: Filter policy can not have more than 5 keys"
+            )
+
+        aggregated_rules = aggregate_rules(value)
+        # For the complexity of the filter policy, the total combination of values must not exceed 150.
+        # https://docs.aws.amazon.com/sns/latest/dg/subscription-filter-policy-constraints.html
         if combinations > 150:
             raise SNSInvalidParameter(
                 "Invalid parameter: FilterPolicy: Filter policy is too complex"
             )
 
-        for rules in value.values():
+        for rules in aggregated_rules:
             for rule in rules:
                 if rule is None:
                     continue
@@ -832,6 +893,7 @@ class SNSBackend(BaseBackend):
                             )
                         continue
                     elif keyword == "numeric":
+                        # TODO: validate conditions
                         continue
                     elif keyword == "prefix":
                         continue
