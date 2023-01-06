@@ -903,9 +903,11 @@ def test_ssm_key_headers_in_create_multipart():
         Key=key_name,
         ServerSideEncryption="aws:kms",
         SSEKMSKeyId=kms_key_id,
+        BucketKeyEnabled=True,
     )
     assert create_multipart_response["ServerSideEncryption"] == "aws:kms"
     assert create_multipart_response["SSEKMSKeyId"] == kms_key_id
+    assert create_multipart_response["BucketKeyEnabled"] == True
 
     upload_part_response = s3_client.upload_part(
         Body=b"bytes",
@@ -916,6 +918,7 @@ def test_ssm_key_headers_in_create_multipart():
     )
     assert upload_part_response["ServerSideEncryption"] == "aws:kms"
     assert upload_part_response["SSEKMSKeyId"] == kms_key_id
+    assert upload_part_response["BucketKeyEnabled"] == True
 
     parts = {"Parts": [{"PartNumber": 1, "ETag": upload_part_response["ETag"]}]}
     complete_multipart_response = s3_client.complete_multipart_upload(
@@ -926,6 +929,7 @@ def test_ssm_key_headers_in_create_multipart():
     )
     assert complete_multipart_response["ServerSideEncryption"] == "aws:kms"
     assert complete_multipart_response["SSEKMSKeyId"] == kms_key_id
+    assert complete_multipart_response["BucketKeyEnabled"] == True
 
 
 @mock_s3
