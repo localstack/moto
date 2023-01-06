@@ -1419,7 +1419,9 @@ class S3Response(BaseResponse):
         bucket_key_enabled = request.headers.get(
             "x-amz-server-side-encryption-bucket-key-enabled", None
         )
+
         if bucket_key_enabled is not None:
+            # todo validate if in ("true", "false")
             bucket_key_enabled = str(bucket_key_enabled).lower()
 
         bucket = self.backend.get_bucket(bucket_name)
@@ -1508,12 +1510,11 @@ class S3Response(BaseResponse):
                     ):
                         raise ObjectNotInActiveTierError(key)
 
-                bucket_key_enabled = (
-                    request.headers.get(
-                        "x-amz-server-side-encryption-bucket-key-enabled", ""
-                    ).lower()
-                    == "true"
+                bucket_key_enabled = request.headers.get(
+                    "x-amz-server-side-encryption-bucket-key-enabled", None
                 )
+                if bucket_key_enabled is not None:
+                    bucket_key_enabled = str(bucket_key_enabled).lower()
 
                 mdirective = request.headers.get("x-amz-metadata-directive")
                 self.backend.copy_object(
@@ -1806,7 +1807,7 @@ class S3Response(BaseResponse):
 
     def _encryption_config_from_body(self):
         parsed_xml = xmltodict.parse(self.body)
-
+        # TODO: validate KMS if BucketKeyEnabled
         if (
             not parsed_xml["ServerSideEncryptionConfiguration"].get("Rule")
             or not parsed_xml["ServerSideEncryptionConfiguration"]["Rule"].get(
@@ -1998,6 +1999,13 @@ class S3Response(BaseResponse):
 
         encryption = request.headers.get("x-amz-server-side-encryption")
         kms_key_id = request.headers.get("x-amz-server-side-encryption-aws-kms-key-id")
+        bucket_key_enabled = request.headers.get(
+            "x-amz-server-side-encryption-bucket-key-enabled", None
+        )
+
+        if bucket_key_enabled is not None:
+            # todo validate if in ("true", "false")
+            bucket_key_enabled = str(bucket_key_enabled).lower()
 
         if body == b"" and "uploads" in query:
             response_headers = {}
@@ -2017,6 +2025,7 @@ class S3Response(BaseResponse):
                 acl,
                 encryption,
                 kms_key_id,
+                bucket_key_enabled,
             )
             if encryption:
                 response_headers["x-amz-server-side-encryption"] = encryption
@@ -2024,6 +2033,11 @@ class S3Response(BaseResponse):
                 response_headers[
                     "x-amz-server-side-encryption-aws-kms-key-id"
                 ] = kms_key_id
+
+            if bucket_key_enabled == "true":
+                response_headers[
+                    "x-amz-server-side-encryption-bucket-key-enabled"
+                ] = bucket_key_enabled
 
             template = self.response_template(S3_MULTIPART_INITIATE_RESPONSE)
             response = template.render(
@@ -2050,6 +2064,7 @@ class S3Response(BaseResponse):
                 multipart=multipart,
                 encryption=multipart.sse_encryption,
                 kms_key_id=multipart.kms_key_id,
+                bucket_key_enabled=multipart.bucket_key_enabled,
             )
             key.set_metadata(multipart.metadata)
             self.backend.set_key_tags(key, multipart.tags)
@@ -2065,6 +2080,11 @@ class S3Response(BaseResponse):
 
             if key.kms_key_id:
                 headers["x-amz-server-side-encryption-aws-kms-key-id"] = key.kms_key_id
+
+            if key.bucket_key_enabled == "true":
+                headers[
+                    "x-amz-server-side-encryption-bucket-key-enabled"
+                ] = key.bucket_key_enabled
 
             return (
                 200,

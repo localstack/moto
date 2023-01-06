@@ -242,9 +242,10 @@ class FakeKey(BaseModel, ManagedState):
             if self.encryption == "aws:kms" and self.kms_key_id is not None:
                 res["x-amz-server-side-encryption-aws-kms-key-id"] = self.kms_key_id
         if self.bucket_key_enabled is not None:
-            res[
-                "x-amz-server-side-encryption-bucket-key-enabled"
-            ] = self.bucket_key_enabled
+            bucket_key_enabled = (
+                "true" if self.bucket_key_enabled in ("true", True) else "false"
+            )
+            res["x-amz-server-side-encryption-bucket-key-enabled"] = bucket_key_enabled
         if self._storage_class != "STANDARD":
             res["x-amz-storage-class"] = self._storage_class
         if self._expiry is not None:
@@ -368,6 +369,7 @@ class FakeMultipart(BaseModel):
         acl=None,
         sse_encryption=None,
         kms_key_id=None,
+        bucket_key_enabled=None,
     ):
         self.key_name = key_name
         self.metadata = metadata
@@ -382,6 +384,7 @@ class FakeMultipart(BaseModel):
         )
         self.sse_encryption = sse_encryption
         self.kms_key_id = kms_key_id
+        self.bucket_key_enabled = bucket_key_enabled
 
     def complete(self, body):
         decode_hex = codecs.getdecoder("hex_codec")
@@ -417,7 +420,11 @@ class FakeMultipart(BaseModel):
             raise NoSuchUpload(upload_id=part_id)
 
         key = FakeKey(
-            part_id, value, encryption=self.sse_encryption, kms_key_id=self.kms_key_id
+            part_id,
+            value,
+            encryption=self.sse_encryption,
+            kms_key_id=self.kms_key_id,
+            bucket_key_enabled=self.bucket_key_enabled,
         )
         if part_id in self.parts:
             # We're overwriting the current part - dispose of it first
@@ -2029,7 +2036,23 @@ class S3Backend(BaseBackend, CloudWatchMetricProvider):
         acl,
         sse_encryption,
         kms_key_id,
+        bucket_key_enabled,
     ):
+        bucket = self.get_bucket(bucket_name)
+        # getting default config from bucket if not included in put request
+        if bucket.encryption:
+            bucket_key_enabled = bucket_key_enabled or bucket.encryption["Rule"].get(
+                "BucketKeyEnabled", False
+            )
+            kms_key_id = kms_key_id or bucket.encryption["Rule"][
+                "ApplyServerSideEncryptionByDefault"
+            ].get("KMSMasterKeyID")
+            sse_encryption = (
+                sse_encryption
+                or bucket.encryption["Rule"]["ApplyServerSideEncryptionByDefault"][
+                    "SSEAlgorithm"
+                ]
+            )
         multipart = FakeMultipart(
             key_name,
             metadata,
@@ -2038,9 +2061,9 @@ class S3Backend(BaseBackend, CloudWatchMetricProvider):
             acl=acl,
             sse_encryption=sse_encryption,
             kms_key_id=kms_key_id,
+            bucket_key_enabled=bucket_key_enabled,
         )
 
-        bucket = self.get_bucket(bucket_name)
         bucket.multiparts[multipart.id] = multipart
         return multipart.id
 
