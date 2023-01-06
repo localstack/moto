@@ -63,6 +63,8 @@ from xml.dom import minidom
 
 
 DEFAULT_REGION_NAME = "us-east-1"
+# the key to be used for KMS encryption when none is supplied. It is supposed to be the same between buckets
+DEFAULT_KMS_AWS_MANAGED_KEY = "ba2a4d37-2dcd-4ad0-8f84-eacee65cdf9c"
 
 ACTION_MAP = {
     "BUCKET": {
@@ -1387,7 +1389,8 @@ class S3Response(BaseResponse):
         storage_class = request.headers.get("x-amz-storage-class", "STANDARD")
         encryption = request.headers.get("x-amz-server-side-encryption", None)
         kms_key_id = request.headers.get(
-            "x-amz-server-side-encryption-aws-kms-key-id", None
+            "x-amz-server-side-encryption-aws-kms-key-id",
+            DEFAULT_KMS_AWS_MANAGED_KEY if encryption else None,
         )
 
         checksum_algorithm = request.headers.get("x-amz-sdk-checksum-algorithm", "")
@@ -1998,7 +2001,10 @@ class S3Response(BaseResponse):
         self._authenticate_and_authorize_s3_action()
 
         encryption = request.headers.get("x-amz-server-side-encryption")
-        kms_key_id = request.headers.get("x-amz-server-side-encryption-aws-kms-key-id")
+        kms_key_id = request.headers.get(
+            "x-amz-server-side-encryption-aws-kms-key-id",
+            DEFAULT_KMS_AWS_MANAGED_KEY if encryption else None,
+        )
         bucket_key_enabled = request.headers.get(
             "x-amz-server-side-encryption-bucket-key-enabled", None
         )

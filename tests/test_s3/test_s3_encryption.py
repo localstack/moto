@@ -142,13 +142,15 @@ def test_encryption_status_on_new_objects_with_kms():
     res.shouldnt.have.key("ServerSideEncryption")
     # enable KMS encryption
     sse_config = {
-        "Rules": [{
-            "ApplyServerSideEncryptionByDefault": {
-                "SSEAlgorithm": "aws:kms",
-                "KMSMasterKeyID": "fake-key-id",
-            },
-            "BucketKeyEnabled": True,
-        }]
+        "Rules": [
+            {
+                "ApplyServerSideEncryptionByDefault": {
+                    "SSEAlgorithm": "aws:kms",
+                    "KMSMasterKeyID": "fake-key-id",
+                },
+                "BucketKeyEnabled": True,
+            }
+        ]
     }
     s3.put_bucket_encryption(
         Bucket=bucket_name, ServerSideEncryptionConfiguration=sse_config
@@ -169,3 +171,19 @@ def test_encryption_status_on_new_objects_with_kms():
     res.should.have.key("ServerSideEncryption").equals("aws:kms")
     res.should.have.key("SSEKMSKeyId").equals("fake-key-id")
     res.should.have.key("BucketKeyEnabled").equals(True)
+
+
+@mock_s3
+def test_encryption_default_kms_key():
+    bucket_name = str(uuid4())
+    s3 = boto3.client("s3", region_name="us-east-1")
+    s3.create_bucket(Bucket=bucket_name)
+    s3.put_object(
+        Bucket=bucket_name, Body=b"test", Key="file.txt", ServerSideEncryption="aws:kms"
+    )
+    # verify encryption status on object itself
+    res = s3.get_object(Bucket=bucket_name, Key="file.txt")
+    res.shouldnt.have.key("BucketKeyEnabled")
+    res.should.have.key("ServerSideEncryption").equal = "aws:kms"
+    # don't test for the hardcoded value of the key
+    res.should.have.key("SSEKMSKeyId")
