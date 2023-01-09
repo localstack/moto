@@ -2230,7 +2230,7 @@ class S3Backend(BaseBackend, CloudWatchMetricProvider):
         acl=None,
         encryption=None,
         kms_key_id=None,
-        bucket_key_enabled=False,
+        bucket_key_enabled=None,
         mdirective=None,
     ):
         if (
@@ -2240,7 +2240,7 @@ class S3Backend(BaseBackend, CloudWatchMetricProvider):
             and acl == src_key.acl
             and encryption == src_key.encryption
             and kms_key_id == src_key.kms_key_id
-            and bucket_key_enabled == (src_key.bucket_key_enabled or False)
+            and bucket_key_enabled == src_key.bucket_key_enabled
             and mdirective != "REPLACE"
         ):
             raise CopyObjectMustChangeSomething

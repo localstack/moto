@@ -80,6 +80,7 @@ class TestS3FileHandleClosures(TestCase):
             acl=None,
             sse_encryption=None,
             kms_key_id=None,
+            bucket_key_enabled=None,
         )
         self.s3.upload_part(
             bucket_name="my-bucket",
@@ -99,6 +100,7 @@ class TestS3FileHandleClosures(TestCase):
             acl=None,
             sse_encryption=None,
             kms_key_id=None,
+            bucket_key_enabled=None,
         )
         self.s3.upload_part(
             bucket_name="my-bucket",
@@ -124,6 +126,7 @@ class TestS3FileHandleClosures(TestCase):
             acl=None,
             sse_encryption=None,
             kms_key_id=None,
+            bucket_key_enabled=None,
         )
         self.s3.upload_part(
             bucket_name="my-bucket",
@@ -146,6 +149,7 @@ class TestS3FileHandleClosures(TestCase):
             acl=None,
             sse_encryption=None,
             kms_key_id=None,
+            bucket_key_enabled=None,
         )
         etag = self.s3.upload_part(
             bucket_name="my-bucket",
