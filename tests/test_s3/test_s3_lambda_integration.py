@@ -10,6 +10,7 @@ from tests.test_awslambda.utilities import (
 )
 from uuid import uuid4
 
+import sure  # noqa # pylint: disable=unused-import
 
 REGION_NAME = "us-east-1"
 
