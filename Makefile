@@ -50,7 +50,7 @@ terraformtests:
 	cd tests/terraformtests && bin/run_go_test $(SERVICE_NAME) "$(TEST_NAMES)"
 
 publish:
-	python setup.py sdist bdist_wheel
+	python -m build
 	twine upload dist/*
 
 test_server:
