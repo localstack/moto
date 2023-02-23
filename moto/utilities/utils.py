@@ -7,6 +7,8 @@ from typing import Any, Dict, List, TypeVar, Tuple
 
 
 def get_partition(region: str):
+    if region is None:
+        return "aws"
     valid_matches = [
         # (region prefix, aws partition)
         ("cn-", "aws-cn"),

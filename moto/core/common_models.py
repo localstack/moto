@@ -197,5 +197,5 @@ class ConfigQueryModel:
 class CloudWatchMetricProvider(object):
     @staticmethod
     @abstractmethod
-    def get_cloudwatch_metrics(account_id: str) -> Any:  # type: ignore[misc]
+    def get_cloudwatch_metrics(account_id: str, region: str) -> Any:  # type: ignore[misc]
         pass

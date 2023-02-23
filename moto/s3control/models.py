@@ -137,5 +137,5 @@ s3control_backends = BackendDict(
     S3ControlBackend,
     "s3control",
     use_boto3_regions=False,
-    additional_regions=["global"],
+    additional_regions=["aws", "aws-us-gov", "aws-cn"],
 )

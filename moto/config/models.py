@@ -1531,6 +1531,8 @@ class ConfigBackend(BaseBackend):
         )
         if RESOURCE_MAP[resource_type].backends[self.account_id].get("global"):
             backend_region = "global"
+        if RESOURCE_MAP[resource_type].backends[self.account_id].get("aws"):
+            backend_region = "aws"
 
         # If the backend region isn't implemented then we won't find the item:
         if (

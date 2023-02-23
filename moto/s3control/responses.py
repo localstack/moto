@@ -6,6 +6,7 @@ from moto.s3.exceptions import S3ClientError
 from moto.s3.responses import S3_PUBLIC_ACCESS_BLOCK_CONFIGURATION
 from moto.utilities.aws_headers import amzn_request_id
 from .models import s3control_backends
+from ..utilities.utils import get_partition
 
 
 class S3ControlResponse(BaseResponse):
@@ -14,7 +15,8 @@ class S3ControlResponse(BaseResponse):
 
     @property
     def backend(self):
-        return s3control_backends[self.current_account]["global"]
+        partition = get_partition(self.region)
+        return s3control_backends[self.current_account][partition]
 
     @amzn_request_id
     def public_access_block(self, request, full_url, headers):

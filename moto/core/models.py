@@ -48,6 +48,8 @@ class BaseMockAWS:
         if "us-east-1" in backend_default_account:
             # We only need to know the URL for a single region - they will be the same everywhere
             self.backends_for_urls.append(backend_default_account["us-east-1"])
+        elif "aws" in backend_default_account:
+            self.backends_for_urls.append(backend_default_account["aws"])
         elif "global" in backend_default_account:
             # If us-east-1 is not available, it's probably a global service
             self.backends_for_urls.append(backend_default_account["global"])

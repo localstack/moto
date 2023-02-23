@@ -26,7 +26,7 @@ from moto.moto_api import state_manager
 from moto.moto_api._internal import mock_random as random
 from moto.moto_api._internal.managed_state_model import ManagedState
 from moto.utilities.tagging_service import TaggingService
-from moto.utilities.utils import LowercaseDict, md5_hash
+from moto.utilities.utils import LowercaseDict, md5_hash, get_partition
 from moto.s3.exceptions import (
     AccessDeniedByLock,
     BucketAlreadyExists,
@@ -93,6 +93,7 @@ class FakeKey(BaseModel, ManagedState):
         name,
         value,
         account_id=None,
+        partition=None,
         storage="STANDARD",
         etag=None,
         is_versioned=False,
@@ -117,6 +118,7 @@ class FakeKey(BaseModel, ManagedState):
         )
         self.name = name
         self.account_id = account_id
+        self.partition = partition
         self.last_modified = datetime.datetime.utcnow()
         self.acl = get_canned_acl("private")
         self.website_redirect_location = None
@@ -169,7 +171,7 @@ class FakeKey(BaseModel, ManagedState):
     @property
     def arn(self):
         # S3 Objects don't have an ARN, but we do need something unique when creating tags against this resource
-        return f"arn:aws:s3:::{self.bucket_name}/{self.name}/{self.version_id}"
+        return f"arn:{self.partition}:s3:::{self.bucket_name}/{self.name}/{self.version_id}"
 
     @value.setter
     def value(self, new_value):
@@ -274,7 +276,7 @@ class FakeKey(BaseModel, ManagedState):
             res["x-amz-object-lock-retain-until-date"] = self.lock_until
         if self.lock_mode:
             res["x-amz-object-lock-mode"] = self.lock_mode
-        tags = s3_backends[self.account_id]["global"].tagger.get_tag_dict_for_resource(
+        tags = s3_backends[self.account_id][self.partition].tagger.get_tag_dict_for_resource(
             self.arn
         )
         if tags:
@@ -908,6 +910,7 @@ class FakeBucket(CloudFormationModel):
         self.name = name
         self.account_id = account_id
         self.region_name = region_name
+        self.partition = get_partition(region_name)
         self.keys = _VersionedKeyStore()
         self.multiparts = MultipartDict()
         self.versioning_status = None
@@ -1239,7 +1242,7 @@ class FakeBucket(CloudFormationModel):
 
     @property
     def arn(self):
-        return f"arn:aws:s3:::{self.name}"
+        return f"arn:{self.partition}:s3:::{self.name}"
 
     @property
     def domain_name(self):
@@ -1274,7 +1277,8 @@ class FakeBucket(CloudFormationModel):
     def create_from_cloudformation_json(
         cls, resource_name, cloudformation_json, account_id, region_name, **kwargs
     ):
-        bucket = s3_backends[account_id]["global"].create_bucket(
+        partition = get_partition(region_name)
+        bucket = s3_backends[account_id][partition].create_bucket(
             resource_name, region_name
         )
 
@@ -1282,7 +1286,7 @@ class FakeBucket(CloudFormationModel):
 
         if "BucketEncryption" in properties:
             bucket_encryption = cfn_to_api_encryption(properties["BucketEncryption"])
-            s3_backends[account_id]["global"].put_bucket_encryption(
+            s3_backends[account_id][partition].put_bucket_encryption(
                 bucket_name=resource_name, encryption=bucket_encryption
             )
 
@@ -1320,7 +1324,8 @@ class FakeBucket(CloudFormationModel):
                 bucket_encryption = cfn_to_api_encryption(
                     properties["BucketEncryption"]
                 )
-                s3_backends[account_id]["global"].put_bucket_encryption(
+                partition = get_partition(region_name)
+                s3_backends[account_id][partition].put_bucket_encryption(
                     bucket_name=original_resource.name, encryption=bucket_encryption
                 )
             return original_resource
@@ -1329,7 +1334,8 @@ class FakeBucket(CloudFormationModel):
     def delete_from_cloudformation_json(
         cls, resource_name, cloudformation_json, account_id, region_name
     ):
-        s3_backends[account_id]["global"].delete_bucket(resource_name)
+        partition = get_partition(region_name)
+        s3_backends[account_id][partition].delete_bucket(resource_name)
 
     def to_config_dict(self):
         """Return the AWS Config JSON format of this S3 bucket.
@@ -1353,7 +1359,7 @@ class FakeBucket(CloudFormationModel):
             "relatedEvents": [],
             "relationships": [],
             "tags": s3_backends[self.account_id][
-                "global"
+                self.partition
             ].tagger.get_tag_dict_for_resource(self.arn),
             "configuration": {
                 "name": self.name,
@@ -1448,6 +1454,7 @@ class S3Backend(BaseBackend, CloudWatchMetricProvider):
 
     def __init__(self, region_name, account_id):
         super().__init__(region_name, account_id)
+        self.partition = region_name
         self.buckets = {}
         self.tagger = TaggingService()
 
@@ -1543,9 +1550,10 @@ class S3Backend(BaseBackend, CloudWatchMetricProvider):
         # metric_providers["S3"] = self
 
     @classmethod
-    def get_cloudwatch_metrics(cls, account_id):
+    def get_cloudwatch_metrics(cls, account_id, region):
         metrics = []
-        for name, bucket in s3_backends[account_id]["global"].buckets.items():
+        partition = get_partition(region)
+        for name, bucket in s3_backends[account_id][partition].buckets.items():
             metrics.append(
                 MetricDatum(
                     namespace="AWS/S3",
@@ -1601,7 +1609,7 @@ class S3Backend(BaseBackend, CloudWatchMetricProvider):
             source="aws.s3",
             event_name="CreateBucket",
             region=region_name,
-            resources=[f"arn:aws:s3:::{bucket_name}"],
+            resources=[f"arn:{self.partition}:s3:::{bucket_name}"],
             detail=notification_detail,
         )
 
@@ -1799,6 +1807,7 @@ class S3Backend(BaseBackend, CloudWatchMetricProvider):
             bucket_name=bucket_name,
             value=value,
             account_id=self.account_id,
+            partition=self.partition,
             storage=storage,
             etag=etag,
             is_versioned=bucket.is_versioned,
@@ -2281,5 +2290,5 @@ class S3Backend(BaseBackend, CloudWatchMetricProvider):
 
 
 s3_backends = BackendDict(
-    S3Backend, service_name="s3", use_boto3_regions=False, additional_regions=["global"]
+    S3Backend, service_name="s3", use_boto3_regions=False, additional_regions=["aws", "aws-us-gov", "aws-cn"]
 )

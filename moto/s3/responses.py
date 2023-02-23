@@ -61,6 +61,7 @@ from .utils import (
 )
 from xml.dom import minidom
 
+from ..utilities.utils import get_partition
 
 DEFAULT_REGION_NAME = "us-east-1"
 
@@ -152,7 +153,7 @@ class S3Response(BaseResponse):
 
     @property
     def backend(self):
-        return s3_backends[self.current_account]["global"]
+        return s3_backends[self.current_account][get_partition(self.region)]
 
     @property
     def should_autoescape(self):
@@ -1165,7 +1166,7 @@ class S3Response(BaseResponse):
 
             if key and not signed_url:
                 bucket = self.backend.get_bucket(bucket_name)
-                resource = f"arn:aws:s3:::{bucket_name}/{key_name}"
+                resource = f"arn:{get_partition(self.region)}:s3:::{bucket_name}/{key_name}"
                 bucket_policy_allows = bucket.allow_action("s3:GetObject", resource)
                 if not bucket_policy_allows and (key.acl and not key.acl.public_read):
                     return 403, {}, ""
@@ -1916,7 +1917,7 @@ class S3Response(BaseResponse):
                     ] = [the_notification]
 
                 for n in the_notification:
-                    if not n[name].startswith(f"arn:aws:{arn_string}:"):
+                    if not n[name].startswith(f"arn:{get_partition(self.region)}:{arn_string}:"):
                         raise InvalidNotificationARN()
 
                     # 2nd, verify that the Events list is correct:

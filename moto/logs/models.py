@@ -954,7 +954,7 @@ class LogsBackend(BaseBackend):
         return query_id
 
     def create_export_task(self, log_group_name, destination):
-        s3_backends[self.account_id]["global"].get_bucket(destination)
+        s3_backends[self.account_id][get_partition(self.region_name)].get_bucket(destination)
         if log_group_name not in self.groups:
             raise ResourceNotFoundException()
         task_id = mock_random.uuid4()
