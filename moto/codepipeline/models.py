@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import json
 from datetime import datetime
 from typing import Any, Dict, List, Tuple
@@ -23,7 +24,7 @@ class CodePipeline(BaseModel):
         self.pipeline = self.add_default_values(pipeline)
         self.tags: Dict[str, str] = {}
 
-        self._arn = f"arn:aws:codepipeline:{region}:{account_id}:{pipeline['name']}"
+        self._arn = f"arn:{get_partition(region)}:codepipeline:{region}:{account_id}:{pipeline['name']}"
         self._created = datetime.utcnow()
         self._updated = datetime.utcnow()
 

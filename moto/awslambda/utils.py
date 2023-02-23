@@ -1,3 +1,6 @@
+import re
+
+from moto.utilities.utils import get_partition
 from collections import namedtuple
 from functools import partial
 from typing import Any, Callable
@@ -7,7 +10,9 @@ LAYER_ARN = namedtuple("LAYER_ARN", ["region", "account", "layer_name", "version
 
 
 def make_arn(resource_type: str, region: str, account: str, name: str) -> str:
-    return f"arn:aws:lambda:{region}:{account}:{resource_type}:{name}"
+    return (
+        f"arn:{get_partition(region)}:lambda:{region}:{account}:{resource_type}:{name}"
+    )
 
 
 make_function_arn = partial(make_arn, "function")
@@ -26,7 +31,7 @@ make_layer_ver_arn = partial(make_ver_arn, "layer")
 
 
 def split_arn(arn_type: Callable[[str, str, str, str], str], arn: str) -> Any:
-    arn = arn.replace("arn:aws:lambda:", "")
+    arn = re.sub(r"arn:aws([^:]*):lambda:", "", arn)
 
     region, account, _, name, version = arn.split(":")
 

@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from datetime import datetime, timedelta, timezone
 
 import warnings
@@ -287,7 +288,7 @@ class FakeCluster(BaseModel):
 
     @property
     def arn(self):
-        return f"arn:aws:elasticmapreduce:{self.emr_backend.region_name}:{self.emr_backend.account_id}:cluster/{self.id}"
+        return f"arn:{get_partition(self.emr_backend.region_name)}:elasticmapreduce:{self.emr_backend.region_name}:{self.emr_backend.account_id}:cluster/{self.id}"
 
     @property
     def master_public_dns_name(self):

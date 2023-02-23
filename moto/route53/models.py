@@ -1,3 +1,5 @@
+from moto.utilities.utils import get_partition
+
 """Route53Backend class with methods for supported APIs."""
 import copy
 import itertools
@@ -386,13 +388,14 @@ class FakeZone(CloudFormationModel):
 
 
 class RecordSetGroup(CloudFormationModel):
-    def __init__(self, hosted_zone_id, record_sets):
+    def __init__(self, hosted_zone_id, record_sets, region_name: str):
         self.hosted_zone_id = hosted_zone_id
         self.record_sets = record_sets
+        self.region_name = region_name
 
     @property
     def physical_resource_id(self):
-        return f"arn:aws:route53:::hostedzone/{self.hosted_zone_id}"
+        return f"arn:{get_partition(self.region_name)}:route53:::hostedzone/{self.hosted_zone_id}"
 
     @staticmethod
     def cloudformation_name_type():
@@ -419,7 +422,7 @@ class RecordSetGroup(CloudFormationModel):
         for record_set in record_sets:
             hosted_zone.add_rrset(record_set)
 
-        record_set_group = RecordSetGroup(hosted_zone.id, record_sets)
+        record_set_group = RecordSetGroup(hosted_zone.id, record_sets, region_name)
         return record_set_group
 
 
@@ -750,7 +753,9 @@ class Route53Backend(BaseBackend):
 
     @staticmethod
     def _validate_arn(region, arn):
-        match = re.match(rf"arn:aws:logs:{region}:\d{{12}}:log-group:.+", arn)
+        match = re.match(
+            rf"arn:{get_partition(region)}:logs:{region}:\d{{12}}:log-group:.+", arn
+        )
         if not arn or not match:
             raise InvalidCloudWatchArn()
 

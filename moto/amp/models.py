@@ -1,3 +1,5 @@
+from moto.utilities.utils import get_partition
+
 """PrometheusServiceBackend class with methods for supported APIs."""
 
 from moto.core import BaseBackend, BackendDict, BaseModel
@@ -23,7 +25,7 @@ class RuleGroupNamespace(BaseModel):
         self.name = name
         self.data = data
         self.tag_fn = tag_fn
-        self.arn = f"arn:aws:aps:{region}:{account_id}:rulegroupsnamespace/{workspace_id}/{self.name}"
+        self.arn = f"arn:{get_partition(region)}:aps:{region}:{account_id}:rulegroupsnamespace/{workspace_id}/{self.name}"
         self.created_at = unix_time()
         self.modified_at = self.created_at
 
@@ -53,7 +55,7 @@ class Workspace(BaseModel):
     ):
         self.alias = alias
         self.workspace_id = f"ws-{mock_random.uuid4()}"
-        self.arn = f"arn:aws:aps:{region}:{account_id}:workspace/{self.workspace_id}"
+        self.arn = f"arn:{get_partition(region)}:aps:{region}:{account_id}:workspace/{self.workspace_id}"
         self.endpoint = f"https://aps-workspaces.{region}.amazonaws.com/workspaces/{self.workspace_id}/"
         self.status = {"statusCode": "ACTIVE"}
         self.created_at = unix_time()

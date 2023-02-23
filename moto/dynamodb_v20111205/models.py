@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from collections import defaultdict
 from typing import Any, Dict, Optional, List, Union, Tuple, Iterable
 import datetime
@@ -334,7 +335,7 @@ class Table(CloudFormationModel):
         if attribute_name == "StreamArn":
             region = "us-east-1"
             time = "2000-01-01T00:00:00.000"
-            return f"arn:aws:dynamodb:{region}:{self.account_id}:table/{self.name}/stream/{time}"
+            return f"arn:{get_partition(region)}:dynamodb:{region}:{self.account_id}:table/{self.name}/stream/{time}"
         raise UnformattedGetAttTemplateException()
 
 

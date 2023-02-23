@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import string
 
 from datetime import datetime
@@ -193,9 +194,7 @@ class Distribution(BaseModel, ManagedState):
         )
         # Configure internal properties
         self.distribution_id = Distribution.random_id()
-        self.arn = (
-            f"arn:aws:cloudfront:{account_id}:distribution/{self.distribution_id}"
-        )
+        self.arn = f"arn:{get_partition(account_id)}:cloudfront:{account_id}:distribution/{self.distribution_id}"
         self.distribution_config = DistributionConfig(config)
         self.active_trusted_signers = ActiveTrustedSigners()
         self.active_trusted_key_groups = ActiveTrustedKeyGroups()

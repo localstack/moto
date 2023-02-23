@@ -1,3 +1,5 @@
+from moto.utilities.utils import get_partition
+
 """PersonalizeBackend class with methods for supported APIs."""
 
 from .exceptions import ResourceNotFoundException
@@ -10,7 +12,7 @@ class Schema(BaseModel):
         self.name = name
         self.schema = schema
         self.domain = domain
-        self.arn = f"arn:aws:personalize:{region}:{account_id}:schema/{name}"
+        self.arn = f"arn:{get_partition(region)}:personalize:{region}:{account_id}:schema/{name}"
         self.created = unix_time()
 
     def to_dict(self, full=True):

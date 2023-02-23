@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from moto.core import BaseBackend, BackendDict, BaseModel
 from moto.core.utils import iso_8601_datetime_with_milliseconds
 from moto.moto_api._internal import mock_random
@@ -24,7 +25,7 @@ class CodeBuildProjectMetadata(BaseModel):
         self.build_metadata["id"] = build_id
         self.build_metadata[
             "arn"
-        ] = f"arn:aws:codebuild:{region_name}:{account_id}:build/{build_id}"
+        ] = f"arn:{get_partition(region_name)}:codebuild:{region_name}:{account_id}:build/{build_id}"
 
         self.build_metadata["buildNumber"] = mock_random.randint(1, 100)
         self.build_metadata["startTime"] = current_date
@@ -74,7 +75,7 @@ class CodeBuildProjectMetadata(BaseModel):
 
         self.build_metadata["logs"] = {
             "deepLink": "https://console.aws.amazon.com/cloudwatch/home?region=eu-west-2#logEvent:group=null;stream=null",
-            "cloudWatchLogsArn": f"arn:aws:logs:{region_name}:{account_id}:log-group:null:log-stream:null",
+            "cloudWatchLogsArn": f"arn:{get_partition(region_name)}:logs:{region_name}:{account_id}:log-group:null:log-stream:null",
             "cloudWatchLogs": {"status": "ENABLED"},
             "s3Logs": {"status": "DISABLED", "encryptionDisabled": False},
         }
@@ -85,7 +86,7 @@ class CodeBuildProjectMetadata(BaseModel):
         self.build_metadata["initiator"] = "rootme"
         self.build_metadata[
             "encryptionKey"
-        ] = f"arn:aws:kms:{region_name}:{account_id}:alias/aws/s3"
+        ] = f"arn:{get_partition(region_name)}:kms:{region_name}:{account_id}:alias/aws/s3"
 
 
 class CodeBuild(BaseModel):
@@ -105,13 +106,13 @@ class CodeBuild(BaseModel):
         self.project_metadata["name"] = project_name
         self.project_metadata[
             "arn"
-        ] = f"arn:aws:codebuild:{region}:{account_id}:project/{project_name}"
+        ] = f"arn:{get_partition(region)}:codebuild:{region}:{account_id}:project/{project_name}"
         self.project_metadata[
             "encryptionKey"
-        ] = f"arn:aws:kms:{region}:{account_id}:alias/aws/s3"
+        ] = f"arn:{get_partition(region)}:kms:{region}:{account_id}:alias/aws/s3"
         self.project_metadata[
             "serviceRole"
-        ] = f"arn:aws:iam::{account_id}:role/service-role/{serviceRole}"
+        ] = f"arn:{get_partition(region)}:iam::{account_id}:role/service-role/{serviceRole}"
         self.project_metadata["lastModifiedDate"] = current_date
         self.project_metadata["created"] = current_date
         self.project_metadata["badge"] = dict()

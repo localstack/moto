@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from moto.core import BaseBackend, BackendDict
 from moto.core.exceptions import RESTError
 from moto.moto_api._internal import mock_random
@@ -151,7 +152,11 @@ class ResourceGroupsTaggingAPIBackend(BaseBackend):
                     tags
                 ):  # Skip if no tags, or invalid filter
                     continue
-                yield {"ResourceARN": "arn:aws:s3:::" + bucket.name, "Tags": tags}
+                yield {
+                    "ResourceARN": f"arn:{get_partition(self.region_name)}:s3:::"
+                    + bucket.name,
+                    "Tags": tags,
+                }
 
         # EC2 tags
         def get_ec2_tags(res_id):
@@ -174,7 +179,7 @@ class ResourceGroupsTaggingAPIBackend(BaseBackend):
                 ):  # Skip if no tags, or invalid filter
                     continue
                 yield {
-                    "ResourceARN": f"arn:aws:ec2:{self.region_name}::image/{ami.id}",
+                    "ResourceARN": f"arn:{get_partition(self.region_name)}:ec2:{self.region_name}::image/{ami.id}",
                     "Tags": tags,
                 }
 
@@ -193,7 +198,7 @@ class ResourceGroupsTaggingAPIBackend(BaseBackend):
                     ):  # Skip if no tags, or invalid filter
                         continue
                     yield {
-                        "ResourceARN": f"arn:aws:ec2:{self.region_name}::instance/{instance.id}",
+                        "ResourceARN": f"arn:{get_partition(self.region_name)}:ec2:{self.region_name}::instance/{instance.id}",
                         "Tags": tags,
                     }
 
@@ -211,7 +216,7 @@ class ResourceGroupsTaggingAPIBackend(BaseBackend):
                 ):  # Skip if no tags, or invalid filter
                     continue
                 yield {
-                    "ResourceARN": f"arn:aws:ec2:{self.region_name}::network-interface/{eni.id}",
+                    "ResourceARN": f"arn:{get_partition(self.region_name)}:ec2:{self.region_name}::network-interface/{eni.id}",
                     "Tags": tags,
                 }
 
@@ -232,7 +237,7 @@ class ResourceGroupsTaggingAPIBackend(BaseBackend):
                     ):  # Skip if no tags, or invalid filter
                         continue
                     yield {
-                        "ResourceARN": f"arn:aws:ec2:{self.region_name}::security-group/{sg.id}",
+                        "ResourceARN": f"arn:{get_partition(self.region_name)}:ec2:{self.region_name}::security-group/{sg.id}",
                         "Tags": tags,
                     }
 
@@ -250,7 +255,7 @@ class ResourceGroupsTaggingAPIBackend(BaseBackend):
                 ):  # Skip if no tags, or invalid filter
                     continue
                 yield {
-                    "ResourceARN": f"arn:aws:ec2:{self.region_name}::snapshot/{snapshot.id}",
+                    "ResourceARN": f"arn:{get_partition(self.region_name)}:ec2:{self.region_name}::snapshot/{snapshot.id}",
                     "Tags": tags,
                 }
 
@@ -270,7 +275,7 @@ class ResourceGroupsTaggingAPIBackend(BaseBackend):
                 ):  # Skip if no tags, or invalid filter
                     continue
                 yield {
-                    "ResourceARN": f"arn:aws:ec2:{self.region_name}::volume/{volume.id}",
+                    "ResourceARN": f"arn:{get_partition(self.region_name)}:ec2:{self.region_name}::volume/{volume.id}",
                     "Tags": tags,
                 }
 
@@ -399,7 +404,7 @@ class ResourceGroupsTaggingAPIBackend(BaseBackend):
                 ):  # Skip if no tags, or invalid filter
                     continue
                 yield {
-                    "ResourceARN": f"arn:aws:ec2:{self.region_name}:{self.account_id}:vpc/{vpc.id}",
+                    "ResourceARN": f"arn:{get_partition(self.region_name)}:ec2:{self.region_name}:{self.account_id}:vpc/{vpc.id}",
                     "Tags": tags,
                 }
         # VPC Customer Gateway

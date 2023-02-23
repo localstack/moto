@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import copy
 import datetime
 
@@ -44,7 +45,7 @@ class TaggableResourceMixin(object):
 
     @property
     def arn(self):
-        return f"arn:aws:redshift:{self.region}:{self.account_id}:{self.resource_type}:{self.resource_id}"
+        return f"arn:{get_partition(self.region)}:redshift:{self.region}:{self.account_id}:{self.resource_type}:{self.resource_id}"
 
     def create_tags(self, tags):
         new_keys = [tag_set["Key"] for tag_set in tags]

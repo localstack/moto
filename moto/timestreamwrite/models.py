@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from moto.core import BaseBackend, BackendDict, BaseModel
 from moto.utilities.tagging_service import TaggingService
 from .exceptions import ResourceNotFound
@@ -22,7 +23,7 @@ class TimestreamTable(BaseModel):
         }
         self.magnetic_store_write_properties = magnetic_store_write_properties or {}
         self.records = []
-        self.arn = f"arn:aws:timestream:{self.region_name}:{account_id}:database/{self.db_name}/table/{self.name}"
+        self.arn = f"arn:{get_partition(self.region_name)}:timestream:{self.region_name}:{account_id}:database/{self.db_name}/table/{self.name}"
 
     def update(self, retention_properties, magnetic_store_write_properties):
         self.retention_properties = retention_properties
@@ -49,11 +50,10 @@ class TimestreamDatabase(BaseModel):
         self.region_name = region_name
         self.name = database_name
         self.kms_key_id = (
-            kms_key_id or f"arn:aws:kms:{region_name}:{account_id}:key/default_key"
+            kms_key_id
+            or f"arn:{get_partition(region_name)}:kms:{region_name}:{account_id}:key/default_key"
         )
-        self.arn = (
-            f"arn:aws:timestream:{self.region_name}:{account_id}:database/{self.name}"
-        )
+        self.arn = f"arn:{get_partition(self.region_name)}:timestream:{self.region_name}:{account_id}:database/{self.name}"
         self.tables = dict()
 
     def update(self, kms_key_id):

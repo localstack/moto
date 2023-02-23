@@ -14,7 +14,7 @@ from collections import OrderedDict
 US_EAST_1_REGION = "us-east-1"
 GLOBAL_REGION = "global"
 APIGATEWAY_REGEX = (
-    r"arn:aws:apigateway:[a-zA-Z0-9-]+::/restapis/[a-zA-Z0-9]+/stages/[a-zA-Z0-9]+"
+    r"arn:aws[^:]*:apigateway:[a-zA-Z0-9-]+::/restapis/[a-zA-Z0-9]+/stages/[a-zA-Z0-9]+"
 )
 
 

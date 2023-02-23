@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from datetime import datetime, timedelta
 from typing import Any, Dict, List, Tuple, Optional
 from moto.core import BaseBackend, BackendDict, BaseModel
@@ -60,7 +61,7 @@ class LogStream(BaseModel):
     def __init__(self, account_id, region, log_group, name):
         self.account_id = account_id
         self.region = region
-        self.arn = f"arn:aws:logs:{region}:{account_id}:log-group:{log_group}:log-stream:{name}"
+        self.arn = f"arn:{get_partition(region)}:logs:{region}:{account_id}:log-group:{log_group}:log-stream:{name}"
         self.creation_time = int(unix_time_millis())
         self.first_event_timestamp = None
         self.last_event_timestamp = None
@@ -252,7 +253,9 @@ class LogGroup(CloudFormationModel):
         self.name = name
         self.account_id = account_id
         self.region = region
-        self.arn = f"arn:aws:logs:{region}:{account_id}:log-group:{name}"
+        self.arn = (
+            f"arn:{get_partition(region)}:logs:{region}:{account_id}:log-group:{name}"
+        )
         self.creation_time = int(unix_time_millis())
         self.tags = tags
         self.streams = dict()  # {name: LogStream}

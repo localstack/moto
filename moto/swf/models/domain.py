@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from collections import defaultdict
 
 from moto.core import BaseModel
@@ -34,7 +35,7 @@ class Domain(BaseModel):
             hsh["description"] = self.description
         hsh[
             "arn"
-        ] = f"arn:aws:swf:{self.region_name}:{self.account_id}:/domain/{self.name}"
+        ] = f"arn:{get_partition(self.region_name)}:swf:{self.region_name}:{self.account_id}:/domain/{self.name}"
         return hsh
 
     def to_full_dict(self):

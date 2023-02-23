@@ -1,3 +1,5 @@
+from moto.utilities.utils import get_partition
+
 """Implementation of the AWS Config Service APIs."""
 import json
 import re
@@ -382,7 +384,7 @@ class ConfigAggregator(ConfigEmptyDictable):
         super().__init__(capitalize_start=True, capitalize_arn=False)
 
         self.configuration_aggregator_name = name
-        self.configuration_aggregator_arn = f"arn:aws:config:{region}:{account_id}:config-aggregator/config-aggregator-{random_string()}"
+        self.configuration_aggregator_arn = f"arn:{get_partition(region)}:config:{region}:{account_id}:config-aggregator/config-aggregator-{random_string()}"
         self.account_aggregation_sources = account_sources
         self.organization_aggregation_source = org_source
         self.creation_time = datetime2int(datetime.utcnow())
@@ -420,7 +422,7 @@ class ConfigAggregationAuthorization(ConfigEmptyDictable):
     ):
         super().__init__(capitalize_start=True, capitalize_arn=False)
 
-        self.aggregation_authorization_arn = f"arn:aws:config:{current_region}:{account_id}:aggregation-authorization/{authorized_account_id}/{authorized_aws_region}"
+        self.aggregation_authorization_arn = f"arn:{get_partition(current_region)}:config:{current_region}:{account_id}:aggregation-authorization/{authorized_account_id}/{authorized_aws_region}"
         self.authorized_account_id = authorized_account_id
         self.authorized_aws_region = authorized_aws_region
         self.creation_time = datetime2int(datetime.utcnow())
@@ -450,7 +452,7 @@ class OrganizationConformancePack(ConfigEmptyDictable):
         self.delivery_s3_key_prefix = delivery_s3_key_prefix
         self.excluded_accounts = excluded_accounts or []
         self.last_update_time = datetime2int(datetime.utcnow())
-        self.organization_conformance_pack_arn = f"arn:aws:config:{region}:{account_id}:organization-conformance-pack/{self._unique_pack_name}"
+        self.organization_conformance_pack_arn = f"arn:{get_partition(region)}:config:{region}:{account_id}:organization-conformance-pack/{self._unique_pack_name}"
         self.organization_conformance_pack_name = name
 
     def update(
@@ -727,9 +729,7 @@ class ConfigRule(ConfigEmptyDictable):
         self.maximum_execution_frequency = None  # keeps pylint happy
         self.modify_fields(region, config_rule, tags)
         self.config_rule_id = f"config-rule-{random_string():.6}"
-        self.config_rule_arn = (
-            f"arn:aws:config:{region}:{account_id}:config-rule/{self.config_rule_id}"
-        )
+        self.config_rule_arn = f"arn:{get_partition(region)}:config:{region}:{account_id}:config-rule/{self.config_rule_id}"
 
     def modify_fields(
         self, region: str, config_rule: Dict[str, Any], tags: Dict[str, str]

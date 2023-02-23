@@ -1,3 +1,5 @@
+from moto.utilities.utils import get_partition
+
 """FirehoseBackend class with methods for supported APIs.
 
 Incomplete list of unfinished items:
@@ -150,7 +152,7 @@ class DeliveryStream(
             del self.destinations[0][destination_name]["S3Configuration"]
 
         self.delivery_stream_status = "ACTIVE"
-        self.delivery_stream_arn = f"arn:aws:firehose:{region}:{account_id}:deliverystream/{delivery_stream_name}"
+        self.delivery_stream_arn = f"arn:{get_partition(region)}:firehose:{region}:{account_id}:deliverystream/{delivery_stream_name}"
 
         self.create_timestamp = datetime.now(timezone.utc).isoformat()
         self.version_id = "1"  # Used to track updates of destination configs

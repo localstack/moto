@@ -1,3 +1,5 @@
+from moto.utilities.utils import get_partition
+
 """CostExplorerBackend class with methods for supported APIs."""
 
 from .exceptions import CostCategoryNotFound
@@ -11,6 +13,7 @@ class CostCategoryDefinition(BaseModel):
     def __init__(
         self,
         account_id: str,
+        region: str,
         name: str,
         rule_version: str,
         rules: List[Dict[str, Any]],
@@ -22,7 +25,7 @@ class CostCategoryDefinition(BaseModel):
         self.rules = rules
         self.default_value = default_value
         self.split_charge_rules = split_charge_rules
-        self.arn = f"arn:aws:ce::{account_id}:costcategory/{str(mock_random.uuid4())}"
+        self.arn = f"arn:{get_partition(region)}:ce::{account_id}:costcategory/{str(mock_random.uuid4())}"
 
     def update(
         self,
@@ -69,6 +72,7 @@ class CostExplorerBackend(BaseBackend):
         """
         ccd = CostCategoryDefinition(
             self.account_id,
+            self.region_name,
             name,
             rule_version,
             rules,

@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from abc import ABCMeta
 from abc import abstractmethod
 
@@ -598,9 +599,7 @@ class FakeDataset(BaseModel):
 
     @property
     def resource_arn(self) -> str:
-        return (
-            f"arn:aws:databrew:{self.region_name}:{self.account_id}:dataset/{self.name}"
-        )
+        return f"arn:{get_partition(self.region_name)}:databrew:{self.region_name}:{self.account_id}:dataset/{self.name}"
 
     def as_dict(self) -> Dict[str, Any]:
         return {
@@ -665,7 +664,7 @@ class FakeJob(BaseModel, metaclass=BaseModelABCMeta):  # type: ignore[misc]
 
     @property
     def resource_arn(self) -> str:
-        return f"arn:aws:databrew:{self.region_name}:{self.account_id}:job/{self.name}"
+        return f"arn:{get_partition(self.region_name)}:databrew:{self.region_name}:{self.account_id}:job/{self.name}"
 
     def as_dict(self) -> Dict[str, Any]:
         rtn_dict = {

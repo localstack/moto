@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import copy
 import os
 import re
@@ -73,7 +74,7 @@ class Rule(CloudFormationModel):
             "" if self.event_bus_name == "default" else f"{self.event_bus_name}/"
         )
 
-        return f"arn:aws:events:{self.region_name}:{self.account_id}:rule/{event_bus_name}{self.name}"
+        return f"arn:{get_partition(self.region_name)}:events:{self.region_name}:{self.account_id}:rule/{event_bus_name}{self.name}"
 
     @property
     def physical_resource_id(self):
@@ -329,7 +330,7 @@ class EventBus(CloudFormationModel):
         self.account_id = account_id
         self.region = region_name
         self.name = name
-        self.arn = f"arn:aws:events:{self.region}:{account_id}:event-bus/{name}"
+        self.arn = f"arn:{get_partition(self.region)}:events:{self.region}:{account_id}:event-bus/{name}"
         self.tags = tags or []
 
         self._statements = {}
@@ -519,7 +520,7 @@ class Archive(CloudFormationModel):
         self.event_pattern = EventPattern.load(event_pattern)
         self.retention = retention if retention else 0
 
-        self.arn = f"arn:aws:events:{region_name}:{account_id}:archive/{name}"
+        self.arn = f"arn:{get_partition(region_name)}:events:{region_name}:{account_id}:archive/{name}"
         self.creation_time = unix_time(datetime.utcnow())
         self.state = "ENABLED"
         self.uuid = str(random.uuid4())
@@ -657,7 +658,7 @@ class Replay(BaseModel):
         self.event_end_time = end_time
         self.destination = destination
 
-        self.arn = f"arn:aws:events:{region_name}:{account_id}:replay/{name}"
+        self.arn = f"arn:{get_partition(region_name)}:events:{region_name}:{account_id}:replay/{name}"
         self.state = ReplayState.STARTING
         self.start_time = unix_time(datetime.utcnow())
         self.end_time = None
@@ -720,7 +721,7 @@ class Connection(BaseModel):
         self.creation_time = unix_time(datetime.utcnow())
         self.state = "AUTHORIZED"
 
-        self.arn = f"arn:aws:events:{region_name}:{account_id}:connection/{self.name}/{self.uuid}"
+        self.arn = f"arn:{get_partition(region_name)}:events:{region_name}:{account_id}:connection/{self.name}/{self.uuid}"
 
     def describe_short(self):
         """
@@ -797,7 +798,7 @@ class Destination(BaseModel):
         self.creation_time = unix_time(datetime.utcnow())
         self.http_method = http_method
         self.state = "ACTIVE"
-        self.arn = f"arn:aws:events:{region_name}:{account_id}:api-destination/{name}/{self.uuid}"
+        self.arn = f"arn:{get_partition(region_name)}:events:{region_name}:{account_id}:api-destination/{name}/{self.uuid}"
 
     def describe(self):
         """
@@ -1337,7 +1338,9 @@ class EventsBackend(BaseBackend):
                 "InvalidParameterValue", r"StatementId must match ^[a-zA-Z0-9-_]{1,64}$"
             )
 
-        principal = {"AWS": f"arn:aws:iam::{principal}:root"}
+        principal = {
+            "AWS": f"arn:{get_partition(self.region_name)}:iam::{principal}:root"
+        }
         stmt_condition = self._condition_param_to_stmt_condition(condition)
         event_bus.add_permission(statement_id, action, principal, stmt_condition)
 
@@ -1499,7 +1502,7 @@ class EventsBackend(BaseBackend):
             [
                 {
                     "Id": rule.name,
-                    "Arn": f"arn:aws:events:{self.region_name}:::",
+                    "Arn": f"arn:{get_partition(self.region_name)}:events:{self.region_name}:::",
                     "InputTransformer": {
                         "InputPathsMap": {},
                         "InputTemplate": json.dumps(
@@ -1582,7 +1585,7 @@ class EventsBackend(BaseBackend):
         self, name, description, source_arn, start_time, end_time, destination
     ):
         event_bus_arn = destination["Arn"]
-        event_bus_arn_pattern = r"^arn:aws:events:[a-zA-Z0-9-]+:\d{12}:event-bus/"
+        event_bus_arn_pattern = r"^arn:aws[^:]*:events:[a-zA-Z0-9-]+:\d{12}:event-bus/"
         if not re.match(event_bus_arn_pattern, event_bus_arn):
             raise ValidationException(
                 "Parameter Destination.Arn is not valid. Reason: Must contain an event bus ARN."

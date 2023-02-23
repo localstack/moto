@@ -243,7 +243,7 @@ class ResourceGroupsBackend(BaseBackend):
             if not isinstance(stack_identifier, str):
                 raise invalid_json_exception
             if not re.match(
-                r"^arn:aws:cloudformation:[a-z]{2}-[a-z]+-[0-9]+:[0-9]+:stack/[-0-9A-z]+/[-0-9a-f]+$",
+                r"^arn:aws[^:]*:cloudformation:[a-z]{2}-[a-z]+-[0-9]+:[0-9]+:stack/[-0-9A-z]+/[-0-9a-f]+$",
                 stack_identifier,
             ):
                 raise BadRequestException(

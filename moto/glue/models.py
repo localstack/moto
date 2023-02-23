@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import time
 from collections import OrderedDict
 from datetime import datetime
@@ -898,7 +899,7 @@ class FakeCrawler(BaseModel):
         self.version = 1
         self.crawl_elapsed_time = 0
         self.last_crawl_info = None
-        self.arn = f"arn:aws:glue:{backend.region_name}:{backend.account_id}:crawler/{self.name}"
+        self.arn = f"arn:{get_partition(backend.region_name)}:glue:{backend.region_name}:{backend.account_id}:crawler/{self.name}"
         self.backend = backend
         self.backend.tag_resource(self.arn, tags)
 
@@ -1020,9 +1021,7 @@ class FakeJob:
         self.worker_type = worker_type
         self.created_on = datetime.utcnow()
         self.last_modified_on = datetime.utcnow()
-        self.arn = (
-            f"arn:aws:glue:{backend.region_name}:{backend.account_id}:job/{self.name}"
-        )
+        self.arn = f"arn:{get_partition(backend.region_name)}:glue:{backend.region_name}:{backend.account_id}:job/{self.name}"
         self.backend = backend
         self.backend.tag_resource(self.arn, tags)
 
@@ -1140,7 +1139,7 @@ class FakeRegistry(BaseModel):
         self.created_time = datetime.utcnow()
         self.updated_time = datetime.utcnow()
         self.status = "AVAILABLE"
-        self.registry_arn = f"arn:aws:glue:{backend.region_name}:{backend.account_id}:registry/{self.name}"
+        self.registry_arn = f"arn:{get_partition(backend.region_name)}:glue:{backend.region_name}:{backend.account_id}:registry/{self.name}"
         self.schemas: Dict[str, FakeSchema] = OrderedDict()
 
     def as_dict(self):
@@ -1164,9 +1163,9 @@ class FakeSchema(BaseModel):
         description=None,
     ):
         self.registry_name = registry_name
-        self.registry_arn = f"arn:aws:glue:{backend.region_name}:{backend.account_id}:registry/{self.registry_name}"
+        self.registry_arn = f"arn:{get_partition(backend.region_name)}:glue:{backend.region_name}:{backend.account_id}:registry/{self.registry_name}"
         self.schema_name = schema_name
-        self.schema_arn = f"arn:aws:glue:{backend.region_name}:{backend.account_id}:schema/{self.registry_name}/{self.schema_name}"
+        self.schema_arn = f"arn:{get_partition(backend.region_name)}:glue:{backend.region_name}:{backend.account_id}:schema/{self.registry_name}/{self.schema_name}"
         self.description = description
         self.data_format = data_format
         self.compatibility = compatibility
@@ -1218,7 +1217,7 @@ class FakeSchemaVersion(BaseModel):
     ):
         self.registry_name = registry_name
         self.schema_name = schema_name
-        self.schema_arn = f"arn:aws:glue:{backend.region_name}:{backend.account_id}:schema/{self.registry_name}/{self.schema_name}"
+        self.schema_arn = f"arn:{get_partition(backend.region_name)}:glue:{backend.region_name}:{backend.account_id}:schema/{self.registry_name}/{self.schema_name}"
         self.schema_definition = schema_definition
         self.schema_version_status = AVAILABLE_STATUS
         self.version_number = version_number

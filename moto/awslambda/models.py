@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import base64
 import time
 from collections import defaultdict
@@ -345,9 +346,7 @@ class LambdaAlias(BaseModel):
         description: str,
         routing_config: str,
     ):
-        self.arn = (
-            f"arn:aws:lambda:{region}:{account_id}:function:{function_name}:{name}"
-        )
+        self.arn = f"arn:{get_partition(region)}:lambda:{region}:{account_id}:function:{function_name}:{name}"
         self.name = name
         self.function_version = function_version
         self.description = description
@@ -972,7 +971,7 @@ class LambdaFunction(CloudFormationModel, DockerModel):
     def get_alias(self, name: str) -> LambdaAlias:
         if name in self._aliases:
             return self._aliases[name]
-        arn = f"arn:aws:lambda:{self.region}:{self.account_id}:function:{self.function_name}:{name}"
+        arn = f"arn:{get_partition(self.region)}:lambda:{self.region}:{self.account_id}:function:{self.function_name}:{name}"
         raise UnknownAliasException(arn)
 
     def has_alias(self, alias_name: str) -> bool:

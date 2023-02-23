@@ -1,3 +1,5 @@
+from moto.utilities.utils import get_partition
+
 """Implement models for EFS resources.
 
 See AWS docs for details:
@@ -51,7 +53,7 @@ class AccessPoint(BaseModel):
         context,
     ):
         self.access_point_id = mock_random.get_random_hex(8)
-        self.access_point_arn = f"arn:aws:elasticfilesystem:{region_name}:{account_id}:access-point/fsap-{self.access_point_id}"
+        self.access_point_arn = f"arn:{get_partition(region_name)}:elasticfilesystem:{region_name}:{account_id}:access-point/fsap-{self.access_point_id}"
         self.client_token = client_token
         self.file_system_id = file_system_id
         self.name = name
@@ -126,7 +128,7 @@ class FileSystem(CloudFormationModel):
 
         # Generate AWS-assigned parameters
         self.file_system_id = file_system_id
-        self.file_system_arn = f"arn:aws:elasticfilesystem:{region_name}:{account_id}:file-system/{self.file_system_id}"
+        self.file_system_arn = f"arn:{get_partition(region_name)}:elasticfilesystem:{region_name}:{account_id}:file-system/{self.file_system_id}"
         self.creation_time = time.time()
         self.owner_id = account_id
 

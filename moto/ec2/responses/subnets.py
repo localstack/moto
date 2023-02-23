@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from moto.core.utils import camelcase_to_underscores
 from moto.moto_api._internal import mock_random as random
 
@@ -28,7 +29,7 @@ class Subnets(EC2BaseResponse):
             tags=tags,
         )
         template = self.response_template(CREATE_SUBNET_RESPONSE)
-        return template.render(subnet=subnet)
+        return template.render(subnet=subnet, get_partition=get_partition)
 
     def delete_subnet(self):
         subnet_id = self._get_param("SubnetId")
@@ -42,7 +43,7 @@ class Subnets(EC2BaseResponse):
         filters = self._filters_from_querystring()
         subnets = self.ec2_backend.get_all_subnets(subnet_ids, filters)
         template = self.response_template(DESCRIBE_SUBNETS_RESPONSE)
-        return template.render(subnets=subnets)
+        return template.render(subnets=subnets, get_partition=get_partition)
 
     def modify_subnet_attribute(self):
         subnet_id = self._get_param("SubnetId")
@@ -106,7 +107,7 @@ CREATE_SUBNET_RESPONSE = """
     {% endfor %}
     </ipv6CidrBlockAssociationSet>
     <ipv6Native>{{ 'false' if not subnet.ipv6_native else 'true' }}</ipv6Native>
-    <subnetArn>arn:aws:ec2:{{ subnet._availability_zone.name[0:-1] }}:{{ subnet.owner_id }}:subnet/{{ subnet.id }}</subnetArn>
+    <subnetArn>arn:{{ get_partition(subnet._availability_zone.name[0:-1]) }}:ec2:{{ subnet._availability_zone.name[0:-1] }}:{{ subnet.owner_id }}:subnet/{{ subnet.id }}</subnetArn>
     <tagSet>
         {% for tag in subnet.get_tags() %}
           <item>
@@ -156,7 +157,7 @@ DESCRIBE_SUBNETS_RESPONSE = """
         {% endif %}
         {% endfor %}
         </ipv6CidrBlockAssociationSet>
-        <subnetArn>arn:aws:ec2:{{ subnet._availability_zone.name[0:-1] }}:{{ subnet.owner_id }}:subnet/{{ subnet.id }}</subnetArn>
+        <subnetArn>arn:{{ get_partition(subnet._availability_zone.name[0:-1]) }}:ec2:{{ subnet._availability_zone.name[0:-1] }}:{{ subnet.owner_id }}:subnet/{{ subnet.id }}</subnetArn>
         <ipv6Native>{{ 'false' if not subnet.ipv6_native else 'true' }}</ipv6Native>
         {% if subnet.get_tags() %}
           <tagSet>

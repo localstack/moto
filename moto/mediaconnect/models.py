@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from collections import OrderedDict
 
 from moto.core import BaseBackend, BackendDict, BaseModel
@@ -79,7 +80,7 @@ class MediaConnectBackend(BaseBackend):
     def _add_source_details(self, source, flow_id, ingest_ip="127.0.0.1"):
         if source:
             source["sourceArn"] = (
-                f"arn:aws:mediaconnect:{self.region_name}:{self.account_id}:source"
+                f"arn:{get_partition(self.region_name)}:mediaconnect:{self.region_name}:{self.account_id}:source"
                 f":{flow_id}:{source['name']}"
             )
             if not source.get("entitlementArn"):
@@ -88,7 +89,7 @@ class MediaConnectBackend(BaseBackend):
     def _add_entitlement_details(self, entitlement, entitlement_id):
         if entitlement:
             entitlement["entitlementArn"] = (
-                f"arn:aws:mediaconnect:{self.region_name}"
+                f"arn:{get_partition(self.region_name)}:mediaconnect:{self.region_name}"
                 f":{self.account_id}:entitlement:{entitlement_id}"
                 f":{entitlement['name']}"
             )
@@ -98,7 +99,7 @@ class MediaConnectBackend(BaseBackend):
 
         flow.description = "A Moto test flow"
         flow.egress_ip = "127.0.0.1"
-        flow.flow_arn = f"arn:aws:mediaconnect:{self.region_name}:{self.account_id}:flow:{flow_id}:{flow.name}"
+        flow.flow_arn = f"arn:{get_partition(self.region_name)}:mediaconnect:{self.region_name}:{self.account_id}:flow:{flow_id}:{flow.name}"
 
         for index, _source in enumerate(flow.sources):
             self._add_source_details(_source, flow_id, f"127.0.0.{index}")
@@ -108,7 +109,7 @@ class MediaConnectBackend(BaseBackend):
                 output["listenerAddress"] = f"{index}.0.0.0"
             output_id = random.uuid4().hex
             arn = (
-                f"arn:aws:mediaconnect:{self.region_name}"
+                f"arn:{get_partition(self.region_name)}:mediaconnect:{self.region_name}"
                 f":{self.account_id}:output:{output_id}:{output['name']}"
             )
             output["outputArn"] = arn
@@ -302,7 +303,7 @@ class MediaConnectBackend(BaseBackend):
         for source in sources:
             source_id = random.uuid4().hex
             name = source["name"]
-            arn = f"arn:aws:mediaconnect:{self.region_name}:{self.account_id}:source:{source_id}:{name}"
+            arn = f"arn:{get_partition(self.region_name)}:mediaconnect:{self.region_name}:{self.account_id}:source:{source_id}:{name}"
             source["sourceArn"] = arn
         flow.sources = sources
         return flow_arn, sources
@@ -367,7 +368,7 @@ class MediaConnectBackend(BaseBackend):
         for entitlement in entitlements:
             entitlement_id = random.uuid4().hex
             name = entitlement["name"]
-            arn = f"arn:aws:mediaconnect:{self.region_name}:{self.account_id}:entitlement:{entitlement_id}:{name}"
+            arn = f"arn:{get_partition(self.region_name)}:mediaconnect:{self.region_name}:{self.account_id}:entitlement:{entitlement_id}:{name}"
             entitlement["entitlementArn"] = arn
 
         flow.entitlements += entitlements

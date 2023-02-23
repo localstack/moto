@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from collections import defaultdict
 import copy
 import datetime
@@ -199,9 +200,7 @@ class StreamShard(BaseModel):
         from moto.awslambda import lambda_backends
 
         for arn, esm in self.table.lambda_event_source_mappings.items():
-            region = arn[
-                len("arn:aws:lambda:") : arn.index(":", len("arn:aws:lambda:"))
-            ]
+            region = arn.split(":")[3]
 
             result = lambda_backends[self.account_id][region].send_dynamodb_items(
                 arn, self.items, esm.event_source_arn
@@ -400,7 +399,7 @@ class Table(CloudFormationModel):
         dynamodb_backends[account_id][region_name].delete_table(name=resource_name)
 
     def _generate_arn(self, name: str) -> str:
-        return f"arn:aws:dynamodb:{self.region_name}:{self.account_id}:table/{name}"
+        return f"arn:{get_partition(self.region_name)}:dynamodb:{self.region_name}:{self.account_id}:table/{name}"
 
     def set_stream_specification(self, streams: Optional[Dict[str, Any]]) -> None:
         self.stream_specification = streams
@@ -938,7 +937,7 @@ class Backup:
 
     @property
     def arn(self) -> str:
-        return f"arn:aws:dynamodb:{self.region_name}:{self.account_id}:table/{self.table.name}/backup/{self.identifier}"
+        return f"arn:{get_partition(self.region_name)}:dynamodb:{self.region_name}:{self.account_id}:table/{self.table.name}/backup/{self.identifier}"
 
     @property
     def details(self) -> Dict[str, Any]:  # type: ignore[misc]

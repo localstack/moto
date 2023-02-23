@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from collections import OrderedDict
 from datetime import date
 
@@ -42,7 +43,7 @@ class MediaStoreBackend(BaseBackend):
         self._containers = OrderedDict()
 
     def create_container(self, name, tags):
-        arn = f"arn:aws:mediastore:container:{name}"
+        arn = f"arn:{get_partition(self.region_name)}:mediastore:container:{name}"
         container = Container(
             arn=arn,
             name=name,

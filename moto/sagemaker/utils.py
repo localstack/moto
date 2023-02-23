@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from moto.s3.models import s3_backends
 import json
 from .exceptions import ValidationError
@@ -39,4 +40,4 @@ def load_pipeline_definition_from_s3(pipeline_definition_s3_location, account_id
 
 
 def arn_formatter(_type, _id, account_id, region_name):
-    return f"arn:aws:sagemaker:{region_name}:{account_id}:{_type}/{_id}"
+    return f"arn:{get_partition(region_name)}:sagemaker:{region_name}:{account_id}:{_type}/{_id}"

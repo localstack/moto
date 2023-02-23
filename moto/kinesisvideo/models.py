@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from moto.core import BaseBackend, BackendDict, BaseModel
 from datetime import datetime
 from .exceptions import ResourceNotFoundException, ResourceInUseException
@@ -26,7 +27,7 @@ class Stream(BaseModel):
         self.status = "ACTIVE"
         self.version = random.get_random_string(include_digits=False, lower_case=True)
         self.creation_time = datetime.utcnow()
-        stream_arn = f"arn:aws:kinesisvideo:{region_name}:{account_id}:stream/{stream_name}/1598784211076"
+        stream_arn = f"arn:{get_partition(region_name)}:kinesisvideo:{region_name}:{account_id}:stream/{stream_name}/1598784211076"
         self.data_endpoint_number = random.get_random_hex()
         self.arn = stream_arn
 

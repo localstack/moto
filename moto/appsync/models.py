@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import base64
 from datetime import timedelta, datetime, timezone
 from typing import Any, Dict, Iterable, List, Optional, Tuple
@@ -10,8 +11,9 @@ from .exceptions import GraphqlAPINotFound
 
 
 class GraphqlSchema(BaseModel):
-    def __init__(self, definition: Any):
+    def __init__(self, definition: Any, region: str):
         self.definition = definition
+        self.region = region
         # [graphql.language.ast.ObjectTypeDefinitionNode, ..]
         self.types: List[Any] = []
 
@@ -27,7 +29,7 @@ class GraphqlSchema(BaseModel):
                     "description": graphql_type.description.value
                     if graphql_type.description
                     else None,
-                    "arn": f"arn:aws:appsync:graphql_type/{name}",
+                    "arn": f"arn:{get_partition(self.region)}:appsync:graphql_type/{name}",
                     "definition": "NotYetImplemented",
                 }
 
@@ -104,7 +106,7 @@ class GraphqlAPI(BaseModel):
         self.user_pool_config = user_pool_config
         self.xray_enabled = xray_enabled
 
-        self.arn = f"arn:aws:appsync:{self.region}:{account_id}:apis/{self.api_id}"
+        self.arn = f"arn:{get_partition(self.region)}:appsync:{self.region}:{account_id}:apis/{self.api_id}"
         self.graphql_schema: Optional[GraphqlSchema] = None
 
         self.api_keys: Dict[str, GraphqlAPIKey] = dict()
@@ -160,7 +162,7 @@ class GraphqlAPI(BaseModel):
     def start_schema_creation(self, definition: str) -> None:
         graphql_definition = base64.b64decode(definition).decode("utf-8")
 
-        self.graphql_schema = GraphqlSchema(graphql_definition)
+        self.graphql_schema = GraphqlSchema(graphql_definition, region=self.region)
 
     def get_schema_status(self) -> Any:
         return self.graphql_schema.get_status()  # type: ignore[union-attr]

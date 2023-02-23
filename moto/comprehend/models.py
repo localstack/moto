@@ -1,3 +1,5 @@
+from moto.utilities.utils import get_partition
+
 """ComprehendBackend class with methods for supported APIs."""
 
 from moto.core import BaseBackend, BackendDict, BaseModel
@@ -22,7 +24,7 @@ class EntityRecognizer(BaseModel):
         model_policy: str,
     ):
         self.name = recognizer_name
-        self.arn = f"arn:aws:comprehend:{region_name}:{account_id}:entity-recognizer/{recognizer_name}"
+        self.arn = f"arn:{get_partition(region_name)}:comprehend:{region_name}:{account_id}:entity-recognizer/{recognizer_name}"
         if version_name:
             self.arn += f"/version/{version_name}"
         self.language_code = language_code

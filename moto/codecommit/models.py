@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from moto.core import BaseBackend, BackendDict, BaseModel
 from moto.core.utils import iso_8601_datetime_with_milliseconds
 from moto.moto_api._internal import mock_random
@@ -29,7 +30,7 @@ class CodeCommit(BaseModel):
         self.repository_metadata["repositoryId"] = str(mock_random.uuid4())
         self.repository_metadata[
             "Arn"
-        ] = f"arn:aws:codecommit:{region}:{account_id}:{repository_name}"
+        ] = f"arn:{get_partition(region)}:codecommit:{region}:{account_id}:{repository_name}"
         self.repository_metadata["accountId"] = account_id
 
 

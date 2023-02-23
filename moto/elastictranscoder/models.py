@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from moto.core import BaseBackend, BackendDict, BaseModel
 from moto.moto_api._internal import mock_random as random
 import string
@@ -19,7 +20,7 @@ class Pipeline(BaseModel):
         b = "".join(random.choice(string.ascii_lowercase) for _ in range(6))
         self.id = f"{a}-{b}"
         self.name = name
-        self.arn = f"arn:aws:elastictranscoder:{region}:{account_id}:pipeline/{self.id}"
+        self.arn = f"arn:{get_partition(region)}:elastictranscoder:{region}:{account_id}:pipeline/{self.id}"
         self.status = "Active"
         self.input_bucket = input_bucket
         self.output_bucket = output_bucket or content_config["Bucket"]

@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from moto.core import BaseBackend, BackendDict, BaseModel
 from moto.ec2 import ec2_backends
 from moto.moto_api._internal import mock_random as random
@@ -382,7 +383,7 @@ class Stack(BaseModel):
 
     @property
     def arn(self):
-        return f"arn:aws:opsworks:{self.region}:{self.account_number}:stack/{self.id}"
+        return f"arn:{get_partition(self.region)}:opsworks:{self.region}:{self.account_number}:stack/{self.id}"
 
     def to_dict(self):
         response = {

@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import re
 from itertools import cycle
 from time import sleep
@@ -967,7 +968,7 @@ class SchedulingPolicy(BaseModel):
         tags: Dict[str, str],
     ):
         self.name = name
-        self.arn = f"arn:aws:batch:{region}:{account_id}:scheduling-policy/{name}"
+        self.arn = f"arn:{get_partition(region)}:batch:{region}:{account_id}:scheduling-policy/{name}"
         self.fairshare_policy = {
             "computeReservation": fairshare_policy.get("computeReservation") or 0,
             "shareDecaySeconds": fairshare_policy.get("shareDecaySeconds") or 0,

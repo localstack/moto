@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from moto.utilities.utils import get_partition
 from moto.core import BaseBackend, BackendDict, BaseModel
 from moto.moto_api._internal import mock_random
 from datetime import datetime
@@ -22,6 +23,7 @@ class GuardDutyBackend(BaseBackend):
 
         detector = Detector(
             account_id=self.account_id,
+            region_name=self.region_name,
             created_at=datetime.now(),
             finding_publish_freq=finding_publishing_frequency,
             enabled=enable,
@@ -123,6 +125,7 @@ class Detector(BaseModel):
     def __init__(
         self,
         account_id,
+        region_name,
         created_at,
         finding_publish_freq,
         enabled,
@@ -132,7 +135,7 @@ class Detector(BaseModel):
         self.id = mock_random.get_random_hex(length=32)
         self.created_at = created_at
         self.finding_publish_freq = finding_publish_freq
-        self.service_role = f"arn:aws:iam::{account_id}:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
+        self.service_role = f"arn:{get_partition(region_name)}:iam::{account_id}:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty"
         self.enabled = enabled
         self.updated_at = created_at
         self.datasources = datasources or {}

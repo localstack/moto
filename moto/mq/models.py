@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import base64
 import xmltodict
 
@@ -60,7 +61,7 @@ class ConfigurationRevision(BaseModel):
 class Configuration(BaseModel):
     def __init__(self, account_id, region, name, engine_type, engine_version):
         self.id = f"c-{mock_random.get_random_hex(6)}"
-        self.arn = f"arn:aws:mq:{region}:{account_id}:configuration:{self.id}"
+        self.arn = f"arn:{get_partition(region)}:mq:{region}:{account_id}:configuration:{self.id}"
         self.created = unix_time()
 
         self.name = name
@@ -162,7 +163,9 @@ class Broker(BaseModel):
     ):
         self.name = name
         self.id = mock_random.get_random_hex(6)
-        self.arn = f"arn:aws:mq:{region}:{account_id}:broker:{self.id}"
+        self.arn = (
+            f"arn:{get_partition(region)}:mq:{region}:{account_id}:broker:{self.id}"
+        )
         self.state = "RUNNING"
         self.created = unix_time()
 

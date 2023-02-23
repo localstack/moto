@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import string
 
 from moto.core import BaseBackend, BackendDict, BaseModel
@@ -34,7 +35,7 @@ class Namespace(BaseModel):
     ):
         super().__init__()
         self.id = f"ns-{random_id(20)}"
-        self.arn = f"arn:aws:servicediscovery:{region}:{account_id}:namespace/{self.id}"
+        self.arn = f"arn:{get_partition(region)}:servicediscovery:{region}:{account_id}:namespace/{self.id}"
         self.name = name
         self.type = ns_type
         self.creator_request_id = creator_request_id
@@ -78,7 +79,7 @@ class Service(BaseModel):
     ):
         super().__init__()
         self.id = f"srv-{random_id(8)}"
-        self.arn = f"arn:aws:servicediscovery:{region}:{account_id}:service/{self.id}"
+        self.arn = f"arn:{get_partition(region)}:servicediscovery:{region}:{account_id}:service/{self.id}"
         self.name = name
         self.namespace_id = namespace_id
         self.description = description

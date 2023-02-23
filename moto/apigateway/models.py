@@ -1920,7 +1920,7 @@ class APIGatewayBackend(BaseBackend):
     ) -> Integration:
         resource = self.get_resource(function_id, resource_id)
         if credentials and not re.match(
-            "^arn:aws:iam::" + str(self.account_id), credentials
+            "^arn:aws[^:]*:iam::" + str(self.account_id), credentials
         ):
             raise CrossAccountNotAllowed()
         if not integration_method and integration_type in [
@@ -1931,21 +1931,23 @@ class APIGatewayBackend(BaseBackend):
         ]:
             raise IntegrationMethodNotDefined()
         if integration_type in ["AWS_PROXY"] and re.match(
-            "^arn:aws:apigateway:[a-zA-Z0-9-]+:s3", uri
+            "^arn:aws[^:]*:apigateway:[a-zA-Z0-9-]+:s3", uri
         ):
             raise AwsProxyNotAllowed()
         if (
             integration_type in ["AWS"]
-            and re.match("^arn:aws:apigateway:[a-zA-Z0-9-]+:s3", uri)
+            and re.match("^arn:aws[^:]*:apigateway:[a-zA-Z0-9-]+:s3", uri)
             and not credentials
         ):
             raise RoleNotSpecified()
         if integration_type in ["HTTP", "HTTP_PROXY"] and not self._uri_validator(uri):
             raise InvalidHttpEndpoint()
-        if integration_type in ["AWS", "AWS_PROXY"] and not re.match("^arn:aws:", uri):
+        if integration_type in ["AWS", "AWS_PROXY"] and not re.match(
+            "^arn:aws[^:]*:", uri
+        ):
             raise InvalidArn()
         if integration_type in ["AWS", "AWS_PROXY"] and not re.match(
-            "^arn:aws:apigateway:[a-zA-Z0-9-]+:[a-zA-Z0-9-.]+:(path|action)/", uri
+            "^arn:aws[^:]*:apigateway:[a-zA-Z0-9-]+:[a-zA-Z0-9-.]+:(path|action)/", uri
         ):
             raise InvalidIntegrationArn()
         integration = resource.add_integration(

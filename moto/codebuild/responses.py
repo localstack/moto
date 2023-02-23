@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from moto.core.responses import BaseResponse
 from .models import codebuild_backends, CodeBuildBackend
 from .exceptions import (
@@ -30,7 +31,9 @@ def _validate_required_params_source(source: Dict[str, Any]) -> None:
 
 
 def _validate_required_params_service_role(account_id: str, service_role: str) -> None:
-    if f"arn:aws:iam::{account_id}:role/service-role/" not in service_role:
+    if not re.match(
+        rf"arn:aws[^:]*:iam::{account_id}:role/service-role/.*", service_role
+    ):
         raise InvalidInputException(
             "Invalid service role: Service role account ID does not match caller's account"
         )
@@ -105,7 +108,7 @@ class CodeBuildResponse(BaseResponse):
         ):
             name = self._get_param("projectName")
             raise ResourceNotFoundException(
-                f"The provided project arn:aws:codebuild:{self.region}:{self.current_account}:project/{name} does not exist"
+                f"The provided project arn:{get_partition(self.region)}:codebuild:{self.region}:{self.current_account}:project/{name} does not exist"
             )
 
         ids = self.codebuild_backend.list_builds_for_project(
@@ -126,7 +129,7 @@ class CodeBuildResponse(BaseResponse):
         if self._get_param("name") in self.codebuild_backend.codebuild_projects.keys():
             name = self._get_param("name")
             raise ResourceAlreadyExistsException(
-                f"Project already exists: arn:aws:codebuild:{self.region}:{self.current_account}:project/{name}"
+                f"Project already exists: arn:{get_partition(self.region)}:codebuild:{self.region}:{self.current_account}:project/{name}"
             )
 
         project_metadata = self.codebuild_backend.create_project(
@@ -152,7 +155,7 @@ class CodeBuildResponse(BaseResponse):
         ):
             name = self._get_param("projectName")
             raise ResourceNotFoundException(
-                f"Project cannot be found: arn:aws:codebuild:{self.region}:{self.current_account}:project/{name}"
+                f"Project cannot be found: arn:{get_partition(self.region)}:codebuild:{self.region}:{self.current_account}:project/{name}"
             )
 
         metadata = self.codebuild_backend.start_build(

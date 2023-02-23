@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from collections import OrderedDict
 
 from moto.core import BaseBackend, BackendDict, BaseModel
@@ -134,7 +135,7 @@ class MediaLiveBackend(BaseBackend):
         The RequestID and Reserved parameters are not yet implemented
         """
         channel_id = mock_random.uuid4().hex
-        arn = f"arn:aws:medialive:channel:{channel_id}"
+        arn = f"arn:{get_partition(self.region_name)}:medialive:channel:{channel_id}"
         channel = Channel(
             arn=arn,
             cdi_input_specification=cdi_input_specification,
@@ -228,7 +229,7 @@ class MediaLiveBackend(BaseBackend):
         The VPC and RequestId parameters are not yet implemented
         """
         input_id = mock_random.uuid4().hex
-        arn = f"arn:aws:medialive:input:{input_id}"
+        arn = f"arn:{get_partition(self.region_name)}:medialive:input:{input_id}"
         a_input = Input(
             arn=arn,
             input_id=input_id,

@@ -1,3 +1,5 @@
+from moto.utilities.utils import get_partition
+
 """DAXBackend class with methods for supported APIs."""
 from moto.core import BaseBackend, BackendDict, BaseModel
 from moto.core.utils import unix_time
@@ -88,7 +90,9 @@ class DaxCluster(BaseModel, ManagedState):
         # Set internal properties
         self.name = name
         self.description = description
-        self.arn = f"arn:aws:dax:{region}:{account_id}:cache/{self.name}"
+        self.arn = (
+            f"arn:{get_partition(region)}:dax:{region}:{account_id}:cache/{self.name}"
+        )
         self.node_type = node_type
         self.replication_factor = replication_factor
         self.cluster_hex = random.get_random_hex(6)

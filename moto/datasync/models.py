@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from collections import OrderedDict
 from typing import Any, Dict, List, Optional
 from moto.core import BaseBackend, BackendDict, BaseModel
@@ -19,7 +20,7 @@ class Location(BaseModel):
         self.metadata = metadata
         self.typ = typ
         # Generate ARN
-        self.arn = f"arn:aws:datasync:{region_name}:111222333444:location/loc-{str(arn_counter).zfill(17)}"
+        self.arn = f"arn:{get_partition(region_name)}:datasync:{region_name}:111222333444:location/loc-{str(arn_counter).zfill(17)}"
 
 
 class Task(BaseModel):
@@ -40,7 +41,7 @@ class Task(BaseModel):
         self.status = "AVAILABLE"
         self.current_task_execution_arn: Optional[str] = None
         # Generate ARN
-        self.arn = f"arn:aws:datasync:{region_name}:111222333444:task/task-{str(arn_counter).zfill(17)}"
+        self.arn = f"arn:{get_partition(region_name)}:datasync:{region_name}:111222333444:task/task-{str(arn_counter).zfill(17)}"
 
 
 class TaskExecution(BaseModel):

@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import json
 import os
 from collections import defaultdict
@@ -84,7 +85,9 @@ class Key(CloudFormationModel):
         self.origin = "AWS_KMS"
         self.key_manager = "CUSTOMER"
         self.key_spec = key_spec or "SYMMETRIC_DEFAULT"
-        self.arn = f"arn:aws:kms:{region}:{account_id}:key/{self.id}"
+        self.arn = (
+            f"arn:{get_partition(region)}:kms:{region}:{account_id}:key/{self.id}"
+        )
 
         self.grants = dict()
 
@@ -136,7 +139,9 @@ class Key(CloudFormationModel):
                     {
                         "Sid": "Enable IAM User Permissions",
                         "Effect": "Allow",
-                        "Principal": {"AWS": f"arn:aws:iam::{self.account_id}:root"},
+                        "Principal": {
+                            "AWS": f"arn:{get_partition(self.region)}:iam::{self.account_id}:root"
+                        },
                         "Action": "kms:*",
                         "Resource": "*",
                     }

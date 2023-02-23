@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import json
 import re
 from datetime import datetime
@@ -221,10 +222,7 @@ class Execution:
         state_machine_arn,
         execution_input,
     ):
-        execution_arn = "arn:aws:states:{}:{}:execution:{}:{}"
-        execution_arn = execution_arn.format(
-            region_name, account_id, state_machine_name, execution_name
-        )
+        execution_arn = f"arn:{get_partition(region_name)}:states:{region_name}:{account_id}:execution:{state_machine_name}:{execution_name}"
         self.execution_arn = execution_arn
         self.name = execution_name
         self.start_date = iso_8601_datetime_with_milliseconds(datetime.now())
@@ -438,13 +436,13 @@ class StepFunctionBackend(BaseBackend):
         "\u009F",
     ]
     accepted_role_arn_format = re.compile(
-        "arn:aws:iam::(?P<account_id>[0-9]{12}):role/.+"
+        r"arn:aws[^:]*:iam::(?P<account_id>[0-9]{12}):role/.+"
     )
     accepted_mchn_arn_format = re.compile(
-        "arn:aws:states:[-0-9a-zA-Z]+:(?P<account_id>[0-9]{12}):stateMachine:.+"
+        "arn:aws[^:]*:states:[-0-9a-zA-Z]+:(?P<account_id>[0-9]{12}):stateMachine:.+"
     )
     accepted_exec_arn_format = re.compile(
-        "arn:aws:states:[-0-9a-zA-Z]+:(?P<account_id>[0-9]{12}):execution:.+"
+        "arn:aws[^:]*:states:[-0-9a-zA-Z]+:(?P<account_id>[0-9]{12}):execution:.+"
     )
 
     def __init__(self, region_name, account_id):
@@ -456,7 +454,7 @@ class StepFunctionBackend(BaseBackend):
     def create_state_machine(self, name, definition, roleArn, tags=None):
         self._validate_name(name)
         self._validate_role_arn(roleArn)
-        arn = f"arn:aws:states:{self.region_name}:{self.account_id}:stateMachine:{name}"
+        arn = f"arn:{get_partition(self.region_name)}:states:{self.region_name}:{self.account_id}:stateMachine:{name}"
         try:
             return self.describe_state_machine(arn)
         except StateMachineDoesNotExist:

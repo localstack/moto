@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from moto.core import BaseBackend, BackendDict, BaseModel
 
 from .exceptions import UserAlreadyExists, UserNotFound
@@ -25,7 +26,7 @@ class User(BaseModel):
         self.minimum_engine_version = "6.0"
         self.usergroupids = []
         self.region = region
-        self.arn = f"arn:aws:elasticache:{self.region}:{account_id}:user:{self.id}"
+        self.arn = f"arn:{get_partition(self.region)}:elasticache:{self.region}:{account_id}:user:{self.id}"
 
 
 class ElastiCacheBackend(BaseBackend):

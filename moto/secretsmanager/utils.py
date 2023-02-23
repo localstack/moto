@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import string
 import re
 from moto.moto_api._internal import mock_random as random
@@ -63,9 +64,7 @@ def random_password(
 
 def secret_arn(account_id, region, secret_id):
     id_string = "".join(random.choice(string.ascii_letters) for _ in range(6))
-    return (
-        f"arn:aws:secretsmanager:{region}:{account_id}:secret:{secret_id}-{id_string}"
-    )
+    return f"arn:{get_partition(region)}:secretsmanager:{region}:{account_id}:secret:{secret_id}-{id_string}"
 
 
 def get_secret_name_from_arn(secret_id):
@@ -73,7 +72,7 @@ def get_secret_name_from_arn(secret_id):
     # but we are storing via name
     # so we need to change the arn to name
     # if it starts with arn then the secret id is arn
-    if secret_id.startswith("arn:aws:secretsmanager:"):
+    if re.match(r"arn:aws([^:]*):secretsmanager:.*", secret_id):
         # split the arn by colon
         # then get the last value which is the name appended with a random string
         # then remove the random string

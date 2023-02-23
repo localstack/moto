@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from collections import OrderedDict
 import datetime
 import re
@@ -40,7 +41,7 @@ class Consumer(BaseModel):
         self.created = unix_time()
         self.stream_arn = stream_arn
         stream_name = stream_arn.split("/")[-1]
-        self.consumer_arn = f"arn:aws:kinesis:{region_name}:{account_id}:stream/{stream_name}/consumer/{consumer_name}"
+        self.consumer_arn = f"arn:{get_partition(region_name)}:kinesis:{region_name}:{account_id}:stream/{stream_name}/consumer/{consumer_name}"
 
     def to_json(self, include_stream_arn=False):
         resp = {
@@ -183,7 +184,7 @@ class Stream(CloudFormationModel):
         )
         self.region = region_name
         self.account_id = account_id
-        self.arn = f"arn:aws:kinesis:{region_name}:{account_id}:stream/{stream_name}"
+        self.arn = f"arn:{get_partition(region_name)}:kinesis:{region_name}:{account_id}:stream/{stream_name}"
         self.shards = {}
         self.tags = {}
         self.status = "ACTIVE"

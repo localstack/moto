@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import re
 import time
 
@@ -111,12 +112,12 @@ class Trail(BaseModel):
 
     @property
     def arn(self) -> str:
-        return f"arn:aws:cloudtrail:{self.region_name}:{self.account_id}:trail/{self.trail_name}"
+        return f"arn:{get_partition(self.region_name)}:cloudtrail:{self.region_name}:{self.account_id}:trail/{self.trail_name}"
 
     @property
     def topic_arn(self) -> Optional[str]:
         if self.sns_topic_name:
-            return f"arn:aws:sns:{self.region_name}:{self.account_id}:{self.sns_topic_name}"
+            return f"arn:{get_partition(self.region_name)}:sns:{self.region_name}:{self.account_id}:{self.sns_topic_name}"
         return None
 
     def check_name(self) -> None:
@@ -310,9 +311,7 @@ class CloudTrailBackend(BaseBackend):
         )
         if not trail_name:
             # This particular method returns the ARN as part of the error message
-            arn = (
-                f"arn:aws:cloudtrail:{self.region_name}:{self.account_id}:trail/{name}"
-            )
+            arn = f"arn:{get_partition(self.region_name)}:cloudtrail:{self.region_name}:{self.account_id}:trail/{name}"
             raise TrailNotFoundException(account_id=self.account_id, name=arn)
         trail = self.trails[trail_name]
         return trail.status

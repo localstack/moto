@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import copy
 import datetime
 import os
@@ -119,7 +120,7 @@ class Cluster:
 
     @property
     def db_cluster_arn(self):
-        return f"arn:aws:rds:{self.region_name}:{self.account_id}:cluster:{self.db_cluster_identifier}"
+        return f"arn:{get_partition(self.region_name)}:rds:{self.region_name}:{self.account_id}:cluster:{self.db_cluster_identifier}"
 
     @property
     def master_user_password(self):
@@ -319,7 +320,7 @@ class ClusterSnapshot(BaseModel):
 
     @property
     def snapshot_arn(self):
-        return f"arn:aws:rds:{self.cluster.region_name}:{self.cluster.account_id}:cluster-snapshot:{self.snapshot_id}"
+        return f"arn:{get_partition(self.cluster.region_name)}:rds:{self.cluster.region_name}:{self.cluster.account_id}:cluster-snapshot:{self.snapshot_id}"
 
     def to_xml(self):
         template = Template(
@@ -499,7 +500,7 @@ class Database(CloudFormationModel):
 
     @property
     def db_instance_arn(self):
-        return f"arn:aws:rds:{self.region_name}:{self.account_id}:db:{self.db_instance_identifier}"
+        return f"arn:{get_partition(self.region_name)}:rds:{self.region_name}:{self.account_id}:db:{self.db_instance_identifier}"
 
     @property
     def physical_resource_id(self):
@@ -932,7 +933,7 @@ class DatabaseSnapshot(BaseModel):
 
     @property
     def snapshot_arn(self):
-        return f"arn:aws:rds:{self.database.region_name}:{self.database.account_id}:snapshot:{self.snapshot_id}"
+        return f"arn:{get_partition(self.database.region_name)}:rds:{self.database.region_name}:{self.database.account_id}:snapshot:{self.snapshot_id}"
 
     def to_xml(self):
         template = Template(
@@ -1046,7 +1047,7 @@ class EventSubscription(BaseModel):
 
     @property
     def es_arn(self):
-        return f"arn:aws:rds:{self.region_name}:{self.customer_aws_id}:es:{self.subscription_name}"
+        return f"arn:{get_partition(self.region_name)}:rds:{self.region_name}:{self.customer_aws_id}:es:{self.subscription_name}"
 
     def to_xml(self):
         template = Template(
@@ -1222,7 +1223,7 @@ class SubnetGroup(CloudFormationModel):
 
     @property
     def sg_arn(self):
-        return f"arn:aws:rds:{self.region}:{self.account_id}:subgrp:{self.subnet_name}"
+        return f"arn:{get_partition(self.region)}:rds:{self.region}:{self.account_id}:subgrp:{self.subnet_name}"
 
     def to_xml(self):
         template = Template(
@@ -1322,7 +1323,7 @@ class RDSBackend(BaseBackend):
     def __init__(self, region_name, account_id):
         super().__init__(region_name, account_id)
         self.arn_regex = re_compile(
-            r"^arn:aws:rds:.*:[0-9]*:(db|cluster|es|og|pg|ri|secgrp|snapshot|cluster-snapshot|subgrp):.*$"
+            r"^arn:aws[^:]*:rds:.*:[0-9]*:(db|cluster|es|og|pg|ri|secgrp|snapshot|cluster-snapshot|subgrp):.*$"
         )
         self.clusters = OrderedDict()
         self.databases = OrderedDict()
@@ -2276,7 +2277,7 @@ class DBParameterGroup(CloudFormationModel):
         self.family = family
         self.tags = tags
         self.parameters = defaultdict(dict)
-        self.arn = f"arn:aws:rds:{region}:{account_id}:pg:{name}"
+        self.arn = f"arn:{get_partition(region)}:rds:{region}:{account_id}:pg:{name}"
 
     def to_xml(self):
         template = Template(

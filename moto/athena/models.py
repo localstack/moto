@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import time
 
 from moto.core import BaseBackend, BackendDict, BaseModel
@@ -19,7 +20,7 @@ class TaggableResourceMixin(object):
         self.region = region_name
         self.resource_name = resource_name
         self.tags = tags or []
-        self.arn = f"arn:aws:athena:{region_name}:{account_id}:{resource_name}"
+        self.arn = f"arn:{get_partition(region_name)}:athena:{region_name}:{account_id}:{resource_name}"
 
     def create_tags(self, tags: List[Dict[str, str]]) -> List[Dict[str, str]]:
         new_keys = [tag_set["Key"] for tag_set in tags]

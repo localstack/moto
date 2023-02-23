@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import json
 import re
 import yaml
@@ -554,7 +555,7 @@ class CloudFormationResponse(BaseResponse):
         stackset = self.cloudformation_backend.describe_stack_set(stackset_name)
 
         if not stackset.admin_role:
-            stackset.admin_role = f"arn:aws:iam::{self.current_account}:role/AWSCloudFormationStackSetAdministrationRole"
+            stackset.admin_role = f"arn:{get_partition(self.region)}:iam::{self.current_account}:role/AWSCloudFormationStackSetAdministrationRole"
         if not stackset.execution_role:
             stackset.execution_role = "AWSCloudFormationStackSetExecutionRole"
 

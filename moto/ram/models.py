@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import re
 import string
 from datetime import datetime
@@ -42,9 +43,7 @@ class ResourceShare(BaseModel):
         self.region = region
 
         self.allow_external_principals = kwargs.get("allowExternalPrincipals", True)
-        self.arn = (
-            f"arn:aws:ram:{self.region}:{account_id}:resource-share/{random.uuid4()}"
-        )
+        self.arn = f"arn:{get_partition(self.region)}:ram:{self.region}:{account_id}:resource-share/{random.uuid4()}"
         self.creation_time = datetime.utcnow()
         self.feature_set = "STANDARD"
         self.last_updated_time = datetime.utcnow()
@@ -61,7 +60,7 @@ class ResourceShare(BaseModel):
     def add_principals(self, principals):
         for principal in principals:
             match = re.search(
-                r"^arn:aws:organizations::\d{12}:organization/(o-\w+)$", principal
+                r"^arn:aws[^:]*:organizations::\d{12}:organization/(o-\w+)$", principal
             )
             if match:
                 organization = self.organizations_backend.describe_organization()
@@ -73,7 +72,8 @@ class ResourceShare(BaseModel):
                     )
 
             match = re.search(
-                r"^arn:aws:organizations::\d{12}:ou/(o-\w+)/(ou-[\w-]+)$", principal
+                r"^arn:aws[^:]*:organizations::\d{12}:ou/(o-\w+)/(ou-[\w-]+)$",
+                principal,
             )
             if match:
                 roots = self.organizations_backend.list_roots()
@@ -111,7 +111,8 @@ class ResourceShare(BaseModel):
     def add_resources(self, resource_arns):
         for resource in resource_arns:
             match = re.search(
-                r"^arn:aws:[a-z0-9-]+:[a-z0-9-]*:[0-9]{12}:([a-z-]+)[/:].*$", resource
+                r"^arn:aws[^:]*:[a-z0-9-]+:[a-z0-9-]*:[0-9]{12}:([a-z-]+)[/:].*$",
+                resource,
             )
             if not match:
                 raise MalformedArnException(

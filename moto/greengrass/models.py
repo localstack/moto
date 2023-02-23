@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import json
 from collections import OrderedDict
 from datetime import datetime
@@ -22,7 +23,7 @@ class FakeCoreDefinition(BaseModel):
         self.region_name = region_name
         self.name = name
         self.id = str(mock_random.uuid4())
-        self.arn = f"arn:aws:greengrass:{region_name}:{account_id}:greengrass/definition/cores/{self.id}"
+        self.arn = f"arn:{get_partition(region_name)}:greengrass:{region_name}:{account_id}:greengrass/definition/cores/{self.id}"
         self.created_at_datetime = datetime.utcnow()
         self.latest_version = ""
         self.latest_version_arn = ""
@@ -49,7 +50,7 @@ class FakeCoreDefinitionVersion(BaseModel):
         self.core_definition_id = core_definition_id
         self.definition = definition
         self.version = str(mock_random.uuid4())
-        self.arn = f"arn:aws:greengrass:{region_name}:{account_id}:greengrass/definition/cores/{self.core_definition_id}/versions/{self.version}"
+        self.arn = f"arn:{get_partition(region_name)}:greengrass:{region_name}:{account_id}:greengrass/definition/cores/{self.core_definition_id}/versions/{self.version}"
         self.created_at_datetime = datetime.utcnow()
 
     def to_dict(self, include_detail=False):
@@ -72,7 +73,7 @@ class FakeDeviceDefinition(BaseModel):
     def __init__(self, account_id, region_name, name, initial_version):
         self.region_name = region_name
         self.id = str(mock_random.uuid4())
-        self.arn = f"arn:aws:greengrass:{region_name}:{account_id}:greengrass/definition/devices/{self.id}"
+        self.arn = f"arn:{get_partition(region_name)}:greengrass:{region_name}:{account_id}:greengrass/definition/devices/{self.id}"
         self.created_at_datetime = datetime.utcnow()
         self.update_at_datetime = datetime.utcnow()
         self.latest_version = ""
@@ -104,7 +105,7 @@ class FakeDeviceDefinitionVersion(BaseModel):
         self.device_definition_id = device_definition_id
         self.devices = devices
         self.version = str(mock_random.uuid4())
-        self.arn = f"arn:aws:greengrass:{region_name}:{account_id}:greengrass/definition/devices/{self.device_definition_id}/versions/{self.version}"
+        self.arn = f"arn:{get_partition(region_name)}:greengrass:{region_name}:{account_id}:greengrass/definition/devices/{self.device_definition_id}/versions/{self.version}"
         self.created_at_datetime = datetime.utcnow()
 
     def to_dict(self, include_detail=False):
@@ -127,7 +128,7 @@ class FakeResourceDefinition(BaseModel):
     def __init__(self, account_id, region_name, name, initial_version):
         self.region_name = region_name
         self.id = str(mock_random.uuid4())
-        self.arn = f"arn:aws:greengrass:{region_name}:{account_id}:greengrass/definition/resources/{self.id}"
+        self.arn = f"arn:{get_partition(region_name)}:greengrass:{region_name}:{account_id}:greengrass/definition/resources/{self.id}"
         self.created_at_datetime = datetime.utcnow()
         self.update_at_datetime = datetime.utcnow()
         self.latest_version = ""
@@ -157,7 +158,7 @@ class FakeResourceDefinitionVersion(BaseModel):
         self.resource_definition_id = resource_definition_id
         self.resources = resources
         self.version = str(mock_random.uuid4())
-        self.arn = f"arn:aws:greengrass:{region_name}:{account_id}:greengrass/definition/resources/{self.resource_definition_id}/versions/{self.version}"
+        self.arn = f"arn:{get_partition(region_name)}:greengrass:{region_name}:{account_id}:greengrass/definition/resources/{self.resource_definition_id}/versions/{self.version}"
         self.created_at_datetime = datetime.utcnow()
 
     def to_dict(self):
@@ -176,7 +177,7 @@ class FakeFunctionDefinition(BaseModel):
     def __init__(self, account_id, region_name, name, initial_version):
         self.region_name = region_name
         self.id = str(mock_random.uuid4())
-        self.arn = f"arn:aws:greengrass:{self.region_name}:{account_id}:greengrass/definition/functions/{self.id}"
+        self.arn = f"arn:{get_partition(self.region_name)}:greengrass:{self.region_name}:{account_id}:greengrass/definition/functions/{self.id}"
         self.created_at_datetime = datetime.utcnow()
         self.update_at_datetime = datetime.utcnow()
         self.latest_version = ""
@@ -211,7 +212,7 @@ class FakeFunctionDefinitionVersion(BaseModel):
         self.functions = functions
         self.default_config = default_config
         self.version = str(mock_random.uuid4())
-        self.arn = f"arn:aws:greengrass:{self.region_name}:{account_id}:greengrass/definition/functions/{self.function_definition_id}/versions/{self.version}"
+        self.arn = f"arn:{get_partition(self.region_name)}:greengrass:{self.region_name}:{account_id}:greengrass/definition/functions/{self.function_definition_id}/versions/{self.version}"
         self.created_at_datetime = datetime.utcnow()
 
     def to_dict(self):
@@ -230,7 +231,7 @@ class FakeSubscriptionDefinition(BaseModel):
     def __init__(self, account_id, region_name, name, initial_version):
         self.region_name = region_name
         self.id = str(mock_random.uuid4())
-        self.arn = f"arn:aws:greengrass:{self.region_name}:{account_id}:greengrass/definition/subscriptions/{self.id}"
+        self.arn = f"arn:{get_partition(self.region_name)}:greengrass:{self.region_name}:{account_id}:greengrass/definition/subscriptions/{self.id}"
         self.created_at_datetime = datetime.utcnow()
         self.update_at_datetime = datetime.utcnow()
         self.latest_version = ""
@@ -262,7 +263,7 @@ class FakeSubscriptionDefinitionVersion(BaseModel):
         self.subscription_definition_id = subscription_definition_id
         self.subscriptions = subscriptions
         self.version = str(mock_random.uuid4())
-        self.arn = f"arn:aws:greengrass:{self.region_name}:{account_id}:greengrass/definition/subscriptions/{self.subscription_definition_id}/versions/{self.version}"
+        self.arn = f"arn:{get_partition(self.region_name)}:greengrass:{self.region_name}:{account_id}:greengrass/definition/subscriptions/{self.subscription_definition_id}/versions/{self.version}"
         self.created_at_datetime = datetime.utcnow()
 
     def to_dict(self):
@@ -282,7 +283,7 @@ class FakeGroup(BaseModel):
         self.region_name = region_name
         self.group_id = str(mock_random.uuid4())
         self.name = name
-        self.arn = f"arn:aws:greengrass:{self.region_name}:{account_id}:greengrass/groups/{self.group_id}"
+        self.arn = f"arn:{get_partition(self.region_name)}:greengrass:{self.region_name}:{account_id}:greengrass/groups/{self.group_id}"
         self.created_at_datetime = datetime.utcnow()
         self.last_updated_datetime = datetime.utcnow()
         self.latest_version = ""
@@ -320,7 +321,7 @@ class FakeGroupVersion(BaseModel):
         self.region_name = region_name
         self.group_id = group_id
         self.version = str(mock_random.uuid4())
-        self.arn = f"arn:aws:greengrass:{self.region_name}:{account_id}:greengrass/groups/{self.group_id}/versions/{self.version}"
+        self.arn = f"arn:{get_partition(self.region_name)}:greengrass:{self.region_name}:{account_id}:greengrass/groups/{self.group_id}/versions/{self.version}"
         self.created_at_datetime = datetime.utcnow()
         self.core_definition_version_arn = core_definition_version_arn
         self.device_definition_version_arn = device_definition_version_arn
@@ -379,7 +380,7 @@ class FakeDeployment(BaseModel):
         self.update_at_datetime = datetime.utcnow()
         self.deployment_status = "InProgress"
         self.deployment_type = deployment_type
-        self.arn = f"arn:aws:greengrass:{self.region_name}:{account_id}:/greengrass/groups/{self.group_id}/deployments/{self.id}"
+        self.arn = f"arn:{get_partition(self.region_name)}:greengrass:{self.region_name}:{account_id}:/greengrass/groups/{self.group_id}/deployments/{self.id}"
 
     def to_dict(self, include_detail=False):
         obj = {"DeploymentId": self.id, "DeploymentArn": self.arn}
@@ -815,13 +816,13 @@ class GreengrassBackend(BaseBackend):
             return True
 
         if re.match(
-            r"^arn:aws:iot:[a-zA-Z0-9-]+:[0-9]{12}:thing/[a-zA-Z0-9-]+$",
+            r"^arn:aws[^:]*:iot:[a-zA-Z0-9-]+:[0-9]{12}:thing/[a-zA-Z0-9-]+$",
             target_or_source,
         ):
             return True
 
         if re.match(
-            r"^arn:aws:lambda:[a-zA-Z0-9-]+:[0-9]{12}:function:[a-zA-Z0-9-_]+:[a-zA-Z0-9-_]+$",
+            r"^arn:aws[^:]*:lambda:[a-zA-Z0-9-]+:[0-9]{12}:function:[a-zA-Z0-9-_]+:[a-zA-Z0-9-_]+$",
             target_or_source,
         ):
             return True
@@ -1073,7 +1074,7 @@ class GreengrassBackend(BaseBackend):
                 raise Exception("invalid args")
 
             arn_regex = (
-                r"^arn:aws:greengrass:[a-zA-Z0-9-]+:[0-9]{12}:greengrass/definition/"
+                r"^arn:aws[^:]*:greengrass:[a-zA-Z0-9-]+:[0-9]{12}:greengrass/definition/"
                 + kind
                 + r"/[a-z0-9-]{36}/versions/[a-z0-9-]{36}$"
             )

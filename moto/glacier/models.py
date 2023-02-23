@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import hashlib
 
 import datetime
@@ -95,7 +96,7 @@ class Vault(BaseModel):
         self.region = region
         self.archives = {}
         self.jobs = {}
-        self.arn = f"arn:aws:glacier:{region}:{account_id}:vaults/{vault_name}"
+        self.arn = f"arn:{get_partition(region)}:glacier:{region}:{account_id}:vaults/{vault_name}"
 
     def to_dict(self):
         archives_size = 0

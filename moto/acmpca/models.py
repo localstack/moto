@@ -1,3 +1,5 @@
+from moto.utilities.utils import get_partition
+
 """ACMPCABackend class with methods for supported APIs."""
 import base64
 from .exceptions import ResourceNotFoundException
@@ -25,9 +27,7 @@ class CertificateAuthority(BaseModel):
         revocation_configuration: Dict[str, Any],
     ):
         self.id = mock_random.uuid4()
-        self.arn = (
-            f"arn:aws:acm-pca:{region}:{account_id}:certificate-authority/{self.id}"
-        )
+        self.arn = f"arn:{get_partition(region)}:acm-pca:{region}:{account_id}:certificate-authority/{self.id}"
         self.account_id = account_id
         self.region_name = region
         self.certificate_authority_configuration = certificate_authority_configuration
@@ -112,7 +112,7 @@ class CertificateAuthority(BaseModel):
         cert = cryptography.x509.load_pem_x509_csr(base64.b64decode(csr_bytes))
         new_cert = self.generate_cert(common_name="", subject=cert.subject)
         cert_id = str(mock_random.uuid4()).replace("-", "")
-        cert_arn = f"arn:aws:acm-pca:{self.region_name}:{self.account_id}:certificate-authority/{self.id}/certificate/{cert_id}"
+        cert_arn = f"arn:{get_partition(self.region_name)}:acm-pca:{self.region_name}:{self.account_id}:certificate-authority/{self.id}/certificate/{cert_id}"
         self.issued_certificates[cert_arn] = new_cert
         return cert_arn
 

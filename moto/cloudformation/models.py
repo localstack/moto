@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from datetime import datetime, timedelta
 import json
 import yaml
@@ -52,7 +53,9 @@ class FakeStackSet(BaseModel):
         self.parameters = parameters
         self.tags = tags
         self.admin_role = admin_role
-        self.admin_role_arn = f"arn:aws:iam::{account_id}:role/{self.admin_role}"
+        self.admin_role_arn = (
+            f"arn:{get_partition(region)}:iam::{account_id}:role/{self.admin_role}"
+        )
         self.execution_role = execution_role or "AWSCloudFormationStackSetExecutionRole"
         self.status = "ACTIVE"
         self.instances = FakeStackInstances(

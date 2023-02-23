@@ -1,3 +1,4 @@
+import re
 import json
 
 
@@ -47,7 +48,7 @@ def _send_safe_notification(source, event_name, region, resources, detail):
                         applicable_targets.extend(rule.targets)
 
             for target in applicable_targets:
-                if target.get("Arn", "").startswith("arn:aws:lambda"):
+                if re.match("arn:aws[^:]*:lambda:.*", target.get("Arn", "")):
                     _invoke_lambda(account_id, target.get("Arn"), event=event)
 
 

@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import datetime
 import json
 import os
@@ -387,7 +388,7 @@ class CognitoIdpUserPool(BaseModel):
             get_cognito_idp_user_pool_id_strategy(), region, name, extended_config
         )
         self.id = f"{self.region}_{user_pool_id}"[: self.MAX_ID_LENGTH]
-        self.arn = f"arn:aws:cognito-idp:{self.region}:{account_id}:userpool/{self.id}"
+        self.arn = f"arn:{get_partition(self.region)}:cognito-idp:{self.region}:{account_id}:userpool/{self.id}"
 
         self.name = name
         self.status = None

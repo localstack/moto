@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 from collections import OrderedDict
 
 from moto.core import BaseBackend, BackendDict, BaseModel
@@ -73,7 +74,7 @@ class MediaPackageBackend(BaseBackend):
         self._origin_endpoints = OrderedDict()
 
     def create_channel(self, description, channel_id, tags):
-        arn = f"arn:aws:mediapackage:channel:{channel_id}"
+        arn = f"arn:{get_partition(self.region_name)}:mediapackage:channel:{channel_id}"
         channel = Channel(
             arn=arn,
             description=description,
@@ -126,7 +127,7 @@ class MediaPackageBackend(BaseBackend):
         time_delay_seconds,
         whitelist,
     ):
-        arn = f"arn:aws:mediapackage:origin_endpoint:{endpoint_id}"
+        arn = f"arn:{get_partition(self.region_name)}:mediapackage:origin_endpoint:{endpoint_id}"
         url = f"https://origin-endpoint.mediapackage.{self.region_name}.amazonaws.com/{endpoint_id}"
         origin_endpoint = OriginEndpoint(
             arn=arn,

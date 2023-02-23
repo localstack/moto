@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import json
 import os
 import random
@@ -1524,7 +1525,7 @@ class SageMakerModelBackend(BaseBackend):
             self.trials[trial_name].trial_components.extend([trial_component_name])
         else:
             raise ResourceNotFound(
-                message=f"Trial 'arn:aws:sagemaker:{self.region_name}:{self.account_id}:experiment-trial/{trial_name}' does not exist."
+                message=f"Trial 'arn:{get_partition(self.region_name)}:sagemaker:{self.region_name}:{self.account_id}:experiment-trial/{trial_name}' does not exist."
             )
 
         if trial_component_name in self.trial_components.keys():
@@ -1553,8 +1554,8 @@ class SageMakerModelBackend(BaseBackend):
             )
 
         return {
-            "TrialComponentArn": f"arn:aws:sagemaker:{self.region_name}:{self.account_id}:experiment-trial-component/{trial_component_name}",
-            "TrialArn": f"arn:aws:sagemaker:{self.region_name}:{self.account_id}:experiment-trial/{trial_name}",
+            "TrialComponentArn": f"arn:{get_partition(self.region_name)}:sagemaker:{self.region_name}:{self.account_id}:experiment-trial-component/{trial_component_name}",
+            "TrialArn": f"arn:{get_partition(self.region_name)}:sagemaker:{self.region_name}:{self.account_id}:experiment-trial/{trial_name}",
         }
 
     def create_notebook_instance(

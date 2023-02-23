@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import base64
 import hashlib
 import json
@@ -263,7 +264,7 @@ class Queue(CloudFormationModel):
 
         now = unix_time()
         self.created_timestamp = now
-        self.queue_arn = f"arn:aws:sqs:{region}:{account_id}:{name}"
+        self.queue_arn = f"arn:{get_partition(region)}:sqs:{region}:{account_id}:{name}"
         self.dead_letter_queue = None
 
         self.lambda_event_source_mappings = {}
@@ -1036,7 +1037,10 @@ class SQSBackend(BaseBackend):
                 f"Value {label} for parameter Label is invalid. Reason: Already exists."
             )
 
-        principals = [f"arn:aws:iam::{account_id}:root" for account_id in account_ids]
+        principals = [
+            f"arn:{get_partition(self.region_name)}:iam::{account_id}:root"
+            for account_id in account_ids
+        ]
         actions = [f"SQS:{action}" for action in actions]
 
         statement = {

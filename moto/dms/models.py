@@ -1,3 +1,4 @@
+from moto.utilities.utils import get_partition
 import json
 
 from datetime import datetime
@@ -125,7 +126,7 @@ class FakeReplicationTask(BaseModel):
         self.table_mappings = table_mappings
         self.replication_task_settings = replication_task_settings
 
-        self.arn = f"arn:aws:dms:{region_name}:{account_id}:task:{self.id}"
+        self.arn = f"arn:{get_partition(region_name)}:dms:{region_name}:{account_id}:task:{self.id}"
         self.status = "creating"
 
         self.creation_date = datetime.utcnow()

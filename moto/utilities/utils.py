@@ -6,6 +6,21 @@ from collections.abc import MutableMapping
 from typing import Any, Dict, List, TypeVar, Tuple
 
 
+def get_partition(region: str):
+    valid_matches = [
+        # (region prefix, aws partition)
+        ("cn-", "aws-cn"),
+        ("us-gov-", "aws-us-gov"),
+        ("us-gov-iso-", "aws-iso"),
+        ("us-gov-iso-b-", "aws-iso-b"),
+    ]
+
+    for prefix, partition in valid_matches:
+        if region.startswith(prefix):
+            return partition
+    return "aws"
+
+
 def str2bool(v):
     if v in ("yes", True, "true", "True", "TRUE", "t", "1"):
         return True

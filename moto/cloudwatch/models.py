@@ -306,9 +306,9 @@ class MetricAggregatedDatum(MetricDatumBase):
 
 
 class Dashboard(BaseModel):
-    def __init__(self, account_id: str, name: str, body: str):
+    def __init__(self, account_id: str, region: str, name: str, body: str):
         # Guaranteed to be unique for now as the name is also the key of a dictionary where they are stored
-        self.arn = make_arn_for_dashboard(account_id, name)
+        self.arn = make_arn_for_dashboard(account_id, region, name)
         self.name = name
         self.body = body
         self.last_modified = datetime.now()
@@ -778,7 +778,7 @@ class CloudWatchBackend(BaseBackend):
         return self.metric_data + self.aws_metric_data
 
     def put_dashboard(self, name: str, body: str) -> None:
-        self.dashboards[name] = Dashboard(self.account_id, name, body)
+        self.dashboards[name] = Dashboard(self.account_id, self.region_name, name, body)
 
     def list_dashboards(self, prefix: str = "") -> Iterable[Dashboard]:
         for key, value in self.dashboards.items():
