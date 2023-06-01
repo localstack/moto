@@ -84,7 +84,8 @@ def test_s3_object_in_public_bucket():
     s3_resource = boto3.resource("s3", DEFAULT_REGION_NAME)
     bucket = s3_resource.Bucket("test-bucket")
     bucket.create(ACL="public-read")
-    bucket.put_object(Body=b"ABCD", Key="file.txt")
+    # by default, a file created by an authenticated user in a public bucket will be private
+    bucket.put_object(Body=b"ABCD", Key="file.txt", ACL="public-read")
 
     s3_anonymous = boto3.resource("s3")
     s3_anonymous.meta.client.meta.events.register("choose-signer.s3.*", disable_signing)
@@ -96,7 +97,9 @@ def test_s3_object_in_public_bucket():
     )
     assert contents == b"ABCD"
 
-    bucket.put_object(ACL="private", Body=b"ABCD", Key="file.txt")
+    # the object will be created private by default
+    # TODO: support an anonymous user to create an object in a public bucket, it should have `public` ACL
+    bucket.put_object(Body=b"ABCD", Key="file.txt")
 
     with pytest.raises(ClientError) as exc:
         s3_anonymous.Object(key="file.txt", bucket_name="test-bucket").get()
