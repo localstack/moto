@@ -506,7 +506,7 @@ class FakeAcl(BaseModel):
                     return True
         return False
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         """
         User-defined classes always compare unequal except to themselves by default. Using the `config_dict` allows
         to check for equality in ACLs.
