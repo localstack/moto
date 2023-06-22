@@ -37,6 +37,7 @@ def test_copy_key_boto3(key_name):
     assert resp["Body"].read() == b"some value"
 
 
+@pytest.mark.xfail(reason="Logic implemented in LocalStack S3 provider")
 @pytest.mark.aws_verified
 @s3_aws_verified
 def test_copy_key_boto3_with_args(bucket=None):
@@ -833,6 +834,7 @@ def test_copy_key_boto3_with_both_sha256_checksum(algorithm):
 
 
 @mock_s3
+@pytest.mark.xfail(reason="logic moved into LocalStack S3 provider")
 @pytest.mark.parametrize(
     "algorithm, checksum",
     [
