@@ -1801,19 +1801,17 @@ class S3Response(BaseResponse):
                     key_to_copy.version_id
                 )
 
-            # checksum stuff, do we need to compute hash of the copied object
-            checksum_algorithm = request.headers.get("x-amz-checksum-algorithm")
-            if checksum_algorithm:
-                checksum_value = compute_checksum(
-                    new_key.value, algorithm=checksum_algorithm
-                ).decode("utf-8")
-                response_headers.update(
-                    {"Checksum": {f"Checksum{checksum_algorithm}": checksum_value}}
-                )
-                # By default, the checksum-details for the copy will be the same as the original
-                # But if another algorithm is provided during the copy-operation, we override the values
-                new_key.checksum_algorithm = checksum_algorithm
-                new_key.checksum_value = checksum_value
+            # Commented out to be compatible with stream handling: we are doing it on our provider
+            # checksum_algorithm = request.headers.get("x-amz-checksum-algorithm")
+            # if checksum_algorithm:
+            #     checksum_value = compute_checksum(
+            #         new_key.value, algorithm=checksum_algorithm
+            #     ).decode("utf-8")
+            #     response_headers.update(
+            #         {"Checksum": {f"Checksum{checksum_algorithm}": checksum_value}}
+            #     )
+            #     new_key.checksum_algorithm = checksum_algorithm
+            #     new_key.checksum_value = checksum_value
 
             template = self.response_template(S3_OBJECT_COPY_RESPONSE)
             response_headers.update(new_key.response_dict)
