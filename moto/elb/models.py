@@ -657,4 +657,4 @@ class ELBBackend(BaseBackend):
 
 
 # Use the same regions as EC2
-elb_backends = BackendDict(ELBBackend, "ec2")
+elb_backends = BackendDict(ELBBackend, "elb")

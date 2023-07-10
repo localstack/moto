@@ -197,4 +197,4 @@ class SignerBackend(BaseBackend):
 
 # Using the lambda-regions
 # boto3.Session().get_available_regions("signer") still returns an empty list
-signer_backends = BackendDict(SignerBackend, "lambda")
+signer_backends = BackendDict(SignerBackend, "signer")
