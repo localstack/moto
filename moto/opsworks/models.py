@@ -628,4 +628,4 @@ class OpsWorksBackend(BaseBackend):
         self.instances[instance_id].start()
 
 
-opsworks_backends = BackendDict(OpsWorksBackend, "ec2")
+opsworks_backends = BackendDict(OpsWorksBackend, "opsworks")

@@ -532,4 +532,6 @@ class FakeScheduledAction(BaseModel):
         self.end_time = end_time
 
 
-applicationautoscaling_backends = BackendDict(ApplicationAutoscalingBackend, "ec2")
+applicationautoscaling_backends = BackendDict(
+    ApplicationAutoscalingBackend, "application-autoscaling"
+)
