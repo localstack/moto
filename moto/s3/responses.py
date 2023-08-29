@@ -173,7 +173,8 @@ class S3Response(BaseResponse):
         template = self.response_template(S3_ALL_BUCKETS)
         return template.render(buckets=all_buckets)
 
-    def subdomain_based_buckets(self, request: Any) -> bool:
+    @staticmethod
+    def subdomain_based_buckets(request: Any) -> bool:
         if settings.S3_IGNORE_SUBDOMAIN_BUCKETNAME:
             return False
         host = request.headers.get("host", request.headers.get("Host"))
@@ -241,30 +242,33 @@ class S3Response(BaseResponse):
         else:
             return bucketpath_parse_key_name(url)
 
+    @classmethod
     def ambiguous_response(
-        self, request: Any, full_url: str, headers: Any
+        cls, request: Any, full_url: str, headers: Any
     ) -> TYPE_RESPONSE:
         # Depending on which calling format the client is using, we don't know
         # if this is a bucket or key request so we have to check
-        if self.subdomain_based_buckets(request):
-            return self.key_response(request, full_url, headers)
+        if cls.subdomain_based_buckets(request):
+            return cls.key_response(request, full_url, headers)
         else:
             # Using path-based buckets
-            return self.bucket_response(request, full_url, headers)
+            return cls.bucket_response(request, full_url, headers)
 
+    @classmethod
     @amzn_request_id
     def bucket_response(
-        self, request: Any, full_url: str, headers: Any
+        cls, request: Any, full_url: str, headers: Any
     ) -> TYPE_RESPONSE:
-        self.setup_class(request, full_url, headers, use_raw_body=True)
-        bucket_name = self.parse_bucket_name_from_url(request, full_url)
-        self.backend.log_incoming_request(request, bucket_name)
+        s3_response = cls()
+        s3_response.setup_class(request, full_url, headers, use_raw_body=True)
+        bucket_name = s3_response.parse_bucket_name_from_url(request, full_url)
+        s3_response.backend.log_incoming_request(request, bucket_name)
         try:
-            response = self._bucket_response(request, full_url)
+            response = s3_response._bucket_response(request, full_url)
         except S3ClientError as s3error:
             response = s3error.code, {}, s3error.description
 
-        return self._send_response(response)
+        return s3_response._send_response(response)
 
     @staticmethod
     def _send_response(response: Any) -> TYPE_RESPONSE:  # type: ignore
@@ -1197,18 +1201,20 @@ class S3Response(BaseResponse):
         # last line should equal
         # amz-checksum-sha256:<..>\r\n
 
+    @classmethod
     @amzn_request_id
     def key_response(
-        self, request: Any, full_url: str, headers: Dict[str, Any]
+        cls, request: Any, full_url: str, headers: Dict[str, Any]
     ) -> TYPE_RESPONSE:
+        s3_response = cls()
         # Key and Control are lumped in because splitting out the regex is too much of a pain :/
-        self.setup_class(request, full_url, headers, use_raw_body=True)
-        bucket_name = self.parse_bucket_name_from_url(request, full_url)
-        self.backend.log_incoming_request(request, bucket_name)
+        s3_response.setup_class(request, full_url, headers, use_raw_body=True)
+        bucket_name = s3_response.parse_bucket_name_from_url(request, full_url)
+        s3_response.backend.log_incoming_request(request, bucket_name)
         response_headers: Dict[str, Any] = {}
 
         try:
-            response = self._key_response(request, full_url, self.headers)
+            response = s3_response._key_response(request, full_url, s3_response.headers)
         except S3ClientError as s3error:
             response = s3error.code, {}, s3error.description
 
@@ -1224,7 +1230,7 @@ class S3Response(BaseResponse):
             and request.headers["range"] != ""
         ):
             try:
-                return self._handle_range_header(
+                return s3_response._handle_range_header(
                     request, response_headers, response_content
                 )
             except S3ClientError as s3error:
