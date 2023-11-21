@@ -35,6 +35,7 @@ class DbInstanceEngine(str, Enum):
     CUSTOM_SQLSERVER_EE = "custom-sqlserver-ee"
     CUSTOM_SQLSERVER_SE = "custom-sqlserver-se"
     CUSTOM_SQLSERVER_WEB = "custom-sqlserver-web"
+    DOCDB = "docdb"
     MARIADB = "mariadb"
     MYSQL = "mysql"
     NEPTUNE = "neptune"
