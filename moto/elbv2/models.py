@@ -1410,7 +1410,7 @@ Member must satisfy regular expression pattern: {expression}"
 
         arn = (
             load_balancer_arn.replace(":loadbalancer/", ":listener/")
-            + f"/{port}{id(self)}"
+            + f"/{mock_random.get_random_hex(16)}"
         )
         listener = FakeListener(
             load_balancer_arn,
