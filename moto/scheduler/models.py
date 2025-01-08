@@ -126,7 +126,9 @@ class Schedule(BaseModel):
 class ScheduleGroup(BaseModel):
     def __init__(self, region: str, account_id: str, name: str):
         self.name = name
-        self.arn = f"arn:{get_partition(region)}:scheduler:{region}:{account_id}:schedule-group/{name}"
+        self.arn = (
+            f"arn:{get_partition(region)}:scheduler:{region}:{account_id}:schedule-group/{name}"
+        )
         self.schedules: Dict[str, Schedule] = dict()
         self.created_on = None if self.name == "default" else unix_time()
         self.last_modified = None if self.name == "default" else unix_time()
@@ -161,9 +163,7 @@ class EventBridgeSchedulerBackend(BaseBackend):
         super().__init__(region_name, account_id)
         self.schedules: List[Schedule] = list()
         self.schedule_groups = {
-            "default": ScheduleGroup(
-                region=region_name, account_id=account_id, name="default"
-            )
+            "default": ScheduleGroup(region=region_name, account_id=account_id, name="default")
         }
         self.tagger = TaggingService()
 
@@ -262,22 +262,18 @@ class EventBridgeSchedulerBackend(BaseBackend):
                         results.append(schedule)
         return results
 
-    def create_schedule_group(
-        self, name: str, tags: List[Dict[str, str]]
-    ) -> ScheduleGroup:
+    def create_schedule_group(self, name: str, tags: List[Dict[str, str]]) -> ScheduleGroup:
         """
         The ClientToken parameter is not yet implemented
         """
-        group = ScheduleGroup(
-            region=self.region_name, account_id=self.account_id, name=name
-        )
+        group = ScheduleGroup(region=self.region_name, account_id=self.account_id, name=name)
         self.schedule_groups[name] = group
         self.tagger.tag_resource(group.arn, tags)
         return group
 
     def get_schedule_group(self, group_name: Optional[str]) -> ScheduleGroup:
         if (group_name or "default") not in self.schedule_groups:
-            raise ScheduleGroupNotFound(group_name)
+            raise ScheduleGroupNotFound(group_name or "default")
         return self.schedule_groups[group_name or "default"]
 
     def list_schedule_groups(self) -> Iterable[ScheduleGroup]:
@@ -289,9 +285,7 @@ class EventBridgeSchedulerBackend(BaseBackend):
     def delete_schedule_group(self, name: Optional[str]) -> None:
         self.schedule_groups.pop(name or "default")
 
-    def list_tags_for_resource(
-        self, resource_arn: str
-    ) -> Dict[str, List[Dict[str, str]]]:
+    def list_tags_for_resource(self, resource_arn: str) -> Dict[str, List[Dict[str, str]]]:
         return self.tagger.list_tags_for_resource(resource_arn)
 
     def tag_resource(self, resource_arn: str, tags: List[Dict[str, str]]) -> None:
