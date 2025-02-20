@@ -16,10 +16,10 @@ class DBInstanceAlreadyExists(RDSClientError):
         super().__init__("DBInstanceAlreadyExists", "DB instance already exists")
 
 
-class DBSnapshotNotFoundFault(RDSClientError):
+class DBSnapshotNotFoundError(RDSClientError):
     def __init__(self, snapshot_identifier: str):
         super().__init__(
-            "DBSnapshotNotFoundFault", f"DBSnapshot {snapshot_identifier} not found."
+            "DBSnapshotNotFound", f"DBSnapshot {snapshot_identifier} not found."
         )
 
 
@@ -90,36 +90,12 @@ class InvalidDBInstanceStateError(RDSClientError):
         )
 
 
-class SnapshotQuotaExceededFault(RDSClientError):
-    # This is used for both DBSnapshots and DBClusterSnapshots
+class SnapshotQuotaExceededError(RDSClientError):
     def __init__(self) -> None:
         super().__init__(
             "SnapshotQuotaExceeded",
             "The request cannot be processed because it would exceed the maximum number of snapshots.",
         )
-
-
-class SharedSnapshotQuotaExceeded(RDSClientError):
-    def __init__(self) -> None:
-        super().__init__(
-            "SharedSnapshotQuotaExceeded",
-            "The request cannot be processed because it would exceed the maximum number of snapshots.",
-        )
-
-
-class KMSKeyNotAccessibleFault(RDSClientError):
-    fmt = "Specified KMS key [{key_id}] does not exist, is not enabled or you do not have permissions to access it."
-
-    def __init__(self, key_id: str) -> None:
-        super().__init__(
-            "KMSKeyNotAccessibleFault",
-            f"Specified KMS key [{key_id}] does not exist, is not enabled or you do not have permissions to access it.",
-        )
-
-
-class InvalidDBClusterSnapshotStateFault(RDSClientError):
-    def __init__(self, message: str):
-        super().__init__("InvalidDBClusterSnapshotStateFault", message)
 
 
 class DBSnapshotAlreadyExistsError(RDSClientError):
