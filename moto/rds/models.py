@@ -9,18 +9,9 @@ import string
 from collections import OrderedDict, defaultdict
 from functools import lru_cache, partialmethod
 from re import compile as re_compile
-from typing import (
-    TYPE_CHECKING,
-    Any,
-    Dict,
-    Iterable,
-    List,
-    Literal,
-    Optional,
-    Protocol,
-    Tuple,
-    Union,
-)
+from typing import TYPE_CHECKING, Any, Dict, Iterable, List, Optional, Tuple, Union
+
+from typing_extensions import Literal, Protocol, Type
 
 from moto.core.base_backend import BackendDict, BaseBackend
 from moto.core.common_models import BaseModel, CloudFormationModel
@@ -2120,9 +2111,9 @@ class RDSBackend(BaseBackend):
     def get_snapshot(
         self,
         identifier: str,
-        resource_type: type[DBSnapshot] | type[DBClusterSnapshot],
-        not_found_exception: type[DBSnapshotNotFoundFault]
-        | type[DBClusterSnapshotNotFoundError],
+        resource_type: Type[DBSnapshot] | Type[DBClusterSnapshot],
+        not_found_exception: Type[DBSnapshotNotFoundFault]
+        | Type[DBClusterSnapshotNotFoundError],
     ) -> DBSnapshot | DBClusterSnapshot:
         region = self.region_name
         if identifier.startswith("arn"):
@@ -2147,7 +2138,7 @@ class RDSBackend(BaseBackend):
     )
 
     def get_shared_snapshots(
-        self, resource_type: type[DBSnapshot] | type[DBClusterSnapshot]
+        self, resource_type: Type[DBSnapshot] | Type[DBClusterSnapshot]
     ) -> List[DBSnapshot | DBClusterSnapshot]:
         snapshots_shared = []
         for backend_container in rds_backends.values():
