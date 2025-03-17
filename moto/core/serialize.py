@@ -452,7 +452,6 @@ class ResponseSerializer(ShapeHelpersMixin):
 
 
 class BaseJSONSerializer(ResponseSerializer):
-    APPLICATION_AMZ_JSON = "application/x-amz-json-{version}"
     DEFAULT_TIMESTAMP_FORMAT = "unixtimestamp"
 
     def _serialized_result_to_response(
@@ -463,7 +462,7 @@ class BaseJSONSerializer(ResponseSerializer):
         serialized_result: MutableMapping[str, Any],
     ) -> ResponseDict:
         resp["body"] = self._serialize_body(serialized_result)
-        resp["headers"]["Content-Type"] = self._get_protocol_specific_content_type()
+        resp["headers"]["Content-Type"] = self.CONTENT_TYPE
         return resp
 
     def _serialized_error_to_response(
@@ -480,17 +479,8 @@ class BaseJSONSerializer(ResponseSerializer):
         resp["status_code"] = status_code
         error_code = self._get_protocol_specific_error_code(shape.error_code)
         resp["headers"]["X-Amzn-Errortype"] = error_code
-        resp["headers"]["Content-Type"] = self._get_protocol_specific_content_type()
+        resp["headers"]["Content-Type"] = self.CONTENT_TYPE
         return resp
-
-    def _get_protocol_specific_content_type(self) -> str:
-        content_type = self.CONTENT_TYPE
-        service_model = self.operation_model.service_model
-        protocol = service_model.protocol
-        if protocol == "json":
-            json_version = service_model.metadata.get("jsonVersion", "1.0")
-            content_type = self.APPLICATION_AMZ_JSON.format(version=json_version)
-        return content_type
 
     def _get_protocol_specific_error_code(
         self,
@@ -588,7 +578,6 @@ class BaseXMLSerializer(ResponseSerializer):
             "httpStatusCode", self.DEFAULT_ERROR_RESPONSE_CODE
         )
         resp["status_code"] = status_code
-        resp["headers"]["Content-Type"] = self.CONTENT_TYPE
         return resp
 
     def _serialized_result_to_response(
@@ -604,7 +593,6 @@ class BaseXMLSerializer(ResponseSerializer):
         }
         self._serialize_namespace_attribute(result_wrapper[result_key])
         resp["body"] = self._serialize_body(result_wrapper)
-        resp["headers"]["Content-Type"] = self.CONTENT_TYPE
         return resp
 
     def _serialize_error_metadata(
@@ -704,7 +692,6 @@ class BaseRestSerializer(ResponseSerializer):
                 )
         if "headers" in serialized_result:
             resp["headers"].update(serialized_result["headers"])
-        resp["headers"]["Content-Type"] = self.CONTENT_TYPE
         return resp
 
     def _serialize_result(self, resp: ResponseDict, result: Any) -> ResponseDict:
@@ -795,7 +782,6 @@ class QuerySerializer(BaseXMLSerializer):
             "httpStatusCode", self.DEFAULT_ERROR_RESPONSE_CODE
         )
         resp["status_code"] = status_code
-        resp["headers"]["Content-Type"] = self.CONTENT_TYPE
         return resp
 
     def _serialized_result_to_response(
@@ -861,7 +847,6 @@ class EC2Serializer(QuerySerializer):
             "httpStatusCode", self.DEFAULT_ERROR_RESPONSE_CODE
         )
         resp["status_code"] = status_code
-        resp["headers"]["Content-Type"] = self.CONTENT_TYPE
         return resp
 
     def _serialized_result_to_response(
@@ -878,7 +863,6 @@ class EC2Serializer(QuerySerializer):
         result_wrapper[response_key]["requestId"] = self.context.request_id
         self._serialize_namespace_attribute(result_wrapper[response_key])
         resp["body"] = self._serialize_body(result_wrapper)
-        resp["headers"]["Content-Type"] = self.CONTENT_TYPE
         return resp
 
 
