@@ -52,7 +52,6 @@ from .exceptions import (
     GenericResourcNotFound,
     InvalidParameterValueException,
     InvalidRoleFormat,
-    LambdaClientError,
     UnknownAliasException,
     UnknownEventConfig,
     UnknownFunctionException,
@@ -927,12 +926,11 @@ class LambdaFunction(CloudFormationModel, DockerModel):
                 )["images"]
 
                 if len(images) == 0:
-                    exc = ImageNotFoundException(image_id, repo_name, registry_id)  # type: ignore
-                    raise LambdaClientError(exc.code, exc.message)
+                    raise ImageNotFoundException(image_id, repo_name, registry_id)  # type: ignore
                 else:
-                    manifest = json.loads(images[0].image_manifest)
-                    self.code_sha_256 = (
-                        images[0].image_id["imageDigest"].replace("sha256:", "")
+                    manifest = json.loads(images[0]["imageManifest"])
+                    self.code_sha_256 = images[0]["imageId"]["imageDigest"].replace(
+                        "sha256:", ""
                     )
                     self.code_size = manifest["config"]["size"]
             if from_update:

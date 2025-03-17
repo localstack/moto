@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import hashlib
 import json
 import re
@@ -44,7 +42,31 @@ EcrRepositoryArn = namedtuple(
 )
 
 
-class Repository(CloudFormationModel, BaseModel):
+class BaseObject(BaseModel):
+    def camelCase(self, key: str) -> str:
+        words = []
+        for i, word in enumerate(key.split("_")):
+            if i > 0:
+                words.append(word.title())
+            else:
+                words.append(word)
+        return "".join(words)
+
+    def gen_response_object(self) -> Dict[str, Any]:
+        response_object = dict()
+        for key, value in self.__dict__.items():
+            if "_" in key:
+                response_object[self.camelCase(key)] = value
+            else:
+                response_object[key] = value
+        return response_object
+
+    @property
+    def response_object(self) -> Dict[str, Any]:  # type: ignore[misc]
+        return self.gen_response_object()
+
+
+class Repository(BaseObject, CloudFormationModel):
     def __init__(
         self,
         account_id: str,
@@ -93,7 +115,7 @@ class Repository(CloudFormationModel, BaseModel):
 
     def _get_image(
         self, image_tag: Optional[str], image_digest: Optional[str]
-    ) -> Image:
+    ) -> "Image":
         # you can either search for one or both
         image = next(
             (
@@ -121,6 +143,18 @@ class Repository(CloudFormationModel, BaseModel):
     @property
     def physical_resource_id(self) -> str:
         return self.name
+
+    @property
+    def response_object(self) -> Dict[str, Any]:  # type: ignore[misc]
+        response_object = self.gen_response_object()
+
+        response_object["registryId"] = self.registry_id
+        response_object["repositoryArn"] = self.arn
+        response_object["repositoryName"] = self.name
+        response_object["repositoryUri"] = self.uri
+        response_object["createdAt"] = self.created_at.timestamp()
+        del response_object["arn"], response_object["name"], response_object["images"]
+        return response_object
 
     def update(
         self,
@@ -223,7 +257,7 @@ class Repository(CloudFormationModel, BaseModel):
             )
 
 
-class Image(BaseModel):
+class Image(BaseObject):
     def __init__(
         self,
         account_id: str,
@@ -237,33 +271,18 @@ class Image(BaseModel):
         self.image_tag = tag
         self.image_tags = [tag] if tag is not None else []
         self.image_manifest = manifest
-        self.image_manifest_media_type = image_manifest_mediatype
-        self.repository_name = repository
+        self.image_manifest_mediatype = image_manifest_mediatype
+        self.repository = repository
         self.registry_id = registry_id or account_id
-        self._image_digest = digest
+        self.image_digest = digest
         self.image_pushed_at = int(datetime.now(timezone.utc).timestamp())
         self.last_scan: Optional[datetime] = None
-
-    @property
-    def image_digest(self) -> str:
-        return self.get_image_digest()
-
-    @property
-    def image_id(self) -> dict[str, str]:
-        return {
-            "imageTag": self.image_tag,
-            "imageDigest": self.get_image_digest(),
-        }
-
-    @property
-    def image_size_in_bytes(self) -> int | None:
-        return self.get_image_size_in_bytes()
 
     def _create_digest(self) -> None:
         image_manifest = json.loads(self.image_manifest)
         if "layers" in image_manifest:
             layer_digests = [layer["digest"] for layer in image_manifest["layers"]]
-            self._image_digest = (
+            self.image_digest = (
                 "sha256:"
                 + hashlib.sha256("".join(layer_digests).encode("utf-8")).hexdigest()
             )
@@ -271,12 +290,12 @@ class Image(BaseModel):
             random_sha = hashlib.sha256(
                 f"{random.randint(0,100)}".encode("utf-8")
             ).hexdigest()
-            self._image_digest = f"sha256:{random_sha}"
+            self.image_digest = f"sha256:{random_sha}"
 
     def get_image_digest(self) -> str:
-        if not self._image_digest:
+        if not self.image_digest:
             self._create_digest()
-        return self._image_digest  # type: ignore[return-value]
+        return self.image_digest  # type: ignore[return-value]
 
     def get_image_size_in_bytes(self) -> Optional[int]:
         image_manifest = json.loads(self.image_manifest)
@@ -301,6 +320,61 @@ class Image(BaseModel):
         self.image_tag = tag
         if tag not in self.image_tags and tag is not None:
             self.image_tags.append(tag)
+
+    @property
+    def response_object(self) -> Dict[str, Any]:  # type: ignore[misc]
+        response_object = self.gen_response_object()
+        response_object["imageId"] = {}
+        response_object["imageId"]["imageTag"] = self.image_tag
+        response_object["imageId"]["imageDigest"] = self.get_image_digest()
+        response_object["imageManifest"] = self.image_manifest
+        response_object["imageManifestMediaType"] = self.image_manifest_mediatype
+        response_object["repositoryName"] = self.repository
+        response_object["registryId"] = self.registry_id
+        return {
+            k: v for k, v in response_object.items() if v is not None and v != [None]
+        }
+
+    @property
+    def response_describe_object(self) -> Dict[str, Any]:  # type: ignore[misc]
+        response_object = self.gen_response_object()
+        response_object["imageTags"] = self.image_tags
+        response_object["imageDigest"] = self.get_image_digest()
+        response_object["imageManifest"] = self.image_manifest
+        response_object["imageManifestMediaType"] = self.image_manifest_mediatype
+        response_object["repositoryName"] = self.repository
+        response_object["registryId"] = self.registry_id
+        response_object["imageSizeInBytes"] = self.get_image_size_in_bytes()
+        response_object["imagePushedAt"] = self.image_pushed_at
+        return {k: v for k, v in response_object.items() if v is not None and v != []}
+
+    @property
+    def response_batch_get_image(self) -> Dict[str, Any]:  # type: ignore[misc]
+        response_object = {
+            "imageId": {
+                "imageTag": self.image_tag,
+                "imageDigest": self.get_image_digest(),
+            },
+            "imageManifest": self.image_manifest,
+            "repositoryName": self.repository,
+            "registryId": self.registry_id,
+        }
+        return {
+            k: v
+            for k, v in response_object.items()
+            if v is not None and v != [None]  # type: ignore
+        }
+
+    @property
+    def response_batch_delete_image(self) -> Dict[str, Any]:  # type: ignore[misc]
+        response_object = {}
+        response_object["imageDigest"] = self.get_image_digest()
+        response_object["imageTag"] = self.image_tag
+        return {
+            k: v
+            for k, v in response_object.items()
+            if v is not None and v != [None]  # type: ignore
+        }
 
 
 class ECRBackend(BaseBackend):
@@ -366,7 +440,7 @@ class ECRBackend(BaseBackend):
         self,
         registry_id: Optional[str] = None,
         repository_names: Optional[List[str]] = None,
-    ) -> List[Repository]:
+    ) -> List[Dict[str, Any]]:
         """
         maxResults and nextToken not implemented
         """
@@ -388,7 +462,7 @@ class ECRBackend(BaseBackend):
             if repository_names:
                 if repository.name not in repository_names:
                     continue
-            repositories.append(repository)
+            repositories.append(repository.response_object)
         return repositories
 
     def create_repository(
@@ -519,14 +593,14 @@ class ECRBackend(BaseBackend):
         else:
             if "mediaType" not in parsed_image_manifest:
                 raise InvalidParameterException(
-                    "image manifest mediatype not provided in manifest or parameter"
+                    message="image manifest mediatype not provided in manifest or parameter"
                 )
             else:
                 image_manifest_mediatype = parsed_image_manifest["mediaType"]
 
         existing_images_with_matching_manifest = list(
             filter(
-                lambda x: x.image_manifest == image_manifest,
+                lambda x: x.response_object["imageManifest"] == image_manifest,
                 repository.images,
             )
         )
@@ -616,7 +690,7 @@ class ECRBackend(BaseBackend):
                     "imageTag" in image_id and image_id["imageTag"] in image.image_tags
                 ):
                     found = True
-                    response["images"].append(image)
+                    response["images"].append(image.response_batch_get_image)
 
             if not found:
                 response["failures"].append(
@@ -646,11 +720,6 @@ class ECRBackend(BaseBackend):
             raise ParamValidationError(
                 msg='Missing required parameter in input: "imageIds"'
             )
-
-        class ImageId:
-            def __init__(self, img: Image):
-                self.image_digest = img.get_image_digest()
-                self.image_tag = img.image_tag
 
         response: Dict[str, Any] = {"imageIds": [], "failures": []}
 
@@ -691,7 +760,9 @@ class ECRBackend(BaseBackend):
                         image_found = True
                         for image_tag in reversed(image.image_tags):
                             repository.images[num].image_tag = image_tag
-                            response["imageIds"].append(ImageId(image))
+                            response["imageIds"].append(
+                                image.response_batch_delete_image
+                            )
                             repository.images[num].remove_tag(image_tag)
                         del repository.images[num]
 
@@ -703,7 +774,7 @@ class ECRBackend(BaseBackend):
                     image_found = True
                     for image_tag in reversed(image.image_tags):
                         repository.images[num].image_tag = image_tag
-                        response["imageIds"].append(ImageId(image))
+                        response["imageIds"].append(image.response_batch_delete_image)
                         repository.images[num].remove_tag(image_tag)
                     del repository.images[num]
 
@@ -713,7 +784,7 @@ class ECRBackend(BaseBackend):
                 ):
                     image_found = True
                     repository.images[num].image_tag = image_id["imageTag"]
-                    response["imageIds"].append(ImageId(image))
+                    response["imageIds"].append(image.response_batch_delete_image)
                     if len(image.image_tags) > 1:
                         repository.images[num].remove_tag(image_id["imageTag"])
                     else:
