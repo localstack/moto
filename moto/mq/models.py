@@ -5,7 +5,7 @@ import xmltodict
 
 from moto.core.base_backend import BackendDict, BaseBackend
 from moto.core.common_models import BaseModel
-from moto.core.utils import utcnow
+from moto.core.utils import unix_time
 from moto.moto_api._internal import mock_random
 from moto.utilities.tagging_service import TaggingService
 from moto.utilities.utils import get_partition
@@ -28,13 +28,15 @@ class ConfigurationRevision(BaseModel):
         data: Optional[str] = None,
     ):
         self.configuration_id = configuration_id
-        self.created = utcnow()
+        self.created = unix_time()
         self.description = description
         self.is_invalid = False
         self.revision_id = revision_id
 
         if data is None:
-            self.data = DEFAULT_CONFIGURATION_DATA
+            self.data = base64.b64encode(
+                DEFAULT_CONFIGURATION_DATA.encode("UTF-8")
+            ).decode("utf-8")
         else:
             self.data = data
 
@@ -52,9 +54,16 @@ class ConfigurationRevision(BaseModel):
             # If anything fails, lets assume it's not LDAP
             return False
 
-    @property
-    def revision(self) -> str:
-        return self.revision_id
+    def to_json(self, full: bool = True) -> Dict[str, Any]:
+        resp = {
+            "created": self.created,
+            "description": self.description,
+            "revision": int(self.revision_id),
+        }
+        if full:
+            resp["configurationId"] = self.configuration_id
+            resp["data"] = self.data
+        return resp
 
 
 class Configuration(BaseModel):
@@ -68,7 +77,7 @@ class Configuration(BaseModel):
     ):
         self.id = f"c-{mock_random.get_random_hex(6)}"
         self.arn = f"arn:{get_partition(region)}:mq:{region}:{account_id}:configuration:{self.id}"
-        self.created = utcnow()
+        self.created = unix_time()
 
         self.name = name
         self.engine_type = engine_type
@@ -105,10 +114,18 @@ class Configuration(BaseModel):
     def get_revision(self, revision_id: str) -> ConfigurationRevision:
         return self.revisions[revision_id]
 
-    @property
-    def latest_revision(self) -> ConfigurationRevision:
+    def to_json(self) -> Dict[str, Any]:
         _, latest_revision = sorted(self.revisions.items())[-1]
-        return latest_revision
+        return {
+            "arn": self.arn,
+            "authenticationStrategy": self.authentication_strategy,
+            "created": self.created,
+            "engineType": self.engine_type,
+            "engineVersion": self.engine_version,
+            "id": self.id,
+            "name": self.name,
+            "latestRevision": latest_revision.to_json(full=False),
+        }
 
 
 class User(BaseModel):
@@ -132,6 +149,17 @@ class User(BaseModel):
         if groups:
             self.groups = groups
 
+    def summary(self) -> Dict[str, str]:
+        return {"username": self.username}
+
+    def to_json(self) -> Dict[str, Any]:
+        return {
+            "brokerId": self.broker_id,
+            "username": self.username,
+            "consoleAccess": self.console_access,
+            "groups": self.groups,
+        }
+
 
 class Broker(BaseModel):
     def __init__(
@@ -143,13 +171,13 @@ class Broker(BaseModel):
         auto_minor_version_upgrade: bool,
         configuration: Dict[str, Any],
         deployment_mode: str,
-        encryption_options: Optional[Dict[str, Any]],
+        encryption_options: Dict[str, Any],
         engine_type: str,
         engine_version: str,
         host_instance_type: str,
-        ldap_server_metadata: Optional[Dict[str, Any]],
+        ldap_server_metadata: Dict[str, Any],
         logs: Dict[str, bool],
-        maintenance_window_start_time: Optional[Dict[str, Any]],
+        maintenance_window_start_time: Dict[str, str],
         publicly_accessible: bool,
         security_groups: List[str],
         storage_type: str,
@@ -162,7 +190,7 @@ class Broker(BaseModel):
             f"arn:{get_partition(region)}:mq:{region}:{account_id}:broker:{self.id}"
         )
         self.state = "RUNNING"
-        self.created = utcnow()
+        self.created = unix_time()
 
         self.authentication_strategy = authentication_strategy
         self.auto_minor_version_upgrade = auto_minor_version_upgrade
@@ -204,7 +232,7 @@ class Broker(BaseModel):
             else:
                 self.subnet_ids = ["default-subnet"]
 
-        self._users: Dict[str, User] = dict()
+        self.users: Dict[str, User] = dict()
         for user in users:
             self.create_user(
                 username=user["username"],
@@ -281,7 +309,7 @@ class Broker(BaseModel):
         self, username: str, console_access: bool, groups: List[str]
     ) -> None:
         user = User(self.id, username, console_access, groups)
-        self._users[username] = user
+        self.users[username] = user
 
     def update_user(
         self, username: str, console_access: bool, groups: List[str]
@@ -290,19 +318,53 @@ class Broker(BaseModel):
         user.update(console_access, groups)
 
     def get_user(self, username: str) -> User:
-        if username not in self._users:
+        if username not in self.users:
             raise UnknownUser(username)
-        return self._users[username]
+        return self.users[username]
 
     def delete_user(self, username: str) -> None:
-        self._users.pop(username, None)
+        self.users.pop(username, None)
 
     def list_users(self) -> Iterable[User]:
-        return self._users.values()
+        return self.users.values()
 
-    @property
-    def users(self) -> Iterable[User]:
-        return self._users.values()
+    def summary(self) -> Dict[str, Any]:
+        return {
+            "brokerArn": self.arn,
+            "brokerId": self.id,
+            "brokerName": self.name,
+            "brokerState": self.state,
+            "created": self.created,
+            "deploymentMode": self.deployment_mode,
+            "engineType": self.engine_type,
+            "hostInstanceType": self.host_instance_type,
+        }
+
+    def to_json(self) -> Dict[str, Any]:
+        return {
+            "brokerId": self.id,
+            "brokerArn": self.arn,
+            "brokerName": self.name,
+            "brokerState": self.state,
+            "brokerInstances": self.instances,
+            "created": self.created,
+            "configurations": self.configurations,
+            "authenticationStrategy": self.authentication_strategy,
+            "autoMinorVersionUpgrade": self.auto_minor_version_upgrade,
+            "deploymentMode": self.deployment_mode,
+            "encryptionOptions": self.encryption_options,
+            "engineType": self.engine_type,
+            "engineVersion": self.engine_version,
+            "hostInstanceType": self.host_instance_type,
+            "ldapServerMetadata": self.ldap_server_metadata,
+            "logs": self.logs,
+            "maintenanceWindowStartTime": self.maintenance_window_start_time,
+            "publiclyAccessible": self.publicly_accessible,
+            "securityGroups": self.security_groups,
+            "storageType": self.storage_type,
+            "subnetIds": self.subnet_ids,
+            "users": [u.summary() for u in self.users.values()],
+        }
 
 
 class MQBackend(BaseBackend):
@@ -323,13 +385,13 @@ class MQBackend(BaseBackend):
         broker_name: str,
         configuration: Optional[Dict[str, Any]],
         deployment_mode: str,
-        encryption_options: Optional[Dict[str, Any]],
+        encryption_options: Dict[str, Any],
         engine_type: str,
         engine_version: str,
         host_instance_type: str,
-        ldap_server_metadata: Optional[Dict[str, Any]],
+        ldap_server_metadata: Dict[str, Any],
         logs: Dict[str, bool],
-        maintenance_window_start_time: Optional[Dict[str, Any]],
+        maintenance_window_start_time: Dict[str, str],
         publicly_accessible: bool,
         security_groups: List[str],
         storage_type: str,

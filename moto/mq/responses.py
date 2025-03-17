@@ -1,10 +1,9 @@
 """Handles incoming mq requests, invokes methods, returns responses."""
 
-import copy
 import json
 from urllib.parse import unquote
 
-from moto.core.responses import ActionResult, BaseResponse
+from moto.core.responses import BaseResponse
 
 from .models import MQBackend, mq_backends
 
@@ -20,7 +19,7 @@ class MQResponse(BaseResponse):
         """Return backend instance specific for this region."""
         return mq_backends[self.current_account][self.region]
 
-    def create_broker(self) -> ActionResult:
+    def create_broker(self) -> str:
         params = json.loads(self.body)
         authentication_strategy = params.get("authenticationStrategy")
         auto_minor_version_upgrade = params.get("autoMinorVersionUpgrade")
@@ -60,10 +59,11 @@ class MQResponse(BaseResponse):
             tags=tags,
             users=users,
         )
+        # Lowercase members - boto3 will convert it into UpperCase
         resp = {"brokerArn": broker_arn, "brokerId": broker_id}
-        return ActionResult(resp)
+        return json.dumps(resp)
 
-    def update_broker(self) -> ActionResult:
+    def update_broker(self) -> str:
         params = json.loads(self.body)
         broker_id = self.path.split("/")[-1]
         authentication_strategy = params.get("authenticationStrategy")
@@ -89,32 +89,32 @@ class MQResponse(BaseResponse):
         )
         return self.describe_broker()
 
-    def delete_broker(self) -> ActionResult:
+    def delete_broker(self) -> str:
         broker_id = self.path.split("/")[-1]
         self.mq_backend.delete_broker(broker_id=broker_id)
-        return ActionResult(dict(BrokerId=broker_id))
+        return json.dumps(dict(brokerId=broker_id))
 
-    def describe_broker(self) -> ActionResult:
+    def describe_broker(self) -> str:
         broker_id = self.path.split("/")[-1]
         broker = self.mq_backend.describe_broker(broker_id=broker_id)
-        resp = copy.copy(broker)
-        setattr(resp, "tags", self.mq_backend.list_tags(broker.arn))
-        return ActionResult(resp)
+        resp = broker.to_json()
+        resp["tags"] = self.mq_backend.list_tags(broker.arn)
+        return json.dumps(resp)
 
-    def list_brokers(self) -> ActionResult:
+    def list_brokers(self) -> str:
         brokers = self.mq_backend.list_brokers()
-        return ActionResult(dict(BrokerSummaries=brokers))
+        return json.dumps(dict(brokerSummaries=[b.summary() for b in brokers]))
 
-    def create_user(self) -> ActionResult:
+    def create_user(self) -> str:
         params = json.loads(self.body)
         broker_id = self.path.split("/")[-3]
         username = self.path.split("/")[-1]
         console_access = params.get("consoleAccess", False)
         groups = params.get("groups", [])
         self.mq_backend.create_user(broker_id, username, console_access, groups)
-        return ActionResult({})
+        return "{}"
 
-    def update_user(self) -> ActionResult:
+    def update_user(self) -> str:
         params = json.loads(self.body)
         broker_id = self.path.split("/")[-3]
         username = self.path.split("/")[-1]
@@ -126,30 +126,30 @@ class MQResponse(BaseResponse):
             groups=groups,
             username=username,
         )
-        return ActionResult({})
+        return "{}"
 
-    def describe_user(self) -> ActionResult:
+    def describe_user(self) -> str:
         broker_id = self.path.split("/")[-3]
         username = self.path.split("/")[-1]
         user = self.mq_backend.describe_user(broker_id, username)
-        return ActionResult(user)
+        return json.dumps(user.to_json())
 
-    def delete_user(self) -> ActionResult:
+    def delete_user(self) -> str:
         broker_id = self.path.split("/")[-3]
         username = self.path.split("/")[-1]
         self.mq_backend.delete_user(broker_id, username)
-        return ActionResult({})
+        return "{}"
 
-    def list_users(self) -> ActionResult:
+    def list_users(self) -> str:
         broker_id = self.path.split("/")[-2]
         users = self.mq_backend.list_users(broker_id=broker_id)
         resp = {
             "brokerId": broker_id,
             "users": [{"username": u.username} for u in users],
         }
-        return ActionResult(resp)
+        return json.dumps(resp)
 
-    def create_configuration(self) -> ActionResult:
+    def create_configuration(self) -> str:
         params = json.loads(self.body)
         name = params.get("name")
         engine_type = params.get("engineType")
@@ -159,54 +159,54 @@ class MQResponse(BaseResponse):
         config = self.mq_backend.create_configuration(
             name, engine_type, engine_version, tags
         )
-        return ActionResult(config)
+        return json.dumps(config.to_json())
 
-    def describe_configuration(self) -> ActionResult:
+    def describe_configuration(self) -> str:
         config_id = self.path.split("/")[-1]
         config = self.mq_backend.describe_configuration(config_id)
-        resp = copy.copy(config)
-        setattr(resp, "tags", self.mq_backend.list_tags(config.arn))
-        return ActionResult(resp)
+        resp = config.to_json()
+        resp["tags"] = self.mq_backend.list_tags(config.arn)
+        return json.dumps(resp)
 
-    def list_configurations(self) -> ActionResult:
+    def list_configurations(self) -> str:
         configs = self.mq_backend.list_configurations()
-        resp = {"Configurations": configs}
-        return ActionResult(resp)
+        resp = {"configurations": [c.to_json() for c in configs]}
+        return json.dumps(resp)
 
-    def update_configuration(self) -> ActionResult:
+    def update_configuration(self) -> str:
         config_id = self.path.split("/")[-1]
         params = json.loads(self.body)
         data = params.get("data")
         description = params.get("description")
         config = self.mq_backend.update_configuration(config_id, data, description)
-        return ActionResult(config)
+        return json.dumps(config.to_json())
 
-    def describe_configuration_revision(self) -> ActionResult:
+    def describe_configuration_revision(self) -> str:
         revision_id = self.path.split("/")[-1]
         config_id = self.path.split("/")[-3]
         revision = self.mq_backend.describe_configuration_revision(
             config_id, revision_id
         )
-        return ActionResult(revision)
+        return json.dumps(revision.to_json())
 
-    def create_tags(self) -> ActionResult:
+    def create_tags(self) -> str:
         resource_arn = unquote(self.path.split("/")[-1])
         tags = json.loads(self.body).get("tags", {})
         self.mq_backend.create_tags(resource_arn, tags)
-        return ActionResult({})
+        return "{}"
 
-    def delete_tags(self) -> ActionResult:
+    def delete_tags(self) -> str:
         resource_arn = unquote(self.path.split("/")[-1])
         tag_keys = self._get_param("tagKeys")
         self.mq_backend.delete_tags(resource_arn, tag_keys)
-        return ActionResult({})
+        return "{}"
 
-    def list_tags(self) -> ActionResult:
+    def list_tags(self) -> str:
         resource_arn = unquote(self.path.split("/")[-1])
         tags = self.mq_backend.list_tags(resource_arn)
-        return ActionResult({"Tags": tags})
+        return json.dumps({"tags": tags})
 
-    def reboot_broker(self) -> ActionResult:
+    def reboot_broker(self) -> str:
         broker_id = self.path.split("/")[-2]
         self.mq_backend.reboot_broker(broker_id=broker_id)
-        return ActionResult({})
+        return "{}"
