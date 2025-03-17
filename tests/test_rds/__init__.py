@@ -1,1 +1,1 @@
-DEFAULT_REGION = "us-west-2"
+# This file is intentionally left blank.
