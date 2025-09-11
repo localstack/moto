@@ -48,6 +48,7 @@ jobs:
           # Configure git
           git config --global user.name 'LocalStack Bot'
           git config --global user.email 'localstack-bot@users.noreply.github.com'
+          git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           
           # make sure to switch to the `localstack` branch (default / main branch of this fork)
           git switch localstack
@@ -68,8 +69,8 @@ jobs:
           KEYS=("name" "url")
           
           # Read files into arrays
-          mapfile -t LOCAL_LINES < "$remote"
-          mapfile -t REMOTE_LINES < "$local"
+          mapfile -t REMOTE_LINES < "$remote"
+          mapfile -t LOCAL_LINES < "$local"
           
           echo "merging $local + $local + $remote ..."
           
@@ -83,11 +84,11 @@ jobs:
           }
           
           # Build result: keep key-matched lines from local, others from remote
-          for i in "${!REMOTE_LINES[@]}"; do
-            if keep_line "${LOCAL_LINES[i]}"; then
-              echo "${LOCAL_LINES[i]}"
-            else
+          for i in "${!LOCAL_LINES[@]}"; do
+            if keep_line "${REMOTE_LINES[i]}"; then
               echo "${REMOTE_LINES[i]}"
+            else
+              echo "${LOCAL_LINES[i]}"
             fi
           done > "$local"
           
@@ -178,3 +179,5 @@ jobs:
           # git push --force-with-lease
           # git push --atomic origin localstack $NEW_VERSION
           # gh release create $NEW_VERSION
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
