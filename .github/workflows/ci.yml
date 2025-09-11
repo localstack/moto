@@ -8,7 +8,7 @@
 name: Sync / Release moto-ext
 
 on:
-  # TODO remove this trigger after testing
+  # TODO replace this push trigger with a schedule (every Monday morning)
   push:
   workflow_dispatch:
     inputs:
@@ -111,8 +111,6 @@ jobs:
           cat > .gitattributes << EOF
           setup.cfg   merge=git-prefer-theirs-name-url
           EOF
-          
-          
 
       - name: Rebase localstack branch with latest master from upstream
         run: |
@@ -168,16 +166,13 @@ jobs:
       # publish the package before pushing the tag (this might fail if the version already exists on PyPI)
       - name: Publish package distributions to PyPI
         if: ${{ github.event.inputs.dry_run == false }}
-        run: |
-          echo "Ensure that this is really only triggered if dry run is explicitly set to false"
-        # uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@release/v1
 
       - name: Push & Create Release
         if: ${{ github.event.inputs.dry_run == false }}
         run: |
-          echo "Ensure that this is really only triggered if dry run is explicitly set to false"
-          # git push --force-with-lease
-          # git push --atomic origin localstack $NEW_VERSION
-          # gh release create $NEW_VERSION
+          git push --force-with-lease
+          git push --atomic origin localstack $NEW_VERSION
+          gh release create $NEW_VERSION
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
