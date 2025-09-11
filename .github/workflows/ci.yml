@@ -22,15 +22,15 @@ on:
 concurrency:
   group: ${{ github.workflow }}
 
-permissions:
-  contents: write
-
 jobs:
   sync-build-release-moto-ext:
     runs-on: ubuntu-latest
     environment:
       name: pypi
       url: https://pypi.org/project/moto-ext/
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
