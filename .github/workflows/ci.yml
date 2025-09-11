@@ -37,6 +37,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: localstack
+          persist-credentials: false
 
       - name: Setup Python
         uses: actions/setup-python@v6
@@ -48,7 +49,7 @@ jobs:
           # Configure git
           git config --global user.name 'LocalStack Bot'
           git config --global user.email 'localstack-bot@users.noreply.github.com'
-          git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git remote set-url origin https://git:${{ secrets.PRO_ACCESS_TOKEN }}@github.com/${{ github.repository }}
           
           # make sure to switch to the `localstack` branch (default / main branch of this fork)
           git switch localstack
@@ -61,36 +62,40 @@ jobs:
           mkdir -p $HOME/.local/bin
           cat > $HOME/.local/bin/git-prefer-theirs-name-url << EOF
           #!/bin/bash
-          base="$1"
-          local="$2"
-          remote="$3"
+          set -e
+          
+          base="\$1"
+          local="\$2"
+          remote="\$3"
+          
+          echo "Executing custom merge driver for base \$base, local \$local, remote \$remote."
           
           # Define keys to keep
           KEYS=("name" "url")
           
           # Read files into arrays
-          mapfile -t REMOTE_LINES < "$remote"
-          mapfile -t LOCAL_LINES < "$local"
+          mapfile -t REMOTE_LINES < "\$remote"
+          mapfile -t LOCAL_LINES < "\$local"
           
-          echo "merging $local + $local + $remote ..."
+          echo "merging \$local + \$local + \$remote ..."
           
           # Function to check if a line should be kept (matches any key)
           keep_line() {
-            local line="$1"
-            for key in "${KEYS[@]}"; do
-              [[ "$line" == *"$key"* ]] && return 0
+            local line="\$1"
+            for key in "\${KEYS[@]}"; do
+              [[ "\$line" == *"\$key"* ]] && return 0
             done
             return 1
           }
           
-          # Build result: keep key-matched lines from local, others from remote
-          for i in "${!LOCAL_LINES[@]}"; do
-            if keep_line "${REMOTE_LINES[i]}"; then
-              echo "${REMOTE_LINES[i]}"
+          # keep key-matched lines from local, others from remote
+          for i in "\${!LOCAL_LINES[@]}"; do
+            if keep_line "\${REMOTE_LINES[i]}"; then
+              echo "\${REMOTE_LINES[i]}"
             else
-              echo "${LOCAL_LINES[i]}"
+              echo "\${LOCAL_LINES[i]}"
             fi
-          done > "$local"
+          done > "\$local"
           
           exit 0
           EOF
@@ -103,13 +108,13 @@ jobs:
           cat >> .git/config << EOF
           
           [merge "git-prefer-theirs-name-url"]
-                name = A driver which resolves merge conflicts on a setup.cfg such that it always takes the local name and url, and everything else from upstream
-                driver = git-prefer-theirs-name-url %O %A %B
+                  name = A driver which resolves merge conflicts on a setup.cfg such that it always takes the local name and url, and everything else from upstream
+                  driver = git-prefer-theirs-name-url %O %A %B
           EOF
           
           # define to use the custom merge driver for the setup.cfg
           cat > .gitattributes << EOF
-          setup.cfg   merge=git-prefer-theirs-name-url
+          setup.cfg       merge=git-prefer-theirs-name-url
           EOF
 
       - name: Rebase localstack branch with latest master from upstream
