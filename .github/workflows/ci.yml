@@ -8,8 +8,8 @@
 name: Sync / Release moto-ext
 
 on:
-  # TODO replace this push trigger with a schedule (every Monday morning)
-  push:
+  schedule:
+    - cron: 0 5 * * MON
   workflow_dispatch:
     inputs:
       dry_run:
@@ -178,6 +178,8 @@ jobs:
         run: |
           git push --force-with-lease
           git push --atomic origin localstack $NEW_VERSION
-          gh release create $NEW_VERSION
+          # Wait a few seconds to avoid "gh release create" fail because the tag is not yet available
+          sleep 10
+          gh release create $NEW_VERSION --notes "automatic rebase sync and release"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
