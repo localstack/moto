@@ -173,13 +173,19 @@ jobs:
         if: ${{ github.event.inputs.dry_run == false }}
         uses: pypa/gh-action-pypi-publish@release/v1
 
-      - name: Push & Create Release
+      - name: Push
         if: ${{ github.event.inputs.dry_run == false }}
         run: |
           git push --force-with-lease
           git push --atomic origin localstack $NEW_VERSION
-          # Wait a few seconds to avoid "gh release create" fail because the tag is not yet available
-          sleep 10
-          gh release create $NEW_VERSION --notes "automatic rebase sync and release"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Add a retry to avoid issues where the GH CLI fails
+      # because it does not yet detect the pushed tag.
+      - name: Create Release
+        uses: nick-fields/retry@v3
+        with:
+          max_attempts: 5
+          retry_wait_seconds: 120
+          command: gh release create $NEW_VERSION --notes "automatic rebase sync and release"
