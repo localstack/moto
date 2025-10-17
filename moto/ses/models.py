@@ -81,6 +81,12 @@ class SESFeedback(BaseModel):
 
 
 class Message(BaseModel):
+    id: str
+    source: str
+    subject: str
+    body: str
+    destinations: dict[str, list[str]]
+
     def __init__(
         self,
         message_id: str,
@@ -146,12 +152,17 @@ class SESQuota(BaseModel):
 
 
 class ReceiptRuleSet(BaseModel):
-    def __init__(self, name: str):
+    name: str
+    created_timestamp: str
+    is_active: bool
+    rules: list[dict[str, Any]]  # todo any
+
+    def __init__(self, name: str, is_active: bool = False):
         self.name = name
         self.created_timestamp = datetime.datetime.now(
             datetime.timezone.utc
         ).isoformat()
-        self.is_active = False  # By default, during creation
+        self.is_active = is_active  # By default, during creation
         self.rules: List[Dict[str, Any]] = []
 
     @property
@@ -163,27 +174,37 @@ class ReceiptRuleSet(BaseModel):
 
 
 class ConfigurationSet(BaseModel):
+    configuration_set_name: str
+    tracking_options: dict[str, str] | None
+    delivery_options: dict[str, str] | None
+    # maps to https://docs.aws.amazon.com/ses/latest/APIReference/API_ReputationOptions.html
+    reputation_options: dict[str, Any] | None
+    enabled: dict[str, bool] | None
+    tags: list[dict[str, str]] | None
+    suppression_options: dict[str, list[str]] | None
+    vdm_options: dict[str, dict[str, str]] | None
+
     def __init__(
         self,
         configuration_set_name: str,
-        tracking_options: Optional[Dict[str, str]] = {},
-        delivery_options: Optional[Dict[str, Any]] = {},
-        reputation_options: Optional[Dict[str, Any]] = {},
-        sending_options: Optional[Dict[str, bool]] = {},
-        tags: Optional[List[Dict[str, str]]] = [],
-        suppression_options: Optional[Dict[str, List[str]]] = {},
-        vdm_options: Optional[Dict[str, Dict[str, str]]] = {},
+        tracking_options: dict[str, str] | None = None,
+        delivery_options: dict[str, str] | None = None,
+        reputation_options: dict[str, Any] = None,
+        sending_options: dict[str, bool] = None,
+        tags: list[dict[str, str]] = None,
+        suppression_options: dict[str, list[str]] = None,
+        vdm_options: dict[str, dict[str, str]] = None,
     ) -> None:
         # Shared between SES and SESv2
         self.configuration_set_name = configuration_set_name
-        self.tracking_options = tracking_options
-        self.delivery_options = delivery_options
-        self.reputation_options = reputation_options
-        self.enabled = sending_options  # Enabled in v1, SendingOptions in v2
+        self.tracking_options = tracking_options or {}
+        self.delivery_options = delivery_options or {}
+        self.reputation_options = reputation_options or {}
+        self.enabled = sending_options or {}  # Enabled in v1, SendingOptions in v2
         # SESv2 specific fields
-        self.tags = tags
-        self.suppression_options = suppression_options
-        self.vdm_options = vdm_options
+        self.tags = tags or []
+        self.suppression_options = suppression_options or {}
+        self.vdm_options = vdm_options or {}
 
     def to_dict_v2(self) -> Dict[str, Any]:
         return {
@@ -199,16 +220,24 @@ class ConfigurationSet(BaseModel):
 
 
 class Contact(BaseModel):
+    contact_list_name: str
+    email_address: str
+    topic_default_preferences: list[dict[str, str]]
+    topic_preferences: list[dict[str, str]]
+    unsubscribe_all: bool
+    created_timestamp: str
+    last_updated_timestamp: str
+
     def __init__(
         self,
         contact_list_name: str,
         email_address: str,
-        topic_preferences: List[Dict[str, str]],
+        topic_preferences: list[dict[str, str]],
         unsubscribe_all: bool,
     ) -> None:
         self.contact_list_name = contact_list_name
         self.email_address = email_address
-        self.topic_default_preferences: List[Dict[str, str]] = []
+        self.topic_default_preferences = []
         self.topic_preferences = topic_preferences
         self.unsubscribe_all = unsubscribe_all
         self.created_timestamp = iso_8601_datetime_with_milliseconds()
@@ -228,18 +257,25 @@ class Contact(BaseModel):
 
 
 class ContactList(BaseModel):
+    contact_list_name: str
+    description: str
+    topics: list[dict[str, str]]
+    created_timestamp: str
+    last_updated_timestamp: str
+    contacts: dict[str, Contact]
+
     def __init__(
         self,
         contact_list_name: str,
         description: str,
-        topics: List[Dict[str, str]],
+        topics: list[dict[str, str]],
     ) -> None:
         self.contact_list_name = contact_list_name
         self.description = description
         self.topics = topics
         self.created_timestamp = iso_8601_datetime_with_milliseconds()
         self.last_updated_timestamp = iso_8601_datetime_with_milliseconds()
-        self.contacts: Dict[str, Contact] = {}
+        self.contacts = {}
 
     def create_contact(self, contact_list_name: str, params: Dict[str, Any]) -> None:
         email_address = params["EmailAddress"]
@@ -280,12 +316,25 @@ class ContactList(BaseModel):
 
 
 class EmailIdentity(BaseModel):
+    email_identity: str
+    tags: dict[str, str] | None
+    dkim_signing_attributes: dict[str, str] | None
+    configuration_set_name: str | None
+    identity_type: str
+    verified_for_sending_status: bool
+    feedback_forwarding_status: bool
+    verification_status: str
+    sending_enabled: bool
+    # maps to # maps to https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_DkimAttributes.html
+    dkim_attributes: dict[str, str | bool]
+    policies: dict[str, str]
+
     def __init__(
         self,
         email_identity: str,
-        tags: Optional[Dict[str, str]],
-        dkim_signing_attributes: Optional[object],
-        configuration_set_name: Optional[str],
+        tags: dict[str, str] | None,
+        dkim_signing_attributes: object | None,
+        configuration_set_name: str | None,
     ) -> None:
         self.email_identity = email_identity
         self.tags = tags
@@ -296,10 +345,8 @@ class EmailIdentity(BaseModel):
         self.feedback_forwarding_status = False
         self.verification_status = "SUCCESS"
         self.sending_enabled = True
-        self.dkim_attributes: Dict[str, Any] = {}
-        if not self.dkim_signing_attributes or not isinstance(
-            self.dkim_signing_attributes, dict
-        ):
+        self.dkim_attributes = {}
+        if not self.dkim_signing_attributes:
             self.dkim_attributes["SigningEnabled"] = False
             self.dkim_attributes["Status"] = "NOT_STARTED"
         else:
@@ -314,7 +361,7 @@ class EmailIdentity(BaseModel):
             self.dkim_attributes["LastKeyGenerationTimestamp"] = (
                 iso_8601_datetime_with_milliseconds()
             )
-        self.policies: Dict[str, Any] = {}
+        self.policies = {}
 
     @property
     def get_response_object(self) -> Dict[str, Any]:  # type: ignore[misc]
@@ -340,6 +387,10 @@ class EmailIdentity(BaseModel):
 
 
 class DedicatedIpPool(BaseModel):
+    pool_name: str
+    scaling_mode: str
+    tags: list[dict[str, str]]
+
     def __init__(
         self, pool_name: str, scaling_mode: str, tags: List[Dict[str, str]]
     ) -> None:
@@ -375,23 +426,39 @@ class SESBackend(BaseBackend):
     __RULE_SET_PARAM = "ruleSetName"
     __RULE_PARAM = "rule.name"
 
+    sent_messages: list[Message]
+    sent_message_count: int
+    rejected_messages_count: int
+    sns_topics: dict[str, dict[str, Any]]
+    config_sets: dict[str, ConfigurationSet]
+    config_set_event_destination: dict[str, dict[str, Any]]
+    event_destinations: dict[str, int]
+    identity_mail_from_domains: dict[str, dict[str, Any]]
+    templates: dict[str, dict[str, str]]
+    receipt_rule_set: dict[str, ReceiptRuleSet]
+    dkim_tokens: dict[str, list[str]]
+    contacts: dict[str, Contact]
+    contacts_lists: dict[str, ContactList]
+    email_identities: dict[str, EmailIdentity]
+    dedicated_ip_pools: dict[str, DedicatedIpPool]
+
     def __init__(self, region_name: str, account_id: str):
         super().__init__(region_name, account_id)
-        self.sent_messages: List[Any] = []
+        self.sent_messages = []
         self.sent_message_count = 0
         self.rejected_messages_count = 0
-        self.sns_topics: Dict[str, Dict[str, Any]] = {}
-        self.config_sets: Dict[str, ConfigurationSet] = {}
-        self.config_set_event_destination: Dict[str, Dict[str, Any]] = {}
-        self.event_destinations: Dict[str, int] = {}
-        self.identity_mail_from_domains: Dict[str, Dict[str, Any]] = {}
-        self.templates: Dict[str, Dict[str, str]] = {}
-        self.receipt_rule_set: Dict[str, ReceiptRuleSet] = {}
-        self.dkim_tokens: Dict[str, List[str]] = {}
-        self.contacts: Dict[str, Contact] = {}
-        self.contacts_lists: Dict[str, ContactList] = {}
-        self.email_identities: Dict[str, EmailIdentity] = {}
-        self.dedicated_ip_pools: Dict[str, DedicatedIpPool] = {}
+        self.sns_topics = {}
+        self.config_sets = {}
+        self.config_set_event_destination = {}
+        self.event_destinations = {}
+        self.identity_mail_from_domains = {}
+        self.templates = {}
+        self.receipt_rule_set = {}
+        self.dkim_tokens = {}
+        self.contacts = {}
+        self.contacts_lists = {}
+        self.email_identities = {}
+        self.dedicated_ip_pools = {}
 
     def _is_verified_address(self, source: str) -> bool:
         _, address = parseaddr(source)
