@@ -62,6 +62,12 @@ jobs:
         run: |
           ! git rev-parse $NEW_VERSION || { echo "A tag for $NEW_VERSION already exists" ; exit 1; }
 
+      - name: Check for new commits since the last tag
+        env:
+          LAST_TAG: ${{ steps.previous.outputs.tag }}
+        run: |
+          [ $(git log --oneline $LAST_TAG..HEAD | wc -l) -eq "0" ] && { echo "No commits since the last tag. Nothing to release."; exit 1; }
+
       - name: Build Python distributions
         env:
           NEW_VERSION: ${{ steps.semver.outputs.patch }}
