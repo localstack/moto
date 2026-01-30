@@ -35,7 +35,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v5
       with:
         aws-region: us-east-1
-        role-to-assume: arn:aws:iam::623948600419:role/MotoExt-OIDC-Role
+        role-to-assume: arn:aws:iam::385386232812:role/MotoExt-OIDC-Role
 
     - name: Pull EC2 instance types from AWS
       run: |
