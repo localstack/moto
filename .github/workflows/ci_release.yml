@@ -23,8 +23,41 @@ concurrency:
   group: ${{ github.workflow }}
 
 jobs:
+  analyse-commit-log:
+    runs-on: ubuntu-latest
+    outputs:
+      is-release-required: ${{ steps.check.outputs.new_commits_made }}
+      last-tag: ${{ steps.last_tag.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: localstack
+          persist-credentials: false
+
+      - name: Get last tag
+        id: last_tag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Check for new commits since the last tag
+        id: check
+        env:
+          LAST_TAG: ${{ steps.last_tag.outputs.tag }}
+        run: |
+          if [ $(git log --oneline $LAST_TAG..HEAD | wc -l) -eq "0" ]; then
+            echo "No commits since the last tag."
+            echo "new_commits_made=false" >> $GITHUB_OUTPUT
+          else
+            echo "new_commits_made=true" >> $GITHUB_OUTPUT
+          fi
+
   build-release-moto-ext:
     runs-on: ubuntu-latest
+    needs: analyse-commit-log
+    if: ${{ needs.analyse-commit-log.outputs.is-release-required == 'true' }}
     environment:
       name: pypi
       url: https://pypi.org/project/moto-ext/
@@ -44,29 +77,17 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: Get current latest version
-        id: previous
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-
       - name: Guess next version
         id: semver
         uses: "WyriHaximus/github-action-next-semvers@v1"
         with:
-          version: ${{ steps.previous.outputs.tag }}
+          version: ${{ needs.analyse-commit-log.outputs.last-tag }}
 
       - name: Ensure guessed version does not exist
         env:
           NEW_VERSION: ${{ steps.semver.outputs.patch }}
         run: |
           ! git rev-parse $NEW_VERSION || { echo "A tag for $NEW_VERSION already exists" ; exit 1; }
-
-      - name: Check for new commits since the last tag
-        env:
-          LAST_TAG: ${{ steps.previous.outputs.tag }}
-        run: |
-          [ $(git log --oneline $LAST_TAG..HEAD | wc -l) -eq "0" ] && { echo "No commits since the last tag. Nothing to release."; exit 1; }
 
       - name: Build Python distributions
         env:
