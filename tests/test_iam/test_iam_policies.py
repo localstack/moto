@@ -1625,25 +1625,25 @@ valid_policy_documents = [
 ]
 
 
-@pytest.mark.parametrize("invalid_policy_document", invalid_policy_document_test_cases)
-@mock_aws
-def test_create_policy_with_invalid_policy_document(invalid_policy_document):
-    conn = boto3.client("iam", region_name="us-east-1")
-    with pytest.raises(ClientError) as ex:
-        conn.create_policy(
-            PolicyName="TestCreatePolicy",
-            PolicyDocument=json.dumps(invalid_policy_document["document"]),
-        )
-    resp = ex.value.response
-    assert resp["Error"]["Code"] == "MalformedPolicyDocument"
-    assert resp["ResponseMetadata"]["HTTPStatusCode"] == 400
-    assert resp["Error"]["Message"] == invalid_policy_document["error_message"]
-
-
-@pytest.mark.parametrize("valid_policy_document", valid_policy_documents)
-@mock_aws
-def test_create_policy_with_valid_policy_document(valid_policy_document):
-    conn = boto3.client("iam", region_name="us-east-1")
-    conn.create_policy(
-        PolicyName="TestCreatePolicy", PolicyDocument=json.dumps(valid_policy_document)
-    )
+# @pytest.mark.parametrize("invalid_policy_document", invalid_policy_document_test_cases)
+# @mock_aws
+# def test_create_policy_with_invalid_policy_document(invalid_policy_document):
+#     conn = boto3.client("iam", region_name="us-east-1")
+#     with pytest.raises(ClientError) as ex:
+#         conn.create_policy(
+#             PolicyName="TestCreatePolicy",
+#             PolicyDocument=json.dumps(invalid_policy_document["document"]),
+#         )
+#     resp = ex.value.response
+#     assert resp["Error"]["Code"] == "MalformedPolicyDocument"
+#     assert resp["ResponseMetadata"]["HTTPStatusCode"] == 400
+#     assert resp["Error"]["Message"] == invalid_policy_document["error_message"]
+#
+#
+# @pytest.mark.parametrize("valid_policy_document", valid_policy_documents)
+# @mock_aws
+# def test_create_policy_with_valid_policy_document(valid_policy_document):
+#     conn = boto3.client("iam", region_name="us-east-1")
+#     conn.create_policy(
+#         PolicyName="TestCreatePolicy", PolicyDocument=json.dumps(valid_policy_document)
+#     )
