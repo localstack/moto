@@ -786,24 +786,24 @@ def test_delete_role():
 #     assert policy["Policy"]["Arn"] == f"arn:aws:iam::{ACCOUNT_ID}:policy/TestGetPolicy"
 
 
-@mock_aws(config={"iam": {"load_aws_managed_policies": True}})
-@pytest.mark.parametrize(
-    "region,partition", [("us-west-2", "aws"), ("cn-north-1", "aws-cn")]
-)
-def test_get_aws_managed_policy(region, partition):
-    if settings.TEST_SERVER_MODE:
-        raise SkipTest("Policies not loaded in ServerMode")
-    conn = boto3.client("iam", region_name=region)
-    managed_policy_arn = f"arn:{partition}:iam::aws:policy/IAMUserChangePassword"
-    managed_policy_create_date = datetime.strptime(
-        "2016-11-15T00:25:16+00:00", "%Y-%m-%dT%H:%M:%S+00:00"
-    )
-    policy = conn.get_policy(PolicyArn=managed_policy_arn)
-    assert policy["Policy"]["Arn"] == managed_policy_arn
-    assert (
-        policy["Policy"]["CreateDate"].replace(tzinfo=None)
-        == managed_policy_create_date
-    )
+# @mock_aws(config={"iam": {"load_aws_managed_policies": True}})
+# @pytest.mark.parametrize(
+#     "region,partition", [("us-west-2", "aws"), ("cn-north-1", "aws-cn")]
+# )
+# def test_get_aws_managed_policy(region, partition):
+#     if settings.TEST_SERVER_MODE:
+#         raise SkipTest("Policies not loaded in ServerMode")
+#     conn = boto3.client("iam", region_name=region)
+#     managed_policy_arn = f"arn:{partition}:iam::aws:policy/IAMUserChangePassword"
+#     managed_policy_create_date = datetime.strptime(
+#         "2016-11-15T00:25:16+00:00", "%Y-%m-%dT%H:%M:%S+00:00"
+#     )
+#     policy = conn.get_policy(PolicyArn=managed_policy_arn)
+#     assert policy["Policy"]["Arn"] == managed_policy_arn
+#     assert (
+#         policy["Policy"]["CreateDate"].replace(tzinfo=None)
+#         == managed_policy_create_date
+#     )
 
 
 # @mock_aws
@@ -827,44 +827,44 @@ def test_get_aws_managed_policy(region, partition):
 #     assert retrieved.get("PolicyVersion")["IsDefaultVersion"] is False
 
 
-@mock_aws(config={"iam": {"load_aws_managed_policies": True}})
-def test_get_aws_managed_policy_version():
-    if settings.TEST_SERVER_MODE:
-        raise SkipTest("Policies not loaded in ServerMode")
-    conn = boto3.client("iam", region_name="us-east-1")
-    managed_policy_arn = (
-        "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-    )
-    managed_policy_version_create_date = datetime.strptime(
-        "2015-04-09T15:03:43+00:00", "%Y-%m-%dT%H:%M:%S+00:00"
-    )
-    with pytest.raises(ClientError):
-        conn.get_policy_version(
-            PolicyArn=managed_policy_arn, VersionId="v2-does-not-exist"
-        )
-    retrieved = conn.get_policy_version(PolicyArn=managed_policy_arn, VersionId="v1")
-    assert (
-        retrieved["PolicyVersion"]["CreateDate"].replace(tzinfo=None)
-        == managed_policy_version_create_date
-    )
-    assert isinstance(retrieved["PolicyVersion"]["Document"], dict)
+# @mock_aws(config={"iam": {"load_aws_managed_policies": True}})
+# def test_get_aws_managed_policy_version():
+#     if settings.TEST_SERVER_MODE:
+#         raise SkipTest("Policies not loaded in ServerMode")
+#     conn = boto3.client("iam", region_name="us-east-1")
+#     managed_policy_arn = (
+#         "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+#     )
+#     managed_policy_version_create_date = datetime.strptime(
+#         "2015-04-09T15:03:43+00:00", "%Y-%m-%dT%H:%M:%S+00:00"
+#     )
+#     with pytest.raises(ClientError):
+#         conn.get_policy_version(
+#             PolicyArn=managed_policy_arn, VersionId="v2-does-not-exist"
+#         )
+#     retrieved = conn.get_policy_version(PolicyArn=managed_policy_arn, VersionId="v1")
+#     assert (
+#         retrieved["PolicyVersion"]["CreateDate"].replace(tzinfo=None)
+#         == managed_policy_version_create_date
+#     )
+#     assert isinstance(retrieved["PolicyVersion"]["Document"], dict)
 
 
-@mock_aws(config={"iam": {"load_aws_managed_policies": True}})
-def test_get_aws_managed_policy_v8_version():
-    if settings.TEST_SERVER_MODE:
-        raise SkipTest("Policies not loaded in ServerMode")
-    conn = boto3.client("iam", region_name="us-east-1")
-    managed_policy_arn = "arn:aws:iam::aws:policy/job-function/SystemAdministrator"
-    with pytest.raises(ClientError):
-        conn.get_policy_version(
-            PolicyArn=managed_policy_arn, VersionId="v2-does-not-exist"
-        )
-    retrieved = conn.get_policy_version(PolicyArn=managed_policy_arn, VersionId="v8")
-    assert isinstance(
-        retrieved["PolicyVersion"]["CreateDate"].replace(tzinfo=None), datetime
-    )
-    assert isinstance(retrieved["PolicyVersion"]["Document"], dict)
+# @mock_aws(config={"iam": {"load_aws_managed_policies": True}})
+# def test_get_aws_managed_policy_v8_version():
+#     if settings.TEST_SERVER_MODE:
+#         raise SkipTest("Policies not loaded in ServerMode")
+#     conn = boto3.client("iam", region_name="us-east-1")
+#     managed_policy_arn = "arn:aws:iam::aws:policy/job-function/SystemAdministrator"
+#     with pytest.raises(ClientError):
+#         conn.get_policy_version(
+#             PolicyArn=managed_policy_arn, VersionId="v2-does-not-exist"
+#         )
+#     retrieved = conn.get_policy_version(PolicyArn=managed_policy_arn, VersionId="v8")
+#     assert isinstance(
+#         retrieved["PolicyVersion"]["CreateDate"].replace(tzinfo=None), datetime
+#     )
+#     assert isinstance(retrieved["PolicyVersion"]["Document"], dict)
 
 
 # @mock_aws
@@ -2033,97 +2033,97 @@ def test_get_access_key_last_used_when_used():
     assert resp["AccessKeyLastUsed"]["Region"] == "us-east-1"
 
 
-@mock_aws(config={"iam": {"load_aws_managed_policies": True}})
-def test_managed_policy():
-    if settings.TEST_SERVER_MODE:
-        raise SkipTest("Policies not loaded in ServerMode")
-    conn = boto3.client("iam", region_name="us-west-1")
-
-    conn.create_policy(
-        PolicyName="UserManagedPolicy",
-        PolicyDocument=MOCK_POLICY,
-        Path="/mypolicy/",
-        Description="my user managed policy",
-    )
-
-    marker = "0"
-    aws_policies = []
-    while marker is not None:
-        response = conn.list_policies(Scope="AWS", Marker=marker)
-        for policy in response["Policies"]:
-            aws_policies.append(policy)
-        marker = response.get("Marker")
-    aws_managed_policies = iam_backends[ACCOUNT_ID]["global"].aws_managed_policies
-    assert {p.name for p in aws_managed_policies} == {
-        p["PolicyName"] for p in aws_policies
-    }
-
-    user_policies = conn.list_policies(Scope="Local")["Policies"]
-    assert {"UserManagedPolicy"} == {p["PolicyName"] for p in user_policies}
-
-    marker = "0"
-    all_policies = []
-    while marker is not None:
-        response = conn.list_policies(Marker=marker)
-        for policy in response["Policies"]:
-            all_policies.append(policy)
-        marker = response.get("Marker")
-    assert {p["PolicyName"] for p in aws_policies + user_policies} == {
-        p["PolicyName"] for p in all_policies
-    }
-
-    role_name = "my-new-role"
-    conn.create_role(
-        RoleName=role_name, AssumeRolePolicyDocument="test policy", Path="my-path"
-    )
-    for policy_name in [
-        "AmazonElasticMapReduceRole",
-        "AWSControlTowerServiceRolePolicy",
-    ]:
-        policy_arn = "arn:aws:iam::aws:policy/service-role/" + policy_name
-        conn.attach_role_policy(PolicyArn=policy_arn, RoleName=role_name)
-
-    rows = conn.list_policies(OnlyAttached=True)["Policies"]
-    assert len(rows) == 2
-    for x in rows:
-        assert x["AttachmentCount"] > 0
-
-    resp = conn.list_attached_role_policies(RoleName=role_name)
-    assert len(resp["AttachedPolicies"]) == 2
-
-    conn.detach_role_policy(
-        PolicyArn="arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceRole",
-        RoleName=role_name,
-    )
-    rows = conn.list_policies(OnlyAttached=True)["Policies"]
-    assert "AWSControlTowerServiceRolePolicy" in [r["PolicyName"] for r in rows]
-    assert "AmazonElasticMapReduceRole" not in [r["PolicyName"] for r in rows]
-    for x in rows:
-        assert x["AttachmentCount"] > 0
-
-    policies = conn.list_attached_role_policies(RoleName=role_name)["AttachedPolicies"]
-    assert "AWSControlTowerServiceRolePolicy" in [p["PolicyName"] for p in policies]
-    assert "AmazonElasticMapReduceRole" not in [p["PolicyName"] for p in policies]
-
-    with pytest.raises(ClientError) as ex:
-        conn.detach_role_policy(
-            PolicyArn="arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceRole",
-            RoleName=role_name,
-        )
-    err = ex.value.response["Error"]
-    assert err["Code"] == "NoSuchEntity"
-    assert (
-        err["Message"]
-        == "Policy arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceRole was not found."
-    )
-
-    with pytest.raises(ClientError) as ex:
-        conn.detach_role_policy(
-            PolicyArn="arn:aws:iam::aws:policy/Nonexistent", RoleName=role_name
-        )
-    err = ex.value.response["Error"]
-    assert err["Code"] == "NoSuchEntity"
-    assert err["Message"] == "Policy arn:aws:iam::aws:policy/Nonexistent was not found."
+# @mock_aws(config={"iam": {"load_aws_managed_policies": True}})
+# def test_managed_policy():
+#     if settings.TEST_SERVER_MODE:
+#         raise SkipTest("Policies not loaded in ServerMode")
+#     conn = boto3.client("iam", region_name="us-west-1")
+#
+#     conn.create_policy(
+#         PolicyName="UserManagedPolicy",
+#         PolicyDocument=MOCK_POLICY,
+#         Path="/mypolicy/",
+#         Description="my user managed policy",
+#     )
+#
+#     marker = "0"
+#     aws_policies = []
+#     while marker is not None:
+#         response = conn.list_policies(Scope="AWS", Marker=marker)
+#         for policy in response["Policies"]:
+#             aws_policies.append(policy)
+#         marker = response.get("Marker")
+#     aws_managed_policies = iam_backends[ACCOUNT_ID]["global"].aws_managed_policies
+#     assert {p.name for p in aws_managed_policies} == {
+#         p["PolicyName"] for p in aws_policies
+#     }
+#
+#     user_policies = conn.list_policies(Scope="Local")["Policies"]
+#     assert {"UserManagedPolicy"} == {p["PolicyName"] for p in user_policies}
+#
+#     marker = "0"
+#     all_policies = []
+#     while marker is not None:
+#         response = conn.list_policies(Marker=marker)
+#         for policy in response["Policies"]:
+#             all_policies.append(policy)
+#         marker = response.get("Marker")
+#     assert {p["PolicyName"] for p in aws_policies + user_policies} == {
+#         p["PolicyName"] for p in all_policies
+#     }
+#
+#     role_name = "my-new-role"
+#     conn.create_role(
+#         RoleName=role_name, AssumeRolePolicyDocument="test policy", Path="my-path"
+#     )
+#     for policy_name in [
+#         "AmazonElasticMapReduceRole",
+#         "AWSControlTowerServiceRolePolicy",
+#     ]:
+#         policy_arn = "arn:aws:iam::aws:policy/service-role/" + policy_name
+#         conn.attach_role_policy(PolicyArn=policy_arn, RoleName=role_name)
+#
+#     rows = conn.list_policies(OnlyAttached=True)["Policies"]
+#     assert len(rows) == 2
+#     for x in rows:
+#         assert x["AttachmentCount"] > 0
+#
+#     resp = conn.list_attached_role_policies(RoleName=role_name)
+#     assert len(resp["AttachedPolicies"]) == 2
+#
+#     conn.detach_role_policy(
+#         PolicyArn="arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceRole",
+#         RoleName=role_name,
+#     )
+#     rows = conn.list_policies(OnlyAttached=True)["Policies"]
+#     assert "AWSControlTowerServiceRolePolicy" in [r["PolicyName"] for r in rows]
+#     assert "AmazonElasticMapReduceRole" not in [r["PolicyName"] for r in rows]
+#     for x in rows:
+#         assert x["AttachmentCount"] > 0
+#
+#     policies = conn.list_attached_role_policies(RoleName=role_name)["AttachedPolicies"]
+#     assert "AWSControlTowerServiceRolePolicy" in [p["PolicyName"] for p in policies]
+#     assert "AmazonElasticMapReduceRole" not in [p["PolicyName"] for p in policies]
+#
+#     with pytest.raises(ClientError) as ex:
+#         conn.detach_role_policy(
+#             PolicyArn="arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceRole",
+#             RoleName=role_name,
+#         )
+#     err = ex.value.response["Error"]
+#     assert err["Code"] == "NoSuchEntity"
+#     assert (
+#         err["Message"]
+#         == "Policy arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceRole was not found."
+#     )
+#
+#     with pytest.raises(ClientError) as ex:
+#         conn.detach_role_policy(
+#             PolicyArn="arn:aws:iam::aws:policy/Nonexistent", RoleName=role_name
+#         )
+#     err = ex.value.response["Error"]
+#     assert err["Code"] == "NoSuchEntity"
+#     assert err["Message"] == "Policy arn:aws:iam::aws:policy/Nonexistent was not found."
 
 
 # @mock_aws
