@@ -2245,7 +2245,7 @@ def test_error_on_invalid_ami(m_flag):
     assert ex.value.response["Error"]["Code"] == "InvalidAMIID.NotFound"
     assert (
         ex.value.response["Error"]["Message"]
-        == "The image id '[['ami-invalid']]' does not exist"
+        == "The image id '['ami-invalid']' does not exist"
     )
 
     assert m_flag is True
@@ -2268,7 +2268,7 @@ def test_error_on_invalid_ami_format(m_flag):
     assert ex.value.response["Error"]["Code"] == "InvalidAMIID.Malformed"
     assert (
         ex.value.response["Error"]["Message"]
-        == 'Invalid id: "[\'invalid-ami-format\']" (expecting "ami-...")'
+        == 'Invalid id: "invalid-ami-format" (expecting "ami-...")'
     )
 
     assert m_flag is True
