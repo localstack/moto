@@ -27,6 +27,7 @@ BOUNDARY_POLICY = {
 
 DEFAULT_TAGS = [{"Key": "somekey", "Value": "somevalue"}]
 
+# This should be validated by LS snapshots already
 
 @aws_verified
 @pytest.mark.aws_verified

@@ -6,6 +6,7 @@ import boto3
 
 from moto import mock_aws, settings
 
+# NOT APPLICABLE to LS
 
 # Test IAM User Inline Policy
 def test_policies_are_not_kept_after_mock_ends():

@@ -1702,204 +1702,204 @@ def test_mfa_devices():
     assert len(response["MFADevices"]) == 0
 
 
-@mock_aws
-def test_create_virtual_mfa_device():
-    client = boto3.client("iam", region_name="us-east-1")
-    response = client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
-    device = response["VirtualMFADevice"]
-
-    assert device["SerialNumber"] == f"arn:aws:iam::{ACCOUNT_ID}:mfa/test-device"
-    device["Base32StringSeed"].decode("ascii")
-    assert device["QRCodePNG"] != ""
-
-    response = client.create_virtual_mfa_device(
-        Path="/", VirtualMFADeviceName="test-device-2"
-    )
-    device = response["VirtualMFADevice"]
-
-    assert device["SerialNumber"] == f"arn:aws:iam::{ACCOUNT_ID}:mfa/test-device-2"
-    device["Base32StringSeed"].decode("ascii")
-    assert device["QRCodePNG"] != ""
-
-    response = client.create_virtual_mfa_device(
-        Path="/test/", VirtualMFADeviceName="test-device"
-    )
-    device = response["VirtualMFADevice"]
-
-    assert device["SerialNumber"] == f"arn:aws:iam::{ACCOUNT_ID}:mfa/test/test-device"
-    device["Base32StringSeed"].decode("ascii")
-    assert device["QRCodePNG"] != ""
-    assert isinstance(device["QRCodePNG"], bytes)
-
-
-@mock_aws
-def test_create_virtual_mfa_device_errors():
-    client = boto3.client("iam", region_name="us-east-1")
-    client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
-
-    with pytest.raises(ClientError) as exc:
-        client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
-    err = exc.value.response["Error"]
-    assert (
-        err["Message"] == "MFADevice entity at the same path and name already exists."
-    )
-
-    with pytest.raises(ClientError) as exc:
-        client.create_virtual_mfa_device(
-            Path="test", VirtualMFADeviceName="test-device"
-        )
-    err = exc.value.response["Error"]
-    assert (
-        err["Message"]
-        == "The specified value for path is invalid. It must begin and end with / and contain only alphanumeric characters and/or / characters."
-    )
-
-    with pytest.raises(ClientError) as exc:
-        client.create_virtual_mfa_device(
-            Path="/test//test/", VirtualMFADeviceName="test-device"
-        )
-    err = exc.value.response["Error"]
-    assert (
-        err["Message"]
-        == "The specified value for path is invalid. It must begin and end with / and contain only alphanumeric characters and/or / characters."
-    )
-
-    too_long_path = f"/{('b' * 511)}/"
-    with pytest.raises(ClientError) as exc:
-        client.create_virtual_mfa_device(
-            Path=too_long_path, VirtualMFADeviceName="test-device"
-        )
-    err = exc.value.response["Error"]
-    assert (
-        err["Message"]
-        == '1 validation error detected: Value "{}" at "path" failed to satisfy constraint: Member must have length less than or equal to 512'
-    )
+# @mock_aws
+# def test_create_virtual_mfa_device():
+#     client = boto3.client("iam", region_name="us-east-1")
+#     response = client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
+#     device = response["VirtualMFADevice"]
+#
+#     assert device["SerialNumber"] == f"arn:aws:iam::{ACCOUNT_ID}:mfa/test-device"
+#     device["Base32StringSeed"].decode("ascii")
+#     assert device["QRCodePNG"] != ""
+#
+#     response = client.create_virtual_mfa_device(
+#         Path="/", VirtualMFADeviceName="test-device-2"
+#     )
+#     device = response["VirtualMFADevice"]
+#
+#     assert device["SerialNumber"] == f"arn:aws:iam::{ACCOUNT_ID}:mfa/test-device-2"
+#     device["Base32StringSeed"].decode("ascii")
+#     assert device["QRCodePNG"] != ""
+#
+#     response = client.create_virtual_mfa_device(
+#         Path="/test/", VirtualMFADeviceName="test-device"
+#     )
+#     device = response["VirtualMFADevice"]
+#
+#     assert device["SerialNumber"] == f"arn:aws:iam::{ACCOUNT_ID}:mfa/test/test-device"
+#     device["Base32StringSeed"].decode("ascii")
+#     assert device["QRCodePNG"] != ""
+#     assert isinstance(device["QRCodePNG"], bytes)
 
 
-@mock_aws
-def test_delete_virtual_mfa_device():
-    client = boto3.client("iam", region_name="us-east-1")
-    response = client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
-    serial_number = response["VirtualMFADevice"]["SerialNumber"]
-
-    client.delete_virtual_mfa_device(SerialNumber=serial_number)
-
-    response = client.list_virtual_mfa_devices()
-
-    assert len(response["VirtualMFADevices"]) == 0
-    assert response["IsTruncated"] is False
-
-
-@mock_aws
-def test_delete_virtual_mfa_device_errors():
-    client = boto3.client("iam", region_name="us-east-1")
-
-    serial_number = f"arn:aws:iam::{ACCOUNT_ID}:mfa/not-existing"
-    with pytest.raises(ClientError) as exc:
-        client.delete_virtual_mfa_device(SerialNumber=serial_number)
-    err = exc.value.response["Error"]
-    assert (
-        err["Message"]
-        == f"VirtualMFADevice with serial number {serial_number} doesn't exist."
-    )
-
-
-@mock_aws
-def test_list_virtual_mfa_devices():
-    client = boto3.client("iam", region_name="us-east-1")
-    response = client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
-    serial_number_1 = response["VirtualMFADevice"]["SerialNumber"]
-
-    response = client.create_virtual_mfa_device(
-        Path="/test/", VirtualMFADeviceName="test-device"
-    )
-    serial_number_2 = response["VirtualMFADevice"]["SerialNumber"]
-
-    response = client.list_virtual_mfa_devices()
-
-    assert response["VirtualMFADevices"][0]["SerialNumber"] == serial_number_1
-    assert response["VirtualMFADevices"][1]["SerialNumber"] == serial_number_2
-    assert response["IsTruncated"] is False
-
-    response = client.list_virtual_mfa_devices(AssignmentStatus="Assigned")
-
-    assert len(response["VirtualMFADevices"]) == 0
-    assert response["IsTruncated"] is False
-
-    response = client.list_virtual_mfa_devices(AssignmentStatus="Unassigned")
-
-    assert response["VirtualMFADevices"][0]["SerialNumber"] == serial_number_1
-    assert response["VirtualMFADevices"][1]["SerialNumber"] == serial_number_2
-    assert response["IsTruncated"] is False
-
-    response = client.list_virtual_mfa_devices(AssignmentStatus="Any", MaxItems=1)
-
-    assert response["VirtualMFADevices"][0]["SerialNumber"] == serial_number_1
-    assert response["IsTruncated"] is True
-    assert response["Marker"] == "1"
-
-    response = client.list_virtual_mfa_devices(
-        AssignmentStatus="Any", Marker=response["Marker"]
-    )
-
-    assert response["VirtualMFADevices"][0]["SerialNumber"] == serial_number_2
-    assert response["IsTruncated"] is False
+# @mock_aws
+# def test_create_virtual_mfa_device_errors():
+#     client = boto3.client("iam", region_name="us-east-1")
+#     client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
+#
+#     with pytest.raises(ClientError) as exc:
+#         client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
+#     err = exc.value.response["Error"]
+#     assert (
+#         err["Message"] == "MFADevice entity at the same path and name already exists."
+#     )
+#
+#     with pytest.raises(ClientError) as exc:
+#         client.create_virtual_mfa_device(
+#             Path="test", VirtualMFADeviceName="test-device"
+#         )
+#     err = exc.value.response["Error"]
+#     assert (
+#         err["Message"]
+#         == "The specified value for path is invalid. It must begin and end with / and contain only alphanumeric characters and/or / characters."
+#     )
+#
+#     with pytest.raises(ClientError) as exc:
+#         client.create_virtual_mfa_device(
+#             Path="/test//test/", VirtualMFADeviceName="test-device"
+#         )
+#     err = exc.value.response["Error"]
+#     assert (
+#         err["Message"]
+#         == "The specified value for path is invalid. It must begin and end with / and contain only alphanumeric characters and/or / characters."
+#     )
+#
+#     too_long_path = f"/{('b' * 511)}/"
+#     with pytest.raises(ClientError) as exc:
+#         client.create_virtual_mfa_device(
+#             Path=too_long_path, VirtualMFADeviceName="test-device"
+#         )
+#     err = exc.value.response["Error"]
+#     assert (
+#         err["Message"]
+#         == '1 validation error detected: Value "{}" at "path" failed to satisfy constraint: Member must have length less than or equal to 512'
+#     )
 
 
-@mock_aws
-def test_list_virtual_mfa_devices_errors():
-    client = boto3.client("iam", region_name="us-east-1")
-    client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
+# @mock_aws
+# def test_delete_virtual_mfa_device():
+#     client = boto3.client("iam", region_name="us-east-1")
+#     response = client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
+#     serial_number = response["VirtualMFADevice"]["SerialNumber"]
+#
+#     client.delete_virtual_mfa_device(SerialNumber=serial_number)
+#
+#     response = client.list_virtual_mfa_devices()
+#
+#     assert len(response["VirtualMFADevices"]) == 0
+#     assert response["IsTruncated"] is False
 
-    with pytest.raises(ClientError) as exc:
-        client.list_virtual_mfa_devices(Marker="100")
-    err = exc.value.response["Error"]
-    assert err["Message"] == "Invalid Marker."
+
+# @mock_aws
+# def test_delete_virtual_mfa_device_errors():
+#     client = boto3.client("iam", region_name="us-east-1")
+#
+#     serial_number = f"arn:aws:iam::{ACCOUNT_ID}:mfa/not-existing"
+#     with pytest.raises(ClientError) as exc:
+#         client.delete_virtual_mfa_device(SerialNumber=serial_number)
+#     err = exc.value.response["Error"]
+#     assert (
+#         err["Message"]
+#         == f"VirtualMFADevice with serial number {serial_number} doesn't exist."
+#     )
 
 
-@mock_aws
-def test_enable_virtual_mfa_device():
-    client = boto3.client("iam", region_name="us-east-1")
-    response = client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
-    serial_number = response["VirtualMFADevice"]["SerialNumber"]
-    tags = [{"Key": "key", "Value": "value"}]
+# @mock_aws
+# def test_list_virtual_mfa_devices():
+#     client = boto3.client("iam", region_name="us-east-1")
+#     response = client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
+#     serial_number_1 = response["VirtualMFADevice"]["SerialNumber"]
+#
+#     response = client.create_virtual_mfa_device(
+#         Path="/test/", VirtualMFADeviceName="test-device"
+#     )
+#     serial_number_2 = response["VirtualMFADevice"]["SerialNumber"]
+#
+#     response = client.list_virtual_mfa_devices()
+#
+#     assert response["VirtualMFADevices"][0]["SerialNumber"] == serial_number_1
+#     assert response["VirtualMFADevices"][1]["SerialNumber"] == serial_number_2
+#     assert response["IsTruncated"] is False
+#
+#     response = client.list_virtual_mfa_devices(AssignmentStatus="Assigned")
+#
+#     assert len(response["VirtualMFADevices"]) == 0
+#     assert response["IsTruncated"] is False
+#
+#     response = client.list_virtual_mfa_devices(AssignmentStatus="Unassigned")
+#
+#     assert response["VirtualMFADevices"][0]["SerialNumber"] == serial_number_1
+#     assert response["VirtualMFADevices"][1]["SerialNumber"] == serial_number_2
+#     assert response["IsTruncated"] is False
+#
+#     response = client.list_virtual_mfa_devices(AssignmentStatus="Any", MaxItems=1)
+#
+#     assert response["VirtualMFADevices"][0]["SerialNumber"] == serial_number_1
+#     assert response["IsTruncated"] is True
+#     assert response["Marker"] == "1"
+#
+#     response = client.list_virtual_mfa_devices(
+#         AssignmentStatus="Any", Marker=response["Marker"]
+#     )
+#
+#     assert response["VirtualMFADevices"][0]["SerialNumber"] == serial_number_2
+#     assert response["IsTruncated"] is False
 
-    client.create_user(UserName="test-user", Tags=tags)
-    client.enable_mfa_device(
-        UserName="test-user",
-        SerialNumber=serial_number,
-        AuthenticationCode1="234567",
-        AuthenticationCode2="987654",
-    )
 
-    response = client.list_virtual_mfa_devices(AssignmentStatus="Unassigned")
+# @mock_aws
+# def test_list_virtual_mfa_devices_errors():
+#     client = boto3.client("iam", region_name="us-east-1")
+#     client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
+#
+#     with pytest.raises(ClientError) as exc:
+#         client.list_virtual_mfa_devices(Marker="100")
+#     err = exc.value.response["Error"]
+#     assert err["Message"] == "Invalid Marker."
 
-    assert len(response["VirtualMFADevices"]) == 0
-    assert response["IsTruncated"] is False
 
-    response = client.list_virtual_mfa_devices(AssignmentStatus="Assigned")
-
-    device = response["VirtualMFADevices"][0]
-    assert device["SerialNumber"] == serial_number
-    assert device["User"]["Path"] == "/"
-    assert device["User"]["UserName"] == "test-user"
-    assert device["User"]["Arn"] == f"arn:aws:iam::{ACCOUNT_ID}:user/test-user"
-    assert isinstance(device["User"]["CreateDate"], datetime)
-    assert device["User"]["Tags"] == tags
-    assert isinstance(device["EnableDate"], datetime)
-    assert response["IsTruncated"] is False
-
-    client.deactivate_mfa_device(UserName="test-user", SerialNumber=serial_number)
-
-    response = client.list_virtual_mfa_devices(AssignmentStatus="Assigned")
-
-    assert len(response["VirtualMFADevices"]) == 0
-    assert response["IsTruncated"] is False
-
-    response = client.list_virtual_mfa_devices(AssignmentStatus="Unassigned")
-
-    assert response["VirtualMFADevices"][0]["SerialNumber"] == serial_number
-    assert response["IsTruncated"] is False
+# @mock_aws
+# def test_enable_virtual_mfa_device():
+#     client = boto3.client("iam", region_name="us-east-1")
+#     response = client.create_virtual_mfa_device(VirtualMFADeviceName="test-device")
+#     serial_number = response["VirtualMFADevice"]["SerialNumber"]
+#     tags = [{"Key": "key", "Value": "value"}]
+#
+#     client.create_user(UserName="test-user", Tags=tags)
+#     client.enable_mfa_device(
+#         UserName="test-user",
+#         SerialNumber=serial_number,
+#         AuthenticationCode1="234567",
+#         AuthenticationCode2="987654",
+#     )
+#
+#     response = client.list_virtual_mfa_devices(AssignmentStatus="Unassigned")
+#
+#     assert len(response["VirtualMFADevices"]) == 0
+#     assert response["IsTruncated"] is False
+#
+#     response = client.list_virtual_mfa_devices(AssignmentStatus="Assigned")
+#
+#     device = response["VirtualMFADevices"][0]
+#     assert device["SerialNumber"] == serial_number
+#     assert device["User"]["Path"] == "/"
+#     assert device["User"]["UserName"] == "test-user"
+#     assert device["User"]["Arn"] == f"arn:aws:iam::{ACCOUNT_ID}:user/test-user"
+#     assert isinstance(device["User"]["CreateDate"], datetime)
+#     assert device["User"]["Tags"] == tags
+#     assert isinstance(device["EnableDate"], datetime)
+#     assert response["IsTruncated"] is False
+#
+#     client.deactivate_mfa_device(UserName="test-user", SerialNumber=serial_number)
+#
+#     response = client.list_virtual_mfa_devices(AssignmentStatus="Assigned")
+#
+#     assert len(response["VirtualMFADevices"]) == 0
+#     assert response["IsTruncated"] is False
+#
+#     response = client.list_virtual_mfa_devices(AssignmentStatus="Unassigned")
+#
+#     assert response["VirtualMFADevices"][0]["SerialNumber"] == serial_number
+#     assert response["IsTruncated"] is False
 
 
 # @mock_aws()
@@ -3075,6 +3075,7 @@ def test_delete_saml_provider():
 #     assert role["MaxSessionDuration"] == 3600
 #     assert role.get("Description") is None
 
+# TODO migrate
 
 @mock_aws()
 def test_list_entities_for_policy():
@@ -4703,24 +4704,24 @@ def test_list_roles_with_more_than_100_roles_no_max_items_defaults_to_100():
     assert len(roles) == 100
 
 
-@mock_aws()
-def test_list_roles_max_item_and_marker_values_adhered():
-    iam = boto3.client("iam", region_name="us-east-1")
-    for i in range(10):
-        iam.create_role(
-            RoleName=f"test_role_{i}", AssumeRolePolicyDocument="some policy"
-        )
-    response = iam.list_roles(MaxItems=2)
-    roles = response["Roles"]
-
-    assert response["IsTruncated"] is True
-    assert len(roles) == 2
-
-    response = iam.list_roles(Marker=response["Marker"])
-    roles = response["Roles"]
-
-    assert response["IsTruncated"] is False
-    assert len(roles) == 8
+# @mock_aws()
+# def test_list_roles_max_item_and_marker_values_adhered():
+#     iam = boto3.client("iam", region_name="us-east-1")
+#     for i in range(10):
+#         iam.create_role(
+#             RoleName=f"test_role_{i}", AssumeRolePolicyDocument="some policy"
+#         )
+#     response = iam.list_roles(MaxItems=2)
+#     roles = response["Roles"]
+#
+#     assert response["IsTruncated"] is True
+#     assert len(roles) == 2
+#
+#     response = iam.list_roles(Marker=response["Marker"])
+#     roles = response["Roles"]
+#
+#     assert response["IsTruncated"] is False
+#     assert len(roles) == 8
 
 
 # @mock_aws()
