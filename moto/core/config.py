@@ -50,6 +50,7 @@ default_user_config: DefaultConfig = {
         "mock_credentials": True,
         "passthrough": {"urls": [], "services": []},
         "reset_boto3_session": True,
+        # Important: When whitelisting a new service, make sure to unskip the service test suite in Makefile
         "service_whitelist": [
             "acm",
             "acm-pca",
