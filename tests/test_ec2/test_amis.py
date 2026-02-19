@@ -1081,11 +1081,9 @@ def test_ami_attribute_error_cases():
 @ec2_aws_verified()
 @pytest.mark.aws_verified
 def test_ami_describe_non_existent(ec2_client=None):
-    ec2 = ec2_client
-
     # Valid pattern but non-existent id
     with pytest.raises(ClientError) as exc:
-        ec2.describe_images(ImageIds=["ami-abcd1234"])
+        ec2_client.describe_images(ImageIds=["ami-abcd1234"])
     assert exc.value.response["ResponseMetadata"]["HTTPStatusCode"] == 400
     assert exc.value.response["Error"]["Code"] == "InvalidAMIID.NotFound"
     assert (
@@ -1095,7 +1093,7 @@ def test_ami_describe_non_existent(ec2_client=None):
 
     # Valid pattern but non-existent id: With multiple IDs
     with pytest.raises(ClientError) as exc:
-        ec2.describe_images(ImageIds=["ami-abcd1234", "ami-1234abcd"])
+        ec2_client.describe_images(ImageIds=["ami-abcd1234", "ami-1234abcd"])
     assert exc.value.response["ResponseMetadata"]["HTTPStatusCode"] == 400
     assert exc.value.response["Error"]["Code"] == "InvalidAMIID.NotFound"
     assert (
@@ -1105,7 +1103,7 @@ def test_ami_describe_non_existent(ec2_client=None):
 
     # Invalid ami pattern
     with pytest.raises(ClientError) as exc:
-        ec2.describe_images(ImageIds=["not_an_ami_id"])
+        ec2_client.describe_images(ImageIds=["not_an_ami_id"])
     assert exc.value.response["ResponseMetadata"]["HTTPStatusCode"] == 400
     assert exc.value.response["Error"]["Code"] == "InvalidAMIID.Malformed"
     assert (
@@ -1115,7 +1113,7 @@ def test_ami_describe_non_existent(ec2_client=None):
 
     # Invalid ami pattern: With multiple IDs
     with pytest.raises(ClientError) as exc:
-        ec2.describe_images(ImageIds=["not_an_ami_id", "another_bad_ami_id"])
+        ec2_client.describe_images(ImageIds=["not_an_ami_id", "another_bad_ami_id"])
     assert exc.value.response["ResponseMetadata"]["HTTPStatusCode"] == 400
     assert exc.value.response["Error"]["Code"] == "InvalidAMIID.Malformed"
     assert (
