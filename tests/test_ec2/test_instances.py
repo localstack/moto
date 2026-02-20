@@ -14,7 +14,7 @@ from freezegun import freeze_time
 from moto import mock_aws, settings
 from moto.core import DEFAULT_ACCOUNT_ID as ACCOUNT_ID
 from moto.core.types import Base64EncodedString
-from tests import EXAMPLE_AMI_ID
+from tests import EXAMPLE_AMI_ID, allow_aws_request
 from tests.test_ec2 import ec2_aws_verified
 
 from .helpers import assert_dryrun_error
@@ -2491,27 +2491,120 @@ def test_create_instance_with_launch_template_id_produces_no_warning(
     assert all("Could not find AMI" not in msg for msg in messages)
 
 
-@mock_aws
-def test_create_instance_from_launch_template__process_tags():
-    client = boto3.client("ec2", region_name="us-west-1")
+@ec2_aws_verified()
+@pytest.mark.aws_verified
+@pytest.mark.parametrize(
+    ["create_version_2", "change_default", "explicit_version", "expected_version"],
+    [
+        pytest.param(False, False, None, "1", id="default-v1-only"),
+        pytest.param(True, False, None, "1", id="default-v1-with-v2-exists"),
+        pytest.param(True, True, None, "2", id="default-changed-to-v2"),
+        pytest.param(True, False, "1", "1", id="explicit-v1"),
+        pytest.param(True, False, "2", "2", id="explicit-v2"),
+        pytest.param(False, False, "$Latest", "1", id="dollar-latest-v1-only"),
+        pytest.param(True, False, "$Latest", "2", id="dollar-latest-with-v2"),
+        pytest.param(False, False, "$Default", "1", id="dollar-default-v1"),
+        pytest.param(
+            True, False, "$Default", "1", id="dollar-default-v1-with-v2-exists"
+        ),
+        pytest.param(True, True, "$Default", "2", id="dollar-default-v2-after-change"),
+    ],
+)
+def test_create_instance_from_launch_template__aws_managed_tags(
+    create_version_2,
+    change_default,
+    explicit_version,
+    expected_version,
+    ec2_client=None,
+):
+    """Test that AWS-managed launch template tags are added and version resolution works correctly.
 
-    template = client.create_launch_template(
-        LaunchTemplateName=str(uuid4()),
+    This test verifies:
+    1. AWS-managed tags (aws:ec2launchtemplate:id and aws:ec2launchtemplate:version) are added
+    2. Default version (not latest) is used when no version is specified
+    3. Numeric versions (1, 2) work correctly
+    4. Special version identifiers ($Latest, $Default) work correctly
+    """
+    if allow_aws_request():
+        # Running against real AWS - get latest Amazon Linux AMI
+        ssm_client = boto3.client("ssm", region_name=ec2_client.meta.region_name)
+        kernel_61 = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-x86_64"
+        ami_id = ssm_client.get_parameter(Name=kernel_61)["Parameter"]["Value"]
+    else:
+        # Running in mock mode - use test AMI
+        ami_id = EXAMPLE_AMI_ID
+
+    template_name = str(uuid4())
+    template = ec2_client.create_launch_template(
+        LaunchTemplateName=template_name,
         LaunchTemplateData={
-            "ImageId": EXAMPLE_AMI_ID,
+            "ImageId": ami_id,
             "TagSpecifications": [
-                {"ResourceType": "instance", "Tags": [{"Key": "k", "Value": "v"}]}
+                {"ResourceType": "instance", "Tags": [{"Key": "k", "Value": "v1"}]}
             ],
         },
     )["LaunchTemplate"]
+    template_id = template["LaunchTemplateId"]
 
-    instance = client.run_instances(
-        MinCount=1,
-        MaxCount=1,
-        LaunchTemplate={"LaunchTemplateId": template["LaunchTemplateId"]},
-    )["Instances"][0]
+    try:
+        # Optionally create version 2
+        if create_version_2:
+            ec2_client.create_launch_template_version(
+                LaunchTemplateId=template_id,
+                LaunchTemplateData={
+                    "ImageId": ami_id,
+                    "TagSpecifications": [
+                        {
+                            "ResourceType": "instance",
+                            "Tags": [{"Key": "k", "Value": "v2"}],
+                        }
+                    ],
+                },
+            )
 
-    assert instance["Tags"] == [{"Key": "k", "Value": "v"}]
+        # Optionally change default version to 2
+        if change_default:
+            ec2_client.modify_launch_template(
+                LaunchTemplateId=template_id,
+                DefaultVersion="2",
+            )
+
+        # Build launch template specification
+        launch_template_spec = {"LaunchTemplateId": template_id}
+        if explicit_version:
+            launch_template_spec["Version"] = explicit_version
+
+        # Run instance
+        instance = ec2_client.run_instances(
+            MinCount=1,
+            MaxCount=1,
+            LaunchTemplate=launch_template_spec,
+        )["Instances"][0]
+        instance_id = instance["InstanceId"]
+
+        try:
+            # Verify AWS-managed tags are present
+            tags = {tag["Key"]: tag["Value"] for tag in instance["Tags"]}
+            assert tags["aws:ec2launchtemplate:id"] == template_id, (
+                f"Expected template ID {template_id}, got {tags.get('aws:ec2launchtemplate:id')}"
+            )
+            assert tags["aws:ec2launchtemplate:version"] == expected_version, (
+                f"Expected version {expected_version}, got {tags.get('aws:ec2launchtemplate:version')}"
+            )
+
+            # Verify user tags from the correct version
+            expected_tag_value = f"v{expected_version}"
+            assert tags["k"] == expected_tag_value, (
+                f"Expected tag value {expected_tag_value}, got {tags.get('k')}"
+            )
+
+        finally:
+            # Clean up instance
+            ec2_client.terminate_instances(InstanceIds=[instance_id])
+
+    finally:
+        # Clean up launch template
+        ec2_client.delete_launch_template(LaunchTemplateId=template_id)
 
 
 @mock_aws
