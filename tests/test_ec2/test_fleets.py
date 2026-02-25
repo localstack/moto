@@ -912,45 +912,43 @@ def test_user_data():
 @pytest.mark.aws_verified
 @ec2_aws_verified()
 @pytest.mark.parametrize("version_specified", ["$Latest", "$Default"])
-def test_version_resolves_to_actual_version_number(version_specified, ec2_client=None):
+def test_version_resolves_to_actual_version_number(
+    version_specified, cleanups, ec2_client=None
+):
     """Test that $Latest or $Default in a fleet LaunchTemplateSpecification resolves to the actual version number"""
     with launch_template_context() as ctxt:
-        fleet_id = None
-        instance_ids = []
-        try:
-            fleet_response = ctxt.ec2.create_fleet(
-                LaunchTemplateConfigs=[
-                    {
-                        "LaunchTemplateSpecification": {
-                            "LaunchTemplateId": ctxt.lt_id,
-                            "Version": version_specified,
-                        },
-                        "Overrides": [{"InstanceType": "t3.micro"}],
-                    }
-                ],
-                TargetCapacitySpecification={
-                    "TotalTargetCapacity": 1,
-                    "OnDemandTargetCapacity": 1,
-                    "SpotTargetCapacity": 0,
-                    "DefaultTargetCapacityType": "on-demand",
-                },
-                OnDemandOptions={"AllocationStrategy": "lowest-price"},
-                Type="instant",
-            )
-            fleet_id = fleet_response["FleetId"]
-            instances = fleet_response["Instances"]
-            instance_ids = [i for inst in instances for i in inst["InstanceIds"]]
+        fleet_response = ctxt.ec2.create_fleet(
+            LaunchTemplateConfigs=[
+                {
+                    "LaunchTemplateSpecification": {
+                        "LaunchTemplateId": ctxt.lt_id,
+                        "Version": version_specified,
+                    },
+                    "Overrides": [{"InstanceType": "t3.micro"}],
+                }
+            ],
+            TargetCapacitySpecification={
+                "TotalTargetCapacity": 1,
+                "OnDemandTargetCapacity": 1,
+                "SpotTargetCapacity": 0,
+                "DefaultTargetCapacityType": "on-demand",
+            },
+            OnDemandOptions={"AllocationStrategy": "lowest-price"},
+            Type="instant",
+        )
+        fleet_id = fleet_response["FleetId"]
+        cleanups.append(
+            lambda: ctxt.ec2.delete_fleets(FleetIds=[fleet_id], TerminateInstances=True)
+        )
+        instances = fleet_response["Instances"]
+        instance_ids = [i for inst in instances for i in inst["InstanceIds"]]
+        cleanups.append(lambda: ctxt.ec2.terminate_instances(InstanceIds=instance_ids))
 
-            for instance in instances:
-                lt_spec_response = instance["LaunchTemplateAndOverrides"][
-                    "LaunchTemplateSpecification"
-                ]
-                assert lt_spec_response["Version"] == "1"
-        finally:
-            if fleet_id:
-                ctxt.ec2.delete_fleets(FleetIds=[fleet_id], TerminateInstances=False)
-            if instance_ids:
-                ctxt.ec2.terminate_instances(InstanceIds=instance_ids)
+        for instance in instances:
+            lt_spec_response = instance["LaunchTemplateAndOverrides"][
+                "LaunchTemplateSpecification"
+            ]
+            assert lt_spec_response["Version"] == "1"
 
 
 @ec2_aws_verified()
@@ -983,85 +981,80 @@ def test_create_instant_fleet_with_launch_template_overrides(
     overrides,
     on_demand_count,
     spot_count,
+    cleanups,
     ec2_client=None,
 ):
     """Test that LaunchTemplateAndOverrides is included in instant fleet responses"""
     expected_instance_types = {o["InstanceType"] for o in overrides}
 
     with launch_template_context(region=ec2_client.meta.region_name) as ctxt:
-        fleet_id = None
-        instance_ids = []
+        if use_template_name:
+            lt_spec = {"LaunchTemplateName": ctxt.lt_name, "Version": "$Latest"}
+        else:
+            lt_spec = {"LaunchTemplateId": ctxt.lt_id, "Version": "$Latest"}
 
-        try:
-            if use_template_name:
-                lt_spec = {"LaunchTemplateName": ctxt.lt_name, "Version": "$Latest"}
-            else:
-                lt_spec = {"LaunchTemplateId": ctxt.lt_id, "Version": "$Latest"}
-
-            total_capacity = on_demand_count + spot_count
-            fleet_request = {
-                "LaunchTemplateConfigs": [
-                    {
-                        "LaunchTemplateSpecification": lt_spec,
-                        "Overrides": overrides,
-                    }
-                ],
-                "TargetCapacitySpecification": {
-                    "TotalTargetCapacity": total_capacity,
-                    "OnDemandTargetCapacity": on_demand_count,
-                    "SpotTargetCapacity": spot_count,
-                    "DefaultTargetCapacityType": "on-demand"
-                    if on_demand_count > 0
-                    else "spot",
-                },
-                "Type": "instant",
-            }
-
-            if on_demand_count > 0:
-                fleet_request["OnDemandOptions"] = {
-                    "AllocationStrategy": "lowest-price"
+        total_capacity = on_demand_count + spot_count
+        fleet_request = {
+            "LaunchTemplateConfigs": [
+                {
+                    "LaunchTemplateSpecification": lt_spec,
+                    "Overrides": overrides,
                 }
-            if spot_count > 0:
-                fleet_request["SpotOptions"] = {"AllocationStrategy": "lowest-price"}
+            ],
+            "TargetCapacitySpecification": {
+                "TotalTargetCapacity": total_capacity,
+                "OnDemandTargetCapacity": on_demand_count,
+                "SpotTargetCapacity": spot_count,
+                "DefaultTargetCapacityType": "on-demand"
+                if on_demand_count > 0
+                else "spot",
+            },
+            "Type": "instant",
+        }
 
-            fleet_response = ctxt.ec2.create_fleet(**fleet_request)
+        if on_demand_count > 0:
+            fleet_request["OnDemandOptions"] = {"AllocationStrategy": "lowest-price"}
+        if spot_count > 0:
+            fleet_request["SpotOptions"] = {"AllocationStrategy": "lowest-price"}
 
-            # Verify response structure
-            assert "FleetId" in fleet_response
-            assert "Instances" in fleet_response
-            fleet_id = fleet_response["FleetId"]
+        fleet_response = ctxt.ec2.create_fleet(**fleet_request)
 
-            instances = fleet_response["Instances"]
-            # AWS groups instances with same config, moto returns them separately
-            # Count total instance IDs across all items
-            total_instance_ids = []
-            for inst in instances:
-                total_instance_ids.extend(inst["InstanceIds"])
-            assert len(total_instance_ids) == total_capacity
+        # Verify response structure
+        assert "FleetId" in fleet_response
+        fleet_id = fleet_response["FleetId"]
+        cleanups.append(
+            lambda: ctxt.ec2.delete_fleets(FleetIds=[fleet_id], TerminateInstances=True)
+        )
 
-            instance_ids.extend(total_instance_ids)
+        assert "Instances" in fleet_response
 
-            # Verify lifecycles if mixed
-            if on_demand_count > 0 and spot_count > 0:
-                lifecycles = {instance["Lifecycle"] for instance in instances}
-                assert "on-demand" in lifecycles
-                assert "spot" in lifecycles
+        instances = fleet_response["Instances"]
+        # AWS groups instances with same config, moto returns them separately
+        # Count total instance IDs across all items
+        total_instance_ids = []
+        for inst in instances:
+            total_instance_ids.extend(inst["InstanceIds"])
+        assert len(total_instance_ids) == total_capacity
 
-            for instance in instances:
-                assert "LaunchTemplateAndOverrides" in instance
+        cleanups.append(
+            lambda: ctxt.ec2.terminate_instances(InstanceIds=total_instance_ids)
+        )
 
-                lt_and_overrides = instance["LaunchTemplateAndOverrides"]
-                assert "LaunchTemplateSpecification" in lt_and_overrides
+        # Verify lifecycles if mixed
+        if on_demand_count > 0 and spot_count > 0:
+            lifecycles = {instance["Lifecycle"] for instance in instances}
+            assert "on-demand" in lifecycles
+            assert "spot" in lifecycles
 
-                lt_spec_response = lt_and_overrides["LaunchTemplateSpecification"]
-                assert lt_spec_response["LaunchTemplateId"] == ctxt.lt_id
+        for instance in instances:
+            assert "LaunchTemplateAndOverrides" in instance
 
-                assert "Overrides" in lt_and_overrides
-                overrides_response = lt_and_overrides["Overrides"]
-                assert overrides_response["InstanceType"] in expected_instance_types
+            lt_and_overrides = instance["LaunchTemplateAndOverrides"]
+            assert "LaunchTemplateSpecification" in lt_and_overrides
 
-        finally:
-            if fleet_id:
-                ctxt.ec2.delete_fleets(FleetIds=[fleet_id], TerminateInstances=False)
-            if instance_ids:
-                ctxt.ec2.terminate_instances(InstanceIds=instance_ids)
+            lt_spec_response = lt_and_overrides["LaunchTemplateSpecification"]
+            assert lt_spec_response["LaunchTemplateId"] == ctxt.lt_id
+
+            assert "Overrides" in lt_and_overrides
+            overrides_response = lt_and_overrides["Overrides"]
+            assert overrides_response["InstanceType"] in expected_instance_types
