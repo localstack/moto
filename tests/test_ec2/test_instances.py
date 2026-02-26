@@ -3173,35 +3173,33 @@ def _run_instance_from_template(ec2_client, template_id, version=None):
 
 @ec2_aws_verified()
 @pytest.mark.aws_verified
-def test_create_instance_from_launch_template_single_template_version(ec2_client=None):
+def test_create_instance_from_launch_template_single_template_version(
+    cleanups, ec2_client=None
+):
     template = _create_default_launch_template(ec2_client)
     template_id = template["LaunchTemplateId"]
 
     instance = _run_instance_from_template(ec2_client, template_id)
     instance_id = instance["InstanceId"]
 
-    try:
-        try:
-            _verify_instance_tags(
-                instance,
-                expected_template_id=template_id,
-                expected_template_version="1",
-                expected_user_tags={"k": "v1"},
-            )
-        finally:
-            # Clean up instance
-            ec2_client.terminate_instances(InstanceIds=[instance_id])
+    cleanups.append(lambda: ec2_client.terminate_instances(InstanceIds=[instance_id]))
+    cleanups.append(
+        lambda: ec2_client.delete_launch_template(LaunchTemplateId=template_id)
+    )
 
-    finally:
-        # Clean up launch template
-        ec2_client.delete_launch_template(LaunchTemplateId=template_id)
+    _verify_instance_tags(
+        instance,
+        expected_template_id=template_id,
+        expected_template_version="1",
+        expected_user_tags={"k": "v1"},
+    )
 
 
 @ec2_aws_verified()
 @pytest.mark.aws_verified
 @pytest.mark.parametrize("version_specified", ["2", "$Latest"])
 def test_create_instance_from_launch_template_latest_non_default_version(
-    version_specified, ec2_client=None
+    version_specified, cleanups, ec2_client=None
 ):
     ec2_client = boto3.client("ec2", region_name="us-east-1")
     ami_id = _get_ami_id(ec2_client)
@@ -3225,29 +3223,24 @@ def test_create_instance_from_launch_template_latest_non_default_version(
     )
     instance_id = instance["InstanceId"]
 
-    try:
-        try:
-            _verify_instance_tags(
-                instance,
-                expected_template_id=template_id,
-                expected_template_version="2",
-                expected_user_tags={"k": "v2"},
-            )
+    cleanups.append(lambda: ec2_client.terminate_instances(InstanceIds=[instance_id]))
+    cleanups.append(
+        lambda: ec2_client.delete_launch_template(LaunchTemplateId=template_id)
+    )
 
-        finally:
-            # Clean up instance
-            ec2_client.terminate_instances(InstanceIds=[instance_id])
-
-    finally:
-        # Clean up launch template
-        ec2_client.delete_launch_template(LaunchTemplateId=template_id)
+    _verify_instance_tags(
+        instance,
+        expected_template_id=template_id,
+        expected_template_version="2",
+        expected_user_tags={"k": "v2"},
+    )
 
 
 @ec2_aws_verified()
 @pytest.mark.aws_verified
 @pytest.mark.parametrize("version_specified", ["1", "$Default"])
 def test_create_instance_from_launch_template_default_version(
-    version_specified, ec2_client=None
+    version_specified, cleanups, ec2_client=None
 ):
     ec2_client = boto3.client("ec2", region_name="us-east-1")
     ami_id = _get_ami_id(ec2_client)
@@ -3271,28 +3264,24 @@ def test_create_instance_from_launch_template_default_version(
     )
     instance_id = instance["InstanceId"]
 
-    try:
-        try:
-            _verify_instance_tags(
-                instance,
-                expected_template_id=template_id,
-                expected_template_version="1",
-                expected_user_tags={"k": "v1"},
-            )
-        finally:
-            # Clean up instance
-            ec2_client.terminate_instances(InstanceIds=[instance_id])
+    cleanups.append(lambda: ec2_client.terminate_instances(InstanceIds=[instance_id]))
+    cleanups.append(
+        lambda: ec2_client.delete_launch_template(LaunchTemplateId=template_id)
+    )
 
-    finally:
-        # Clean up launch template
-        ec2_client.delete_launch_template(LaunchTemplateId=template_id)
+    _verify_instance_tags(
+        instance,
+        expected_template_id=template_id,
+        expected_template_version="1",
+        expected_user_tags={"k": "v1"},
+    )
 
 
 @ec2_aws_verified()
 @pytest.mark.aws_verified
 @pytest.mark.parametrize("version_specified", ["2", "$Latest", "$Default"])
 def test_create_instance_from_launch_template_latest_and_default_version(
-    version_specified, ec2_client=None
+    version_specified, cleanups, ec2_client=None
 ):
     ec2_client = boto3.client("ec2", region_name="us-east-1")
     ami_id = _get_ami_id(ec2_client)
@@ -3319,18 +3308,14 @@ def test_create_instance_from_launch_template_latest_and_default_version(
     )
     instance_id = instance["InstanceId"]
 
-    try:
-        try:
-            _verify_instance_tags(
-                instance,
-                expected_template_id=template_id,
-                expected_template_version="2",
-                expected_user_tags={"k": "v2"},
-            )
-        finally:
-            # Clean up instance
-            ec2_client.terminate_instances(InstanceIds=[instance_id])
+    cleanups.append(lambda: ec2_client.terminate_instances(InstanceIds=[instance_id]))
+    cleanups.append(
+        lambda: ec2_client.delete_launch_template(LaunchTemplateId=template_id)
+    )
 
-    finally:
-        # Clean up launch template
-        ec2_client.delete_launch_template(LaunchTemplateId=template_id)
+    _verify_instance_tags(
+        instance,
+        expected_template_id=template_id,
+        expected_template_version="2",
+        expected_user_tags={"k": "v2"},
+    )
