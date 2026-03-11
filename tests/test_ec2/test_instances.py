@@ -3436,7 +3436,6 @@ class TestCreateInstanceFromLaunchTemplate:
     def test_create_instance_from_launch_template_latest_non_default_version(
         self, valid_ami, version_specified, cleanups, ec2_client=None
     ):
-        ec2_client = boto3.client("ec2", region_name="us-east-1")
         template = self._create_default_launch_template(ec2_client)
         template_id = template["LaunchTemplateId"]
 
@@ -3476,7 +3475,6 @@ class TestCreateInstanceFromLaunchTemplate:
     def test_create_instance_from_launch_template_default_version(
         self, version_specified, valid_ami, cleanups, ec2_client=None
     ):
-        ec2_client = boto3.client("ec2", region_name="us-east-1")
         template = self._create_default_launch_template(ec2_client)
         template_id = template["LaunchTemplateId"]
 
@@ -3516,7 +3514,6 @@ class TestCreateInstanceFromLaunchTemplate:
     def test_create_instance_from_launch_template_latest_and_default_version(
         self, version_specified, valid_ami, cleanups, ec2_client=None
     ):
-        ec2_client = boto3.client("ec2", region_name="us-east-1")
         template = self._create_default_launch_template(ec2_client)
         template_id = template["LaunchTemplateId"]
 

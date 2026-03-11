@@ -773,8 +773,8 @@ class InstanceBackend:
         The KeyPair-parameter can be validated, to see if it is a known key-pair.
         Enable this validation by setting the environment variable `MOTO_ENABLE_KEYPAIR_VALIDATION=true`
         """
-        if kwargs.get("launch_template"):
-            tmpl = self._get_template_from_args(kwargs["launch_template"]).data
+        if launch_template := kwargs.get("launch_template"):
+            tmpl = self._get_template_from_args(launch_template).data
 
             if user_data is None and (template_user_data := tmpl.get("UserData")):
                 user_data = template_user_data
