@@ -892,6 +892,7 @@ def test_associate_subnet_cidr_block():
     assert len(association_set) == 1
     assert association_set[0]["AssociationId"] == association["AssociationId"]
     assert association_set[0]["Ipv6CidrBlock"] == "1080::1:200C:417A/112"
+    assert association_set[0]["Ipv6CidrBlockState"] == {"State": "associated"}
 
 
 @mock_aws
