@@ -8,7 +8,11 @@ from botocore.exceptions import ClientError
 
 from moto import mock_aws, settings
 from tests import DEFAULT_ACCOUNT_ID, EXAMPLE_AMI_ID
-from tests.test_ec2 import ec2_aws_verified, wait_for_ipv6_cidr_block_associations, wait_for_subnet_ipv6_cidr_block_associations
+from tests.test_ec2 import (
+    ec2_aws_verified,
+    wait_for_ipv6_cidr_block_associations,
+    wait_for_subnet_ipv6_cidr_block_associations,
+)
 
 from .helpers import assert_dryrun_error
 
@@ -1004,7 +1008,9 @@ def test_create_ipv6native_subnet(account_id, ec2_client=None, vpc_id=None):
             subnet["Ipv6CidrBlockAssociationSet"][0]["Ipv6CidrBlock"]
             == assoc["Ipv6CidrBlock"]
         )
-        subnet_associated=wait_for_subnet_ipv6_cidr_block_associations(ec2_client, subnet["SubnetId"])
+        subnet_associated = wait_for_subnet_ipv6_cidr_block_associations(
+            ec2_client, subnet["SubnetId"]
+        )
         assert subnet_associated["Ipv6CidrBlockState"] == {"State": "associated"}
     finally:
         if subnet:
