@@ -636,7 +636,7 @@ class SubnetBackend:
         raise InvalidSubnetIdError(subnet_id)
 
     def modify_subnet_attribute(
-        self, subnet_id: str, attr_name: str, attr_value: str | bool
+        self, subnet_id: str, attr_name: str, attr_value: bool
     ) -> None:
         subnet = self.get_subnet(subnet_id)
         if attr_name in ("map_public_ip_on_launch", "assign_ipv6_address_on_creation"):
