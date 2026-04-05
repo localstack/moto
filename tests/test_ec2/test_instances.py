@@ -3124,6 +3124,14 @@ def test_block_device_status_conversion():
     assert Instance.get_block_device_status("deleting") == "deleting"
 
 
+def _schedule_terminate_and_wait(ec2_client, instance_id, cleanups):
+    def _terminate():
+        ec2_client.terminate_instances(InstanceIds=[instance_id])
+        ec2_client.get_waiter("instance_terminated").wait(InstanceIds=[instance_id])
+
+    cleanups.append(_terminate)
+
+
 @ec2_aws_verified()
 @pytest.mark.aws_verified
 def test_run_instances__security_groups_from_request_network_interfaces(
@@ -3155,12 +3163,7 @@ def test_run_instances__security_groups_from_request_network_interfaces(
         ],
     )["Instances"][0]
     instance_id = instance["InstanceId"]
-
-    def terminate_and_wait():
-        ec2_client.terminate_instances(InstanceIds=[instance_id])
-        ec2_client.get_waiter("instance_terminated").wait(InstanceIds=[instance_id])
-
-    cleanups.append(terminate_and_wait)
+    _schedule_terminate_and_wait(ec2_client, instance_id, cleanups)
 
     sg_ids = [g["GroupId"] for g in instance["SecurityGroups"]]
     assert sg_id in sg_ids
@@ -3441,12 +3444,7 @@ class TestCreateInstanceFromLaunchTemplate:
             ec2_client, template_name=lt_name, ImageId=valid_ami, SubnetId=subnet_id
         )
         instance_id = instance["InstanceId"]
-
-        def terminate_and_wait():
-            ec2_client.terminate_instances(InstanceIds=[instance_id])
-            ec2_client.get_waiter("instance_terminated").wait(InstanceIds=[instance_id])
-
-        cleanups.append(terminate_and_wait)
+        _schedule_terminate_and_wait(ec2_client, instance_id, cleanups)
 
         instance_sg_ids = [g["GroupId"] for g in instance["SecurityGroups"]]
         assert sg_id in instance_sg_ids
@@ -3510,12 +3508,7 @@ class TestCreateInstanceFromLaunchTemplate:
             ec2_client, template_name=lt_name, ImageId=valid_ami
         )
         instance_id = instance["InstanceId"]
-
-        def terminate_and_wait():
-            ec2_client.terminate_instances(InstanceIds=[instance_id])
-            ec2_client.get_waiter("instance_terminated").wait(InstanceIds=[instance_id])
-
-        cleanups.append(terminate_and_wait)
+        _schedule_terminate_and_wait(ec2_client, instance_id, cleanups)
 
         sg_ids = [g["GroupId"] for g in instance["SecurityGroups"]]
         assert sg_id in sg_ids
