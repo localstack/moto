@@ -103,7 +103,16 @@ class Fleet(TaggedEC2Resource):
                 self.launch_specs.append(
                     SpotFleetLaunchSpec(
                         ebs_optimized=spec.get("EbsOptimized"),
-                        group_set=spec.get("GroupSet", []),
+                        group_set=(
+                            spec.get("SecurityGroupIds")
+                            or spec.get("SecurityGroups")
+                            or [
+                                g
+                                for nic in (spec.get("NetworkInterfaces") or [])
+                                for g in (nic.get("Groups") or [])
+                            ]
+                            or []
+                        ),
                         iam_instance_profile=spec.get("IamInstanceProfile"),
                         image_id=spec["ImageId"],
                         instance_type=spec["InstanceType"],
