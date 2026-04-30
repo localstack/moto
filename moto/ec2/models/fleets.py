@@ -73,18 +73,17 @@ class Fleet(TaggedEC2Resource):
             else:
                 continue
 
-            # Resolve $Latest or $Default to actual version number
-            resolved_launch_spec = launch_spec.copy()
-            if resolved_launch_spec.get("Version") == "$Latest":
-                resolved_launch_spec["Version"] = str(
-                    launch_template.latest_version_number
-                )
-            elif resolved_launch_spec.get("Version") == "$Default":
-                resolved_launch_spec["Version"] = str(
-                    launch_template.default_version_number
-                )
-            # Always include the template ID in response (AWS does this even when name is used)
-            resolved_launch_spec["LaunchTemplateId"] = launch_template.id
+            # Resolve $Latest, $Default, or missing version to actual version number
+            resolved_version = launch_spec.get("Version", "$default")
+            if resolved_version == "$Default":
+                resolved_version = str(launch_template.default_version_number)
+            elif resolved_version == "$Latest":
+                resolved_version = str(launch_template.latest_version_number)
+
+            resolved_launch_spec = {
+                "LaunchTemplateId": launch_template.id,
+                "Version": resolved_version,
+            }
 
             template_version = resolved_launch_spec.get(
                 "Version", launch_template.default_version_number
