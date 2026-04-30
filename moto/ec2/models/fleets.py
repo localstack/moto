@@ -210,11 +210,9 @@ class Fleet(TaggedEC2Resource):
         # Add launch template and overrides if available
         if launch_spec and launch_spec.launch_template_spec:
             launch_template_and_overrides = {
-                "LaunchTemplateSpecification": launch_spec.launch_template_spec
+                "LaunchTemplateSpecification": launch_spec.launch_template_spec,
+                "Overrides": launch_spec.overrides,
             }
-            if launch_spec.overrides:
-                launch_template_and_overrides["Overrides"] = launch_spec.overrides
-
             instance_data["LaunchTemplateAndOverrides"] = launch_template_and_overrides
 
         return instance_data
