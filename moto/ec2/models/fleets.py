@@ -98,7 +98,17 @@ class Fleet(TaggedEC2Resource):
 
                 tag_spec_set = spec.get("TagSpecifications", [])
                 tags = convert_tag_spec(tag_spec_set)
-                tags["instance"] = tags.get("instance", {}) | instance_tags
+                # AWS automatically adds these system tags to all instances launched via a fleet
+                system_tags = {
+                    "aws:ec2:fleet-id": self.id,
+                    "aws:ec2launchtemplate:id": resolved_launch_spec[
+                        "LaunchTemplateId"
+                    ],
+                    "aws:ec2launchtemplate:version": resolved_launch_spec["Version"],
+                }
+                tags["instance"] = (
+                    system_tags | tags.get("instance", {}) | instance_tags
+                )
 
                 self.launch_specs.append(
                     SpotFleetLaunchSpec(
