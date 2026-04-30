@@ -833,18 +833,25 @@ def test_create_fleet_api():
     assert fleet_res["FleetId"].startswith("fleet-") is True
 
     assert "Instances" in fleet_res
-    assert len(fleet_res["Instances"]) == 3
 
-    instance_ids = [i["InstanceIds"] for i in fleet_res["Instances"]]
-    for instance_id in instance_ids:
-        assert instance_id[0].startswith("i-") is True
+    instances = fleet_res["Instances"]
 
-    instance_types = [i["InstanceType"] for i in fleet_res["Instances"]]
-    assert instance_types == ["t2.micro", "t2.micro", "t2.micro"]
+    # AWS groups instances with the same config (lifecycle/template) into one entry;
+    # with 1 on-demand + 2 spot we expect 2 groups
+    assert len(instances) == 2
 
-    lifecycle = [i["Lifecycle"] for i in fleet_res["Instances"]]
-    assert "spot" in lifecycle
-    assert "on-demand" in lifecycle
+    # Total instance IDs across all groups should equal the requested capacity
+    all_instance_ids = [iid for i in instances for iid in i["InstanceIds"]]
+    assert len(all_instance_ids) == 3
+    for instance_id in all_instance_ids:
+        assert instance_id.startswith("i-") is True
+
+    all_instance_types = {i["InstanceType"] for i in instances}
+    assert all_instance_types == {"t2.micro"}
+
+    lifecycles = {i["Lifecycle"] for i in instances}
+    assert "spot" in lifecycles
+    assert "on-demand" in lifecycles
 
 
 @mock_aws

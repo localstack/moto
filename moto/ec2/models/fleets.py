@@ -171,31 +171,31 @@ class Fleet(TaggedEC2Resource):
         """
         Return instances for instant fleets, None for other fleet types.
         This is part of the CreateFleet response for instant fleets only.
+        AWS groups instances that share the same launch spec and lifecycle into
+        a single entry with aggregated InstanceIds.
         """
         if self.fleet_type != "instant":
             return None
 
-        instances = []
+        # Flatten all launched instances into (lifecycle, launch_spec, instance) tuples.
+        # SpotFleetLaunchSpec is hashable and compares by content, so identical configs
+        # collapse into one group entry, matching AWS behaviour.
+        all_items: list[tuple[str, Optional[SpotFleetLaunchSpec], Any]] = [
+            ("on-demand", item.get("launch_spec"), item["instance"])
+            for item in self.on_demand_instances
+        ] + [("spot", req.launch_spec, req.instance) for req in self.spot_requests]
 
-        # Process on-demand instances
-        for item in self.on_demand_instances:
-            instance_data = self._build_instance_data(
-                instance=item["instance"],
-                lifecycle="on-demand",
-                launch_spec=item.get("launch_spec"),
-            )
-            instances.append(instance_data)
+        groups: dict[tuple[str, Optional[SpotFleetLaunchSpec]], dict[str, Any]] = {}
+        for lifecycle, launch_spec, instance in all_items:
+            key = (lifecycle, launch_spec)
+            if key not in groups:
+                groups[key] = self._build_instance_data(
+                    instance, lifecycle, launch_spec
+                )
+            else:
+                groups[key]["InstanceIds"].append(instance.id)
 
-        # Process spot instances
-        for spot_request in self.spot_requests:
-            instance_data = self._build_instance_data(
-                instance=spot_request.instance,
-                lifecycle="spot",
-                launch_spec=spot_request.launch_spec,
-            )
-            instances.append(instance_data)
-
-        return instances
+        return list(groups.values())
 
     @staticmethod
     def _build_instance_data(
