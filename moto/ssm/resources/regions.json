@@ -4341,6 +4341,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "inspector-scan": {
+                "Value": "inspector-scan",
+                "endpoint": {
+                  "Value": "inspector-scan.ap-east-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "inspector2": {
                 "Value": "inspector2",
                 "endpoint": {
@@ -11625,6 +11634,12 @@
                 },
                 "protocols": {
                   "Value": "HTTPS"
+                }
+              },
+              "pcs": {
+                "Value": "pcs",
+                "endpoint": {
+                  "Value": "pcs.ap-northeast-3.amazonaws.com"
                 }
               },
               "pi": {
@@ -25392,6 +25407,15 @@
                   "Value": "HTTPS, HTTP"
                 }
               },
+              "codebuild": {
+                "Value": "codebuild",
+                "endpoint": {
+                  "Value": "codebuild.ap-southeast-5.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "codepipeline": {
                 "Value": "codepipeline",
                 "endpoint": {
@@ -26015,6 +26039,15 @@
               },
               "marketplace": {
                 "Value": "marketplace"
+              },
+              "mcs": {
+                "Value": "mcs",
+                "endpoint": {
+                  "Value": "cassandra.ap-southeast-5.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS, TLS"
+                }
               },
               "mediaconnect": {
                 "Value": "mediaconnect",
@@ -26879,6 +26912,15 @@
                 },
                 "protocols": {
                   "Value": "HTTPS, HTTP"
+                }
+              },
+              "codebuild": {
+                "Value": "codebuild",
+                "endpoint": {
+                  "Value": "codebuild.ap-southeast-6.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
                 }
               },
               "cognito-identity": {
@@ -28112,6 +28154,15 @@
                   "Value": "HTTPS, HTTP"
                 }
               },
+              "codebuild": {
+                "Value": "codebuild",
+                "endpoint": {
+                  "Value": "codebuild.ap-southeast-7.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "cognito-identity": {
                 "Value": "cognito-identity",
                 "endpoint": {
@@ -28634,6 +28685,15 @@
               "marketplace": {
                 "Value": "marketplace"
               },
+              "mcs": {
+                "Value": "mcs",
+                "endpoint": {
+                  "Value": "cassandra.ap-southeast-7.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS, TLS"
+                }
+              },
               "mgn": {
                 "Value": "mgn",
                 "endpoint": {
@@ -28743,6 +28803,15 @@
                 "Value": "pi",
                 "endpoint": {
                   "Value": "pi.ap-southeast-7.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "polly": {
+                "Value": "polly",
+                "endpoint": {
+                  "Value": "polly.ap-southeast-7.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -54346,6 +54415,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "apigatewayv2": {
+                "Value": "apigatewayv2",
+                "endpoint": {
+                  "Value": "apigateway.eusc-de-east-1.amazonaws.eu"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "appconfig": {
                 "Value": "appconfig",
                 "endpoint": {
@@ -54497,6 +54575,15 @@
                 },
                 "protocols": {
                   "Value": "HTTPS, HTTP"
+                }
+              },
+              "codedeploy": {
+                "Value": "codedeploy",
+                "endpoint": {
+                  "Value": "codedeploy.eusc-de-east-1.amazonaws.eu"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
                 }
               },
               "cognito-identity": {
@@ -63264,6 +63351,12 @@
                 "Value": "observabilityadmin",
                 "endpoint": {
                   "Value": "observabilityadmin.sa-east-1.amazonaws.com"
+                }
+              },
+              "odb": {
+                "Value": "odb",
+                "endpoint": {
+                  "Value": "odb.sa-east-1.amazonaws.com"
                 }
               },
               "opensearchserverless": {
