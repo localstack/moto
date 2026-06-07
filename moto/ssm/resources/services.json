@@ -49838,6 +49838,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "eusc-de-east-1": {
+                "Value": "eusc-de-east-1",
+                "endpoint": {
+                  "Value": "mq.eusc-de-east-1.amazonaws.eu"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "il-central-1": {
                 "Value": "il-central-1",
                 "endpoint": {

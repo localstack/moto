@@ -55147,6 +55147,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "mq": {
+                "Value": "mq",
+                "endpoint": {
+                  "Value": "mq.eusc-de-east-1.amazonaws.eu"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "neptune": {
                 "Value": "neptune",
                 "endpoint": {
