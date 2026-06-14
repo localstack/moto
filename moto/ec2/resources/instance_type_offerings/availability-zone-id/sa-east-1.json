@@ -5992,6 +5992,34 @@
   "Location": "sae1-az3"
  },
  {
+  "InstanceType": "c8i-flex.12xlarge",
+  "Location": "sae1-az3"
+ },
+ {
+  "InstanceType": "c8i-flex.16xlarge",
+  "Location": "sae1-az3"
+ },
+ {
+  "InstanceType": "c8i-flex.2xlarge",
+  "Location": "sae1-az3"
+ },
+ {
+  "InstanceType": "c8i-flex.4xlarge",
+  "Location": "sae1-az3"
+ },
+ {
+  "InstanceType": "c8i-flex.8xlarge",
+  "Location": "sae1-az3"
+ },
+ {
+  "InstanceType": "c8i-flex.large",
+  "Location": "sae1-az3"
+ },
+ {
+  "InstanceType": "c8i-flex.xlarge",
+  "Location": "sae1-az3"
+ },
+ {
   "InstanceType": "c8i.12xlarge",
   "Location": "sae1-az3"
  },
