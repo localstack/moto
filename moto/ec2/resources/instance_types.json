@@ -42056,8 +42056,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -42194,8 +42194,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -42602,8 +42602,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -42736,8 +42736,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -42890,8 +42890,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -43189,8 +43189,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -43332,8 +43332,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -44023,8 +44023,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -44697,8 +44697,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45014,8 +45014,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -45142,8 +45142,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45278,8 +45278,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -45430,8 +45430,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -45544,8 +45544,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45668,8 +45668,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45821,8 +45821,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -46275,8 +46275,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -47023,8 +47023,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -47174,8 +47174,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47333,8 +47333,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47652,8 +47652,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47951,8 +47951,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48237,8 +48237,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48385,8 +48385,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48634,6 +48634,1197 @@
    ]
   }
  },
+ "g7.12xlarge": {
+  "AutoRecoverySupported": false,
+  "BareMetal": false,
+  "BurstablePerformanceSupported": false,
+  "CurrentGeneration": true,
+  "DedicatedHostsSupported": true,
+  "EbsInfo": {
+   "AttachmentLimitType": "dedicated",
+   "EbsOptimizedInfo": {
+    "BaselineBandwidthInMbps": 20000,
+    "BaselineIops": 80000,
+    "BaselineThroughputInMBps": 2500.0,
+    "MaximumBandwidthInMbps": 20000,
+    "MaximumIops": 80000,
+    "MaximumThroughputInMBps": 2500.0
+   },
+   "EbsOptimizedSupport": "default",
+   "EncryptionSupport": "supported",
+   "MaximumEbsAttachments": 32,
+   "NvmeSupport": "required"
+  },
+  "FreeTierEligible": false,
+  "GpuInfo": {
+   "Gpus": [
+    {
+     "Count": 2,
+     "GpuPartitionSize": 1.0,
+     "LogicalGpuCount": 2,
+     "Manufacturer": "NVIDIA",
+     "MemoryInfo": {
+      "SizeInMiB": 32768
+     },
+     "Name": "RTX PRO 4500",
+     "Workloads": [
+      "graphics",
+      "ml-ai"
+     ]
+    }
+   ],
+   "TotalGpuMemoryInMiB": 65536
+  },
+  "HibernationSupported": false,
+  "Hypervisor": "nitro",
+  "InstanceStorageInfo": {
+   "Disks": [
+    {
+     "Count": 1,
+     "SizeInGB": 1900,
+     "Type": "ssd"
+    }
+   ],
+   "EncryptionSupport": "required",
+   "NvmeSupport": "required",
+   "TotalSizeInGB": 1900
+  },
+  "InstanceStorageSupported": true,
+  "InstanceType": "g7.12xlarge",
+  "MemoryInfo": {
+   "SizeInMiB": 196608
+  },
+  "NetworkInfo": {
+   "ConnectionTrackingConfiguration": {
+    "DefaultTcpEstablishedTimeout": 350,
+    "DefaultUdpStreamTimeout": 180,
+    "DefaultUdpTimeout": 30
+   },
+   "DefaultNetworkCardIndex": 0,
+   "EfaInfo": {
+    "MaximumEfaInterfaces": 1
+   },
+   "EfaSupported": true,
+   "EnaSrdSupported": false,
+   "EnaSupport": "required",
+   "EncryptionInTransitSupported": true,
+   "FlexibleEnaQueuesSupport": "supported",
+   "Ipv4AddressesPerInterface": 64,
+   "Ipv4AddressesPerSecondaryInterface": 0,
+   "Ipv6AddressesPerInterface": 64,
+   "Ipv6Supported": true,
+   "MaximumNetworkCards": 1,
+   "MaximumNetworkInterfaces": 12,
+   "NetworkCards": [
+    {
+     "AdditionalFlexibleNetworkInterfaces": 0,
+     "BaselineBandwidthInGbps": 175.0,
+     "DefaultEnaQueueCountPerInterface": 16,
+     "MaximumEnaQueueCount": 192,
+     "MaximumEnaQueueCountPerInterface": 64,
+     "MaximumNetworkInterfaces": 12,
+     "NetworkCardIndex": 0,
+     "NetworkPerformance": "175 Gigabit",
+     "PeakBandwidthInGbps": 175.0
+    }
+   ],
+   "NetworkPerformance": "175 Gigabit",
+   "SecondaryNetworkSupported": false
+  },
+  "NitroEnclavesSupport": "supported",
+  "NitroTpmInfo": {
+   "SupportedVersions": [
+    "2.0"
+   ]
+  },
+  "NitroTpmSupport": "supported",
+  "PhcSupport": "supported",
+  "PlacementGroupInfo": {
+   "SupportedStrategies": [
+    "cluster",
+    "partition",
+    "spread"
+   ]
+  },
+  "ProcessorInfo": {
+   "Manufacturer": "Intel",
+   "SupportedArchitectures": [
+    "x86_64"
+   ],
+   "SustainedClockSpeedInGhz": 3.9
+  },
+  "RebootMigrationSupport": "unsupported",
+  "SupportedBootModes": [
+   "legacy-bios",
+   "uefi"
+  ],
+  "SupportedRootDeviceTypes": [
+   "ebs"
+  ],
+  "SupportedUsageClasses": [
+   "on-demand",
+   "spot"
+  ],
+  "SupportedVirtualizationTypes": [
+   "hvm"
+  ],
+  "VCpuInfo": {
+   "DefaultCores": 48,
+   "DefaultThreadsPerCore": 1,
+   "DefaultVCpus": 48,
+   "ValidCores": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48
+   ],
+   "ValidThreadsPerCore": [
+    1
+   ]
+  }
+ },
+ "g7.24xlarge": {
+  "AutoRecoverySupported": false,
+  "BareMetal": false,
+  "BurstablePerformanceSupported": false,
+  "CurrentGeneration": true,
+  "DedicatedHostsSupported": true,
+  "EbsInfo": {
+   "AttachmentLimitType": "dedicated",
+   "EbsOptimizedInfo": {
+    "BaselineBandwidthInMbps": 40000,
+    "BaselineIops": 160000,
+    "BaselineThroughputInMBps": 5000.0,
+    "MaximumBandwidthInMbps": 40000,
+    "MaximumIops": 160000,
+    "MaximumThroughputInMBps": 5000.0
+   },
+   "EbsOptimizedSupport": "default",
+   "EncryptionSupport": "supported",
+   "MaximumEbsAttachments": 64,
+   "NvmeSupport": "required"
+  },
+  "FreeTierEligible": false,
+  "GpuInfo": {
+   "Gpus": [
+    {
+     "Count": 4,
+     "GpuPartitionSize": 1.0,
+     "LogicalGpuCount": 4,
+     "Manufacturer": "NVIDIA",
+     "MemoryInfo": {
+      "SizeInMiB": 32768
+     },
+     "Name": "RTX PRO 4500",
+     "Workloads": [
+      "ml-ai",
+      "graphics"
+     ]
+    }
+   ],
+   "TotalGpuMemoryInMiB": 131072
+  },
+  "HibernationSupported": false,
+  "Hypervisor": "nitro",
+  "InstanceStorageInfo": {
+   "Disks": [
+    {
+     "Count": 1,
+     "SizeInGB": 3800,
+     "Type": "ssd"
+    }
+   ],
+   "EncryptionSupport": "required",
+   "NvmeSupport": "required",
+   "TotalSizeInGB": 3800
+  },
+  "InstanceStorageSupported": true,
+  "InstanceType": "g7.24xlarge",
+  "MemoryInfo": {
+   "SizeInMiB": 393216
+  },
+  "NetworkInfo": {
+   "ConnectionTrackingConfiguration": {
+    "DefaultTcpEstablishedTimeout": 350,
+    "DefaultUdpStreamTimeout": 180,
+    "DefaultUdpTimeout": 30
+   },
+   "DefaultNetworkCardIndex": 0,
+   "EfaInfo": {
+    "MaximumEfaInterfaces": 1
+   },
+   "EfaSupported": true,
+   "EnaSrdSupported": true,
+   "EnaSupport": "required",
+   "EncryptionInTransitSupported": true,
+   "FlexibleEnaQueuesSupport": "supported",
+   "Ipv4AddressesPerInterface": 64,
+   "Ipv4AddressesPerSecondaryInterface": 0,
+   "Ipv6AddressesPerInterface": 64,
+   "Ipv6Supported": true,
+   "MaximumNetworkCards": 1,
+   "MaximumNetworkInterfaces": 24,
+   "NetworkCards": [
+    {
+     "AdditionalFlexibleNetworkInterfaces": 0,
+     "BaselineBandwidthInGbps": 350.0,
+     "DefaultEnaQueueCountPerInterface": 16,
+     "MaximumEnaQueueCount": 384,
+     "MaximumEnaQueueCountPerInterface": 128,
+     "MaximumNetworkInterfaces": 24,
+     "NetworkCardIndex": 0,
+     "NetworkPerformance": "350 Gigabit",
+     "PeakBandwidthInGbps": 350.0
+    }
+   ],
+   "NetworkPerformance": "350 Gigabit",
+   "SecondaryNetworkSupported": false
+  },
+  "NitroEnclavesSupport": "supported",
+  "NitroTpmInfo": {
+   "SupportedVersions": [
+    "2.0"
+   ]
+  },
+  "NitroTpmSupport": "supported",
+  "PhcSupport": "supported",
+  "PlacementGroupInfo": {
+   "SupportedStrategies": [
+    "cluster",
+    "partition",
+    "spread"
+   ]
+  },
+  "ProcessorInfo": {
+   "Manufacturer": "Intel",
+   "SupportedArchitectures": [
+    "x86_64"
+   ],
+   "SustainedClockSpeedInGhz": 3.9
+  },
+  "RebootMigrationSupport": "unsupported",
+  "SupportedBootModes": [
+   "legacy-bios",
+   "uefi"
+  ],
+  "SupportedRootDeviceTypes": [
+   "ebs"
+  ],
+  "SupportedUsageClasses": [
+   "on-demand",
+   "spot"
+  ],
+  "SupportedVirtualizationTypes": [
+   "hvm"
+  ],
+  "VCpuInfo": {
+   "DefaultCores": 96,
+   "DefaultThreadsPerCore": 1,
+   "DefaultVCpus": 96,
+   "ValidCores": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96
+   ],
+   "ValidThreadsPerCore": [
+    1
+   ]
+  }
+ },
+ "g7.2xlarge": {
+  "AutoRecoverySupported": false,
+  "BareMetal": false,
+  "BurstablePerformanceSupported": false,
+  "CurrentGeneration": true,
+  "DedicatedHostsSupported": false,
+  "EbsInfo": {
+   "AttachmentLimitType": "dedicated",
+   "EbsOptimizedInfo": {
+    "BaselineBandwidthInMbps": 4000,
+    "BaselineIops": 16000,
+    "BaselineThroughputInMBps": 500.0,
+    "MaximumBandwidthInMbps": 8000,
+    "MaximumIops": 32000,
+    "MaximumThroughputInMBps": 1000.0
+   },
+   "EbsOptimizedSupport": "default",
+   "EncryptionSupport": "supported",
+   "MaximumEbsAttachments": 32,
+   "NvmeSupport": "required"
+  },
+  "FreeTierEligible": false,
+  "GpuInfo": {
+   "Gpus": [
+    {
+     "Count": 1,
+     "GpuPartitionSize": 1.0,
+     "LogicalGpuCount": 1,
+     "Manufacturer": "NVIDIA",
+     "MemoryInfo": {
+      "SizeInMiB": 32768
+     },
+     "Name": "RTX PRO 4500",
+     "Workloads": [
+      "graphics",
+      "ml-ai"
+     ]
+    }
+   ],
+   "TotalGpuMemoryInMiB": 32768
+  },
+  "HibernationSupported": false,
+  "Hypervisor": "nitro",
+  "InstanceStorageInfo": {
+   "Disks": [
+    {
+     "Count": 1,
+     "SizeInGB": 440,
+     "Type": "ssd"
+    }
+   ],
+   "EncryptionSupport": "required",
+   "NvmeSupport": "required",
+   "TotalSizeInGB": 440
+  },
+  "InstanceStorageSupported": true,
+  "InstanceType": "g7.2xlarge",
+  "MemoryInfo": {
+   "SizeInMiB": 32768
+  },
+  "NetworkInfo": {
+   "ConnectionTrackingConfiguration": {
+    "DefaultTcpEstablishedTimeout": 350,
+    "DefaultUdpStreamTimeout": 180,
+    "DefaultUdpTimeout": 30
+   },
+   "DefaultNetworkCardIndex": 0,
+   "EfaSupported": false,
+   "EnaSrdSupported": false,
+   "EnaSupport": "required",
+   "EncryptionInTransitSupported": true,
+   "FlexibleEnaQueuesSupport": "supported",
+   "Ipv4AddressesPerInterface": 64,
+   "Ipv4AddressesPerSecondaryInterface": 0,
+   "Ipv6AddressesPerInterface": 64,
+   "Ipv6Supported": true,
+   "MaximumNetworkCards": 1,
+   "MaximumNetworkInterfaces": 4,
+   "NetworkCards": [
+    {
+     "AdditionalFlexibleNetworkInterfaces": 0,
+     "BaselineBandwidthInGbps": 40.0,
+     "DefaultEnaQueueCountPerInterface": 8,
+     "MaximumEnaQueueCount": 32,
+     "MaximumEnaQueueCountPerInterface": 8,
+     "MaximumNetworkInterfaces": 4,
+     "NetworkCardIndex": 0,
+     "NetworkPerformance": "Up to 60 Gigabit",
+     "PeakBandwidthInGbps": 60.0
+    }
+   ],
+   "NetworkPerformance": "60 Gigabit",
+   "SecondaryNetworkSupported": false
+  },
+  "NitroEnclavesSupport": "supported",
+  "NitroTpmInfo": {
+   "SupportedVersions": [
+    "2.0"
+   ]
+  },
+  "NitroTpmSupport": "supported",
+  "PhcSupport": "supported",
+  "PlacementGroupInfo": {
+   "SupportedStrategies": [
+    "cluster",
+    "partition",
+    "spread"
+   ]
+  },
+  "ProcessorInfo": {
+   "Manufacturer": "Intel",
+   "SupportedArchitectures": [
+    "x86_64"
+   ],
+   "SustainedClockSpeedInGhz": 3.9
+  },
+  "RebootMigrationSupport": "unsupported",
+  "SupportedBootModes": [
+   "legacy-bios",
+   "uefi"
+  ],
+  "SupportedRootDeviceTypes": [
+   "ebs"
+  ],
+  "SupportedUsageClasses": [
+   "on-demand",
+   "spot"
+  ],
+  "SupportedVirtualizationTypes": [
+   "hvm"
+  ],
+  "VCpuInfo": {
+   "DefaultCores": 8,
+   "DefaultThreadsPerCore": 1,
+   "DefaultVCpus": 8,
+   "ValidCores": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "ValidThreadsPerCore": [
+    1
+   ]
+  }
+ },
+ "g7.48xlarge": {
+  "AutoRecoverySupported": false,
+  "BareMetal": false,
+  "BurstablePerformanceSupported": false,
+  "CurrentGeneration": true,
+  "DedicatedHostsSupported": true,
+  "EbsInfo": {
+   "AttachmentLimitType": "dedicated",
+   "EbsCards": [
+    {
+     "BaselineBandwidthInMbps": 40000,
+     "BaselineIops": 160000,
+     "BaselineThroughputInMBps": 5000.0,
+     "EbsCardIndex": 0,
+     "MaximumBandwidthInMbps": 40000,
+     "MaximumIops": 160000,
+     "MaximumThroughputInMBps": 5000.0
+    },
+    {
+     "BaselineBandwidthInMbps": 40000,
+     "BaselineIops": 160000,
+     "BaselineThroughputInMBps": 5000.0,
+     "EbsCardIndex": 1,
+     "MaximumBandwidthInMbps": 40000,
+     "MaximumIops": 160000,
+     "MaximumThroughputInMBps": 5000.0
+    }
+   ],
+   "EbsOptimizedInfo": {
+    "BaselineBandwidthInMbps": 80000,
+    "BaselineIops": 320000,
+    "BaselineThroughputInMBps": 10000.0,
+    "MaximumBandwidthInMbps": 80000,
+    "MaximumIops": 320000,
+    "MaximumThroughputInMBps": 10000.0
+   },
+   "EbsOptimizedSupport": "default",
+   "EncryptionSupport": "supported",
+   "MaximumEbsAttachments": 128,
+   "MaximumEbsCards": 2,
+   "NvmeSupport": "required"
+  },
+  "FreeTierEligible": false,
+  "GpuInfo": {
+   "Gpus": [
+    {
+     "Count": 8,
+     "GpuPartitionSize": 1.0,
+     "LogicalGpuCount": 8,
+     "Manufacturer": "NVIDIA",
+     "MemoryInfo": {
+      "SizeInMiB": 32768
+     },
+     "Name": "RTX PRO 4500",
+     "Workloads": [
+      "graphics",
+      "ml-ai"
+     ]
+    }
+   ],
+   "TotalGpuMemoryInMiB": 262144
+  },
+  "HibernationSupported": false,
+  "Hypervisor": "nitro",
+  "InstanceStorageInfo": {
+   "Disks": [
+    {
+     "Count": 2,
+     "SizeInGB": 3800,
+     "Type": "ssd"
+    }
+   ],
+   "EncryptionSupport": "required",
+   "NvmeSupport": "required",
+   "TotalSizeInGB": 7600
+  },
+  "InstanceStorageSupported": true,
+  "InstanceType": "g7.48xlarge",
+  "MemoryInfo": {
+   "SizeInMiB": 786432
+  },
+  "NetworkInfo": {
+   "ConnectionTrackingConfiguration": {
+    "DefaultTcpEstablishedTimeout": 350,
+    "DefaultUdpStreamTimeout": 180,
+    "DefaultUdpTimeout": 30
+   },
+   "DefaultNetworkCardIndex": 0,
+   "EfaInfo": {
+    "MaximumEfaInterfaces": 2
+   },
+   "EfaSupported": true,
+   "EnaSrdSupported": true,
+   "EnaSupport": "required",
+   "EncryptionInTransitSupported": true,
+   "FlexibleEnaQueuesSupport": "supported",
+   "Ipv4AddressesPerInterface": 64,
+   "Ipv4AddressesPerSecondaryInterface": 0,
+   "Ipv6AddressesPerInterface": 64,
+   "Ipv6Supported": true,
+   "MaximumNetworkCards": 2,
+   "MaximumNetworkInterfaces": 24,
+   "NetworkCards": [
+    {
+     "AdditionalFlexibleNetworkInterfaces": 0,
+     "BaselineBandwidthInGbps": 350.0,
+     "DefaultEnaQueueCountPerInterface": 32,
+     "MaximumEnaQueueCount": 384,
+     "MaximumEnaQueueCountPerInterface": 128,
+     "MaximumNetworkInterfaces": 12,
+     "NetworkCardIndex": 0,
+     "NetworkPerformance": "350 Gigabit",
+     "PeakBandwidthInGbps": 350.0
+    },
+    {
+     "AdditionalFlexibleNetworkInterfaces": 0,
+     "BaselineBandwidthInGbps": 350.0,
+     "DefaultEnaQueueCountPerInterface": 32,
+     "MaximumEnaQueueCount": 384,
+     "MaximumEnaQueueCountPerInterface": 128,
+     "MaximumNetworkInterfaces": 12,
+     "NetworkCardIndex": 1,
+     "NetworkPerformance": "350 Gigabit",
+     "PeakBandwidthInGbps": 350.0
+    }
+   ],
+   "NetworkPerformance": "700 Gigabit",
+   "SecondaryNetworkSupported": false
+  },
+  "NitroEnclavesSupport": "supported",
+  "NitroTpmInfo": {
+   "SupportedVersions": [
+    "2.0"
+   ]
+  },
+  "NitroTpmSupport": "supported",
+  "PhcSupport": "supported",
+  "PlacementGroupInfo": {
+   "SupportedStrategies": [
+    "cluster",
+    "partition",
+    "spread"
+   ]
+  },
+  "ProcessorInfo": {
+   "Manufacturer": "Intel",
+   "SupportedArchitectures": [
+    "x86_64"
+   ],
+   "SustainedClockSpeedInGhz": 3.9
+  },
+  "RebootMigrationSupport": "unsupported",
+  "SupportedBootModes": [
+   "legacy-bios",
+   "uefi"
+  ],
+  "SupportedRootDeviceTypes": [
+   "ebs"
+  ],
+  "SupportedUsageClasses": [
+   "on-demand",
+   "spot"
+  ],
+  "SupportedVirtualizationTypes": [
+   "hvm"
+  ],
+  "VCpuInfo": {
+   "DefaultCores": 192,
+   "DefaultThreadsPerCore": 1,
+   "DefaultVCpus": 192,
+   "ValidCores": [
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22,
+    24,
+    26,
+    28,
+    30,
+    32,
+    34,
+    36,
+    38,
+    40,
+    42,
+    44,
+    46,
+    48,
+    50,
+    52,
+    54,
+    56,
+    58,
+    60,
+    62,
+    64,
+    66,
+    68,
+    70,
+    72,
+    74,
+    76,
+    78,
+    80,
+    82,
+    84,
+    86,
+    88,
+    90,
+    92,
+    94,
+    96,
+    98,
+    100,
+    102,
+    104,
+    106,
+    108,
+    110,
+    112,
+    114,
+    116,
+    118,
+    120,
+    122,
+    124,
+    126,
+    128,
+    130,
+    132,
+    134,
+    136,
+    138,
+    140,
+    142,
+    144,
+    146,
+    148,
+    150,
+    152,
+    154,
+    156,
+    158,
+    160,
+    162,
+    164,
+    166,
+    168,
+    170,
+    172,
+    174,
+    176,
+    178,
+    180,
+    182,
+    184,
+    186,
+    188,
+    190,
+    192
+   ],
+   "ValidThreadsPerCore": [
+    1
+   ]
+  }
+ },
+ "g7.4xlarge": {
+  "AutoRecoverySupported": false,
+  "BareMetal": false,
+  "BurstablePerformanceSupported": false,
+  "CurrentGeneration": true,
+  "DedicatedHostsSupported": false,
+  "EbsInfo": {
+   "AttachmentLimitType": "dedicated",
+   "EbsOptimizedInfo": {
+    "BaselineBandwidthInMbps": 8000,
+    "BaselineIops": 32000,
+    "BaselineThroughputInMBps": 1000.0,
+    "MaximumBandwidthInMbps": 8000,
+    "MaximumIops": 32000,
+    "MaximumThroughputInMBps": 1000.0
+   },
+   "EbsOptimizedSupport": "default",
+   "EncryptionSupport": "supported",
+   "MaximumEbsAttachments": 32,
+   "NvmeSupport": "required"
+  },
+  "FreeTierEligible": false,
+  "GpuInfo": {
+   "Gpus": [
+    {
+     "Count": 1,
+     "GpuPartitionSize": 1.0,
+     "LogicalGpuCount": 1,
+     "Manufacturer": "NVIDIA",
+     "MemoryInfo": {
+      "SizeInMiB": 32768
+     },
+     "Name": "RTX PRO 4500",
+     "Workloads": [
+      "ml-ai",
+      "graphics"
+     ]
+    }
+   ],
+   "TotalGpuMemoryInMiB": 32768
+  },
+  "HibernationSupported": false,
+  "Hypervisor": "nitro",
+  "InstanceStorageInfo": {
+   "Disks": [
+    {
+     "Count": 1,
+     "SizeInGB": 875,
+     "Type": "ssd"
+    }
+   ],
+   "EncryptionSupport": "required",
+   "NvmeSupport": "required",
+   "TotalSizeInGB": 875
+  },
+  "InstanceStorageSupported": true,
+  "InstanceType": "g7.4xlarge",
+  "MemoryInfo": {
+   "SizeInMiB": 65536
+  },
+  "NetworkInfo": {
+   "ConnectionTrackingConfiguration": {
+    "DefaultTcpEstablishedTimeout": 350,
+    "DefaultUdpStreamTimeout": 180,
+    "DefaultUdpTimeout": 30
+   },
+   "DefaultNetworkCardIndex": 0,
+   "EfaSupported": false,
+   "EnaSrdSupported": false,
+   "EnaSupport": "required",
+   "EncryptionInTransitSupported": true,
+   "FlexibleEnaQueuesSupport": "supported",
+   "Ipv4AddressesPerInterface": 64,
+   "Ipv4AddressesPerSecondaryInterface": 0,
+   "Ipv6AddressesPerInterface": 64,
+   "Ipv6Supported": true,
+   "MaximumNetworkCards": 1,
+   "MaximumNetworkInterfaces": 8,
+   "NetworkCards": [
+    {
+     "AdditionalFlexibleNetworkInterfaces": 0,
+     "BaselineBandwidthInGbps": 80.0,
+     "DefaultEnaQueueCountPerInterface": 8,
+     "MaximumEnaQueueCount": 64,
+     "MaximumEnaQueueCountPerInterface": 16,
+     "MaximumNetworkInterfaces": 8,
+     "NetworkCardIndex": 0,
+     "NetworkPerformance": "Up to 100 Gigabit",
+     "PeakBandwidthInGbps": 100.0
+    }
+   ],
+   "NetworkPerformance": "60 Gigabit",
+   "SecondaryNetworkSupported": false
+  },
+  "NitroEnclavesSupport": "supported",
+  "NitroTpmInfo": {
+   "SupportedVersions": [
+    "2.0"
+   ]
+  },
+  "NitroTpmSupport": "supported",
+  "PhcSupport": "supported",
+  "PlacementGroupInfo": {
+   "SupportedStrategies": [
+    "cluster",
+    "partition",
+    "spread"
+   ]
+  },
+  "ProcessorInfo": {
+   "Manufacturer": "Intel",
+   "SupportedArchitectures": [
+    "x86_64"
+   ],
+   "SustainedClockSpeedInGhz": 3.9
+  },
+  "RebootMigrationSupport": "unsupported",
+  "SupportedBootModes": [
+   "legacy-bios",
+   "uefi"
+  ],
+  "SupportedRootDeviceTypes": [
+   "ebs"
+  ],
+  "SupportedUsageClasses": [
+   "on-demand",
+   "spot"
+  ],
+  "SupportedVirtualizationTypes": [
+   "hvm"
+  ],
+  "VCpuInfo": {
+   "DefaultCores": 16,
+   "DefaultThreadsPerCore": 1,
+   "DefaultVCpus": 16,
+   "ValidCores": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+   ],
+   "ValidThreadsPerCore": [
+    1
+   ]
+  }
+ },
+ "g7.8xlarge": {
+  "AutoRecoverySupported": false,
+  "BareMetal": false,
+  "BurstablePerformanceSupported": false,
+  "CurrentGeneration": true,
+  "DedicatedHostsSupported": false,
+  "EbsInfo": {
+   "AttachmentLimitType": "dedicated",
+   "EbsOptimizedInfo": {
+    "BaselineBandwidthInMbps": 16000,
+    "BaselineIops": 64000,
+    "BaselineThroughputInMBps": 2000.0,
+    "MaximumBandwidthInMbps": 16000,
+    "MaximumIops": 64000,
+    "MaximumThroughputInMBps": 2000.0
+   },
+   "EbsOptimizedSupport": "default",
+   "EncryptionSupport": "supported",
+   "MaximumEbsAttachments": 32,
+   "NvmeSupport": "required"
+  },
+  "FreeTierEligible": false,
+  "GpuInfo": {
+   "Gpus": [
+    {
+     "Count": 1,
+     "GpuPartitionSize": 1.0,
+     "LogicalGpuCount": 1,
+     "Manufacturer": "NVIDIA",
+     "MemoryInfo": {
+      "SizeInMiB": 32768
+     },
+     "Name": "RTX PRO 4500",
+     "Workloads": [
+      "graphics",
+      "ml-ai"
+     ]
+    }
+   ],
+   "TotalGpuMemoryInMiB": 32768
+  },
+  "HibernationSupported": false,
+  "Hypervisor": "nitro",
+  "InstanceStorageInfo": {
+   "Disks": [
+    {
+     "Count": 1,
+     "SizeInGB": 930,
+     "Type": "ssd"
+    }
+   ],
+   "EncryptionSupport": "required",
+   "NvmeSupport": "required",
+   "TotalSizeInGB": 930
+  },
+  "InstanceStorageSupported": true,
+  "InstanceType": "g7.8xlarge",
+  "MemoryInfo": {
+   "SizeInMiB": 131072
+  },
+  "NetworkInfo": {
+   "ConnectionTrackingConfiguration": {
+    "DefaultTcpEstablishedTimeout": 350,
+    "DefaultUdpStreamTimeout": 180,
+    "DefaultUdpTimeout": 30
+   },
+   "DefaultNetworkCardIndex": 0,
+   "EfaInfo": {
+    "MaximumEfaInterfaces": 1
+   },
+   "EfaSupported": true,
+   "EnaSrdSupported": false,
+   "EnaSupport": "required",
+   "EncryptionInTransitSupported": true,
+   "FlexibleEnaQueuesSupport": "supported",
+   "Ipv4AddressesPerInterface": 64,
+   "Ipv4AddressesPerSecondaryInterface": 0,
+   "Ipv6AddressesPerInterface": 64,
+   "Ipv6Supported": true,
+   "MaximumNetworkCards": 1,
+   "MaximumNetworkInterfaces": 10,
+   "NetworkCards": [
+    {
+     "AdditionalFlexibleNetworkInterfaces": 0,
+     "BaselineBandwidthInGbps": 85.0,
+     "DefaultEnaQueueCountPerInterface": 8,
+     "MaximumEnaQueueCount": 80,
+     "MaximumEnaQueueCountPerInterface": 32,
+     "MaximumNetworkInterfaces": 10,
+     "NetworkCardIndex": 0,
+     "NetworkPerformance": "Up to 100 Gigabit",
+     "PeakBandwidthInGbps": 100.0
+    }
+   ],
+   "NetworkPerformance": "80 Gigabit",
+   "SecondaryNetworkSupported": false
+  },
+  "NitroEnclavesSupport": "supported",
+  "NitroTpmInfo": {
+   "SupportedVersions": [
+    "2.0"
+   ]
+  },
+  "NitroTpmSupport": "supported",
+  "PhcSupport": "supported",
+  "PlacementGroupInfo": {
+   "SupportedStrategies": [
+    "cluster",
+    "partition",
+    "spread"
+   ]
+  },
+  "ProcessorInfo": {
+   "Manufacturer": "Intel",
+   "SupportedArchitectures": [
+    "x86_64"
+   ],
+   "SustainedClockSpeedInGhz": 3.9
+  },
+  "RebootMigrationSupport": "unsupported",
+  "SupportedBootModes": [
+   "legacy-bios",
+   "uefi"
+  ],
+  "SupportedRootDeviceTypes": [
+   "ebs"
+  ],
+  "SupportedUsageClasses": [
+   "on-demand",
+   "spot"
+  ],
+  "SupportedVirtualizationTypes": [
+   "hvm"
+  ],
+  "VCpuInfo": {
+   "DefaultCores": 32,
+   "DefaultThreadsPerCore": 1,
+   "DefaultVCpus": 32,
+   "ValidCores": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+   ],
+   "ValidThreadsPerCore": [
+    1
+   ]
+  }
+ },
  "g7e.12xlarge": {
   "AutoRecoverySupported": false,
   "BareMetal": false,
@@ -48668,8 +49859,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -48835,8 +50026,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49699,8 +50890,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49847,8 +51038,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49999,8 +51190,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
