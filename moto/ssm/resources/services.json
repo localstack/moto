@@ -55349,6 +55349,12 @@
               "Value": "https://aws.amazon.com/pcs/"
             },
             "regions": {
+              "af-south-1": {
+                "Value": "af-south-1",
+                "endpoint": {
+                  "Value": "pcs.af-south-1.amazonaws.com"
+                }
+              },
               "ap-northeast-1": {
                 "Value": "ap-northeast-1",
                 "endpoint": {
@@ -55377,6 +55383,12 @@
                 "Value": "ap-southeast-2",
                 "endpoint": {
                   "Value": "pcs.ap-southeast-2.amazonaws.com"
+                }
+              },
+              "ap-southeast-3": {
+                "Value": "ap-southeast-3",
+                "endpoint": {
+                  "Value": "pcs.ap-southeast-3.amazonaws.com"
                 }
               },
               "eu-central-1": {

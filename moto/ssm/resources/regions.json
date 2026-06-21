@@ -1288,6 +1288,12 @@
                   "Value": "HTTPS"
                 }
               },
+              "pcs": {
+                "Value": "pcs",
+                "endpoint": {
+                  "Value": "pcs.af-south-1.amazonaws.com"
+                }
+              },
               "pi": {
                 "Value": "pi",
                 "endpoint": {
@@ -16399,6 +16405,9 @@
               "Value": "SG-01"
             },
             "local-zones": {
+              "apse1-han1-az1": {
+                "Value": "apse1-han1-az1"
+              },
               "apse1-mnl1-az1": {
                 "Value": "apse1-mnl1-az1"
               }
@@ -23066,6 +23075,12 @@
                 },
                 "protocols": {
                   "Value": "HTTPS"
+                }
+              },
+              "pcs": {
+                "Value": "pcs",
+                "endpoint": {
+                  "Value": "pcs.ap-southeast-3.amazonaws.com"
                 }
               },
               "pi": {
