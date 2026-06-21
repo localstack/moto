@@ -7632,6 +7632,10 @@
   "Location": "ap-south-1c"
  },
  {
+  "InstanceType": "p6-b200.48xlarge",
+  "Location": "ap-south-1c"
+ },
+ {
   "InstanceType": "r5.12xlarge",
   "Location": "ap-south-1c"
  },

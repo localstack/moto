@@ -1996,6 +1996,10 @@
   "Location": "ap-south-1"
  },
  {
+  "InstanceType": "p6-b200.48xlarge",
+  "Location": "ap-south-1"
+ },
+ {
   "InstanceType": "r3.2xlarge",
   "Location": "ap-south-1"
  },

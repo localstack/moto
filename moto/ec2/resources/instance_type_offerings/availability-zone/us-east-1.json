@@ -6296,6 +6296,58 @@
   "Location": "us-east-1b"
  },
  {
+  "InstanceType": "c8in.12xlarge",
+  "Location": "us-east-1b"
+ },
+ {
+  "InstanceType": "c8in.16xlarge",
+  "Location": "us-east-1b"
+ },
+ {
+  "InstanceType": "c8in.24xlarge",
+  "Location": "us-east-1b"
+ },
+ {
+  "InstanceType": "c8in.2xlarge",
+  "Location": "us-east-1b"
+ },
+ {
+  "InstanceType": "c8in.32xlarge",
+  "Location": "us-east-1b"
+ },
+ {
+  "InstanceType": "c8in.48xlarge",
+  "Location": "us-east-1b"
+ },
+ {
+  "InstanceType": "c8in.4xlarge",
+  "Location": "us-east-1b"
+ },
+ {
+  "InstanceType": "c8in.8xlarge",
+  "Location": "us-east-1b"
+ },
+ {
+  "InstanceType": "c8in.96xlarge",
+  "Location": "us-east-1b"
+ },
+ {
+  "InstanceType": "c8in.large",
+  "Location": "us-east-1b"
+ },
+ {
+  "InstanceType": "c8in.metal-48xl",
+  "Location": "us-east-1b"
+ },
+ {
+  "InstanceType": "c8in.metal-96xl",
+  "Location": "us-east-1b"
+ },
+ {
+  "InstanceType": "c8in.xlarge",
+  "Location": "us-east-1b"
+ },
+ {
   "InstanceType": "d2.2xlarge",
   "Location": "us-east-1b"
  },
@@ -8109,6 +8161,10 @@
  },
  {
   "InstanceType": "mac-m4.metal",
+  "Location": "us-east-1b"
+ },
+ {
+  "InstanceType": "mac-m4pro.metal",
   "Location": "us-east-1b"
  },
  {
@@ -18321,6 +18377,10 @@
  },
  {
   "InstanceType": "mac-m4max.metal",
+  "Location": "us-east-1d"
+ },
+ {
+  "InstanceType": "mac-m4pro.metal",
   "Location": "us-east-1d"
  },
  {
