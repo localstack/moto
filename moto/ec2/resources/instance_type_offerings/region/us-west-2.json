@@ -1468,6 +1468,30 @@
   "Location": "us-west-2"
  },
  {
+  "InstanceType": "g7.12xlarge",
+  "Location": "us-west-2"
+ },
+ {
+  "InstanceType": "g7.24xlarge",
+  "Location": "us-west-2"
+ },
+ {
+  "InstanceType": "g7.2xlarge",
+  "Location": "us-west-2"
+ },
+ {
+  "InstanceType": "g7.48xlarge",
+  "Location": "us-west-2"
+ },
+ {
+  "InstanceType": "g7.4xlarge",
+  "Location": "us-west-2"
+ },
+ {
+  "InstanceType": "g7.8xlarge",
+  "Location": "us-west-2"
+ },
+ {
   "InstanceType": "g7e.12xlarge",
   "Location": "us-west-2"
  },

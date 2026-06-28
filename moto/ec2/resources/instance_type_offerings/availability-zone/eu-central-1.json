@@ -8112,6 +8112,10 @@
   "Location": "eu-central-1b"
  },
  {
+  "InstanceType": "u7in-24tb.224xlarge",
+  "Location": "eu-central-1b"
+ },
+ {
   "InstanceType": "x1.16xlarge",
   "Location": "eu-central-1b"
  },
