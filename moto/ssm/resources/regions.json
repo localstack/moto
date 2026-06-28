@@ -1288,6 +1288,12 @@
                   "Value": "HTTPS"
                 }
               },
+              "pcs": {
+                "Value": "pcs",
+                "endpoint": {
+                  "Value": "pcs.af-south-1.amazonaws.com"
+                }
+              },
               "pi": {
                 "Value": "pi",
                 "endpoint": {
@@ -13106,6 +13112,15 @@
                   "Value": "HTTPS, HTTP"
                 }
               },
+              "elementalinference": {
+                "Value": "elementalinference",
+                "endpoint": {
+                  "Value": "elemental-inference.ap-south-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "emr": {
                 "Value": "emr",
                 "endpoint": {
@@ -16399,6 +16414,9 @@
               "Value": "SG-01"
             },
             "local-zones": {
+              "apse1-han1-az1": {
+                "Value": "apse1-han1-az1"
+              },
               "apse1-mnl1-az1": {
                 "Value": "apse1-mnl1-az1"
               }
@@ -23068,6 +23086,12 @@
                   "Value": "HTTPS"
                 }
               },
+              "pcs": {
+                "Value": "pcs",
+                "endpoint": {
+                  "Value": "pcs.ap-southeast-3.amazonaws.com"
+                }
+              },
               "pi": {
                 "Value": "pi",
                 "endpoint": {
@@ -27642,6 +27666,9 @@
                 "protocols": {
                   "Value": "HTTPS"
                 }
+              },
+              "rosa": {
+                "Value": "rosa"
               },
               "route53": {
                 "Value": "route53",
@@ -42210,6 +42237,12 @@
                   "Value": "observabilityadmin.eu-north-1.amazonaws.com"
                 }
               },
+              "odb": {
+                "Value": "odb",
+                "endpoint": {
+                  "Value": "odb.eu-north-1.amazonaws.com"
+                }
+              },
               "opensearchserverless": {
                 "Value": "opensearchserverless",
                 "endpoint": {
@@ -47533,6 +47566,15 @@
                 },
                 "protocols": {
                   "Value": "HTTPS, HTTP"
+                }
+              },
+              "elementalinference": {
+                "Value": "elementalinference",
+                "endpoint": {
+                  "Value": "elemental-inference.eu-west-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
                 }
               },
               "emr": {
@@ -62285,6 +62327,15 @@
                   "Value": "HTTPS, HTTP"
                 }
               },
+              "awstransform": {
+                "Value": "awstransform",
+                "endpoint": {
+                  "Value": "transform.sa-east-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "backup": {
                 "Value": "backup",
                 "endpoint": {
@@ -65466,6 +65517,15 @@
                 },
                 "protocols": {
                   "Value": "HTTPS, HTTP"
+                }
+              },
+              "elementalinference": {
+                "Value": "elementalinference",
+                "endpoint": {
+                  "Value": "elemental-inference.us-east-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
                 }
               },
               "emr": {
@@ -77118,6 +77178,15 @@
                 },
                 "protocols": {
                   "Value": "HTTPS, HTTP"
+                }
+              },
+              "elementalinference": {
+                "Value": "elementalinference",
+                "endpoint": {
+                  "Value": "elemental-inference.us-west-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
                 }
               },
               "emr": {
