@@ -8075,6 +8075,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "sa-east-1": {
+                "Value": "sa-east-1",
+                "endpoint": {
+                  "Value": "transform.sa-east-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "us-east-1": {
                 "Value": "us-east-1",
                 "endpoint": {
@@ -9535,6 +9544,12 @@
               "ap-southeast-2": {
                 "Value": "ap-southeast-2"
               },
+              "ap-southeast-5": {
+                "Value": "ap-southeast-5"
+              },
+              "ap-southeast-7": {
+                "Value": "ap-southeast-7"
+              },
               "ca-central-1": {
                 "Value": "ca-central-1"
               },
@@ -9543,6 +9558,12 @@
               },
               "eu-north-1": {
                 "Value": "eu-north-1"
+              },
+              "eu-south-1": {
+                "Value": "eu-south-1"
+              },
+              "eu-south-2": {
+                "Value": "eu-south-2"
               },
               "eu-west-1": {
                 "Value": "eu-west-1"
@@ -15663,6 +15684,15 @@
                 "Value": "ap-southeast-5",
                 "endpoint": {
                   "Value": "codepipeline.ap-southeast-5.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "ap-southeast-6": {
+                "Value": "ap-southeast-6",
+                "endpoint": {
+                  "Value": "codepipeline.ap-southeast-6.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -22588,10 +22618,28 @@
                   "Value": "HTTPS"
                 }
               },
+              "ap-southeast-6": {
+                "Value": "ap-southeast-6",
+                "endpoint": {
+                  "Value": "drs.ap-southeast-6.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "ca-central-1": {
                 "Value": "ca-central-1",
                 "endpoint": {
                   "Value": "drs.ca-central-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "ca-west-1": {
+                "Value": "ca-west-1",
+                "endpoint": {
+                  "Value": "drs.ca-west-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -27628,6 +27676,44 @@
             "Value": "elementalinference",
             "longName": {
               "Value": "AWS Elemental Inference"
+            },
+            "regions": {
+              "ap-south-1": {
+                "Value": "ap-south-1",
+                "endpoint": {
+                  "Value": "elemental-inference.ap-south-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "eu-west-1": {
+                "Value": "eu-west-1",
+                "endpoint": {
+                  "Value": "elemental-inference.eu-west-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "us-east-1": {
+                "Value": "us-east-1",
+                "endpoint": {
+                  "Value": "elemental-inference.us-east-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "us-west-2": {
+                "Value": "us-west-2",
+                "endpoint": {
+                  "Value": "elemental-inference.us-west-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              }
             }
           },
           "emr": {
@@ -42182,6 +42268,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "il-central-1": {
+                "Value": "il-central-1",
+                "endpoint": {
+                  "Value": "kinesisvideo.il-central-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "me-south-1": {
                 "Value": "me-south-1",
                 "endpoint": {
@@ -53246,6 +53341,12 @@
                   "Value": "odb.eu-central-2.amazonaws.com"
                 }
               },
+              "eu-north-1": {
+                "Value": "eu-north-1",
+                "endpoint": {
+                  "Value": "odb.eu-north-1.amazonaws.com"
+                }
+              },
               "eu-south-1": {
                 "Value": "eu-south-1",
                 "endpoint": {
@@ -55349,6 +55450,12 @@
               "Value": "https://aws.amazon.com/pcs/"
             },
             "regions": {
+              "af-south-1": {
+                "Value": "af-south-1",
+                "endpoint": {
+                  "Value": "pcs.af-south-1.amazonaws.com"
+                }
+              },
               "ap-northeast-1": {
                 "Value": "ap-northeast-1",
                 "endpoint": {
@@ -55377,6 +55484,12 @@
                 "Value": "ap-southeast-2",
                 "endpoint": {
                   "Value": "pcs.ap-southeast-2.amazonaws.com"
+                }
+              },
+              "ap-southeast-3": {
+                "Value": "ap-southeast-3",
+                "endpoint": {
+                  "Value": "pcs.ap-southeast-3.amazonaws.com"
                 }
               },
               "eu-central-1": {
@@ -61847,6 +61960,9 @@
               },
               "ap-southeast-4": {
                 "Value": "ap-southeast-4"
+              },
+              "ap-southeast-6": {
+                "Value": "ap-southeast-6"
               },
               "ca-central-1": {
                 "Value": "ca-central-1"
