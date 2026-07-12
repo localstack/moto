@@ -1328,10 +1328,6 @@
   "Location": "usw2-az1"
  },
  {
-  "InstanceType": "dl1.24xlarge",
-  "Location": "usw2-az1"
- },
- {
   "InstanceType": "f2.12xlarge",
   "Location": "usw2-az1"
  },
@@ -16777,6 +16773,30 @@
  },
  {
   "InstanceType": "c8in.xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ine.12xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ine.2xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ine.4xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ine.8xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ine.large",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ine.xlarge",
   "Location": "usw2-az4"
  },
  {

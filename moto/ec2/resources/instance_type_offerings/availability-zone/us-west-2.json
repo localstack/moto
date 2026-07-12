@@ -6576,10 +6576,6 @@
   "Location": "us-west-2b"
  },
  {
-  "InstanceType": "dl1.24xlarge",
-  "Location": "us-west-2b"
- },
- {
   "InstanceType": "f2.12xlarge",
   "Location": "us-west-2b"
  },
@@ -16777,6 +16773,30 @@
  },
  {
   "InstanceType": "c8in.xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ine.12xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ine.2xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ine.4xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ine.8xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ine.large",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ine.xlarge",
   "Location": "us-west-2d"
  },
  {
