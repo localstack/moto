@@ -45452,8 +45452,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45588,8 +45588,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -46605,8 +46605,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -46874,8 +46874,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47282,8 +47282,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47551,8 +47551,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47684,8 +47684,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47820,8 +47820,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47953,8 +47953,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48401,8 +48401,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48553,8 +48553,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48791,8 +48791,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48944,8 +48944,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49098,8 +49098,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49254,8 +49254,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49553,8 +49553,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49701,8 +49701,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49995,8 +49995,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -50600,8 +50600,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -50923,8 +50923,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51216,8 +51216,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51649,8 +51649,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51791,8 +51791,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -52225,8 +52225,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -52396,8 +52396,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -52647,8 +52647,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53348,8 +53348,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53492,8 +53492,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53706,8 +53706,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53854,8 +53854,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
