@@ -39617,7 +39617,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -39780,7 +39780,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -39926,7 +39926,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -40137,7 +40137,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -40263,7 +40263,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -40473,7 +40473,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -40604,7 +40604,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -40751,7 +40751,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -40868,7 +40868,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -40975,7 +40975,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -41085,7 +41085,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -41216,7 +41216,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -41391,7 +41391,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -41549,7 +41549,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -41772,7 +41772,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -41910,7 +41910,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -42132,7 +42132,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -42275,7 +42275,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -42434,7 +42434,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -42563,7 +42563,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -42682,7 +42682,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -42804,7 +42804,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -45317,8 +45317,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45452,8 +45452,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45588,8 +45588,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45725,8 +45725,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -45859,8 +45859,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -46312,8 +46312,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -46455,8 +46455,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -46605,8 +46605,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -46734,8 +46734,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -46874,8 +46874,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47010,8 +47010,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -47146,8 +47146,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47415,8 +47415,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -47953,8 +47953,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48137,8 +48137,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48265,8 +48265,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -48401,8 +48401,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48553,8 +48553,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49098,8 +49098,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49398,8 +49398,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49701,8 +49701,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49853,8 +49853,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -49995,8 +49995,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -50146,8 +50146,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -50297,8 +50297,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -50923,8 +50923,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51791,8 +51791,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51984,8 +51984,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -52225,8 +52225,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -52282,7 +52282,7 @@
      "PeakBandwidthInGbps": 60.0
     }
    ],
-   "NetworkPerformance": "60 Gigabit",
+   "NetworkPerformance": "Up to 60 Gigabit",
    "SecondaryNetworkSupported": false
   },
   "NitroEnclavesSupport": "supported",
@@ -52396,8 +52396,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -52647,8 +52647,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -52704,7 +52704,7 @@
      "PeakBandwidthInGbps": 100.0
     }
    ],
-   "NetworkPerformance": "60 Gigabit",
+   "NetworkPerformance": "Up to 100 Gigabit",
    "SecondaryNetworkSupported": false
   },
   "NitroEnclavesSupport": "supported",
@@ -52855,17 +52855,17 @@
    "NetworkCards": [
     {
      "AdditionalFlexibleNetworkInterfaces": 0,
-     "BaselineBandwidthInGbps": 85.0,
+     "BaselineBandwidthInGbps": 100.0,
      "DefaultEnaQueueCountPerInterface": 8,
      "MaximumEnaQueueCount": 80,
      "MaximumEnaQueueCountPerInterface": 32,
      "MaximumNetworkInterfaces": 10,
      "NetworkCardIndex": 0,
-     "NetworkPerformance": "Up to 100 Gigabit",
+     "NetworkPerformance": "100 Gigabit",
      "PeakBandwidthInGbps": 100.0
     }
    ],
-   "NetworkPerformance": "80 Gigabit",
+   "NetworkPerformance": "100 Gigabit",
    "SecondaryNetworkSupported": false
   },
   "NitroEnclavesSupport": "supported",
@@ -52982,8 +52982,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53149,8 +53149,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -53348,8 +53348,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53492,8 +53492,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53706,8 +53706,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53854,8 +53854,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -54313,8 +54313,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -115207,7 +115207,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -115370,7 +115370,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -115516,7 +115516,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -115727,7 +115727,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -115853,7 +115853,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -116063,7 +116063,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -116194,7 +116194,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -116341,7 +116341,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -116458,7 +116458,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -116565,7 +116565,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -116675,7 +116675,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "supported",
   "SupportedBootModes": [
@@ -116806,7 +116806,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -116981,7 +116981,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -117139,7 +117139,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -117362,7 +117362,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -117500,7 +117500,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -117722,7 +117722,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -117865,7 +117865,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -118024,7 +118024,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -118153,7 +118153,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -118272,7 +118272,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -118394,7 +118394,7 @@
    "SupportedArchitectures": [
     "arm64"
    ],
-   "SustainedClockSpeedInGhz": 2.8
+   "SustainedClockSpeedInGhz": 3.3
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
