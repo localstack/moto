@@ -64813,6 +64813,9 @@
                   "Value": "HTTPS"
                 }
               },
+              "eusc-de-east-1": {
+                "Value": "eusc-de-east-1"
+              },
               "mx-central-1": {
                 "Value": "mx-central-1",
                 "endpoint": {
@@ -79409,6 +79412,15 @@
                 "Value": "ap-southeast-4",
                 "endpoint": {
                   "Value": "vpc-lattice.ap-southeast-4.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "ap-southeast-5": {
+                "Value": "ap-southeast-5",
+                "endpoint": {
+                  "Value": "vpc-lattice.ap-southeast-5.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
