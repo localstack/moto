@@ -3280,6 +3280,14 @@
   "Location": "us-west-2a"
  },
  {
+  "InstanceType": "m8idn.metal-48xl",
+  "Location": "us-west-2a"
+ },
+ {
+  "InstanceType": "m8idn.metal-96xl",
+  "Location": "us-west-2a"
+ },
+ {
   "InstanceType": "m8idn.xlarge",
   "Location": "us-west-2a"
  },
@@ -8532,6 +8540,14 @@
   "Location": "us-west-2b"
  },
  {
+  "InstanceType": "m8idn.metal-48xl",
+  "Location": "us-west-2b"
+ },
+ {
+  "InstanceType": "m8idn.metal-96xl",
+  "Location": "us-west-2b"
+ },
+ {
   "InstanceType": "m8idn.xlarge",
   "Location": "us-west-2b"
  },
@@ -8745,6 +8761,10 @@
  },
  {
   "InstanceType": "p6-b200.48xlarge",
+  "Location": "us-west-2b"
+ },
+ {
+  "InstanceType": "p6-b300.48xlarge",
   "Location": "us-west-2b"
  },
  {
@@ -13800,6 +13820,14 @@
   "Location": "us-west-2c"
  },
  {
+  "InstanceType": "m8idn.metal-48xl",
+  "Location": "us-west-2c"
+ },
+ {
+  "InstanceType": "m8idn.metal-96xl",
+  "Location": "us-west-2c"
+ },
+ {
   "InstanceType": "m8idn.xlarge",
   "Location": "us-west-2c"
  },
@@ -16672,6 +16700,50 @@
   "Location": "us-west-2d"
  },
  {
+  "InstanceType": "c8ib.12xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ib.16xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ib.24xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ib.2xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ib.32xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ib.48xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ib.4xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ib.8xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ib.96xlarge",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ib.large",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "c8ib.xlarge",
+  "Location": "us-west-2d"
+ },
+ {
   "InstanceType": "c8id.12xlarge",
   "Location": "us-west-2d"
  },
@@ -18421,6 +18493,14 @@
  },
  {
   "InstanceType": "m8idn.large",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "m8idn.metal-48xl",
+  "Location": "us-west-2d"
+ },
+ {
+  "InstanceType": "m8idn.metal-96xl",
   "Location": "us-west-2d"
  },
  {
