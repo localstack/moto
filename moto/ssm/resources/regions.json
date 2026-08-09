@@ -6424,15 +6424,6 @@
                   "Value": "HTTPS"
                 }
               },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.ap-northeast-1.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
               "iotsecuretunneling": {
                 "Value": "iotsecuretunneling",
                 "endpoint": {
@@ -9149,15 +9140,6 @@
                 "Value": "iotdevicemanagement",
                 "endpoint": {
                   "Value": "iot.ap-northeast-2.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.ap-northeast-2.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -13532,15 +13514,6 @@
                   "Value": "HTTPS"
                 }
               },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.ap-south-1.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
               "iotfleetwise": {
                 "Value": "iotfleetwise",
                 "endpoint": {
@@ -17832,15 +17805,6 @@
                   "Value": "HTTPS"
                 }
               },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.ap-southeast-1.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
               "iotsecuretunneling": {
                 "Value": "iotsecuretunneling",
                 "endpoint": {
@@ -20620,15 +20584,6 @@
                 "Value": "iotdevicemanagement",
                 "endpoint": {
                   "Value": "iot.ap-southeast-2.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.ap-southeast-2.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -30783,15 +30738,6 @@
                   "Value": "HTTPS"
                 }
               },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.ca-central-1.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
               "iotsecuretunneling": {
                 "Value": "iotsecuretunneling",
                 "endpoint": {
@@ -32910,6 +32856,15 @@
               "marketplace": {
                 "Value": "marketplace"
               },
+              "mcs": {
+                "Value": "mcs",
+                "endpoint": {
+                  "Value": "cassandra.ca-west-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS, TLS"
+                }
+              },
               "mgn": {
                 "Value": "mgn",
                 "endpoint": {
@@ -34291,15 +34246,6 @@
                   "Value": "HTTPS"
                 }
               },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.cn-north-1.amazonaws.com.cn"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
               "iotsecuretunneling": {
                 "Value": "iotsecuretunneling",
                 "endpoint": {
@@ -34586,6 +34532,15 @@
                 "Value": "redshift-serverless",
                 "endpoint": {
                   "Value": "redshift-serverless.cn-north-1.amazonaws.com.cn"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "resource-explorer-2": {
+                "Value": "resource-explorer-2",
+                "endpoint": {
+                  "Value": "resource-explorer-2.cn-north-1.amazonaws.com.cn"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -36042,6 +35997,15 @@
                 "Value": "redshift-serverless",
                 "endpoint": {
                   "Value": "redshift-serverless.cn-northwest-1.amazonaws.com.cn"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "resource-explorer-2": {
+                "Value": "resource-explorer-2",
+                "endpoint": {
+                  "Value": "resource-explorer-2.cn-northwest-1.amazonaws.com.cn"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -37842,15 +37806,6 @@
                 "Value": "iotdevicemanagement",
                 "endpoint": {
                   "Value": "iot.eu-central-1.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.eu-central-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -48243,15 +48198,6 @@
                   "Value": "HTTPS"
                 }
               },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.eu-west-1.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
               "iotsecuretunneling": {
                 "Value": "iotsecuretunneling",
                 "endpoint": {
@@ -51155,15 +51101,6 @@
                 "Value": "iotdevicemanagement",
                 "endpoint": {
                   "Value": "iot.eu-west-2.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.eu-west-2.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -55928,6 +55865,15 @@
                 "Value": "synthetics",
                 "endpoint": {
                   "Value": "synthetics.eusc-de-east-1.amazonaws.eu"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "taxsettings": {
+                "Value": "taxsettings",
+                "endpoint": {
+                  "Value": "tax.eusc-de-east-1.amazonaws.eu"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -66278,15 +66224,6 @@
                   "Value": "HTTPS"
                 }
               },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.us-east-1.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
               "iotfleetwise": {
                 "Value": "iotfleetwise",
                 "endpoint": {
@@ -67117,6 +67054,9 @@
                 "protocols": {
                   "Value": "HTTPS"
                 }
+              },
+              "pricing-plan-manager": {
+                "Value": "pricing-plan-manager"
               },
               "privatelink": {
                 "Value": "privatelink"
@@ -69384,15 +69324,6 @@
                 "Value": "iotdevicemanagement",
                 "endpoint": {
                   "Value": "iot.us-east-2.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.us-east-2.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -73307,15 +73238,6 @@
                 "Value": "iotdevicemanagement",
                 "endpoint": {
                   "Value": "iot.us-gov-west-1.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.us-gov-west-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -77937,15 +77859,6 @@
                 "Value": "iotdevicemanagement",
                 "endpoint": {
                   "Value": "iot.us-west-2.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
-              "iotevents": {
-                "Value": "iotevents",
-                "endpoint": {
-                  "Value": "iotevents.us-west-2.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
