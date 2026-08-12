@@ -3284,6 +3284,14 @@
   "Location": "usw2-az1"
  },
  {
+  "InstanceType": "m8idn.metal-48xl",
+  "Location": "usw2-az1"
+ },
+ {
+  "InstanceType": "m8idn.metal-96xl",
+  "Location": "usw2-az1"
+ },
+ {
   "InstanceType": "m8idn.xlarge",
   "Location": "usw2-az1"
  },
@@ -3497,6 +3505,10 @@
  },
  {
   "InstanceType": "p6-b200.48xlarge",
+  "Location": "usw2-az1"
+ },
+ {
+  "InstanceType": "p6-b300.48xlarge",
   "Location": "usw2-az1"
  },
  {
@@ -8553,6 +8565,14 @@
  },
  {
   "InstanceType": "m8idn.large",
+  "Location": "usw2-az2"
+ },
+ {
+  "InstanceType": "m8idn.metal-48xl",
+  "Location": "usw2-az2"
+ },
+ {
+  "InstanceType": "m8idn.metal-96xl",
   "Location": "usw2-az2"
  },
  {
@@ -13800,6 +13820,14 @@
   "Location": "usw2-az3"
  },
  {
+  "InstanceType": "m8idn.metal-48xl",
+  "Location": "usw2-az3"
+ },
+ {
+  "InstanceType": "m8idn.metal-96xl",
+  "Location": "usw2-az3"
+ },
+ {
   "InstanceType": "m8idn.xlarge",
   "Location": "usw2-az3"
  },
@@ -16672,6 +16700,50 @@
   "Location": "usw2-az4"
  },
  {
+  "InstanceType": "c8ib.12xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ib.16xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ib.24xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ib.2xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ib.32xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ib.48xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ib.4xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ib.8xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ib.96xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ib.large",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8ib.xlarge",
+  "Location": "usw2-az4"
+ },
+ {
   "InstanceType": "c8id.12xlarge",
   "Location": "usw2-az4"
  },
@@ -18421,6 +18493,14 @@
  },
  {
   "InstanceType": "m8idn.large",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "m8idn.metal-48xl",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "m8idn.metal-96xl",
   "Location": "usw2-az4"
  },
  {
