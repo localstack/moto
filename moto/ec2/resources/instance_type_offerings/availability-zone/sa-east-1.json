@@ -8008,6 +8008,10 @@
   "Location": "sa-east-1c"
  },
  {
+  "InstanceType": "u7in-24tb.224xlarge",
+  "Location": "sa-east-1c"
+ },
+ {
   "InstanceType": "x1.16xlarge",
   "Location": "sa-east-1c"
  },
