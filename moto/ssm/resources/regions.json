@@ -20199,6 +20199,15 @@
                   "Value": "HTTPS, HTTP"
                 }
               },
+              "elementalinference": {
+                "Value": "elementalinference",
+                "endpoint": {
+                  "Value": "elemental-inference.ap-southeast-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "emr": {
                 "Value": "emr",
                 "endpoint": {
@@ -53905,6 +53914,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "osis": {
+                "Value": "osis",
+                "endpoint": {
+                  "Value": "osis.eu-west-3.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "outposts": {
                 "Value": "outposts",
                 "endpoint": {
@@ -71709,6 +71727,12 @@
                   "Value": "HTTPS"
                 }
               },
+              "observabilityadmin": {
+                "Value": "observabilityadmin",
+                "endpoint": {
+                  "Value": "observabilityadmin.us-gov-east-1.amazonaws.com"
+                }
+              },
               "opensearchserverless": {
                 "Value": "opensearchserverless",
                 "endpoint": {
@@ -71722,6 +71746,15 @@
                 "Value": "organizations",
                 "endpoint": {
                   "Value": "organizations.us-gov-west-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "osis": {
+                "Value": "osis",
+                "endpoint": {
+                  "Value": "osis.us-gov-east-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -73516,6 +73549,12 @@
                   "Value": "HTTPS"
                 }
               },
+              "observabilityadmin": {
+                "Value": "observabilityadmin",
+                "endpoint": {
+                  "Value": "observabilityadmin.us-gov-west-1.amazonaws.com"
+                }
+              },
               "opensearchserverless": {
                 "Value": "opensearchserverless",
                 "endpoint": {
@@ -73529,6 +73568,15 @@
                 "Value": "organizations",
                 "endpoint": {
                   "Value": "organizations.us-gov-west-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "osis": {
+                "Value": "osis",
+                "endpoint": {
+                  "Value": "osis.us-gov-west-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
