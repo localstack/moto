@@ -45230,8 +45230,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45368,8 +45368,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -45503,8 +45503,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45639,8 +45639,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45776,8 +45776,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45910,8 +45910,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -46064,8 +46064,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -46222,8 +46222,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -46363,8 +46363,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -46506,8 +46506,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -46656,8 +46656,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -46925,8 +46925,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -47197,8 +47197,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -47333,8 +47333,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47466,8 +47466,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47602,8 +47602,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47735,8 +47735,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48004,8 +48004,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48188,8 +48188,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -48316,8 +48316,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48452,8 +48452,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48604,8 +48604,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48718,8 +48718,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49149,8 +49149,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -49449,8 +49449,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -49604,8 +49604,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49752,8 +49752,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -50046,8 +50046,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -50197,8 +50197,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -50348,8 +50348,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -50507,8 +50507,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -50651,8 +50651,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -50826,8 +50826,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -50974,8 +50974,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -51125,8 +51125,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51267,8 +51267,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51411,8 +51411,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51559,8 +51559,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51700,8 +51700,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51842,8 +51842,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -52035,8 +52035,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -52276,8 +52276,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -52447,8 +52447,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -52698,8 +52698,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -52856,8 +52856,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53033,8 +53033,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -53200,8 +53200,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53399,8 +53399,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53543,8 +53543,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53757,8 +53757,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53905,8 +53905,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -54064,8 +54064,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -54212,8 +54212,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -54364,8 +54364,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -62783,19 +62783,27 @@
    "Ipv4AddressesPerSecondaryInterface": 0,
    "Ipv6AddressesPerInterface": 50,
    "Ipv6Supported": true,
-   "MaximumNetworkCards": 1,
+   "MaximumNetworkCards": 2,
    "MaximumNetworkInterfaces": 15,
    "NetworkCards": [
     {
      "BaselineBandwidthInGbps": 100.0,
      "DefaultEnaQueueCountPerInterface": 32,
-     "MaximumNetworkInterfaces": 15,
+     "MaximumNetworkInterfaces": 8,
      "NetworkCardIndex": 0,
+     "NetworkPerformance": "100 Gigabit",
+     "PeakBandwidthInGbps": 100.0
+    },
+    {
+     "BaselineBandwidthInGbps": 100.0,
+     "DefaultEnaQueueCountPerInterface": 32,
+     "MaximumNetworkInterfaces": 7,
+     "NetworkCardIndex": 1,
      "NetworkPerformance": "100 Gigabit",
      "PeakBandwidthInGbps": 100.0
     }
    ],
-   "NetworkPerformance": "100 Gigabit",
+   "NetworkPerformance": "200 Gigabit",
    "SecondaryNetworkSupported": false
   },
   "NitroEnclavesSupport": "supported",
@@ -63328,19 +63336,27 @@
    "Ipv4AddressesPerSecondaryInterface": 0,
    "Ipv6AddressesPerInterface": 50,
    "Ipv6Supported": true,
-   "MaximumNetworkCards": 1,
+   "MaximumNetworkCards": 2,
    "MaximumNetworkInterfaces": 15,
    "NetworkCards": [
     {
      "BaselineBandwidthInGbps": 100.0,
      "DefaultEnaQueueCountPerInterface": 32,
-     "MaximumNetworkInterfaces": 15,
+     "MaximumNetworkInterfaces": 8,
      "NetworkCardIndex": 0,
+     "NetworkPerformance": "100 Gigabit",
+     "PeakBandwidthInGbps": 100.0
+    },
+    {
+     "BaselineBandwidthInGbps": 100.0,
+     "DefaultEnaQueueCountPerInterface": 32,
+     "MaximumNetworkInterfaces": 7,
+     "NetworkCardIndex": 1,
      "NetworkPerformance": "100 Gigabit",
      "PeakBandwidthInGbps": 100.0
     }
    ],
-   "NetworkPerformance": "100 Gigabit",
+   "NetworkPerformance": "200 Gigabit",
    "SecondaryNetworkSupported": false
   },
   "NitroEnclavesSupport": "unsupported",
@@ -66071,7 +66087,7 @@
    "Ipv4AddressesPerSecondaryInterface": 0,
    "Ipv6AddressesPerInterface": 50,
    "Ipv6Supported": true,
-   "MaximumNetworkCards": 1,
+   "MaximumNetworkCards": 2,
    "MaximumNetworkInterfaces": 24,
    "NetworkCards": [
     {
@@ -66080,8 +66096,19 @@
      "DefaultEnaQueueCountPerInterface": 32,
      "MaximumEnaQueueCount": 768,
      "MaximumEnaQueueCountPerInterface": 128,
-     "MaximumNetworkInterfaces": 24,
+     "MaximumNetworkInterfaces": 12,
      "NetworkCardIndex": 0,
+     "NetworkPerformance": "Up to 300 Gigabit",
+     "PeakBandwidthInGbps": 300.0
+    },
+    {
+     "AdditionalFlexibleNetworkInterfaces": 0,
+     "BaselineBandwidthInGbps": 300.0,
+     "DefaultEnaQueueCountPerInterface": 32,
+     "MaximumEnaQueueCount": 768,
+     "MaximumEnaQueueCountPerInterface": 128,
+     "MaximumNetworkInterfaces": 12,
+     "NetworkCardIndex": 1,
      "NetworkPerformance": "Up to 300 Gigabit",
      "PeakBandwidthInGbps": 300.0
     }
@@ -66670,7 +66697,7 @@
    "Ipv4AddressesPerSecondaryInterface": 0,
    "Ipv6AddressesPerInterface": 50,
    "Ipv6Supported": true,
-   "MaximumNetworkCards": 1,
+   "MaximumNetworkCards": 2,
    "MaximumNetworkInterfaces": 24,
    "NetworkCards": [
     {
@@ -66678,8 +66705,18 @@
      "DefaultEnaQueueCountPerInterface": 32,
      "MaximumEnaQueueCount": 768,
      "MaximumEnaQueueCountPerInterface": 128,
-     "MaximumNetworkInterfaces": 24,
+     "MaximumNetworkInterfaces": 12,
      "NetworkCardIndex": 0,
+     "NetworkPerformance": "Up to 300 Gigabit",
+     "PeakBandwidthInGbps": 300.0
+    },
+    {
+     "BaselineBandwidthInGbps": 300.0,
+     "DefaultEnaQueueCountPerInterface": 32,
+     "MaximumEnaQueueCount": 768,
+     "MaximumEnaQueueCountPerInterface": 128,
+     "MaximumNetworkInterfaces": 12,
+     "NetworkCardIndex": 1,
      "NetworkPerformance": "Up to 300 Gigabit",
      "PeakBandwidthInGbps": 300.0
     }
