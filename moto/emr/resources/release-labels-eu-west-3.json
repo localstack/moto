@@ -108,5 +108,6 @@
   "emr-4.9.4",
   "emr-4.9.3",
   "emr-4.9.2",
-  "emr-spark-8.0.0"
+  "emr-spark-8.0.0",
+  "emr-spark-8.1.0"
 ]
