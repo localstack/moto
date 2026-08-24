@@ -1831,6 +1831,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.af-south-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
                 "endpoint": {
@@ -3716,6 +3725,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-east-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
                 "endpoint": {
@@ -4985,6 +5003,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-east-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
@@ -7738,6 +7765,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-northeast-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verified-access": {
                 "Value": "verified-access",
                 "endpoint": {
@@ -10351,6 +10387,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-northeast-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verified-access": {
                 "Value": "verified-access",
                 "endpoint": {
@@ -12235,6 +12280,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-northeast-3.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
@@ -14756,6 +14810,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-south-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verified-access": {
                 "Value": "verified-access",
                 "endpoint": {
@@ -16385,6 +16448,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-south-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
@@ -19028,6 +19100,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-southeast-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verified-access": {
                 "Value": "verified-access",
@@ -21942,6 +22023,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-southeast-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verified-access": {
                 "Value": "verified-access",
                 "endpoint": {
@@ -23635,6 +23725,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-southeast-3.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verified-access": {
                 "Value": "verified-access",
                 "endpoint": {
@@ -25177,6 +25276,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-southeast-4.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
@@ -26775,6 +26883,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-southeast-5.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
                 "endpoint": {
@@ -28062,6 +28179,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-southeast-6.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
@@ -29434,6 +29560,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ap-southeast-7.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
@@ -31929,6 +32064,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ca-central-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verified-access": {
                 "Value": "verified-access",
                 "endpoint": {
@@ -33428,6 +33572,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.ca-west-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
@@ -39179,6 +39332,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.eu-central-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verified-access": {
                 "Value": "verified-access",
                 "endpoint": {
@@ -40850,6 +41012,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.eu-central-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
@@ -43101,6 +43272,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.eu-north-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verified-access": {
                 "Value": "verified-access",
                 "endpoint": {
@@ -44980,6 +45160,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.eu-south-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verified-access": {
                 "Value": "verified-access",
                 "endpoint": {
@@ -46762,6 +46951,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.eu-south-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
@@ -49623,6 +49821,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.eu-west-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verified-access": {
                 "Value": "verified-access",
                 "endpoint": {
@@ -49759,6 +49966,9 @@
               },
               "euw2-az3": {
                 "Value": "euw2-az3"
+              },
+              "euw2-az4": {
+                "Value": "euw2-az4"
               }
             },
             "domain": {
@@ -52321,6 +52531,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.eu-west-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verified-access": {
                 "Value": "verified-access",
                 "endpoint": {
@@ -54606,6 +54825,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.eu-west-3.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
@@ -57520,6 +57748,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.il-central-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verified-access": {
                 "Value": "verified-access",
@@ -62314,6 +62551,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.mx-central-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verifiedpermissions": {
                 "Value": "verifiedpermissions",
                 "endpoint": {
@@ -64522,6 +64768,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.sa-east-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verified-access": {
                 "Value": "verified-access",
@@ -70538,6 +70793,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.us-east-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verified-access": {
                 "Value": "verified-access",
                 "endpoint": {
@@ -76322,6 +76586,15 @@
               "trustedadvisor": {
                 "Value": "trustedadvisor"
               },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.us-west-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "verified-access": {
                 "Value": "verified-access",
                 "endpoint": {
@@ -76436,6 +76709,9 @@
               },
               "usw2-las1-az1": {
                 "Value": "usw2-las1-az1"
+              },
+              "usw2-las2-az1": {
+                "Value": "usw2-las2-az1"
               },
               "usw2-lax1-az1": {
                 "Value": "usw2-lax1-az1"
@@ -79348,6 +79624,15 @@
               },
               "trustedadvisor": {
                 "Value": "trustedadvisor"
+              },
+              "uxc": {
+                "Value": "uxc",
+                "endpoint": {
+                  "Value": "uxc.us-west-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
               },
               "verified-access": {
                 "Value": "verified-access",
