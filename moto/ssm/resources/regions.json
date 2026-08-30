@@ -15129,6 +15129,9 @@
                   "Value": "HTTPS"
                 }
               },
+              "bedrock-agentcore": {
+                "Value": "bedrock-agentcore"
+              },
               "bedrock-runtime": {
                 "Value": "bedrock-runtime",
                 "endpoint": {
@@ -16573,6 +16576,12 @@
                 },
                 "protocols": {
                   "Value": "HTTPS"
+                }
+              },
+              "account-access": {
+                "Value": "account-access",
+                "endpoint": {
+                  "Value": "account-access.ap-southeast-1.api.aws"
                 }
               },
               "acm": {
@@ -19053,6 +19062,9 @@
                   "Value": "HTTPS"
                 }
               },
+              "timestream": {
+                "Value": "timestream"
+              },
               "timestream-influxdb": {
                 "Value": "timestream-influxdb",
                 "endpoint": {
@@ -19219,6 +19231,15 @@
                 "Value": "workspaces",
                 "endpoint": {
                   "Value": "workspaces.ap-southeast-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "workspaces-instances": {
+                "Value": "workspaces-instances",
+                "endpoint": {
+                  "Value": "workspaces-instances.ap-southeast-1.api.aws"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -28037,6 +28058,15 @@
                 "Value": "servicediscovery",
                 "endpoint": {
                   "Value": "servicediscovery.ap-southeast-6.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "shield": {
+                "Value": "shield",
+                "endpoint": {
+                  "Value": "shield.us-east-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -43214,6 +43244,9 @@
                 "protocols": {
                   "Value": "HTTPS"
                 }
+              },
+              "timestream": {
+                "Value": "timestream"
               },
               "timestream-influxdb": {
                 "Value": "timestream-influxdb",
@@ -64902,6 +64935,9 @@
               "use1-atl2-az1": {
                 "Value": "use1-atl2-az1"
               },
+              "use1-atl2-az2": {
+                "Value": "use1-atl2-az2"
+              },
               "use1-bos1-az1": {
                 "Value": "use1-bos1-az1"
               },
@@ -65742,6 +65778,15 @@
                 "Value": "connectcases",
                 "endpoint": {
                   "Value": "cases.us-east-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "connecthealth": {
+                "Value": "connecthealth",
+                "endpoint": {
+                  "Value": "health-agent.us-east-1.api.aws"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -74786,6 +74831,9 @@
                   "Value": "HTTPS"
                 }
               },
+              "bedrock-agentcore": {
+                "Value": "bedrock-agentcore"
+              },
               "braket": {
                 "Value": "braket",
                 "endpoint": {
@@ -77451,6 +77499,15 @@
                 "Value": "connectcases",
                 "endpoint": {
                   "Value": "cases.us-west-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "connecthealth": {
+                "Value": "connecthealth",
+                "endpoint": {
+                  "Value": "health-agent.us-west-2.api.aws"
                 },
                 "protocols": {
                   "Value": "HTTPS"

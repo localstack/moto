@@ -687,6 +687,20 @@
               }
             }
           },
+          "account-access": {
+            "Value": "account-access",
+            "longName": {
+              "Value": "Account Access"
+            },
+            "regions": {
+              "ap-southeast-1": {
+                "Value": "ap-southeast-1",
+                "endpoint": {
+                  "Value": "account-access.ap-southeast-1.api.aws"
+                }
+              }
+            }
+          },
           "acm": {
             "Value": "acm",
             "longName": {
@@ -9580,6 +9594,9 @@
               "ap-south-1": {
                 "Value": "ap-south-1"
               },
+              "ap-south-2": {
+                "Value": "ap-south-2"
+              },
               "ap-southeast-1": {
                 "Value": "ap-southeast-1"
               },
@@ -9627,6 +9644,9 @@
               },
               "us-gov-west-1": {
                 "Value": "us-gov-west-1"
+              },
+              "us-west-1": {
+                "Value": "us-west-1"
               },
               "us-west-2": {
                 "Value": "us-west-2"
@@ -18545,6 +18565,24 @@
                 "Value": "eu-west-2",
                 "endpoint": {
                   "Value": "health-agent.eu-west-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "us-east-1": {
+                "Value": "us-east-1",
+                "endpoint": {
+                  "Value": "health-agent.us-east-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "us-west-2": {
+                "Value": "us-west-2",
+                "endpoint": {
+                  "Value": "health-agent.us-west-2.api.aws"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -70263,6 +70301,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "ap-southeast-6": {
+                "Value": "ap-southeast-6",
+                "endpoint": {
+                  "Value": "shield.us-east-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "ap-southeast-7": {
                 "Value": "ap-southeast-7",
                 "endpoint": {
@@ -76680,11 +76727,17 @@
               "ap-south-1": {
                 "Value": "ap-south-1"
               },
+              "ap-southeast-1": {
+                "Value": "ap-southeast-1"
+              },
               "ap-southeast-2": {
                 "Value": "ap-southeast-2"
               },
               "eu-central-1": {
                 "Value": "eu-central-1"
+              },
+              "eu-north-1": {
+                "Value": "eu-north-1"
               },
               "eu-west-1": {
                 "Value": "eu-west-1"
@@ -81598,6 +81651,15 @@
                 "Value": "ap-northeast-2",
                 "endpoint": {
                   "Value": "workspaces-instances.ap-northeast-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "ap-southeast-1": {
+                "Value": "ap-southeast-1",
+                "endpoint": {
+                  "Value": "workspaces-instances.ap-southeast-1.api.aws"
                 },
                 "protocols": {
                   "Value": "HTTPS"
