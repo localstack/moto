@@ -45230,8 +45230,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -45368,8 +45368,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45503,8 +45503,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -45639,8 +45639,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -45776,8 +45776,8 @@
      },
      "Name": "Radeon Pro V520",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -45910,8 +45910,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -46064,8 +46064,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -46222,8 +46222,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -46363,8 +46363,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -46506,8 +46506,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -46656,8 +46656,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -47197,8 +47197,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47333,8 +47333,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -47466,8 +47466,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -47602,8 +47602,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -47735,8 +47735,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -48004,8 +48004,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -48188,8 +48188,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48316,8 +48316,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -48452,8 +48452,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -48604,8 +48604,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -48718,8 +48718,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -49149,8 +49149,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49449,8 +49449,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49604,8 +49604,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -49752,8 +49752,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -50046,8 +50046,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -50197,8 +50197,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -50348,8 +50348,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -50507,8 +50507,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -50651,8 +50651,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -50826,8 +50826,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -50974,8 +50974,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51125,8 +51125,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -51267,8 +51267,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -51411,8 +51411,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -51559,8 +51559,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -51700,8 +51700,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -51842,8 +51842,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -52035,8 +52035,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -52447,8 +52447,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -52698,8 +52698,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -52856,8 +52856,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -53033,8 +53033,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53200,8 +53200,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -53543,8 +53543,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -53757,8 +53757,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -54064,8 +54064,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -54212,8 +54212,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -54364,8 +54364,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -60544,7 +60544,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 2.4
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -60693,7 +60693,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 2.4
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -60853,7 +60853,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 2.4
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -61026,7 +61026,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 2.4
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -61158,7 +61158,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 2.4
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -61330,7 +61330,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 2.4
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -61463,7 +61463,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 2.4
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -61604,7 +61604,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 2.4
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -61720,7 +61720,7 @@
    "SupportedArchitectures": [
     "x86_64"
    ],
-   "SustainedClockSpeedInGhz": 2.4
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -61831,7 +61831,7 @@
    "SupportedArchitectures": [
     "x86_64"
    ],
-   "SustainedClockSpeedInGhz": 2.4
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -61949,7 +61949,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 2.4
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -62076,7 +62076,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 3.6
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -62225,7 +62225,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 3.6
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -62386,7 +62386,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 3.6
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -62559,7 +62559,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 3.6
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -62688,7 +62688,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 3.6
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -62830,7 +62830,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 3.6
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -63002,7 +63002,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 3.6
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -63139,7 +63139,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 3.6
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -63255,7 +63255,7 @@
    "SupportedArchitectures": [
     "x86_64"
    ],
-   "SustainedClockSpeedInGhz": 3.6
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -63374,7 +63374,7 @@
    "SupportedArchitectures": [
     "x86_64"
    ],
-   "SustainedClockSpeedInGhz": 3.6
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
@@ -63492,7 +63492,7 @@
     "nested-virtualization",
     "metal-compatibility"
    ],
-   "SustainedClockSpeedInGhz": 3.6
+   "SustainedClockSpeedInGhz": 3.2
   },
   "RebootMigrationSupport": "unsupported",
   "SupportedBootModes": [
