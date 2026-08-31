@@ -14068,6 +14068,10 @@
   "Location": "us-east-1c"
  },
  {
+  "InstanceType": "p6-b300.48xlarge",
+  "Location": "us-east-1c"
+ },
+ {
   "InstanceType": "r3.2xlarge",
   "Location": "us-east-1c"
  },
