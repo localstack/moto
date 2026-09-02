@@ -10,7 +10,7 @@ class TransitGatewayAttachment(EC2BaseResponse):
         transit_gateway_id = self._get_param("TransitGatewayId")
         vpc_id = self._get_param("VpcId")
 
-        tags = self._parse_tag_specification().get("transit-gateway-route-table", {})
+        tags = self._parse_tag_specification().get("transit-gateway-attachment", {})
 
         transit_gateway_attachment = (
             self.ec2_backend.create_transit_gateway_vpc_attachment(

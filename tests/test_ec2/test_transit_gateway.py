@@ -1,5 +1,6 @@
 from time import sleep
 from unittest import SkipTest
+from uuid import uuid4
 
 import boto3
 import pytest
@@ -627,6 +628,61 @@ def test_create_transit_gateway_vpc_attachment():
     assert attachment["SubnetIds"] == ["sub1"]
     assert attachment["State"] == "available"
     assert "Tags" not in attachment
+
+
+@pytest.mark.aws_verified
+@ec2_aws_verified(create_vpc=True, create_subnet=True, create_transit_gateway=True)
+def test_create_transit_gateway_vpc_attachment_with_tags(
+    account_id, ec2_client=None, vpc_id=None, subnet_id=None, tg_id=None
+):
+    name_tag = {"Key": "Name", "Value": f"my-attachment-{uuid4()}"}
+    team_tag = {"Key": "Team", "Value": f"platform-{uuid4()}"}
+    env_tag = {"Key": "Env", "Value": f"test-{uuid4()}"}
+
+    response = ec2_client.create_transit_gateway_vpc_attachment(
+        TransitGatewayId=tg_id,
+        VpcId=vpc_id,
+        SubnetIds=[subnet_id],
+        TagSpecifications=[
+            {
+                "ResourceType": "transit-gateway-attachment",
+                "Tags": [name_tag, team_tag],
+            }
+        ],
+    )
+    create = response["TransitGatewayVpcAttachment"]
+    tg_attachment_id = create["TransitGatewayAttachmentId"]
+    # AWS returns 'pending' - Moto is immediately 'available', so don't assert on State
+    assert len(create["Tags"]) == 2
+    assert name_tag in create["Tags"]
+    assert team_tag in create["Tags"]
+
+    # Wait until the attachment is fully ready
+    wait_for_transit_gateway_attachments(ec2_client, tg_attachment_id=tg_attachment_id)
+
+    vpc_attachment = ec2_client.describe_transit_gateway_vpc_attachments(
+        TransitGatewayAttachmentIds=[tg_attachment_id]
+    )["TransitGatewayVpcAttachments"][0]
+    assert len(vpc_attachment["Tags"]) == 2
+    assert name_tag in vpc_attachment["Tags"]
+    assert team_tag in vpc_attachment["Tags"]
+
+    tg_attachment = ec2_client.describe_transit_gateway_attachments(
+        TransitGatewayAttachmentIds=[tg_attachment_id]
+    )["TransitGatewayAttachments"][0]
+    assert len(tg_attachment["Tags"]) == 2
+    assert name_tag in tg_attachment["Tags"]
+    assert team_tag in tg_attachment["Tags"]
+
+    # Tags added after creation are merged with the create-time tags
+    ec2_client.create_tags(Resources=[tg_attachment_id], Tags=[env_tag])
+    vpc_attachment = ec2_client.describe_transit_gateway_vpc_attachments(
+        TransitGatewayAttachmentIds=[tg_attachment_id]
+    )["TransitGatewayVpcAttachments"][0]
+    assert len(vpc_attachment["Tags"]) == 3
+    assert name_tag in vpc_attachment["Tags"]
+    assert team_tag in vpc_attachment["Tags"]
+    assert env_tag in vpc_attachment["Tags"]
 
 
 @mock_aws
