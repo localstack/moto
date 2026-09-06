@@ -1801,6 +1801,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "timestream-influxdb": {
+                "Value": "timestream-influxdb",
+                "endpoint": {
+                  "Value": "timestream-influxdb.af-south-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "transcribe": {
                 "Value": "transcribe",
                 "endpoint": {
@@ -1983,6 +1992,15 @@
                 },
                 "protocols": {
                   "Value": "https"
+                }
+              },
+              "aiops": {
+                "Value": "aiops",
+                "endpoint": {
+                  "Value": "aiops.ap-east-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
                 }
               },
               "aiq": {
@@ -3686,6 +3704,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "timestream-influxdb": {
+                "Value": "timestream-influxdb",
+                "endpoint": {
+                  "Value": "timestream-influxdb.ap-east-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "transcribe": {
                 "Value": "transcribe",
                 "endpoint": {
@@ -5129,6 +5156,15 @@
                 },
                 "protocols": {
                   "Value": "https"
+                }
+              },
+              "agent-registry": {
+                "Value": "agent-registry",
+                "endpoint": {
+                  "Value": "agent-registry.ap-northeast-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
                 }
               },
               "aiops": {
@@ -10339,6 +10375,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "timestream-influxdb": {
+                "Value": "timestream-influxdb",
+                "endpoint": {
+                  "Value": "timestream-influxdb.ap-northeast-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "tnb": {
                 "Value": "tnb",
                 "endpoint": {
@@ -10659,6 +10704,15 @@
                 "Value": "appmesh",
                 "endpoint": {
                   "Value": "appmesh.ap-northeast-3.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "appstream": {
+                "Value": "appstream",
+                "endpoint": {
+                  "Value": "appstream2.ap-northeast-3.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -16431,6 +16485,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "timestream-influxdb": {
+                "Value": "timestream-influxdb",
+                "endpoint": {
+                  "Value": "timestream-influxdb.ap-south-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "transfer": {
                 "Value": "transfer",
                 "endpoint": {
@@ -19333,6 +19396,15 @@
                 },
                 "protocols": {
                   "Value": "https"
+                }
+              },
+              "agent-registry": {
+                "Value": "agent-registry",
+                "endpoint": {
+                  "Value": "agent-registry.ap-southeast-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
                 }
               },
               "ahl": {
@@ -25277,6 +25349,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "timestream-influxdb": {
+                "Value": "timestream-influxdb",
+                "endpoint": {
+                  "Value": "timestream-influxdb.ap-southeast-4.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "transfer": {
                 "Value": "transfer",
                 "endpoint": {
@@ -27811,6 +27892,12 @@
                   "Value": "HTTPS"
                 }
               },
+              "pcs": {
+                "Value": "pcs",
+                "endpoint": {
+                  "Value": "pcs.ap-southeast-6.amazonaws.com"
+                }
+              },
               "pi": {
                 "Value": "pi",
                 "endpoint": {
@@ -29565,6 +29652,15 @@
                 "Value": "synthetics",
                 "endpoint": {
                   "Value": "synthetics.ap-southeast-7.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "timestream-influxdb": {
+                "Value": "timestream-influxdb",
+                "endpoint": {
+                  "Value": "timestream-influxdb.ap-southeast-7.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -32329,6 +32425,15 @@
                 "Value": "application-insights",
                 "endpoint": {
                   "Value": "applicationinsights.ca-west-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "appstream": {
+                "Value": "appstream",
+                "endpoint": {
+                  "Value": "appstream2.ca-west-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -36674,6 +36779,15 @@
                   "Value": "https"
                 }
               },
+              "aiops": {
+                "Value": "aiops",
+                "endpoint": {
+                  "Value": "aiops.eu-central-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "aiq": {
                 "Value": "aiq"
               },
@@ -39615,6 +39729,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "appstream": {
+                "Value": "appstream",
+                "endpoint": {
+                  "Value": "appstream2.eu-central-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "appsync": {
                 "Value": "appsync",
                 "endpoint": {
@@ -41008,6 +41131,15 @@
                 "Value": "synthetics",
                 "endpoint": {
                   "Value": "synthetics.eu-central-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "timestream-influxdb": {
+                "Value": "timestream-influxdb",
+                "endpoint": {
+                  "Value": "timestream-influxdb.eu-central-2.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -47127,10 +47259,28 @@
                   "Value": "https"
                 }
               },
+              "agent-registry": {
+                "Value": "agent-registry",
+                "endpoint": {
+                  "Value": "agent-registry.eu-west-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "ahl": {
                 "Value": "ahl",
                 "endpoint": {
                   "Value": "healthlake.eu-west-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "aiops": {
+                "Value": "aiops",
+                "endpoint": {
+                  "Value": "aiops.eu-west-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -57761,6 +57911,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "timestream-influxdb": {
+                "Value": "timestream-influxdb",
+                "endpoint": {
+                  "Value": "timestream-influxdb.il-central-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "transfer": {
                 "Value": "transfer",
                 "endpoint": {
@@ -65018,10 +65177,28 @@
                   "Value": "https"
                 }
               },
+              "agent-registry": {
+                "Value": "agent-registry",
+                "endpoint": {
+                  "Value": "agent-registry.us-east-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "ahl": {
                 "Value": "ahl",
                 "endpoint": {
                   "Value": "healthlake.us-east-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "aiops": {
+                "Value": "aiops",
+                "endpoint": {
+                  "Value": "aiops.us-east-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -68294,47 +68471,6 @@
                   "Value": "HTTPS"
                 }
               }
-            },
-            "wavelength-zones": {
-              "use1-wl1-atl-wlz1": {
-                "Value": "use1-wl1-atl-wlz1"
-              },
-              "use1-wl1-bna-wlz1": {
-                "Value": "use1-wl1-bna-wlz1"
-              },
-              "use1-wl1-bos-wlz1": {
-                "Value": "use1-wl1-bos-wlz1"
-              },
-              "use1-wl1-chi-wlz1": {
-                "Value": "use1-wl1-chi-wlz1"
-              },
-              "use1-wl1-clt-wlz1": {
-                "Value": "use1-wl1-clt-wlz1"
-              },
-              "use1-wl1-dfw-wlz1": {
-                "Value": "use1-wl1-dfw-wlz1"
-              },
-              "use1-wl1-dtw-wlz1": {
-                "Value": "use1-wl1-dtw-wlz1"
-              },
-              "use1-wl1-iah-wlz1": {
-                "Value": "use1-wl1-iah-wlz1"
-              },
-              "use1-wl1-mia-wlz1": {
-                "Value": "use1-wl1-mia-wlz1"
-              },
-              "use1-wl1-msp-wlz1": {
-                "Value": "use1-wl1-msp-wlz1"
-              },
-              "use1-wl1-nyc-wlz1": {
-                "Value": "use1-wl1-nyc-wlz1"
-              },
-              "use1-wl1-tpa-wlz1": {
-                "Value": "use1-wl1-tpa-wlz1"
-              },
-              "use1-wl1-was-wlz1": {
-                "Value": "use1-wl1-was-wlz1"
-              }
             }
           },
           "us-east-2": {
@@ -68415,6 +68551,15 @@
                 "Value": "ahl",
                 "endpoint": {
                   "Value": "healthlake.us-east-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "aiops": {
+                "Value": "aiops",
+                "endpoint": {
+                  "Value": "aiops.us-east-2.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -72000,6 +72145,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "mwaa-serverless": {
+                "Value": "mwaa-serverless",
+                "endpoint": {
+                  "Value": "airflow-serverless.us-gov-east-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "neptune": {
                 "Value": "neptune",
                 "endpoint": {
@@ -73822,6 +73976,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "mwaa-serverless": {
+                "Value": "mwaa-serverless",
+                "endpoint": {
+                  "Value": "airflow-serverless.us-gov-west-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "neptune": {
                 "Value": "neptune",
                 "endpoint": {
@@ -74595,6 +74758,12 @@
                 },
                 "protocols": {
                   "Value": "HTTPS"
+                }
+              },
+              "account-access": {
+                "Value": "account-access",
+                "endpoint": {
+                  "Value": "account-access.us-west-1.api.aws"
                 }
               },
               "acm": {
@@ -76826,10 +76995,28 @@
                   "Value": "https"
                 }
               },
+              "agent-registry": {
+                "Value": "agent-registry",
+                "endpoint": {
+                  "Value": "agent-registry.us-west-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "ahl": {
                 "Value": "ahl",
                 "endpoint": {
                   "Value": "healthlake.us-west-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "aiops": {
+                "Value": "aiops",
+                "endpoint": {
+                  "Value": "aiops.us-west-2.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -79831,26 +80018,6 @@
                 "protocols": {
                   "Value": "HTTPS"
                 }
-              }
-            },
-            "wavelength-zones": {
-              "usw2-wl1-den-wlz1": {
-                "Value": "usw2-wl1-den-wlz1"
-              },
-              "usw2-wl1-las-wlz1": {
-                "Value": "usw2-wl1-las-wlz1"
-              },
-              "usw2-wl1-lax-wlz1": {
-                "Value": "usw2-wl1-lax-wlz1"
-              },
-              "usw2-wl1-phx-wlz1": {
-                "Value": "usw2-wl1-phx-wlz1"
-              },
-              "usw2-wl1-sea-wlz1": {
-                "Value": "usw2-wl1-sea-wlz1"
-              },
-              "usw2-wl1-sfo-wlz1": {
-                "Value": "usw2-wl1-sfo-wlz1"
               }
             }
           }
