@@ -864,26 +864,6 @@
   "Location": "ca-central-1a"
  },
  {
-  "InstanceType": "g4ad.16xlarge",
-  "Location": "ca-central-1a"
- },
- {
-  "InstanceType": "g4ad.2xlarge",
-  "Location": "ca-central-1a"
- },
- {
-  "InstanceType": "g4ad.4xlarge",
-  "Location": "ca-central-1a"
- },
- {
-  "InstanceType": "g4ad.8xlarge",
-  "Location": "ca-central-1a"
- },
- {
-  "InstanceType": "g4ad.xlarge",
-  "Location": "ca-central-1a"
- },
- {
   "InstanceType": "g4dn.12xlarge",
   "Location": "ca-central-1a"
  },
@@ -3949,26 +3929,6 @@
  },
  {
   "InstanceType": "d3.xlarge",
-  "Location": "ca-central-1b"
- },
- {
-  "InstanceType": "g4ad.16xlarge",
-  "Location": "ca-central-1b"
- },
- {
-  "InstanceType": "g4ad.2xlarge",
-  "Location": "ca-central-1b"
- },
- {
-  "InstanceType": "g4ad.4xlarge",
-  "Location": "ca-central-1b"
- },
- {
-  "InstanceType": "g4ad.8xlarge",
-  "Location": "ca-central-1b"
- },
- {
-  "InstanceType": "g4ad.xlarge",
   "Location": "ca-central-1b"
  },
  {
