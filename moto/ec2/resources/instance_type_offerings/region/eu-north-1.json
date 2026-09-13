@@ -1800,6 +1800,10 @@
   "Location": "eu-north-1"
  },
  {
+  "InstanceType": "p6-b200.48xlarge",
+  "Location": "eu-north-1"
+ },
+ {
   "InstanceType": "r5.12xlarge",
   "Location": "eu-north-1"
  },

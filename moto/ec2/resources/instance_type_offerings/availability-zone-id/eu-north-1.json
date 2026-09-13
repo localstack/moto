@@ -4260,6 +4260,10 @@
   "Location": "eun1-az2"
  },
  {
+  "InstanceType": "p6-b200.48xlarge",
+  "Location": "eun1-az2"
+ },
+ {
   "InstanceType": "r5.12xlarge",
   "Location": "eun1-az2"
  },
