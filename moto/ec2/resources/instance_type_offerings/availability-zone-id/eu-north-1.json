@@ -1728,6 +1728,10 @@
   "Location": "eun1-az1"
  },
  {
+  "InstanceType": "p5.4xlarge",
+  "Location": "eun1-az1"
+ },
+ {
   "InstanceType": "p5e.48xlarge",
   "Location": "eun1-az1"
  },
@@ -4257,6 +4261,14 @@
  },
  {
   "InstanceType": "p5.48xlarge",
+  "Location": "eun1-az2"
+ },
+ {
+  "InstanceType": "p5.4xlarge",
+  "Location": "eun1-az2"
+ },
+ {
+  "InstanceType": "p6-b200.48xlarge",
   "Location": "eun1-az2"
  },
  {
@@ -6821,6 +6833,10 @@
  },
  {
   "InstanceType": "p5.48xlarge",
+  "Location": "eun1-az3"
+ },
+ {
+  "InstanceType": "p5.4xlarge",
   "Location": "eun1-az3"
  },
  {

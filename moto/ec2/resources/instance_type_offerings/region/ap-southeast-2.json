@@ -3564,6 +3564,22 @@
   "Location": "ap-southeast-2"
  },
  {
+  "InstanceType": "t8i.medium",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "t8i.micro",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "t8i.nano",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "t8i.small",
+  "Location": "ap-southeast-2"
+ },
+ {
   "InstanceType": "trn1.32xlarge",
   "Location": "ap-southeast-2"
  },

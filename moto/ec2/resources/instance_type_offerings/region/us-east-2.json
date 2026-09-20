@@ -4592,6 +4592,22 @@
   "Location": "us-east-2"
  },
  {
+  "InstanceType": "t8i.medium",
+  "Location": "us-east-2"
+ },
+ {
+  "InstanceType": "t8i.micro",
+  "Location": "us-east-2"
+ },
+ {
+  "InstanceType": "t8i.nano",
+  "Location": "us-east-2"
+ },
+ {
+  "InstanceType": "t8i.small",
+  "Location": "us-east-2"
+ },
+ {
   "InstanceType": "trn1.2xlarge",
   "Location": "us-east-2"
  },
