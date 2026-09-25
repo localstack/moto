@@ -558,11 +558,19 @@ def test_search_transit_gateway_routes_by_routesearch():
 
     exported_cidr_ranges = ["172.17.0.0/24", "192.160.0.0/24"]
     for route in exported_cidr_ranges:
-        client.create_transit_gateway_route(
+        created_route = client.create_transit_gateway_route(
             DestinationCidrBlock=route,
             TransitGatewayRouteTableId=transit_gateway_route_id,
             TransitGatewayAttachmentId=transit_gateway_attachment_id,
-        )
+        )["Route"]
+
+        assert created_route["TransitGatewayAttachments"] == [
+            {
+                "ResourceId": vpc["VpcId"],
+                "ResourceType": "vpc",
+                "TransitGatewayAttachmentId": transit_gateway_attachment_id,
+            }
+        ]
 
     for route in exported_cidr_ranges:
         expected_route = client.search_transit_gateway_routes(
@@ -571,6 +579,13 @@ def test_search_transit_gateway_routes_by_routesearch():
         )
 
         assert expected_route["Routes"][0]["DestinationCidrBlock"] == route
+        assert expected_route["Routes"][0]["TransitGatewayAttachments"] == [
+            {
+                "ResourceId": vpc["VpcId"],
+                "ResourceType": "vpc",
+                "TransitGatewayAttachmentId": transit_gateway_attachment_id,
+            }
+        ]
 
 
 @mock_aws

@@ -164,15 +164,16 @@ class TransitGatewayRouteTableBackend:
         }
 
         if transit_gateway_attachment:
-            transit_gateway_attachment_dict = {
-                "transitGatewayAttachments": {
-                    "resourceId": transit_gateway_attachment.resource_id,
-                    "resourceType": transit_gateway_attachment.resource_type,
-                    "transitGatewayAttachmentId": transit_gateway_attachment_id,
-                }
-            }
             transit_gateways_route_table.routes[destination_cidr_block].update(
-                transit_gateway_attachment_dict  # type: ignore
+                {
+                    "transitGatewayAttachments": [
+                        {
+                            "resourceId": transit_gateway_attachment.resource_id,
+                            "resourceType": transit_gateway_attachment.resource_type,
+                            "transitGatewayAttachmentId": transit_gateway_attachment_id,
+                        }
+                    ]
+                }
             )
         return transit_gateways_route_table.routes[destination_cidr_block]
 
