@@ -3160,6 +3160,22 @@
   "Location": "eu-west-2"
  },
  {
+  "InstanceType": "t8i.medium",
+  "Location": "eu-west-2"
+ },
+ {
+  "InstanceType": "t8i.micro",
+  "Location": "eu-west-2"
+ },
+ {
+  "InstanceType": "t8i.nano",
+  "Location": "eu-west-2"
+ },
+ {
+  "InstanceType": "t8i.small",
+  "Location": "eu-west-2"
+ },
+ {
   "InstanceType": "u-6tb1.112xlarge",
   "Location": "eu-west-2"
  },
