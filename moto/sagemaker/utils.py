@@ -92,7 +92,7 @@ def filter_model_cards(
         filtered_versions = versions
 
         if creation_time_after:
-            if isinstance(creation_time_after, int):
+            if isinstance(creation_time_after, (int, float)):
                 creation_time_after = datetime.fromtimestamp(
                     creation_time_after, tz=timezone.utc
                 )
@@ -103,7 +103,7 @@ def filter_model_cards(
             ]
 
         if creation_time_before:
-            if isinstance(creation_time_before, int):
+            if isinstance(creation_time_before, (int, float)):
                 creation_time_before = datetime.fromtimestamp(
                     creation_time_before, tz=timezone.utc
                 )
