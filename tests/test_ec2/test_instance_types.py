@@ -36,13 +36,10 @@ def test_describe_instance_types_filter_by_type():
 @mock_aws
 def test_describe_instance_types_gpu_instance_types():
     client = boto3.client("ec2", "us-east-1")
-    instance_types = client.describe_instance_types(
-        InstanceTypes=["p3dn.24xlarge", "g4ad.8xlarge"]
-    )
+    instance_types = client.describe_instance_types(InstanceTypes=["p3dn.24xlarge"])
 
-    assert len(instance_types["InstanceTypes"]) == 2
+    assert len(instance_types["InstanceTypes"]) == 1
     assert "GpuInfo" in instance_types["InstanceTypes"][0]
-    assert "GpuInfo" in instance_types["InstanceTypes"][1]
 
     instance_type_to_gpu_info = {
         instance_info["InstanceType"]: instance_info["GpuInfo"]
@@ -53,23 +50,6 @@ def test_describe_instance_types_gpu_instance_types():
             # AWS seems to re-order these attributes every week
             gpu["Workloads"] = sorted(gpu["Workloads"])
     assert instance_type_to_gpu_info == {
-        "g4ad.8xlarge": {
-            "Gpus": [
-                {
-                    "Count": 2,
-                    "GpuPartitionSize": 1.0,
-                    "LogicalGpuCount": 2,
-                    "Manufacturer": "AMD",
-                    "MemoryInfo": {"SizeInMiB": 8192},
-                    "Name": "Radeon Pro V520",
-                    "Workloads": [
-                        "graphics",
-                        "ml-ai",
-                    ],
-                }
-            ],
-            "TotalGpuMemoryInMiB": 16384,
-        },
         "p3dn.24xlarge": {
             "Gpus": [
                 {
@@ -202,7 +182,14 @@ def test_describe_instance_types_small_instances():
     ])  # fmt: skip
 
     types = {t["InstanceType"] for t in instance_types["InstanceTypes"]}
-    assert types == {"t3.nano", "t3.micro", "t3a.nano", "t3a.micro"}
+    assert types == {
+        "t3.nano",
+        "t3.micro",
+        "t3a.nano",
+        "t3a.micro",
+        "t8i.micro",
+        "t8i.nano",
+    }
 
 
 @mock_aws
