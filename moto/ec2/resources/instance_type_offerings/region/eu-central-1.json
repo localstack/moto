@@ -4380,6 +4380,22 @@
   "Location": "eu-central-1"
  },
  {
+  "InstanceType": "t8i.medium",
+  "Location": "eu-central-1"
+ },
+ {
+  "InstanceType": "t8i.micro",
+  "Location": "eu-central-1"
+ },
+ {
+  "InstanceType": "t8i.nano",
+  "Location": "eu-central-1"
+ },
+ {
+  "InstanceType": "t8i.small",
+  "Location": "eu-central-1"
+ },
+ {
   "InstanceType": "u-3tb1.56xlarge",
   "Location": "eu-central-1"
  },
