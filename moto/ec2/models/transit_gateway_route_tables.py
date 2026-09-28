@@ -166,7 +166,7 @@ class TransitGatewayRouteTableBackend:
         if transit_gateway_attachment:
             transit_gateways_route_table.routes[destination_cidr_block].update(
                 {
-                    "transitGatewayAttachments": [
+                    "transitGatewayAttachments": [  # type: ignore[dict-item]
                         {
                             "resourceId": transit_gateway_attachment.resource_id,
                             "resourceType": transit_gateway_attachment.resource_type,
