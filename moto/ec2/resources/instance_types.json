@@ -45542,8 +45542,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45683,8 +45683,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -45976,8 +45976,8 @@
      },
      "Name": "T4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -46245,8 +46245,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47055,8 +47055,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47191,8 +47191,8 @@
      },
      "Name": "A10G",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -47324,8 +47324,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -47368,8 +47368,13 @@
    "NetworkPerformance": "25 Gigabit",
    "SecondaryNetworkSupported": false
   },
-  "NitroEnclavesSupport": "unsupported",
-  "NitroTpmSupport": "unsupported",
+  "NitroEnclavesSupport": "supported",
+  "NitroTpmInfo": {
+   "SupportedVersions": [
+    "2.0"
+   ]
+  },
+  "NitroTpmSupport": "supported",
   "PhcSupport": "unsupported",
   "PlacementGroupInfo": {
    "SupportedStrategies": [
@@ -47552,8 +47557,13 @@
    "NetworkPerformance": "Up to 10 Gigabit",
    "SecondaryNetworkSupported": false
   },
-  "NitroEnclavesSupport": "unsupported",
-  "NitroTpmSupport": "unsupported",
+  "NitroEnclavesSupport": "supported",
+  "NitroTpmInfo": {
+   "SupportedVersions": [
+    "2.0"
+   ]
+  },
+  "NitroTpmSupport": "supported",
   "PhcSupport": "unsupported",
   "PlacementGroupInfo": {
    "SupportedStrategies": [
@@ -47680,8 +47690,13 @@
    "NetworkPerformance": "Up to 10 Gigabit",
    "SecondaryNetworkSupported": false
   },
-  "NitroEnclavesSupport": "unsupported",
-  "NitroTpmSupport": "unsupported",
+  "NitroEnclavesSupport": "supported",
+  "NitroTpmInfo": {
+   "SupportedVersions": [
+    "2.0"
+   ]
+  },
+  "NitroTpmSupport": "supported",
   "PhcSupport": "unsupported",
   "PlacementGroupInfo": {
    "SupportedStrategies": [
@@ -47816,8 +47831,13 @@
    "NetworkPerformance": "12 Gigabit",
    "SecondaryNetworkSupported": false
   },
-  "NitroEnclavesSupport": "unsupported",
-  "NitroTpmSupport": "unsupported",
+  "NitroEnclavesSupport": "supported",
+  "NitroTpmInfo": {
+   "SupportedVersions": [
+    "2.0"
+   ]
+  },
+  "NitroTpmSupport": "supported",
   "PhcSupport": "unsupported",
   "PlacementGroupInfo": {
    "SupportedStrategies": [
@@ -48038,8 +48058,8 @@
      },
      "Name": "T4g",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -48082,8 +48102,13 @@
    "NetworkPerformance": "Up to 10 Gigabit",
    "SecondaryNetworkSupported": false
   },
-  "NitroEnclavesSupport": "unsupported",
-  "NitroTpmSupport": "unsupported",
+  "NitroEnclavesSupport": "supported",
+  "NitroTpmInfo": {
+   "SupportedVersions": [
+    "2.0"
+   ]
+  },
+  "NitroTpmSupport": "supported",
   "PhcSupport": "unsupported",
   "PlacementGroupInfo": {
    "SupportedStrategies": [
@@ -48264,8 +48289,6 @@
    "DefaultThreadsPerCore": 2,
    "DefaultVCpus": 48,
    "ValidCores": [
-    1,
-    2,
     3,
     6,
     9,
@@ -48315,8 +48338,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -48417,9 +48440,6 @@
    "DefaultThreadsPerCore": 2,
    "DefaultVCpus": 64,
    "ValidCores": [
-    1,
-    2,
-    3,
     4,
     8,
     12,
@@ -48571,11 +48591,6 @@
    "DefaultThreadsPerCore": 2,
    "DefaultVCpus": 96,
    "ValidCores": [
-    1,
-    2,
-    3,
-    4,
-    5,
     6,
     12,
     18,
@@ -48625,8 +48640,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -48871,10 +48886,6 @@
    "DefaultThreadsPerCore": 2,
    "DefaultVCpus": 192,
    "ValidCores": [
-    4,
-    6,
-    8,
-    10,
     12,
     24,
     36,
@@ -48924,8 +48935,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49072,8 +49083,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -49174,7 +49185,6 @@
    "DefaultThreadsPerCore": 2,
    "DefaultVCpus": 32,
    "ValidCores": [
-    1,
     2,
     4,
     6,
@@ -49224,8 +49234,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -49366,8 +49376,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -49827,8 +49837,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -50445,8 +50455,8 @@
      },
      "Name": "L40S",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51020,8 +51030,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51355,8 +51365,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -51596,8 +51606,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -52176,8 +52186,8 @@
      },
      "Name": "RTX PRO 4500",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -52719,8 +52729,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -52863,8 +52873,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -53077,8 +53087,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -53225,8 +53235,8 @@
      },
      "Name": "RTX PRO Server 6000",
      "Workloads": [
-      "ml-ai",
-      "graphics"
+      "graphics",
+      "ml-ai"
      ]
     }
    ],
@@ -53384,8 +53394,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53532,8 +53542,8 @@
      },
      "Name": "L4",
      "Workloads": [
-      "graphics",
-      "ml-ai"
+      "ml-ai",
+      "graphics"
      ]
     }
    ],
@@ -53634,7 +53644,6 @@
    "DefaultThreadsPerCore": 2,
    "DefaultVCpus": 32,
    "ValidCores": [
-    1,
     2,
     4,
     6,
