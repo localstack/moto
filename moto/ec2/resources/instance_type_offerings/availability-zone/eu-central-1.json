@@ -784,6 +784,46 @@
   "Location": "eu-central-1a"
  },
  {
+  "InstanceType": "c8gb.12xlarge",
+  "Location": "eu-central-1a"
+ },
+ {
+  "InstanceType": "c8gb.16xlarge",
+  "Location": "eu-central-1a"
+ },
+ {
+  "InstanceType": "c8gb.24xlarge",
+  "Location": "eu-central-1a"
+ },
+ {
+  "InstanceType": "c8gb.2xlarge",
+  "Location": "eu-central-1a"
+ },
+ {
+  "InstanceType": "c8gb.48xlarge",
+  "Location": "eu-central-1a"
+ },
+ {
+  "InstanceType": "c8gb.4xlarge",
+  "Location": "eu-central-1a"
+ },
+ {
+  "InstanceType": "c8gb.8xlarge",
+  "Location": "eu-central-1a"
+ },
+ {
+  "InstanceType": "c8gb.large",
+  "Location": "eu-central-1a"
+ },
+ {
+  "InstanceType": "c8gb.medium",
+  "Location": "eu-central-1a"
+ },
+ {
+  "InstanceType": "c8gb.xlarge",
+  "Location": "eu-central-1a"
+ },
+ {
   "InstanceType": "c8gd.12xlarge",
   "Location": "eu-central-1a"
  },
@@ -5404,6 +5444,46 @@
   "Location": "eu-central-1b"
  },
  {
+  "InstanceType": "c8gb.12xlarge",
+  "Location": "eu-central-1b"
+ },
+ {
+  "InstanceType": "c8gb.16xlarge",
+  "Location": "eu-central-1b"
+ },
+ {
+  "InstanceType": "c8gb.24xlarge",
+  "Location": "eu-central-1b"
+ },
+ {
+  "InstanceType": "c8gb.2xlarge",
+  "Location": "eu-central-1b"
+ },
+ {
+  "InstanceType": "c8gb.48xlarge",
+  "Location": "eu-central-1b"
+ },
+ {
+  "InstanceType": "c8gb.4xlarge",
+  "Location": "eu-central-1b"
+ },
+ {
+  "InstanceType": "c8gb.8xlarge",
+  "Location": "eu-central-1b"
+ },
+ {
+  "InstanceType": "c8gb.large",
+  "Location": "eu-central-1b"
+ },
+ {
+  "InstanceType": "c8gb.medium",
+  "Location": "eu-central-1b"
+ },
+ {
+  "InstanceType": "c8gb.xlarge",
+  "Location": "eu-central-1b"
+ },
+ {
   "InstanceType": "c8gd.12xlarge",
   "Location": "eu-central-1b"
  },
@@ -9953,6 +10033,46 @@
  },
  {
   "InstanceType": "c8g.xlarge",
+  "Location": "eu-central-1c"
+ },
+ {
+  "InstanceType": "c8gb.12xlarge",
+  "Location": "eu-central-1c"
+ },
+ {
+  "InstanceType": "c8gb.16xlarge",
+  "Location": "eu-central-1c"
+ },
+ {
+  "InstanceType": "c8gb.24xlarge",
+  "Location": "eu-central-1c"
+ },
+ {
+  "InstanceType": "c8gb.2xlarge",
+  "Location": "eu-central-1c"
+ },
+ {
+  "InstanceType": "c8gb.48xlarge",
+  "Location": "eu-central-1c"
+ },
+ {
+  "InstanceType": "c8gb.4xlarge",
+  "Location": "eu-central-1c"
+ },
+ {
+  "InstanceType": "c8gb.8xlarge",
+  "Location": "eu-central-1c"
+ },
+ {
+  "InstanceType": "c8gb.large",
+  "Location": "eu-central-1c"
+ },
+ {
+  "InstanceType": "c8gb.medium",
+  "Location": "eu-central-1c"
+ },
+ {
+  "InstanceType": "c8gb.xlarge",
   "Location": "eu-central-1c"
  },
  {
