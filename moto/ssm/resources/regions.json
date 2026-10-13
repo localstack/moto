@@ -724,6 +724,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.af-south-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "entityresolution": {
                 "Value": "entityresolution",
                 "endpoint": {
@@ -4326,6 +4335,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.ap-east-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "es": {
                 "Value": "es",
                 "endpoint": {
@@ -6173,6 +6191,15 @@
                 "Value": "emr-serverless",
                 "endpoint": {
                   "Value": "emr-serverless.ap-northeast-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.ap-northeast-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -8929,6 +8956,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.ap-northeast-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "entityresolution": {
                 "Value": "entityresolution",
                 "endpoint": {
@@ -11282,6 +11318,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.ap-northeast-3.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "es": {
                 "Value": "es",
                 "endpoint": {
@@ -13374,6 +13419,15 @@
                 "Value": "emr-serverless",
                 "endpoint": {
                   "Value": "emr-serverless.ap-south-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.ap-south-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -15615,6 +15669,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.ap-south-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "es": {
                 "Value": "es",
                 "endpoint": {
@@ -17677,6 +17740,15 @@
                 "Value": "emr-serverless",
                 "endpoint": {
                   "Value": "emr-serverless.ap-southeast-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.ap-southeast-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -20478,6 +20550,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.ap-southeast-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "entityresolution": {
                 "Value": "entityresolution",
                 "endpoint": {
@@ -22912,6 +22993,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.ap-southeast-3.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "es": {
                 "Value": "es",
                 "endpoint": {
@@ -24510,6 +24600,15 @@
                 "Value": "emr-serverless",
                 "endpoint": {
                   "Value": "emr-serverless.ap-southeast-4.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.ap-southeast-4.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -27676,6 +27775,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.ap-southeast-6.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "es": {
                 "Value": "es",
                 "endpoint": {
@@ -30819,6 +30927,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.ca-central-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "entityresolution": {
                 "Value": "entityresolution",
                 "endpoint": {
@@ -32992,6 +33109,15 @@
                 "Value": "emr-serverless",
                 "endpoint": {
                   "Value": "emr-serverless.ca-west-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.ca-west-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -37898,6 +38024,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.eu-central-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "entityresolution": {
                 "Value": "entityresolution",
                 "endpoint": {
@@ -40329,6 +40464,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.eu-central-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "es": {
                 "Value": "es",
                 "endpoint": {
@@ -42217,6 +42361,15 @@
                 "Value": "emr-serverless",
                 "endpoint": {
                   "Value": "emr-serverless.eu-north-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.eu-north-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -44401,6 +44554,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.eu-south-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "es": {
                 "Value": "es",
                 "endpoint": {
@@ -46182,6 +46344,15 @@
                 "Value": "emr-serverless",
                 "endpoint": {
                   "Value": "emr-serverless.eu-south-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.eu-south-2.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -48370,6 +48541,15 @@
                 "Value": "emr-serverless",
                 "endpoint": {
                   "Value": "emr-serverless.eu-west-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.eu-west-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -51349,6 +51529,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.eu-west-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "entityresolution": {
                 "Value": "entityresolution",
                 "endpoint": {
@@ -53818,6 +54007,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.eu-west-3.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "es": {
                 "Value": "es",
                 "endpoint": {
@@ -56044,6 +56242,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.eusc-de-east-1.api.amazonwebservices.eu"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "notifications": {
                 "Value": "notifications",
                 "endpoint": {
@@ -57138,6 +57345,15 @@
                 "Value": "emr-serverless",
                 "endpoint": {
                   "Value": "emr-serverless.il-central-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.il-central-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -62164,6 +62380,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.mx-central-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "es": {
                 "Value": "es",
                 "endpoint": {
@@ -63807,6 +64032,15 @@
                 "Value": "emr-serverless",
                 "endpoint": {
                   "Value": "emr-serverless.sa-east-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.sa-east-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -66525,6 +66759,15 @@
                 "Value": "emr-serverless",
                 "endpoint": {
                   "Value": "emr-serverless.us-east-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.us-east-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -69619,6 +69862,15 @@
                 "Value": "emr-serverless",
                 "endpoint": {
                   "Value": "emr-serverless.us-east-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.us-east-2.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -75762,6 +76014,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.us-west-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "es": {
                 "Value": "es",
                 "endpoint": {
@@ -76384,6 +76645,12 @@
                 "Value": "observabilityadmin",
                 "endpoint": {
                   "Value": "observabilityadmin.us-west-1.amazonaws.com"
+                }
+              },
+              "odb": {
+                "Value": "odb",
+                "endpoint": {
+                  "Value": "odb.us-west-1.amazonaws.com"
                 }
               },
               "opensearchserverless": {
@@ -78328,6 +78595,15 @@
                 "Value": "emr-serverless",
                 "endpoint": {
                   "Value": "emr-serverless.us-west-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "endusermessaging": {
+                "Value": "endusermessaging",
+                "endpoint": {
+                  "Value": "end-user-messaging.us-west-2.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
