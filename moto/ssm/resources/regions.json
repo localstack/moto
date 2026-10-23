@@ -3146,6 +3146,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.ap-east-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "networkmanager": {
                 "Value": "networkmanager",
                 "endpoint": {
@@ -7013,6 +7022,15 @@
                 "Value": "network-firewall",
                 "endpoint": {
                   "Value": "network-firewall.ap-northeast-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.ap-northeast-1.api.aws"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -14135,6 +14153,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.ap-south-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "networkflowmonitor": {
                 "Value": "networkflowmonitor",
                 "endpoint": {
@@ -16189,6 +16216,12 @@
                 },
                 "protocols": {
                   "Value": "HTTPS"
+                }
+              },
+              "pcs": {
+                "Value": "pcs",
+                "endpoint": {
+                  "Value": "pcs.ap-south-2.amazonaws.com"
                 }
               },
               "pi": {
@@ -18492,6 +18525,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.ap-southeast-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "networkflowmonitor": {
                 "Value": "networkflowmonitor",
                 "endpoint": {
@@ -19283,9 +19325,6 @@
                 "protocols": {
                   "Value": "HTTPS"
                 }
-              },
-              "timestream": {
-                "Value": "timestream"
               },
               "timestream-influxdb": {
                 "Value": "timestream-influxdb",
@@ -21358,6 +21397,15 @@
                 "Value": "network-firewall",
                 "endpoint": {
                   "Value": "network-firewall.ap-southeast-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.ap-southeast-2.api.aws"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -26697,6 +26745,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.ap-southeast-5.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "networkmanager": {
                 "Value": "networkmanager",
                 "endpoint": {
@@ -29454,6 +29511,15 @@
                 "Value": "network-firewall",
                 "endpoint": {
                   "Value": "network-firewall.ap-southeast-7.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.ap-southeast-7.api.aws"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -32576,11 +32642,6 @@
                 "protocols": {
                   "Value": "HTTPS"
                 }
-              }
-            },
-            "wavelength-zones": {
-              "cac1-wl1-yto-wlz1": {
-                "Value": "cac1-wl1-yto-wlz1"
               }
             }
           },
@@ -38828,6 +38889,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.eu-central-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "networkflowmonitor": {
                 "Value": "networkflowmonitor",
                 "endpoint": {
@@ -42990,6 +43060,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.eu-north-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "networkflowmonitor": {
                 "Value": "networkflowmonitor",
                 "endpoint": {
@@ -43685,9 +43764,6 @@
                 "protocols": {
                   "Value": "HTTPS"
                 }
-              },
-              "timestream": {
-                "Value": "timestream"
               },
               "timestream-influxdb": {
                 "Value": "timestream-influxdb",
@@ -44766,6 +44842,9 @@
                 "protocols": {
                   "Value": "HTTPS"
                 }
+              },
+              "interconnect": {
+                "Value": "interconnect"
               },
               "internetmonitor": {
                 "Value": "internetmonitor",
@@ -46842,6 +46921,15 @@
                 "Value": "network-firewall",
                 "endpoint": {
                   "Value": "network-firewall.eu-south-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.eu-south-2.api.aws"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -49435,6 +49523,15 @@
                 "Value": "network-firewall",
                 "endpoint": {
                   "Value": "network-firewall.eu-west-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.eu-west-1.api.aws"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -56117,6 +56214,15 @@
                 "Value": "kafka",
                 "endpoint": {
                   "Value": "kafka.eusc-de-east-1.amazonaws.eu"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "kafkaconnect": {
+                "Value": "kafkaconnect",
+                "endpoint": {
+                  "Value": "kafkaconnect.eusc-de-east-1.amazonaws.eu"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -65603,6 +65709,12 @@
                   "Value": "HTTPS"
                 }
               },
+              "account-access": {
+                "Value": "account-access",
+                "endpoint": {
+                  "Value": "account-access.us-east-1.api.aws"
+                }
+              },
               "acm": {
                 "Value": "acm",
                 "endpoint": {
@@ -70606,6 +70718,15 @@
                 "Value": "network-firewall",
                 "endpoint": {
                   "Value": "network-firewall.us-east-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.us-east-2.api.aws"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -79450,6 +79571,15 @@
                 "Value": "network-firewall",
                 "endpoint": {
                   "Value": "network-firewall.us-west-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "network-security-manager": {
+                "Value": "network-security-manager",
+                "endpoint": {
+                  "Value": "network-security-manager.us-west-2.api.aws"
                 },
                 "protocols": {
                   "Value": "HTTPS"
