@@ -6284,6 +6284,10 @@
   "Location": "ap-southeast-2b"
  },
  {
+  "InstanceType": "p5.4xlarge",
+  "Location": "ap-southeast-2b"
+ },
+ {
   "InstanceType": "r3.2xlarge",
   "Location": "ap-southeast-2b"
  },
@@ -10061,6 +10065,10 @@
  },
  {
   "InstanceType": "p5.48xlarge",
+  "Location": "ap-southeast-2c"
+ },
+ {
+  "InstanceType": "p5.4xlarge",
   "Location": "ap-southeast-2c"
  },
  {
