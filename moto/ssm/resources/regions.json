@@ -7822,6 +7822,15 @@
                   "Value": "HTTPS"
                 }
               },
+              "textract": {
+                "Value": "textract",
+                "endpoint": {
+                  "Value": "textract.ap-northeast-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "timestream": {
                 "Value": "timestream"
               },
@@ -30114,6 +30123,15 @@
                   "Value": "https"
                 }
               },
+              "agent-registry": {
+                "Value": "agent-registry",
+                "endpoint": {
+                  "Value": "agent-registry.ca-central-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "ahl": {
                 "Value": "ahl",
                 "endpoint": {
@@ -37119,6 +37137,15 @@
                   "Value": "https"
                 }
               },
+              "agent-registry": {
+                "Value": "agent-registry",
+                "endpoint": {
+                  "Value": "agent-registry.eu-central-1.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
               "aiops": {
                 "Value": "aiops",
                 "endpoint": {
@@ -41489,6 +41516,15 @@
                 "Value": "synthetics",
                 "endpoint": {
                   "Value": "synthetics.eu-central-2.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "textract": {
+                "Value": "textract",
+                "endpoint": {
+                  "Value": "textract.eu-central-2.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -50658,6 +50694,15 @@
                 },
                 "protocols": {
                   "Value": "https"
+                }
+              },
+              "agent-registry": {
+                "Value": "agent-registry",
+                "endpoint": {
+                  "Value": "agent-registry.eu-west-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
                 }
               },
               "ahl": {
@@ -61366,15 +61411,6 @@
                   "Value": "HTTPS"
                 }
               },
-              "networkmonitor": {
-                "Value": "networkmonitor",
-                "endpoint": {
-                  "Value": "networkmonitor.me-south-1.amazonaws.com"
-                },
-                "protocols": {
-                  "Value": "HTTPS"
-                }
-              },
               "notifications": {
                 "Value": "notifications",
                 "endpoint": {
@@ -62814,6 +62850,15 @@
                 "Value": "mq",
                 "endpoint": {
                   "Value": "mq.mx-central-1.amazonaws.com"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
+                }
+              },
+              "mwaa": {
+                "Value": "mwaa",
+                "endpoint": {
+                  "Value": "api.airflow.mx-central-1.amazonaws.com"
                 },
                 "protocols": {
                   "Value": "HTTPS"
@@ -69110,6 +69155,15 @@
                 },
                 "protocols": {
                   "Value": "https"
+                }
+              },
+              "agent-registry": {
+                "Value": "agent-registry",
+                "endpoint": {
+                  "Value": "agent-registry.us-east-2.api.aws"
+                },
+                "protocols": {
+                  "Value": "HTTPS"
                 }
               },
               "ahl": {
