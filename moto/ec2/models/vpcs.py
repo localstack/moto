@@ -32,7 +32,6 @@ from ..utils import (
     create_dns_entries,
     generic_filter,
     random_ipv6_cidr,
-    random_private_ip,
     random_vpc_cidr_association_id,
     random_vpc_ep_id,
     random_vpc_id,
@@ -992,7 +991,15 @@ class VPCBackend:
             network_interface_ids = []
             for subnet_id in subnet_ids or []:
                 self.get_subnet(subnet_id)  # type: ignore[attr-defined]
-                eni = self.create_network_interface(subnet_id, random_private_ip())  # type: ignore[attr-defined]
+                eni = self.create_network_interface(  # type: ignore[attr-defined]
+                    subnet_id,
+                    private_ip_address=None,
+                    group_ids=security_group_ids,
+                    description=f"VPC Endpoint Interface {vpc_endpoint_id}",
+                )
+                eni.interface_type = "vpc_endpoint"
+                eni.requester_managed = True
+                eni.status = "in-use"
                 network_interface_ids.append(eni.id)
 
             dns_entries = create_dns_entries(service_name, vpc_endpoint_id)
