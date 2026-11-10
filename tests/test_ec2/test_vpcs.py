@@ -1,5 +1,7 @@
+import ipaddress
 import json
 import random
+from time import sleep
 from unittest import SkipTest
 from uuid import uuid4
 
@@ -1034,6 +1036,61 @@ def test_create_vpc_endpoint__policy():
         VpcEndpointType="Gateway",
     )["VpcEndpoint"]
     assert vpc_end_point["PolicyDocument"] == "my policy document"
+
+
+@ec2_aws_verified(create_vpc=True, create_subnet=True, create_sg=True)
+@pytest.mark.aws_verified
+def test_create_interface_vpc_endpoint_network_interfaces(
+    ec2_client=None, vpc_id=None, subnet_id=None, sg_id=None
+):
+    vpc_end_point_id = ec2_client.create_vpc_endpoint(
+        VpcId=vpc_id,
+        ServiceName="com.amazonaws.us-east-1.execute-api",
+        VpcEndpointType="Interface",
+        PrivateDnsEnabled=False,
+        SubnetIds=[subnet_id],
+        SecurityGroupIds=[sg_id],
+    )["VpcEndpoint"]["VpcEndpointId"]
+
+    try:
+        vpc_end_point = wait_for_vpc_endpoint_available(ec2_client, vpc_end_point_id)
+
+        eni = ec2_client.describe_network_interfaces(
+            NetworkInterfaceIds=vpc_end_point["NetworkInterfaceIds"]
+        )["NetworkInterfaces"][0]
+        assert ipaddress.ip_address(eni["PrivateIpAddress"]) in ipaddress.ip_network(
+            "10.0.0.0/24"
+        )
+        assert [group["GroupId"] for group in eni["Groups"]] == [sg_id]
+        assert eni["InterfaceType"] == "vpc_endpoint"
+        assert eni["RequesterManaged"] is True
+        assert eni["Status"] == "in-use"
+        assert eni["Description"] == f"VPC Endpoint Interface {vpc_end_point_id}"
+    finally:
+        ec2_client.delete_vpc_endpoints(VpcEndpointIds=[vpc_end_point_id])
+        # the subnet cannot be deleted while the endpoint's network interface exists
+        wait_for_subnet_network_interfaces_deleted(ec2_client, subnet_id)
+
+
+def wait_for_vpc_endpoint_available(ec2_client, vpc_end_point_id):
+    for _ in range(60):
+        vpc_end_point = ec2_client.describe_vpc_endpoints(
+            VpcEndpointIds=[vpc_end_point_id]
+        )["VpcEndpoints"][0]
+        if vpc_end_point["State"].lower() == "available":
+            return vpc_end_point
+        sleep(5)
+    raise AssertionError(f"VPC endpoint {vpc_end_point_id} never became available")
+
+
+def wait_for_subnet_network_interfaces_deleted(ec2_client, subnet_id):
+    for _ in range(60):
+        interfaces = ec2_client.describe_network_interfaces(
+            Filters=[{"Name": "subnet-id", "Values": [subnet_id]}]
+        )["NetworkInterfaces"]
+        if not interfaces:
+            return
+        sleep(5)
 
 
 @mock_aws
