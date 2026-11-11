@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     if: ${{ github.event.label.name == 'moto-core' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
