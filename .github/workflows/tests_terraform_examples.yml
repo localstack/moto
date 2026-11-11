@@ -7,7 +7,7 @@ on: [workflow_call]
 
 jobs:
   find-jobs:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     name: Find Jobs
     outputs:
       folders: ${{ steps.set-folders.outputs.folders }}
@@ -23,7 +23,7 @@ jobs:
           echo "folders=$folders" >> $GITHUB_OUTPUT
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: find-jobs
     strategy:
       fail-fast: false

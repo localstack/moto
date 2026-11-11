@@ -24,7 +24,7 @@ concurrency:
 
 jobs:
   analyse-commit-log:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       is-release-required: ${{ steps.check.outputs.new_commits_made }}
       last-tag: ${{ steps.last_tag.outputs.tag }}
@@ -55,7 +55,7 @@ jobs:
           fi
 
   build-release-moto-ext:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: analyse-commit-log
     if: ${{ needs.analyse-commit-log.outputs.is-release-required == 'true' }}
     environment:
