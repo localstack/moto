@@ -6,4 +6,4 @@ pytest-cov
 pytest-order
 pytest-xdist
 freezegun
-pyotp
+pyotp<2.11
