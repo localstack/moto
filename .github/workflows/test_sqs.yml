@@ -14,7 +14,7 @@ env:
 jobs:
   test-sqs-protocols:
     name: "${{ matrix.protocol }} protocol, server mode: ${{ matrix.test-server-mode }}"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:

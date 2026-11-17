@@ -3,7 +3,7 @@ on: [workflow_call]
 
 jobs:
   cdk_start:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -41,7 +41,7 @@ jobs:
         cdk bootstrap -v
 
   find-jobs:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: cdk_start
     name: Find Jobs
     outputs:
@@ -58,7 +58,7 @@ jobs:
           echo "folders=$folders" >> $GITHUB_OUTPUT
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: find-jobs
     strategy:
       fail-fast: false

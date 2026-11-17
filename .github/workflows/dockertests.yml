@@ -11,7 +11,7 @@ on:
 jobs:
   cache:
     name: Caching
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python-version: [ "3.11" ]
@@ -43,7 +43,7 @@ jobs:
 
   test_custom_port:
     name: Test Custom Port
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: cache
     strategy:
       matrix:
@@ -100,7 +100,7 @@ jobs:
 
   test_custom_name:
     name: Test Custom Network Name
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: cache
     strategy:
       matrix:
@@ -156,7 +156,7 @@ jobs:
 
   test_custom_networkmode:
     name: Pass NetworkMode to AWSLambda
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: cache
     strategy:
       matrix:
