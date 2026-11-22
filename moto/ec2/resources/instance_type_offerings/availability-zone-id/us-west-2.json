@@ -928,6 +928,14 @@
   "Location": "usw2-az1"
  },
  {
+  "InstanceType": "c8gn.metal-24xl",
+  "Location": "usw2-az1"
+ },
+ {
+  "InstanceType": "c8gn.metal-48xl",
+  "Location": "usw2-az1"
+ },
+ {
   "InstanceType": "c8gn.xlarge",
   "Location": "usw2-az1"
  },
@@ -5012,11 +5020,31 @@
   "Location": "usw2-az1"
  },
  {
+  "InstanceType": "t9g.medium",
+  "Location": "usw2-az1"
+ },
+ {
+  "InstanceType": "t9g.micro",
+  "Location": "usw2-az1"
+ },
+ {
+  "InstanceType": "t9g.nano",
+  "Location": "usw2-az1"
+ },
+ {
+  "InstanceType": "t9g.small",
+  "Location": "usw2-az1"
+ },
+ {
   "InstanceType": "trn1.2xlarge",
   "Location": "usw2-az1"
  },
  {
   "InstanceType": "trn1.32xlarge",
+  "Location": "usw2-az1"
+ },
+ {
+  "InstanceType": "trn2.48xlarge",
   "Location": "usw2-az1"
  },
  {
@@ -5370,30 +5398,6 @@
  {
   "InstanceType": "z1d.xlarge",
   "Location": "usw2-az1"
- },
- {
-  "InstanceType": "a1.2xlarge",
-  "Location": "usw2-az2"
- },
- {
-  "InstanceType": "a1.4xlarge",
-  "Location": "usw2-az2"
- },
- {
-  "InstanceType": "a1.large",
-  "Location": "usw2-az2"
- },
- {
-  "InstanceType": "a1.medium",
-  "Location": "usw2-az2"
- },
- {
-  "InstanceType": "a1.metal",
-  "Location": "usw2-az2"
- },
- {
-  "InstanceType": "a1.xlarge",
-  "Location": "usw2-az2"
  },
  {
   "InstanceType": "c1.medium",
@@ -6321,6 +6325,14 @@
  },
  {
   "InstanceType": "c8gn.medium",
+  "Location": "usw2-az2"
+ },
+ {
+  "InstanceType": "c8gn.metal-24xl",
+  "Location": "usw2-az2"
+ },
+ {
+  "InstanceType": "c8gn.metal-48xl",
   "Location": "usw2-az2"
  },
  {
@@ -10376,6 +10388,26 @@
   "Location": "usw2-az2"
  },
  {
+  "InstanceType": "t9g.medium",
+  "Location": "usw2-az2"
+ },
+ {
+  "InstanceType": "t9g.micro",
+  "Location": "usw2-az2"
+ },
+ {
+  "InstanceType": "t9g.nano",
+  "Location": "usw2-az2"
+ },
+ {
+  "InstanceType": "t9g.small",
+  "Location": "usw2-az2"
+ },
+ {
+  "InstanceType": "trn2.48xlarge",
+  "Location": "usw2-az2"
+ },
+ {
   "InstanceType": "u-3tb1.56xlarge",
   "Location": "usw2-az2"
  },
@@ -10710,30 +10742,6 @@
  {
   "InstanceType": "z1d.xlarge",
   "Location": "usw2-az2"
- },
- {
-  "InstanceType": "a1.2xlarge",
-  "Location": "usw2-az3"
- },
- {
-  "InstanceType": "a1.4xlarge",
-  "Location": "usw2-az3"
- },
- {
-  "InstanceType": "a1.large",
-  "Location": "usw2-az3"
- },
- {
-  "InstanceType": "a1.medium",
-  "Location": "usw2-az3"
- },
- {
-  "InstanceType": "a1.metal",
-  "Location": "usw2-az3"
- },
- {
-  "InstanceType": "a1.xlarge",
-  "Location": "usw2-az3"
  },
  {
   "InstanceType": "c1.medium",
@@ -11629,6 +11637,14 @@
  },
  {
   "InstanceType": "c8gn.medium",
+  "Location": "usw2-az3"
+ },
+ {
+  "InstanceType": "c8gn.metal-24xl",
+  "Location": "usw2-az3"
+ },
+ {
+  "InstanceType": "c8gn.metal-48xl",
   "Location": "usw2-az3"
  },
  {
@@ -15720,6 +15736,26 @@
   "Location": "usw2-az3"
  },
  {
+  "InstanceType": "t9g.medium",
+  "Location": "usw2-az3"
+ },
+ {
+  "InstanceType": "t9g.micro",
+  "Location": "usw2-az3"
+ },
+ {
+  "InstanceType": "t9g.nano",
+  "Location": "usw2-az3"
+ },
+ {
+  "InstanceType": "t9g.small",
+  "Location": "usw2-az3"
+ },
+ {
+  "InstanceType": "trn2.48xlarge",
+  "Location": "usw2-az3"
+ },
+ {
   "InstanceType": "u-3tb1.56xlarge",
   "Location": "usw2-az3"
  },
@@ -16865,6 +16901,14 @@
  },
  {
   "InstanceType": "c8gn.medium",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8gn.metal-24xl",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "c8gn.metal-48xl",
   "Location": "usw2-az4"
  },
  {
@@ -20172,6 +20216,22 @@
   "Location": "usw2-az4"
  },
  {
+  "InstanceType": "t9g.medium",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "t9g.micro",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "t9g.nano",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "t9g.small",
+  "Location": "usw2-az4"
+ },
+ {
   "InstanceType": "trn1.2xlarge",
   "Location": "usw2-az4"
  },
@@ -20181,6 +20241,10 @@
  },
  {
   "InstanceType": "trn1n.32xlarge",
+  "Location": "usw2-az4"
+ },
+ {
+  "InstanceType": "trn2.48xlarge",
   "Location": "usw2-az4"
  },
  {

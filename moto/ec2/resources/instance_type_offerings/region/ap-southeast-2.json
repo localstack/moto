@@ -1,29 +1,5 @@
 [
  {
-  "InstanceType": "a1.2xlarge",
-  "Location": "ap-southeast-2"
- },
- {
-  "InstanceType": "a1.4xlarge",
-  "Location": "ap-southeast-2"
- },
- {
-  "InstanceType": "a1.large",
-  "Location": "ap-southeast-2"
- },
- {
-  "InstanceType": "a1.medium",
-  "Location": "ap-southeast-2"
- },
- {
-  "InstanceType": "a1.metal",
-  "Location": "ap-southeast-2"
- },
- {
-  "InstanceType": "a1.xlarge",
-  "Location": "ap-southeast-2"
- },
- {
   "InstanceType": "c1.medium",
   "Location": "ap-southeast-2"
  },
@@ -960,6 +936,50 @@
   "Location": "ap-southeast-2"
  },
  {
+  "InstanceType": "c9g.12xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "c9g.16xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "c9g.24xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "c9g.2xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "c9g.48xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "c9g.4xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "c9g.8xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "c9g.large",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "c9g.medium",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "c9g.metal-48xl",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "c9g.xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
   "InstanceType": "d2.2xlarge",
   "Location": "ap-southeast-2"
  },
@@ -1133,6 +1153,30 @@
  },
  {
   "InstanceType": "g6f.xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "g7.12xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "g7.24xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "g7.2xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "g7.48xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "g7.4xlarge",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "g7.8xlarge",
   "Location": "ap-southeast-2"
  },
  {
@@ -3629,6 +3673,22 @@
  },
  {
   "InstanceType": "t8i.small",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "t9g.medium",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "t9g.micro",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "t9g.nano",
+  "Location": "ap-southeast-2"
+ },
+ {
+  "InstanceType": "t9g.small",
   "Location": "ap-southeast-2"
  },
  {

@@ -1,29 +1,5 @@
 [
  {
-  "InstanceType": "a1.2xlarge",
-  "Location": "ap-southeast-1a"
- },
- {
-  "InstanceType": "a1.4xlarge",
-  "Location": "ap-southeast-1a"
- },
- {
-  "InstanceType": "a1.large",
-  "Location": "ap-southeast-1a"
- },
- {
-  "InstanceType": "a1.medium",
-  "Location": "ap-southeast-1a"
- },
- {
-  "InstanceType": "a1.metal",
-  "Location": "ap-southeast-1a"
- },
- {
-  "InstanceType": "a1.xlarge",
-  "Location": "ap-southeast-1a"
- },
- {
   "InstanceType": "c1.medium",
   "Location": "ap-southeast-1a"
  },
@@ -3532,6 +3508,22 @@
   "Location": "ap-southeast-1a"
  },
  {
+  "InstanceType": "t9g.medium",
+  "Location": "ap-southeast-1a"
+ },
+ {
+  "InstanceType": "t9g.micro",
+  "Location": "ap-southeast-1a"
+ },
+ {
+  "InstanceType": "t9g.nano",
+  "Location": "ap-southeast-1a"
+ },
+ {
+  "InstanceType": "t9g.small",
+  "Location": "ap-southeast-1a"
+ },
+ {
   "InstanceType": "u-3tb1.56xlarge",
   "Location": "ap-southeast-1a"
  },
@@ -3722,30 +3714,6 @@
  {
   "InstanceType": "z1d.xlarge",
   "Location": "ap-southeast-1a"
- },
- {
-  "InstanceType": "a1.2xlarge",
-  "Location": "ap-southeast-1b"
- },
- {
-  "InstanceType": "a1.4xlarge",
-  "Location": "ap-southeast-1b"
- },
- {
-  "InstanceType": "a1.large",
-  "Location": "ap-southeast-1b"
- },
- {
-  "InstanceType": "a1.medium",
-  "Location": "ap-southeast-1b"
- },
- {
-  "InstanceType": "a1.metal",
-  "Location": "ap-southeast-1b"
- },
- {
-  "InstanceType": "a1.xlarge",
-  "Location": "ap-southeast-1b"
  },
  {
   "InstanceType": "c1.medium",
@@ -7164,6 +7132,22 @@
   "Location": "ap-southeast-1b"
  },
  {
+  "InstanceType": "t9g.medium",
+  "Location": "ap-southeast-1b"
+ },
+ {
+  "InstanceType": "t9g.micro",
+  "Location": "ap-southeast-1b"
+ },
+ {
+  "InstanceType": "t9g.nano",
+  "Location": "ap-southeast-1b"
+ },
+ {
+  "InstanceType": "t9g.small",
+  "Location": "ap-southeast-1b"
+ },
+ {
   "InstanceType": "u-3tb1.56xlarge",
   "Location": "ap-southeast-1b"
  },
@@ -10569,6 +10553,22 @@
  },
  {
   "InstanceType": "t8i.small",
+  "Location": "ap-southeast-1c"
+ },
+ {
+  "InstanceType": "t9g.medium",
+  "Location": "ap-southeast-1c"
+ },
+ {
+  "InstanceType": "t9g.micro",
+  "Location": "ap-southeast-1c"
+ },
+ {
+  "InstanceType": "t9g.nano",
+  "Location": "ap-southeast-1c"
+ },
+ {
+  "InstanceType": "t9g.small",
   "Location": "ap-southeast-1c"
  },
  {
