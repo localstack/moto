@@ -77,5 +77,6 @@
   "emr-5.17.1",
   "emr-5.17.0",
   "emr-spark-8.0.0",
-  "emr-spark-8.1.0"
+  "emr-spark-8.1.0",
+  "emr-spark-8.2.0"
 ]
