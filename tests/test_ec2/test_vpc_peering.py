@@ -1,4 +1,5 @@
 import os
+import pickle
 from unittest import mock
 
 import boto3
@@ -6,6 +7,7 @@ import pytest
 from botocore.exceptions import ClientError
 
 from moto import mock_aws, settings
+from moto.ec2.models import ec2_backends
 
 
 def create_vpx_pcx(ec2, client):
@@ -752,3 +754,43 @@ def retrieve_all(client):
         all_vpx.extend(resp["VpcPeeringConnections"])
         token = resp.get("NextToken")
     return all_vpx
+
+
+@mock_aws
+@pytest.mark.parametrize(
+    "account1,account2",
+    [
+        pytest.param("111111111111", "111111111111", id="within account"),
+        pytest.param("111111111111", "222222222222", id="across accounts"),
+    ],
+)
+@pytest.mark.skipif(
+    settings.TEST_SERVER_MODE, reason="Cannot access backends in server mode"
+)
+def test_vpc_peering_connections_cross_region_after_backend_restore(account1, account2):
+    with mock.patch.dict(os.environ, {"MOTO_ACCOUNT_ID": account1}):
+        ec2_usw1 = boto3.client("ec2", region_name="us-west-1")
+        vpc_usw1 = ec2_usw1.create_vpc(CidrBlock="10.90.0.0/16")["Vpc"]["VpcId"]
+
+    with mock.patch.dict(os.environ, {"MOTO_ACCOUNT_ID": account2}):
+        ec2_apn1 = boto3.client("ec2", region_name="ap-northeast-1")
+        vpc_apn1 = ec2_apn1.create_vpc(CidrBlock="10.20.0.0/16")["Vpc"]["VpcId"]
+
+    # replace both backends with unpickled copies, as a state restore does
+    for account_id, region in [(account1, "us-west-1"), (account2, "ap-northeast-1")]:
+        backend = ec2_backends[account_id][region]
+        ec2_backends[account_id][region] = pickle.loads(pickle.dumps(backend))
+
+    with mock.patch.dict(os.environ, {"MOTO_ACCOUNT_ID": account1}):
+        vpc_pcx_id = ec2_usw1.create_vpc_peering_connection(
+            VpcId=vpc_usw1,
+            PeerVpcId=vpc_apn1,
+            PeerRegion="ap-northeast-1",
+            PeerOwnerId=account2,
+        )["VpcPeeringConnection"]["VpcPeeringConnectionId"]
+
+    with mock.patch.dict(os.environ, {"MOTO_ACCOUNT_ID": account2}):
+        response = ec2_apn1.accept_vpc_peering_connection(
+            VpcPeeringConnectionId=vpc_pcx_id
+        )
+        assert response["VpcPeeringConnection"]["Status"]["Code"] == "active"
