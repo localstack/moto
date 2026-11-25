@@ -1,29 +1,5 @@
 [
  {
-  "InstanceType": "a1.2xlarge",
-  "Location": "us-east-2"
- },
- {
-  "InstanceType": "a1.4xlarge",
-  "Location": "us-east-2"
- },
- {
-  "InstanceType": "a1.large",
-  "Location": "us-east-2"
- },
- {
-  "InstanceType": "a1.medium",
-  "Location": "us-east-2"
- },
- {
-  "InstanceType": "a1.metal",
-  "Location": "us-east-2"
- },
- {
-  "InstanceType": "a1.xlarge",
-  "Location": "us-east-2"
- },
- {
   "InstanceType": "c4.2xlarge",
   "Location": "us-east-2"
  },
@@ -921,6 +897,14 @@
  },
  {
   "InstanceType": "c8gn.medium",
+  "Location": "us-east-2"
+ },
+ {
+  "InstanceType": "c8gn.metal-24xl",
+  "Location": "us-east-2"
+ },
+ {
+  "InstanceType": "c8gn.metal-48xl",
   "Location": "us-east-2"
  },
  {
@@ -4648,6 +4632,22 @@
   "Location": "us-east-2"
  },
  {
+  "InstanceType": "t9g.medium",
+  "Location": "us-east-2"
+ },
+ {
+  "InstanceType": "t9g.micro",
+  "Location": "us-east-2"
+ },
+ {
+  "InstanceType": "t9g.nano",
+  "Location": "us-east-2"
+ },
+ {
+  "InstanceType": "t9g.small",
+  "Location": "us-east-2"
+ },
+ {
   "InstanceType": "trn1.2xlarge",
   "Location": "us-east-2"
  },
@@ -4661,6 +4661,10 @@
  },
  {
   "InstanceType": "trn2.48xlarge",
+  "Location": "us-east-2"
+ },
+ {
+  "InstanceType": "trn3.48xlarge",
   "Location": "us-east-2"
  },
  {

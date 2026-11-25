@@ -984,6 +984,30 @@
   "Location": "ca-central-1"
  },
  {
+  "InstanceType": "g7e.12xlarge",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "g7e.24xlarge",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "g7e.2xlarge",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "g7e.48xlarge",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "g7e.4xlarge",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "g7e.8xlarge",
+  "Location": "ca-central-1"
+ },
+ {
   "InstanceType": "gr6.4xlarge",
   "Location": "ca-central-1"
  },
@@ -2128,6 +2152,50 @@
   "Location": "ca-central-1"
  },
  {
+  "InstanceType": "m9g.12xlarge",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "m9g.16xlarge",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "m9g.24xlarge",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "m9g.2xlarge",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "m9g.48xlarge",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "m9g.4xlarge",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "m9g.8xlarge",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "m9g.large",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "m9g.medium",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "m9g.metal-48xl",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "m9g.xlarge",
+  "Location": "ca-central-1"
+ },
+ {
   "InstanceType": "mac2-m2.metal",
   "Location": "ca-central-1"
  },
@@ -2137,6 +2205,10 @@
  },
  {
   "InstanceType": "p5.48xlarge",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "p5en.48xlarge",
   "Location": "ca-central-1"
  },
  {
@@ -3125,6 +3197,26 @@
  },
  {
   "InstanceType": "t8i.small",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "t9g.medium",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "t9g.micro",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "t9g.nano",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "t9g.small",
+  "Location": "ca-central-1"
+ },
+ {
+  "InstanceType": "trn2.48xlarge",
   "Location": "ca-central-1"
  },
  {
