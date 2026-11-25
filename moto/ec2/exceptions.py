@@ -913,6 +913,14 @@ class InvalidTransitGatewayID(EC2ClientError):
         )
 
 
+class InvalidTransitGatewayAttachmentID(EC2ClientError):
+    def __init__(self, transit_gateway_attachment_id: str):
+        super().__init__(
+            "InvalidTransitGatewayAttachmentID.NotFound",
+            f"Transit Gateway Attachment {transit_gateway_attachment_id} was deleted or does not exist.",
+        )
+
+
 class NoLoadBalancersProvided(EC2ClientError):
     def __init__(self) -> None:
         super().__init__(

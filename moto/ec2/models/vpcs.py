@@ -2,8 +2,6 @@ import copy
 import ipaddress
 import json
 import threading
-import weakref
-from collections import defaultdict
 from operator import itemgetter
 from typing import Any, Optional
 
@@ -751,12 +749,9 @@ class VPC(TaggedEC2Resource, CloudFormationModel):
 
 
 class VPCBackend:
-    vpc_refs = defaultdict(set)  # type: ignore
-
     def __init__(self) -> None:
         self.vpcs: dict[str, VPC] = {}
         self.vpc_end_points: dict[str, VPCEndPoint] = {}
-        self.vpc_refs[self.__class__].add(weakref.ref(self))
 
     def create_default_vpc(self) -> VPC:
         default_vpc = self.describe_vpcs(filters={"is-default": ["true"]})

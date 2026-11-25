@@ -1,4 +1,5 @@
 import os
+import pickle
 from unittest import SkipTest, mock
 
 import boto3
@@ -7,6 +8,7 @@ from botocore.exceptions import ClientError
 
 from moto import mock_aws, settings
 from moto.core import DEFAULT_ACCOUNT_ID as ACCOUNT_ID
+from moto.ec2.models import ec2_backends
 
 
 @mock_aws
@@ -253,6 +255,76 @@ def test_transit_gateway_peering_attachments_cross_region(account1, account2):
             TransitGatewayAttachmentId=attachment_id
         )
         assert response["TransitGatewayPeeringAttachment"]["State"] == "deleted"
+
+
+@mock_aws
+@pytest.mark.parametrize(
+    "account1,account2",
+    [
+        pytest.param("111111111111", "111111111111", id="within account"),
+        pytest.param("111111111111", "222222222222", id="across accounts"),
+    ],
+)
+@pytest.mark.skipif(
+    settings.TEST_SERVER_MODE, reason="Cannot access backends in server mode"
+)
+def test_transit_gateway_peering_attachments_cross_region_after_backend_restore(
+    account1, account2
+):
+    with mock.patch.dict(os.environ, {"MOTO_ACCOUNT_ID": account1}):
+        ec2_us = boto3.client("ec2", "us-west-1")
+        gateway_us = ec2_us.create_transit_gateway()["TransitGateway"][
+            "TransitGatewayId"
+        ]
+
+    with mock.patch.dict(os.environ, {"MOTO_ACCOUNT_ID": account2}):
+        ec2_eu = boto3.client("ec2", "eu-central-1")
+        gateway_eu = ec2_eu.create_transit_gateway()["TransitGateway"][
+            "TransitGatewayId"
+        ]
+
+    # replace both backends with unpickled copies, as a state restore does
+    for account_id, region in [(account1, "us-west-1"), (account2, "eu-central-1")]:
+        backend = ec2_backends[account_id][region]
+        ec2_backends[account_id][region] = pickle.loads(pickle.dumps(backend))
+
+    with mock.patch.dict(os.environ, {"MOTO_ACCOUNT_ID": account1}):
+        attachment_id = create_peering_attachment(
+            ec2_us,
+            gateway_us,
+            gateway_eu,
+            peer_account=account2,
+            peer_region="eu-central-1",
+        )
+
+    with mock.patch.dict(os.environ, {"MOTO_ACCOUNT_ID": account2}):
+        response = ec2_eu.accept_transit_gateway_peering_attachment(
+            TransitGatewayAttachmentId=attachment_id
+        )
+        assert response["TransitGatewayPeeringAttachment"]["State"] == "available"
+
+
+@mock_aws
+@pytest.mark.parametrize(
+    "operation",
+    [
+        "accept_transit_gateway_peering_attachment",
+        "reject_transit_gateway_peering_attachment",
+        "delete_transit_gateway_peering_attachment",
+    ],
+)
+def test_transit_gateway_peering_attachment_not_found(operation):
+    ec2 = boto3.client("ec2", "us-west-1")
+    attachment_id = "tgw-attach-0123456789abcdef0"
+
+    with pytest.raises(ClientError) as exc:
+        getattr(ec2, operation)(TransitGatewayAttachmentId=attachment_id)
+    err = exc.value.response["Error"]
+    assert err["Code"] == "InvalidTransitGatewayAttachmentID.NotFound"
+    assert (
+        err["Message"]
+        == f"Transit Gateway Attachment {attachment_id} was deleted or does not exist."
+    )
 
 
 def create_peering_attachment(

@@ -1,6 +1,3 @@
-import weakref
-from collections import defaultdict
-from collections.abc import Iterator
 from typing import TYPE_CHECKING, Any, Optional
 
 from moto.core.utils import iso_8601_datetime_with_milliseconds, utcnow
@@ -9,6 +6,7 @@ from moto.utilities.utils import filter_resources, merge_multiple_dicts
 from ..exceptions import (
     DuplicateTransitGatewayAttachmentError,
     InvalidParameterValueErrorPeeringAttachment,
+    InvalidTransitGatewayAttachmentID,
     InvalidTransitGatewayID,
 )
 from ..utils import describe_tag_filter, random_transit_gateway_attachment_id
@@ -115,20 +113,15 @@ class TransitGatewayPeeringAttachment(TransitGatewayAttachment):
 
 
 class TransitGatewayAttachmentBackend:
-    backend_refs = defaultdict(set)  # type: ignore
-
     def __init__(self) -> None:
         self.transit_gateway_attachments: dict[str, TransitGatewayAttachment] = {}
-        self.backend_refs[self.__class__].add(weakref.ref(self))
 
-    @classmethod
-    def _get_peering_attachment_backend_refs(
-        cls,
-    ) -> Iterator["TransitGatewayAttachmentBackend"]:
-        for backend_ref in cls.backend_refs[cls]:
-            backend = backend_ref()
-            if backend is not None:
-                yield backend
+    def _get_transit_gateway_attachment(
+        self, transit_gateway_attachment_id: str
+    ) -> TransitGatewayAttachment:
+        if transit_gateway_attachment_id not in self.transit_gateway_attachments:
+            raise InvalidTransitGatewayAttachmentID(transit_gateway_attachment_id)
+        return self.transit_gateway_attachments[transit_gateway_attachment_id]
 
     def create_transit_gateway_vpn_attachment(
         self,
@@ -270,7 +263,9 @@ class TransitGatewayAttachmentBackend:
         options: Optional[dict[str, str]] = None,
         remove_subnet_ids: Optional[list[str]] = None,
     ) -> TransitGatewayAttachment:
-        tgw_attachment = self.transit_gateway_attachments[transit_gateway_attachment_id]
+        tgw_attachment = self._get_transit_gateway_attachment(
+            transit_gateway_attachment_id
+        )
         if remove_subnet_ids:
             tgw_attachment.subnet_ids = [  # type: ignore[attr-defined]
                 id
@@ -341,14 +336,12 @@ class TransitGatewayAttachmentBackend:
 
         # If the peer is not same as the current account or region, create attachment in peer backend
         if self.account_id != peer_account_id or self.region_name != peer_region:  # type: ignore[attr-defined]
-            for backend in self._get_peering_attachment_backend_refs():
-                if (
-                    backend.account_id == peer_account_id  # type: ignore[attr-defined]
-                    and backend.region_name == peer_region  # type: ignore[attr-defined]
-                ):
-                    backend.transit_gateway_attachments[
-                        transit_gateway_peering_attachment.id
-                    ] = transit_gateway_peering_attachment
+            from ..models import ec2_backends
+
+            peer_backend = ec2_backends[peer_account_id][peer_region]
+            peer_backend.transit_gateway_attachments[
+                transit_gateway_peering_attachment.id
+            ] = transit_gateway_peering_attachment
 
         transit_gateway_peering_attachment.status.pending()
         transit_gateway_peering_attachment.state = "pendingAcceptance"
@@ -387,9 +380,9 @@ class TransitGatewayAttachmentBackend:
     def accept_transit_gateway_peering_attachment(
         self, transit_gateway_attachment_id: str
     ) -> TransitGatewayAttachment:
-        transit_gateway_attachment = self.transit_gateway_attachments[
+        transit_gateway_attachment = self._get_transit_gateway_attachment(
             transit_gateway_attachment_id
-        ]
+        )
 
         requester_account_id = transit_gateway_attachment.requester_tgw_info["ownerId"]  # type: ignore[attr-defined]
         requester_region_name = transit_gateway_attachment.requester_tgw_info["region"]  # type: ignore[attr-defined]
@@ -422,9 +415,9 @@ class TransitGatewayAttachmentBackend:
     def reject_transit_gateway_peering_attachment(
         self, transit_gateway_attachment_id: str
     ) -> TransitGatewayAttachment:
-        transit_gateway_attachment = self.transit_gateway_attachments[
+        transit_gateway_attachment = self._get_transit_gateway_attachment(
             transit_gateway_attachment_id
-        ]
+        )
 
         requester_account_id = transit_gateway_attachment.requester_tgw_info["ownerId"]  # type: ignore[attr-defined]
         requester_region_name = transit_gateway_attachment.requester_tgw_info["region"]  # type: ignore[attr-defined]
@@ -454,9 +447,9 @@ class TransitGatewayAttachmentBackend:
     def delete_transit_gateway_peering_attachment(
         self, transit_gateway_attachment_id: str
     ) -> TransitGatewayAttachment:
-        transit_gateway_attachment = self.transit_gateway_attachments[
+        transit_gateway_attachment = self._get_transit_gateway_attachment(
             transit_gateway_attachment_id
-        ]
+        )
         transit_gateway_attachment.state = "deleted"
         transit_gateway_attachment.status.deleted(deleter_id=self.account_id)  # type: ignore[attr-defined]
         return transit_gateway_attachment
